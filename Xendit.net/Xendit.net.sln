@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xendit.net", "xendit.net\xendit.net.csproj", "{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC66BA51-923C-4233-AF21-71D0707C97FF}
+	EndGlobalSection
+EndGlobal
