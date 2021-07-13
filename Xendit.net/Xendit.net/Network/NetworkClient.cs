@@ -22,12 +22,12 @@ namespace Xendit.net.Network
         public Task<Stream> Request(Dictionary<string, string> headers, string url)
         {
 
-            if (string.IsNullOrWhiteSpace(Xendit.ApiKey))
+            if (string.IsNullOrWhiteSpace(XenditConfiguration.ApiKey))
             {
                 throw new AuthException("No API key is provided yet");
             }
 
-            var user = string.Format("{0}", Xendit.ApiKey);
+            var user = string.Format("{0}", XenditConfiguration.ApiKey);
             var password = "";
             var base64String = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{user}:{password}"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64String);

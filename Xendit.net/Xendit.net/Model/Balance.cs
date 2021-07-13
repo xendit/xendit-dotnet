@@ -62,7 +62,7 @@ namespace Xendit.net.Model
 
         public static async Task<Balance> GetBalanceAsync(Dictionary<string, string> headers, AccountType? accountType)
         {
-            string url = string.Format("{0}{1}", Xendit.ApiUrl, "/balance");
+            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/balance");
 
             if (accountType != null)
             {
@@ -70,7 +70,7 @@ namespace Xendit.net.Model
                 url = string.Format("{0}{1}{2}", url, "?account_type=", accountTypeParam);
             }
 
-            var result = await Xendit.requestClient.Request(headers, url);
+            var result = await XenditConfiguration.requestClient.Request(headers, url);
             var balance = await JsonSerializer.DeserializeAsync<Balance>(result);
             return balance;
         }

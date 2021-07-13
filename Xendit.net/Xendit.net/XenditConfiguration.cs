@@ -2,7 +2,7 @@
 
 namespace Xendit.net
 {
-    public class Xendit
+    public class XenditConfiguration
     {
         public static readonly string LiveUrl = "https://api.xendit.co";
 
