@@ -19,24 +19,35 @@ namespace Xendit.net.Network
             client.DefaultRequestHeaders.ConnectionClose = true;
         }
 
-        public Task<Stream> Request(Dictionary<string, string> headers, string url)
+        public void CheckApiKey()
         {
-
             if (string.IsNullOrWhiteSpace(XenditConfiguration.ApiKey))
             {
                 throw new AuthException("No API key is provided yet");
             }
+        }
 
+        public void SetAuthenticationHeader()
+        {
             var user = string.Format("{0}", XenditConfiguration.ApiKey);
             var password = "";
             var base64String = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{user}:{password}"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64String);
+        }
 
-
+        public void setHeaders(Dictionary<string, string> headers)
+        {
             foreach (var header in headers)
             {
                 client.DefaultRequestHeaders.Add(header.Key, header.Value);
             }
+        }
+
+        public Task<Stream> Request(Dictionary<string, string> headers, string url)
+        {
+            CheckApiKey();
+            SetAuthenticationHeader();
+            setHeaders(headers);
 
             var result = client.GetStreamAsync(url);
 
