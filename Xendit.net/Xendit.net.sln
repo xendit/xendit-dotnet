@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xendit.net", "xendit.net\xendit.net.csproj", "{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xendit.net", "xendit.net\Xendit.net.csproj", "{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

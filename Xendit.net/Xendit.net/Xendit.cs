@@ -1,17 +1,23 @@
-﻿using System;
+﻿using Xendit.net.Network;
 
-namespace xendit.net
+namespace Xendit.net
 {
     public class Xendit
     {
         public static readonly string LiveUrl = "https://api.xendit.co";
 
-        public static volatile string apiKey;
-
         private static volatile string apiUrl = LiveUrl;
 
-        public static string ApiUrl { get;  }
+        public static string ApiUrl
+        {
+            get
+            {
+                return apiUrl;
+            }
+        }
 
-        public static string ApiKey { get; }
+        public static volatile string ApiKey;
+
+        public static volatile NetworkClient requestClient = new NetworkClient();
     }
 }
