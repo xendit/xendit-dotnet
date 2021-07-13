@@ -70,8 +70,7 @@ namespace Xendit.net.Model
                 url = string.Format("{0}{1}{2}", url, "?account_type=", accountTypeParam);
             }
 
-            var result = await XenditConfiguration.requestClient.Request(headers, url);
-            var balance = await JsonSerializer.DeserializeAsync<Balance>(result);
+            var balance = await XenditConfiguration.RequestClient.Request<Balance>(headers, url);
             return balance;
         }
     }
