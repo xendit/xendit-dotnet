@@ -53,7 +53,7 @@ namespace Xendit.net.Model
             try
             {
                 AccountType accountType = (AccountType)Enum.Parse(typeof(AccountType), accountTypeValue);
-                return GetBalanceAsync(new Dictionary<string, string>(), accountType);
+                return GetBalanceAsync(headers, accountType);
             }
             catch (ArgumentException)
             {
