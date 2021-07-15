@@ -18,6 +18,6 @@ namespace Xendit.net
 
         public static volatile string ApiKey;
 
-        public static volatile NetworkClient requestClient = new NetworkClient();
+        public static volatile NetworkClient RequestClient;
     }
 }

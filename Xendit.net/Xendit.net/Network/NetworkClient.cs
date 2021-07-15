@@ -6,15 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Xendit.net.Exception;
+using System.Text.Json;
 
 namespace Xendit.net.Network
 {
     public class NetworkClient
     {
-        private static readonly HttpClient client;
-        static NetworkClient()
+        private readonly HttpClient client;
+
+        public NetworkClient(HttpClient httpClient)
         {
-            client = new HttpClient();
+            client = httpClient;
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.ConnectionClose = true;
         }
@@ -43,15 +45,15 @@ namespace Xendit.net.Network
             }
         }
 
-        public Task<Stream> Request(Dictionary<string, string> headers, string url)
+        public async Task<T> Request<T>(Dictionary<string, string> headers, string url)
         {
             CheckApiKey();
             SetAuthenticationHeader();
             setHeaders(headers);
 
-            var result = client.GetStreamAsync(url);
-
-            return result;
+            var response = await client.GetStreamAsync(url);
+            var deserializedResponse = await JsonSerializer.DeserializeAsync<T>(response);
+            return deserializedResponse;
         }
     }
 }
