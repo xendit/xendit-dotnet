@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using Xendit.net.Exception;
 using System.Net.Http;
