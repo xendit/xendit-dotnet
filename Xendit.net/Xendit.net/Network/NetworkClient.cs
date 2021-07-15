@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace Xendit.net.Network
 {
-    public class NetworkClient
+    public class NetworkClient : INetworkClient
     {
         private readonly HttpClient client;
 
@@ -20,7 +20,7 @@ namespace Xendit.net.Network
             client.DefaultRequestHeaders.ConnectionClose = true;
         }
 
-        public void CheckApiKey(string apiKey)
+        private void CheckApiKey(string apiKey)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -28,7 +28,7 @@ namespace Xendit.net.Network
             }
         }
 
-        public string EncodeToBase64String(string apiKey)
+        private string EncodeToBase64String(string apiKey)
         {
             var user = string.Format("{0}", apiKey);
             var password = "";
@@ -37,7 +37,7 @@ namespace Xendit.net.Network
             return base64String;
         }
 
-        public HttpRequestMessage CreateRequestMessage(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
+        private HttpRequestMessage CreateRequestMessage(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
         {
             var request = new HttpRequestMessage
             {
