@@ -42,7 +42,7 @@ namespace Xendit.net.Model
         /// Get balance from your account based on given account type string (Cash, Holding, Tax)
         /// </summary>
         /// <param name="accountTypeValue">Selected balance type in string ("Cash", "Holding", "Tax")</param>
-        /// <exception cref="ArgumentException">Thrown when account type value is not "Cash", "Holding", "Tax"</exception>
+        /// <exception cref="ParamException">Thrown when account type value is not "Cash", "Holding", "Tax"</exception>
         /// <returns>A Task that contains balance</returns>
         public static Task<Balance> Get(string accountTypeValue)
         {
