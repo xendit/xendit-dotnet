@@ -20,16 +20,31 @@ namespace Xendit.net.Model
             Tax
         }
 
+        /// <summary>
+        /// Get balance from your account
+        /// </summary>
+        /// <returns>A Task that contains balance</returns>
         public static Task<Balance> Get()
         {
             return GetBalanceAsync(new Dictionary<string, string>(), null);
         }
-        
+
+        /// <summary>
+        /// Get balance from your account based on given account type
+        /// </summary>
+        /// <param name="accountType">Selected balance type (in enum)</param>
+        /// <returns>A Task that contains balance</returns>
         public static Task<Balance> Get(AccountType accountType)
         {
             return GetBalanceAsync(new Dictionary<string, string>(), accountType);
         }
 
+        /// <summary>
+        /// Get balance from your account based on given account type string (Cash, Holding, Tax)
+        /// </summary>
+        /// <param name="accountTypeValue">Selected balance type in string ("Cash", "Holding", "Tax")</param>
+        /// <exception cref="ArgumentException">Thrown when account type value is not "Cash", "Holding", "Tax"</exception>
+        /// <returns>A Task that contains balance</returns>
         public static Task<Balance> Get(string accountTypeValue)
         {
             try
@@ -43,11 +58,24 @@ namespace Xendit.net.Model
             }
         }
 
+        /// <summary>
+        /// Get balance from your account based on given account type with custom headers
+        /// </summary>
+        /// <param name="headers">Custom headers. e.g: "for-user-id"</param>
+        /// <param name="accountType">Selected balance type (in enum)</param>
+        /// <returns>A Task that contains balance</returns>
         public static Task<Balance> Get(Dictionary<string, string> headers, AccountType accountType)
         {
             return GetBalanceAsync(headers, accountType);
         }
 
+        /// <summary>
+        /// Get balance from your account based on given account type string (Cash, Holding, Tax) with custom headers
+        /// </summary>
+        /// <param name="headers">Custom headers. e.g: "for-user-id"</param>
+        /// <param name="accountTypeValue">Selected balance type in string ("Cash", "Holding", "Tax")</param>
+        /// <exception cref="ArgumentException">Thrown when account type value is not "Cash", "Holding", "Tax"</exception>
+        /// <returns>A Task that contains balance</returns>
         public static Task<Balance> Get(Dictionary<string, string> headers, string accountTypeValue)
         {
             try
@@ -61,7 +89,7 @@ namespace Xendit.net.Model
             }
         }
 
-        public static async Task<Balance> GetBalanceAsync(Dictionary<string, string> headers, AccountType? accountType)
+        private static async Task<Balance> GetBalanceAsync(Dictionary<string, string> headers, AccountType? accountType)
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/balance");
 
