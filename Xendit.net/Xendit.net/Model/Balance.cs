@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Xendit.net.Exception;
+using System.Net.Http;
 
 namespace Xendit.net.Model
 {
@@ -70,7 +71,7 @@ namespace Xendit.net.Model
                 url = string.Format("{0}{1}{2}", url, "?account_type=", accountTypeParam);
             }
 
-            var balance = await XenditConfiguration.RequestClient.Request<Balance>(headers, url);
+            var balance = await XenditConfiguration.RequestClient.Request<Balance>(HttpMethod.Get, headers, url, null);
             return balance;
         }
     }
