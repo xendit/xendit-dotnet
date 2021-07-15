@@ -12,13 +12,11 @@ namespace XenditTest
     {
         private readonly Mock<INetworkClient> mockClient = new Mock<INetworkClient>();
         private readonly string url = "https://api.xendit.co/balance";
+        private readonly Balance expectedBalance = new Balance { Value = 10000 };
 
         [Fact]
         public async void Balance_ShouldSuccess_IfNoGivenParam()
         {
-            Balance expectedBalance = new Balance();
-            expectedBalance.Value = 10000;
-
             mockClient
                 .Setup(client => client.Request<Balance>(HttpMethod.Get, new Dictionary<string, string>(), url, null))
                 .ReturnsAsync(expectedBalance);
@@ -32,9 +30,6 @@ namespace XenditTest
         [Fact]
         public async void Balance_ShouldSuccess_IfGivenParam()
         {
-            Balance expectedBalance = new Balance();
-            expectedBalance.Value = 10000;
-
             string accountTypeUrl = string.Format("{0}?account_type={1}", url, "HOLDING");
 
             mockClient
