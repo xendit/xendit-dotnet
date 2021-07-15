@@ -20,8 +20,8 @@ namespace XenditTest
             expectedBalance.Value = 10000;
 
             mockClient
-                .Setup(x => x.Request<Balance>(HttpMethod.Get, new Dictionary<string, string>(), url, It.IsAny<Dictionary<string, object>>()))
-                .ReturnsAsync(() => expectedBalance);
+                .Setup(client => client.Request<Balance>(HttpMethod.Get, new Dictionary<string, string>(), url, null))
+                .ReturnsAsync(expectedBalance);
 
             XenditConfiguration.RequestClient = mockClient.Object;
 
@@ -38,7 +38,7 @@ namespace XenditTest
             string accountTypeUrl = string.Format("{0}?account_type={1}", url, "HOLDING");
 
             mockClient
-                .Setup(x => x.Request<Balance>(HttpMethod.Get, new Dictionary<string, string>(), accountTypeUrl, It.IsAny<Dictionary<string, object>>()))
+                .Setup(client => client.Request<Balance>(HttpMethod.Get, new Dictionary<string, string>(), accountTypeUrl, null))
                 .ReturnsAsync(expectedBalance);
             XenditConfiguration.RequestClient = mockClient.Object;
 
