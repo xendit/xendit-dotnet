@@ -1,5 +1,21 @@
 # Xendit API .NET Library
 
+This library is the abstraction of Xendit API for access from applications written with C# .NET.
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [API Documentation](#api-documentation)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Balance Service](#balance-service)
+    - [Get Balance](#get-balance)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## API Documentation
 
 Please check [Xendit API Reference](https://developers.xendit.co/api-reference/)
@@ -53,4 +69,22 @@ namespace XenditExample
         }
     }
 }
+```
+
+### Balance Service
+
+#### Get Balance
+
+The `accountType` parameter is optional. You can use `accountType` in enum or in string type (`"Cash"`, `"Holding"`, `"Tax"`)
+
+```cs
+await Balance.Get();
+
+await Balance.Get(AccountType.Holding);
+
+await Balance.Get("Tax");
+```
+
+```cs
+Balance balance = await Balance.Get();
 ```
