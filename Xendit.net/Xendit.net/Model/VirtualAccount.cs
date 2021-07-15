@@ -81,5 +81,18 @@ namespace Xendit.net.Model
             var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Post, headers, url, parameter);
             return virtualAccount;
         }
+
+        public static Task<VirtualAccount> Update(string id, Dictionary<string, object> parameter)
+        {
+            return Update(new Dictionary<string, string>(), id, parameter);
+        }
+
+        public static async Task<VirtualAccount> Update(Dictionary<string, string> headers, string id, Dictionary<string, object> parameter)
+        {
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/callback_virtual_accounts/", id);
+
+            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Patch, headers, url, parameter);
+            return virtualAccount;
+        }
     }
 }
