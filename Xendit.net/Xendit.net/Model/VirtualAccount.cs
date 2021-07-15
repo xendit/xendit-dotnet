@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -51,9 +52,8 @@ namespace Xendit.net.Model
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/available_virtual_account_banks");
 
-            var result = await XenditConfiguration.requestClient.Request(headers, url);
-            var availableBanks = await JsonSerializer.DeserializeAsync<List<AvailableBank>>(result);
-            return availableBanks;
+            var listAvailableBanks = await XenditConfiguration.RequestClient.Request<List<AvailableBank>>(HttpMethod.Get, headers, url, null);
+            return listAvailableBanks;
         }
 
         public static Task<VirtualAccount> Get(string id)
@@ -65,8 +65,20 @@ namespace Xendit.net.Model
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/callback_virtual_accounts/", id);
 
-            var result = await XenditConfiguration.requestClient.Request(headers, url);
-            var virtualAccount = await JsonSerializer.DeserializeAsync<VirtualAccount>(result);
+            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Get, headers, url, null);
+            return virtualAccount;
+        }
+
+        public static Task<VirtualAccount> Create(Dictionary<string, object> parameter)
+        {
+            return Create(new Dictionary<string, string>(), parameter);
+        }
+
+        public static async Task<VirtualAccount> Create(Dictionary<string, string> headers, Dictionary<string, object> parameter)
+        {
+            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/callback_virtual_accounts");
+
+            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Post, headers, url, parameter);
             return virtualAccount;
         }
     }
