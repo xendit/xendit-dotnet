@@ -188,7 +188,11 @@ namespace Xendit.net.Model
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/callback_virtual_accounts");
 
-            parameter.Add("is_closed", isClosed);
+
+            if (!parameter.ContainsKey("is_closed"))
+            {
+                parameter.Add("is_closed", isClosed);
+            }
 
             if (isClosed && parameter.ContainsKey("suggested_amount")) 
             {
