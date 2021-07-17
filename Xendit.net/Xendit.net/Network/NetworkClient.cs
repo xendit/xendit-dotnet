@@ -1,23 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Xendit.net.Exception;
-using System.Text.Json;
-
-namespace Xendit.net.Network
+﻿namespace Xendit.net.Network
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Text.Json;
+    using System.Threading.Tasks;
+    using Xendit.net.Exception;
+
     public class NetworkClient : INetworkClient
     {
         private readonly HttpClient client;
 
         public NetworkClient(HttpClient httpClient)
         {
-            client = httpClient;
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.ConnectionClose = true;
+            this.client = httpClient;
+            this.client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            this.client.DefaultRequestHeaders.ConnectionClose = true;
+        }
+
+        public async Task<T> Request<T>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
+        {
+            var request = this.CreateRequestMessage(httpMethod, headers, url, requestBody);
+            var response = await this.client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var responseBody = await response.Content.ReadAsStreamAsync();
+
+            var deserializedResponse = await JsonSerializer.DeserializeAsync<T>(responseBody);
+            return deserializedResponse;
         }
 
         private void CheckApiKey(string apiKey)
@@ -31,7 +43,7 @@ namespace Xendit.net.Network
         private string EncodeToBase64String(string apiKey)
         {
             var user = string.Format("{0}", apiKey);
-            var password = "";
+            var password = string.Empty;
             var base64String = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{user}:{password}"));
 
             return base64String;
@@ -50,8 +62,8 @@ namespace Xendit.net.Network
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
             }
 
-            CheckApiKey(XenditConfiguration.ApiKey);
-            string apiKeyBase64 = EncodeToBase64String(XenditConfiguration.ApiKey);
+            this.CheckApiKey(XenditConfiguration.ApiKey);
+            string apiKeyBase64 = this.EncodeToBase64String(XenditConfiguration.ApiKey);
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", apiKeyBase64);
 
             foreach (var header in headers)
@@ -60,18 +72,6 @@ namespace Xendit.net.Network
             }
 
             return request;
-        }
-
-        public async Task<T> Request<T>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
-        {
-            var request = CreateRequestMessage(httpMethod, headers, url, requestBody);
-            var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            var responseBody = await response.Content.ReadAsStreamAsync();
-
-            var deserializedResponse = await JsonSerializer.DeserializeAsync<T>(responseBody);
-            return deserializedResponse;
         }
     }
 }

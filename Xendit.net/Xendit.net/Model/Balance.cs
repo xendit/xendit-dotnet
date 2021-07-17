@@ -1,49 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
-using Xendit.net.Exception;
-using System.Net.Http;
-
-namespace Xendit.net.Model
+﻿namespace Xendit.net.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Text.Json.Serialization;
+    using System.Threading.Tasks;
+    using Xendit.net.Exception;
+
     public class Balance
     {
-        [JsonPropertyName("balance")]
-        public int Value { get; set; }
-        
         public enum AccountType
         {
             Cash,
             Holding,
-            Tax
+            Tax,
         }
 
+        [JsonPropertyName("balance")]
+        public int Value { get; set; }
+
         /// <summary>
-        /// Get balance from your account
+        /// Get balance from your account.
         /// </summary>
-        /// <returns>A Task that contains balance</returns>
+        /// <returns>A Task that contains balance.</returns>
         public static async Task<Balance> Get()
         {
             return await GetBalanceAsync(new Dictionary<string, string>(), null);
         }
 
         /// <summary>
-        /// Get balance from your account based on given account type
+        /// Get balance from your account based on given account type.
         /// </summary>
-        /// <param name="accountType">Selected balance type (in enum)</param>
-        /// <returns>A Task that contains balance</returns>
+        /// <param name="accountType">Selected balance type (in enum).</param>
+        /// <returns>A Task that contains balance.</returns>
         public static async Task<Balance> Get(AccountType accountType)
         {
             return await GetBalanceAsync(new Dictionary<string, string>(), accountType);
         }
 
         /// <summary>
-        /// Get balance from your account based on given account type string (Cash, Holding, Tax)
+        /// Get balance from your account based on given account type string (Cash, Holding, Tax).
         /// </summary>
-        /// <param name="accountTypeValue">Selected balance type in string ("Cash", "Holding", "Tax")</param>
-        /// <exception cref="ParamException">Thrown when account type value is not "Cash", "Holding", "Tax"</exception>
-        /// <returns>A Task that contains balance</returns>
+        /// <param name="accountTypeValue">Selected balance type in string ("Cash", "Holding", "Tax").</param>
+        /// <exception cref="ParamException">Thrown when account type value is not "Cash", "Holding", "Tax".</exception>
+        /// <returns>A Task that contains balance.</returns>
         public static async Task<Balance> Get(string accountTypeValue)
         {
             try
@@ -58,23 +58,23 @@ namespace Xendit.net.Model
         }
 
         /// <summary>
-        /// Get balance from your account based on given account type with custom headers
+        /// Get balance from your account based on given account type with custom headers.
         /// </summary>
-        /// <param name="headers">Custom headers. e.g: "for-user-id"</param>
-        /// <param name="accountType">Selected balance type (in enum)</param>
-        /// <returns>A Task that contains balance</returns>
+        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="accountType">Selected balance type (in enum).</param>
+        /// <returns>A Task that contains balance.</returns>
         public static async Task<Balance> Get(Dictionary<string, string> headers, AccountType accountType)
         {
             return await GetBalanceAsync(headers, accountType);
         }
 
         /// <summary>
-        /// Get balance from your account based on given account type string (Cash, Holding, Tax) with custom headers
+        /// Get balance from your account based on given account type string (Cash, Holding, Tax) with custom headers.
         /// </summary>
-        /// <param name="headers">Custom headers. e.g: "for-user-id"</param>
-        /// <param name="accountTypeValue">Selected balance type in string ("Cash", "Holding", "Tax")</param>
-        /// <exception cref="ArgumentException">Thrown when account type value is not "Cash", "Holding", "Tax"</exception>
-        /// <returns>A Task that contains balance</returns>
+        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="accountTypeValue">Selected balance type in string ("Cash", "Holding", "Tax").</param>
+        /// <exception cref="ArgumentException">Thrown when account type value is not "Cash", "Holding", "Tax".</exception>
+        /// <returns>A Task that contains balance.</returns>
         public static async Task<Balance> Get(Dictionary<string, string> headers, string accountTypeValue)
         {
             try

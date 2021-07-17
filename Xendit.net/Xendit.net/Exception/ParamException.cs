@@ -2,7 +2,8 @@
 {
     public class ParamException : XenditException
     {
-        public ParamException(string message) : base(message)
+        public ParamException(string message)
+            : base(message)
         {
         }
     }

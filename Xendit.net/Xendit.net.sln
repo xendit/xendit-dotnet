@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xendit.net", "xendit.net\Xendit.net.csproj", "{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XenditTest", "XenditTest\XenditTest.csproj", "{0419021E-F85A-4C77-88CB-94C6E7C63D89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XenditTest", "XenditTest\XenditTest.csproj", "{0419021E-F85A-4C77-88CB-94C6E7C63D89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_stylecop", "_stylecop", "{07EB9B75-7EBC-4A8A-9795-FCF12619D2AE}"
+	ProjectSection(SolutionItems) = preProject
+		Xendit.ruleset = Xendit.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,8 @@
 {
     public class AuthException : XenditException
     {
-        public AuthException(string message) : base(message)
+        public AuthException(string message)
+            : base(message)
         {
         }
     }
