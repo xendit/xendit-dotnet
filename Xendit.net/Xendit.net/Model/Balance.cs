@@ -23,9 +23,9 @@ namespace Xendit.net.Model
         /// Get balance from your account
         /// </summary>
         /// <returns>A Task that contains balance</returns>
-        public static Task<Balance> Get()
+        public static async Task<Balance> Get()
         {
-            return GetBalanceAsync(new Dictionary<string, string>(), null);
+            return await GetBalanceAsync(new Dictionary<string, string>(), null);
         }
 
         /// <summary>
@@ -33,9 +33,9 @@ namespace Xendit.net.Model
         /// </summary>
         /// <param name="accountType">Selected balance type (in enum)</param>
         /// <returns>A Task that contains balance</returns>
-        public static Task<Balance> Get(AccountType accountType)
+        public static async Task<Balance> Get(AccountType accountType)
         {
-            return GetBalanceAsync(new Dictionary<string, string>(), accountType);
+            return await GetBalanceAsync(new Dictionary<string, string>(), accountType);
         }
 
         /// <summary>
@@ -44,12 +44,12 @@ namespace Xendit.net.Model
         /// <param name="accountTypeValue">Selected balance type in string ("Cash", "Holding", "Tax")</param>
         /// <exception cref="ParamException">Thrown when account type value is not "Cash", "Holding", "Tax"</exception>
         /// <returns>A Task that contains balance</returns>
-        public static Task<Balance> Get(string accountTypeValue)
+        public static async Task<Balance> Get(string accountTypeValue)
         {
             try
             {
                 AccountType accountType = (AccountType)Enum.Parse(typeof(AccountType), accountTypeValue);
-                return GetBalanceAsync(new Dictionary<string, string>(), accountType);
+                return await GetBalanceAsync(new Dictionary<string, string>(), accountType);
             }
             catch (ArgumentException)
             {
@@ -63,9 +63,9 @@ namespace Xendit.net.Model
         /// <param name="headers">Custom headers. e.g: "for-user-id"</param>
         /// <param name="accountType">Selected balance type (in enum)</param>
         /// <returns>A Task that contains balance</returns>
-        public static Task<Balance> Get(Dictionary<string, string> headers, AccountType accountType)
+        public static async Task<Balance> Get(Dictionary<string, string> headers, AccountType accountType)
         {
-            return GetBalanceAsync(headers, accountType);
+            return await GetBalanceAsync(headers, accountType);
         }
 
         /// <summary>
@@ -75,12 +75,12 @@ namespace Xendit.net.Model
         /// <param name="accountTypeValue">Selected balance type in string ("Cash", "Holding", "Tax")</param>
         /// <exception cref="ArgumentException">Thrown when account type value is not "Cash", "Holding", "Tax"</exception>
         /// <returns>A Task that contains balance</returns>
-        public static Task<Balance> Get(Dictionary<string, string> headers, string accountTypeValue)
+        public static async Task<Balance> Get(Dictionary<string, string> headers, string accountTypeValue)
         {
             try
             {
                 AccountType accountType = (AccountType)Enum.Parse(typeof(AccountType), accountTypeValue);
-                return GetBalanceAsync(headers, accountType);
+                return await GetBalanceAsync(headers, accountType);
             }
             catch (ArgumentException)
             {
