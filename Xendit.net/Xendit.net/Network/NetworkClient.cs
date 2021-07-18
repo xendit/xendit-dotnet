@@ -24,12 +24,20 @@
         {
             var request = this.CreateRequestMessage(httpMethod, headers, url, requestBody);
             var response = await this.client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
 
-            var responseBody = await response.Content.ReadAsStreamAsync();
+            try
+            {
+                response.EnsureSuccessStatusCode();
 
-            var deserializedResponse = await JsonSerializer.DeserializeAsync<T>(responseBody);
-            return deserializedResponse;
+                var responseBody = await response.Content.ReadAsStreamAsync();
+
+                var deserializedResponse = await JsonSerializer.DeserializeAsync<T>(responseBody);
+                return deserializedResponse;
+            }
+            catch (HttpRequestException e)
+            {
+                throw new ApiException(e.Message, response.StatusCode.ToString(), requestBody);
+            }
         }
 
         private void CheckApiKey(string apiKey)
