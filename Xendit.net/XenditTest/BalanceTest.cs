@@ -13,10 +13,10 @@ namespace XenditTest
 
     public class BalanceTest
     {
-        private readonly Mock<INetworkClient> mockClient = new Mock<INetworkClient>();
-        private readonly string url = "https://api.xendit.co/balance";
-        private readonly Balance expectedBalance = new Balance { Value = 10000 };
-        private readonly Dictionary<string, string> customHeaders = new Dictionary<string, string>()
+        private static readonly Mock<INetworkClient> MockClient = new Mock<INetworkClient>();
+        private static readonly string Url = "https://api.xendit.co/balance";
+        private static readonly Balance ExpectedBalance = new Balance { Value = 10000 };
+        private static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
         {
             { "for-user-id", "user-id" },
         };
@@ -24,56 +24,56 @@ namespace XenditTest
         [Fact]
         public async void Balance_ShouldSuccess_IfNoGivenParam()
         {
-            this.mockClient
-                .Setup(client => client.Request<Balance>(HttpMethod.Get, new Dictionary<string, string>(), this.url, null))
-                .ReturnsAsync(this.expectedBalance);
+            MockClient
+                .Setup(client => client.Request<Balance>(HttpMethod.Get, new Dictionary<string, string>(), Url, null))
+                .ReturnsAsync(ExpectedBalance);
 
-            XenditConfiguration.RequestClient = this.mockClient.Object;
+            XenditConfiguration.RequestClient = MockClient.Object;
 
             Balance actualBalance = await Balance.Get();
-            Assert.Equal(JsonSerializer.Serialize(this.expectedBalance), JsonSerializer.Serialize(actualBalance));
+            Assert.Equal(JsonSerializer.Serialize(ExpectedBalance), JsonSerializer.Serialize(actualBalance));
         }
 
         [Fact]
         public async void Balance_ShouldSuccess_IfGivenParam()
         {
-            string accountTypeUrl = string.Format("{0}?account_type={1}", this.url, "HOLDING");
+            string accountTypeUrl = string.Format("{0}?account_type={1}", Url, "HOLDING");
 
-            this.mockClient
+            MockClient
                 .Setup(client => client.Request<Balance>(HttpMethod.Get, new Dictionary<string, string>(), accountTypeUrl, null))
-                .ReturnsAsync(this.expectedBalance);
-            XenditConfiguration.RequestClient = this.mockClient.Object;
+                .ReturnsAsync(ExpectedBalance);
+            XenditConfiguration.RequestClient = MockClient.Object;
 
             Balance actualBalance = await Balance.Get(accountType: Balance.AccountType.Holding);
-            Assert.Equal(JsonSerializer.Serialize(this.expectedBalance), JsonSerializer.Serialize(actualBalance));
+            Assert.Equal(JsonSerializer.Serialize(ExpectedBalance), JsonSerializer.Serialize(actualBalance));
         }
 
         [Fact]
         public async void Balance_ShouldSuccess_IfGivenParam_WithCustomHeaders()
         {
-            string accountTypeUrl = string.Format("{0}?account_type={1}", this.url, "HOLDING");
+            string accountTypeUrl = string.Format("{0}?account_type={1}", Url, "HOLDING");
 
-            this.mockClient
-                .Setup(client => client.Request<Balance>(HttpMethod.Get, this.customHeaders, accountTypeUrl, null))
-                .ReturnsAsync(this.expectedBalance);
-            XenditConfiguration.RequestClient = this.mockClient.Object;
+            MockClient
+                .Setup(client => client.Request<Balance>(HttpMethod.Get, CustomHeaders, accountTypeUrl, null))
+                .ReturnsAsync(ExpectedBalance);
+            XenditConfiguration.RequestClient = MockClient.Object;
 
-            Balance actualBalance = await Balance.Get(headers: this.customHeaders, accountType: Balance.AccountType.Holding);
-            Assert.Equal(JsonSerializer.Serialize(this.expectedBalance), JsonSerializer.Serialize(actualBalance));
+            Balance actualBalance = await Balance.Get(headers: CustomHeaders, accountType: Balance.AccountType.Holding);
+            Assert.Equal(JsonSerializer.Serialize(ExpectedBalance), JsonSerializer.Serialize(actualBalance));
         }
 
         [Fact]
         public async void Balance_ShouldSuccess_IfGivenParamAccountTypeString()
         {
-            string accountTypeUrl = string.Format("{0}?account_type={1}", this.url, "HOLDING");
+            string accountTypeUrl = string.Format("{0}?account_type={1}", Url, "HOLDING");
 
-            this.mockClient
+            MockClient
                 .Setup(client => client.Request<Balance>(HttpMethod.Get, new Dictionary<string, string>(), accountTypeUrl, null))
-                .ReturnsAsync(this.expectedBalance);
-            XenditConfiguration.RequestClient = this.mockClient.Object;
+                .ReturnsAsync(ExpectedBalance);
+            XenditConfiguration.RequestClient = MockClient.Object;
 
             Balance actualBalance = await Balance.Get(accountTypeValue: "Holding");
-            Assert.Equal(JsonSerializer.Serialize(this.expectedBalance), JsonSerializer.Serialize(actualBalance));
+            Assert.Equal(JsonSerializer.Serialize(ExpectedBalance), JsonSerializer.Serialize(actualBalance));
         }
 
         [Fact]
@@ -85,21 +85,21 @@ namespace XenditTest
         [Fact]
         public async void Balance_ShouldSuccess_IfGivenParamAccountTypeString_WithCustomHeaders()
         {
-            string accountTypeUrl = string.Format("{0}?account_type={1}", this.url, "HOLDING");
+            string accountTypeUrl = string.Format("{0}?account_type={1}", Url, "HOLDING");
 
-            this.mockClient
-                .Setup(client => client.Request<Balance>(HttpMethod.Get, this.customHeaders, accountTypeUrl, null))
-                .ReturnsAsync(this.expectedBalance);
-            XenditConfiguration.RequestClient = this.mockClient.Object;
+            MockClient
+                .Setup(client => client.Request<Balance>(HttpMethod.Get, CustomHeaders, accountTypeUrl, null))
+                .ReturnsAsync(ExpectedBalance);
+            XenditConfiguration.RequestClient = MockClient.Object;
 
-            Balance actualBalance = await Balance.Get(headers: this.customHeaders, accountTypeValue: "Holding");
-            Assert.Equal(JsonSerializer.Serialize(this.expectedBalance), JsonSerializer.Serialize(actualBalance));
+            Balance actualBalance = await Balance.Get(headers: CustomHeaders, accountTypeValue: "Holding");
+            Assert.Equal(JsonSerializer.Serialize(ExpectedBalance), JsonSerializer.Serialize(actualBalance));
         }
 
         [Fact]
         public async Task Balance_ShouldFail_IfAccountTypeStringDoesntExist_WithCustomHeaders()
         {
-            await Assert.ThrowsAsync<ParamException>(() => Balance.Get(headers: this.customHeaders, accountTypeValue: "Wallet"));
+            await Assert.ThrowsAsync<ParamException>(() => Balance.Get(headers: CustomHeaders, accountTypeValue: "Wallet"));
         }
     }
 }

@@ -22,7 +22,7 @@
 
         public async Task<T> Request<T>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
         {
-            var request = this.CreateRequestMessage(httpMethod, headers, url, requestBody);
+            var request = CreateRequestMessage(httpMethod, headers, url, requestBody);
             var response = await this.client.SendAsync(request);
 
             try
@@ -40,7 +40,7 @@
             }
         }
 
-        private void CheckApiKey(string apiKey)
+        private static void CheckApiKey(string apiKey)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -48,7 +48,7 @@
             }
         }
 
-        private string EncodeToBase64String(string apiKey)
+        private static string EncodeToBase64String(string apiKey)
         {
             var user = string.Format("{0}", apiKey);
             var password = string.Empty;
@@ -57,7 +57,7 @@
             return base64String;
         }
 
-        private HttpRequestMessage CreateRequestMessage(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
+        private static HttpRequestMessage CreateRequestMessage(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
         {
             var request = new HttpRequestMessage
             {
@@ -70,8 +70,8 @@
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
             }
 
-            this.CheckApiKey(XenditConfiguration.ApiKey);
-            string apiKeyBase64 = this.EncodeToBase64String(XenditConfiguration.ApiKey);
+            CheckApiKey(XenditConfiguration.ApiKey);
+            string apiKeyBase64 = EncodeToBase64String(XenditConfiguration.ApiKey);
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", apiKeyBase64);
 
             foreach (var header in headers)
