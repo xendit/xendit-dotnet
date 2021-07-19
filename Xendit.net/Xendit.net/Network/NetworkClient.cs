@@ -61,11 +61,11 @@
         {
             var request = new HttpRequestMessage
             {
-                Method = httpMethod,
+                Method = new HttpMethod(httpMethod.ToString()),
                 RequestUri = new Uri(url),
             };
 
-            if (httpMethod == HttpMethod.Post || httpMethod == HttpMethod.Patch)
+            if (httpMethod == HttpMethod.Post || httpMethod == XenditHttpMethod.Patch)
             {
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
             }
