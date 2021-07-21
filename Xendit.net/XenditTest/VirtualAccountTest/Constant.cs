@@ -50,7 +50,6 @@
         internal static readonly Dictionary<string, object> UpdateVAbody = new Dictionary<string, object>()
         {
             { "expiration_date", "2019-11-12T23:46:00.000Z" },
-            { "expected_amount", 6000 },
         };
 
         internal static readonly Dictionary<string, object> ClosedPostVAbody = new Dictionary<string, object>()
@@ -58,6 +57,7 @@
             { "external_id", "demo-1475804036622" },
             { "bank_code", "BNI" },
             { "name", "Rika Sutanto" },
+            { "expected_amount", 6000L },
             { "is_closed", true },
         };
 
@@ -75,6 +75,7 @@
             { "external_id", "demo-1475804036622" },
             { "bank_code", "BNI" },
             { "name", "Rika Sutanto" },
+            { "expected_amount", 6000L },
             { "is_closed", true },
         };
 
@@ -100,7 +101,7 @@
             IsSingleUse = false,
             ExpirationDate = "2019-11-12T23:46:00.000Z",
             Id = "virtual-account-id",
-            ExpectedAmount = 6000,
+            ExpectedAmount = 6000L,
             ExternalId = "demo-1475804036622",
         };
 

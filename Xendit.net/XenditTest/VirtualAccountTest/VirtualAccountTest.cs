@@ -11,7 +11,6 @@ using Xunit;
 
 namespace XenditTest.VirtualAccountTest
 {
-    [CollectionDefinition("Virtual Account Test", DisableParallelization = true)]
     public class VirtualAccountTest
     {
         private static readonly Mock<INetworkClient> MockClient = new Mock<INetworkClient>();
@@ -129,7 +128,7 @@ namespace XenditTest.VirtualAccountTest
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            VirtualAccount actualCreatedClosedVirtualAccount = await VirtualAccount.CreateClosed(externalId: Constant.ExpectedCreatedClosedVirtualAccount.ExternalId, bankCode: Constant.ExpectedCreatedClosedVirtualAccount.BankCode, name: Constant.ExpectedCreatedClosedVirtualAccount.Name);
+            VirtualAccount actualCreatedClosedVirtualAccount = await VirtualAccount.CreateClosed(externalId: Constant.ExpectedCreatedClosedVirtualAccount.ExternalId, bankCode: Constant.ExpectedCreatedClosedVirtualAccount.BankCode, name: Constant.ExpectedCreatedClosedVirtualAccount.Name, expectedAmount: Constant.ExpectedCreatedClosedVirtualAccount.ExpectedAmount);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCreatedClosedVirtualAccount), JsonSerializer.Serialize(actualCreatedClosedVirtualAccount));
         }
 
@@ -142,7 +141,7 @@ namespace XenditTest.VirtualAccountTest
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            VirtualAccount actualCreatedClosedVirtualAccount = await VirtualAccount.CreateClosed(headers: Constant.CustomHeaders, externalId: Constant.ExpectedCreatedClosedVirtualAccount.ExternalId, bankCode: Constant.ExpectedCreatedClosedVirtualAccount.BankCode, name: Constant.ExpectedCreatedClosedVirtualAccount.Name);
+            VirtualAccount actualCreatedClosedVirtualAccount = await VirtualAccount.CreateClosed(headers: Constant.CustomHeaders, externalId: Constant.ExpectedCreatedClosedVirtualAccount.ExternalId, bankCode: Constant.ExpectedCreatedClosedVirtualAccount.BankCode, name: Constant.ExpectedCreatedClosedVirtualAccount.Name, expectedAmount: Constant.ExpectedCreatedClosedVirtualAccount.ExpectedAmount);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCreatedClosedVirtualAccount), JsonSerializer.Serialize(actualCreatedClosedVirtualAccount));
         }
 
@@ -160,7 +159,7 @@ namespace XenditTest.VirtualAccountTest
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            VirtualAccount actualCreatedClosedVirtualAccount = await VirtualAccount.CreateClosed(externalId: Constant.ExpectedCreatedClosedVirtualAccount.ExternalId, bankCode: Constant.ExpectedCreatedClosedVirtualAccount.BankCode, name: Constant.ExpectedCreatedClosedVirtualAccount.Name, parameter: additionalParams);
+            VirtualAccount actualCreatedClosedVirtualAccount = await VirtualAccount.CreateClosed(externalId: Constant.ExpectedCreatedClosedVirtualAccount.ExternalId, bankCode: Constant.ExpectedCreatedClosedVirtualAccount.BankCode, name: Constant.ExpectedCreatedClosedVirtualAccount.Name, expectedAmount: Constant.ExpectedCreatedClosedVirtualAccount.ExpectedAmount, parameter: additionalParams);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCreatedClosedVirtualAccount), JsonSerializer.Serialize(actualCreatedClosedVirtualAccount));
         }
 
@@ -178,7 +177,7 @@ namespace XenditTest.VirtualAccountTest
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            VirtualAccount actualCreatedClosedVirtualAccount = await VirtualAccount.CreateClosed(headers: Constant.CustomHeaders, externalId: Constant.ExpectedCreatedClosedVirtualAccount.ExternalId, bankCode: Constant.ExpectedCreatedClosedVirtualAccount.BankCode, name: Constant.ExpectedCreatedClosedVirtualAccount.Name, parameter: additionalParams);
+            VirtualAccount actualCreatedClosedVirtualAccount = await VirtualAccount.CreateClosed(headers: Constant.CustomHeaders, externalId: Constant.ExpectedCreatedClosedVirtualAccount.ExternalId, bankCode: Constant.ExpectedCreatedClosedVirtualAccount.BankCode, name: Constant.ExpectedCreatedClosedVirtualAccount.Name, expectedAmount: Constant.ExpectedCreatedClosedVirtualAccount.ExpectedAmount, parameter: additionalParams);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCreatedClosedVirtualAccount), JsonSerializer.Serialize(actualCreatedClosedVirtualAccount));
         }
 
