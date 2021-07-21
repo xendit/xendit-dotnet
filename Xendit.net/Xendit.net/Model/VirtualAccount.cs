@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using Xendit.net.Exception;
-
-namespace Xendit.net.Model
+﻿namespace Xendit.net.Model
 {
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Text.Json.Serialization;
+    using System.Threading.Tasks;
+    using Xendit.net.Exception;
+    using Xendit.net.Network;
+
     public class VirtualAccount
     {
         [JsonPropertyName("id")]
@@ -103,6 +101,7 @@ namespace Xendit.net.Model
 
             return Create(new Dictionary<string, string>(), parameter, true);
         }
+
         public static Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, string externalId, string bankCode, string name)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
@@ -110,7 +109,7 @@ namespace Xendit.net.Model
                 { "external_id", externalId },
                 { "bank_code", bankCode },
                 { "name", name },
-            }; 
+            };
 
             return Create(headers, parameter, true);
         }
@@ -154,6 +153,7 @@ namespace Xendit.net.Model
 
             return Create(new Dictionary<string, string>(), parameter, false);
         }
+
         public static Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, string externalId, string bankCode, string name)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
@@ -184,25 +184,6 @@ namespace Xendit.net.Model
             return Create(headers, parameter, false);
         }
 
-        private static async Task<VirtualAccount> Create(Dictionary<string, string> headers, Dictionary<string, object> parameter, bool isClosed)
-        {
-            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/callback_virtual_accounts");
-
-
-            if (!parameter.ContainsKey("is_closed"))
-            {
-                parameter.Add("is_closed", isClosed);
-            }
-
-            if (isClosed && parameter.ContainsKey("suggested_amount")) 
-            {
-                throw new ParamException("Suggested amount is not supported for closed VA");
-            }
-
-            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Post, headers, url, parameter);
-            return virtualAccount;
-        }
-
         public static Task<VirtualAccount> Update(string id, Dictionary<string, object> parameter)
         {
             return Update(new Dictionary<string, string>(), id, parameter);
@@ -212,7 +193,25 @@ namespace Xendit.net.Model
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/callback_virtual_accounts/", id);
 
-            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Patch, headers, url, parameter);
+            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(XenditHttpMethod.Patch, headers, url, parameter);
+            return virtualAccount;
+        }
+
+        private static async Task<VirtualAccount> Create(Dictionary<string, string> headers, Dictionary<string, object> parameter, bool isClosed)
+        {
+            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/callback_virtual_accounts");
+
+            if (!parameter.ContainsKey("is_closed"))
+            {
+                parameter.Add("is_closed", isClosed);
+            }
+
+            if (isClosed && parameter.ContainsKey("suggested_amount"))
+            {
+                throw new ParamException("Suggested amount is not supported for closed VA");
+            }
+
+            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Post, headers, url, parameter);
             return virtualAccount;
         }
     }

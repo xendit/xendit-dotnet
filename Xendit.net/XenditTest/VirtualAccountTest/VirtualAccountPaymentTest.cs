@@ -1,26 +1,26 @@
-﻿using System.Collections.Generic;
-using Xunit;
-using Moq;
-using Xendit.net;
-using Xendit.net.Network;
-using Xendit.net.Model;
-using System.Text.Json;
-using System.Net.Http;
-
-namespace XenditTest.VirtualAccountTest
+﻿namespace XenditTest.VirtualAccountTest
 {
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Text.Json;
+    using Moq;
+    using Xendit.net;
+    using Xendit.net.Model;
+    using Xendit.net.Network;
+    using Xunit;
+
     public class VirtualAccountPaymentTest
     {
-        private readonly Mock<INetworkClient> mockClient = new Mock<INetworkClient>();
+        private static readonly Mock<INetworkClient> MockClient = new Mock<INetworkClient>();
 
         [Fact]
         public async void VirtualAccountPayment_ShouldSuccess_GetVirtualAccountPayment()
         {
-            mockClient
+            MockClient
                 .Setup(client => client.Request<VirtualAccountPayment>(HttpMethod.Get, new Dictionary<string, string>(), Constant.VirtualAccountPaymentUrl, null))
                 .ReturnsAsync(Constant.ExpectedVirtualAccountPayment);
 
-            XenditConfiguration.RequestClient = mockClient.Object;
+            XenditConfiguration.RequestClient = MockClient.Object;
 
             VirtualAccountPayment actualVirtualAccountPayment = await VirtualAccountPayment.Get(Constant.PaymentId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedVirtualAccountPayment), JsonSerializer.Serialize(actualVirtualAccountPayment));

@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
-using Xendit.net.Model;
-
-namespace XenditTest.VirtualAccountTest
+﻿namespace XenditTest.VirtualAccountTest
 {
+    using System.Collections.Generic;
+    using Xendit.net.Model;
+
     internal static class Constant
     {
         internal static readonly List<AvailableBank> ExpectedAvailableBanks = new List<AvailableBank>()
         {
-            new AvailableBank{ Name = "Bank Negara Indonesia", Code = "BNI" },
-            new AvailableBank{ Name = "Bank Rakyat Indonesia", Code = "BRI" }
+            new AvailableBank { Name = "Bank Negara Indonesia", Code = "BNI" },
+            new AvailableBank { Name = "Bank Rakyat Indonesia", Code = "BRI" },
         };
 
         internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
         {
-            { "for-user-id", "user-id" }
+            { "for-user-id", "user-id" },
         };
 
         internal static readonly VirtualAccount ExpectedVirtualAccount = new VirtualAccount
@@ -28,7 +28,7 @@ namespace XenditTest.VirtualAccountTest
             AccountNumber = "8808999992622802",
             IsSingleUse = false,
             ExpirationDate = "2052-07-12T17:00:00.000Z",
-            Id = "virtual-account-id"
+            Id = "virtual-account-id",
         };
 
         internal static readonly VirtualAccount ExpectedUpdatedVirtualAccount = new VirtualAccount
@@ -50,7 +50,7 @@ namespace XenditTest.VirtualAccountTest
         internal static readonly Dictionary<string, object> UpdateVAbody = new Dictionary<string, object>()
         {
             { "expiration_date", "2019-11-12T23:46:00.000Z" },
-            { "expected_amount", 6000 }
+            { "expected_amount", 6000 },
         };
 
         internal static readonly Dictionary<string, object> ClosedPostVAbody = new Dictionary<string, object>()
@@ -101,7 +101,7 @@ namespace XenditTest.VirtualAccountTest
             ExpirationDate = "2019-11-12T23:46:00.000Z",
             Id = "virtual-account-id",
             ExpectedAmount = 6000,
-            ExternalId = "demo-1475804036622"
+            ExternalId = "demo-1475804036622",
         };
 
         internal static readonly VirtualAccount ExpectedCreatedOpenVirtualAccount = new VirtualAccount
@@ -117,7 +117,7 @@ namespace XenditTest.VirtualAccountTest
             IsSingleUse = false,
             ExpirationDate = "2019-11-12T23:46:00.000Z",
             Id = "virtual-account-id",
-            ExternalId = "demo-1475804036622"
+            ExternalId = "demo-1475804036622",
         };
 
         internal static readonly string VAId = "virtual-account-id";
@@ -137,7 +137,7 @@ namespace XenditTest.VirtualAccountTest
             BankCode = "BNI",
             Amount = 5000,
             SenderName = "JOHN DOE",
-            TransactionTimestamp = "2017-08-11T11:14:57.080Z"
+            TransactionTimestamp = "2017-08-11T11:14:57.080Z",
         };
     }
 }

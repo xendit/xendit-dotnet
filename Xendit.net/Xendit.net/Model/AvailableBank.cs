@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
-
-namespace Xendit.net.Model
+﻿namespace Xendit.net.Model
 {
+    using System.Text.Json.Serialization;
+
     public class AvailableBank
     {
         [JsonPropertyName("name")]
