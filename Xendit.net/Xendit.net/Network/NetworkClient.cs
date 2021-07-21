@@ -1,26 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Xendit.net.Exception;
-using System.Text.Json;
-
-namespace Xendit.net.Network
+﻿namespace Xendit.net.Network
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Text.Json;
+    using System.Threading.Tasks;
+    using Xendit.net.Exception;
+
     public class NetworkClient : INetworkClient
     {
         private readonly HttpClient client;
 
         public NetworkClient(HttpClient httpClient)
         {
-            client = httpClient;
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.ConnectionClose = true;
+            this.client = httpClient;
+            this.client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            this.client.DefaultRequestHeaders.ConnectionClose = true;
         }
 
-        private void CheckApiKey(string apiKey)
+        public async Task<T> Request<T>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
+        {
+            var request = CreateRequestMessage(httpMethod, headers, url, requestBody);
+            var response = await this.client.SendAsync(request);
+
+            try
+            {
+                response.EnsureSuccessStatusCode();
+
+                var responseBody = await response.Content.ReadAsStreamAsync();
+
+                var deserializedResponse = await JsonSerializer.DeserializeAsync<T>(responseBody);
+                return deserializedResponse;
+            }
+            catch (HttpRequestException e)
+            {
+                throw new ApiException(e.Message, response.StatusCode.ToString(), requestBody);
+            }
+        }
+
+        private static void CheckApiKey(string apiKey)
         {
             if (string.IsNullOrWhiteSpace(apiKey))
             {
@@ -28,24 +48,24 @@ namespace Xendit.net.Network
             }
         }
 
-        private string EncodeToBase64String(string apiKey)
+        private static string EncodeToBase64String(string apiKey)
         {
             var user = string.Format("{0}", apiKey);
-            var password = "";
+            var password = string.Empty;
             var base64String = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{user}:{password}"));
 
             return base64String;
         }
 
-        private HttpRequestMessage CreateRequestMessage(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
+        private static HttpRequestMessage CreateRequestMessage(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
         {
             var request = new HttpRequestMessage
             {
-                Method = httpMethod,
+                Method = new HttpMethod(httpMethod.ToString()),
                 RequestUri = new Uri(url),
             };
 
-            if (httpMethod == HttpMethod.Post || httpMethod == HttpMethod.Patch)
+            if (httpMethod == HttpMethod.Post || httpMethod == XenditHttpMethod.Patch)
             {
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
             }
@@ -60,18 +80,6 @@ namespace Xendit.net.Network
             }
 
             return request;
-        }
-
-        public async Task<T> Request<T>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
-        {
-            var request = CreateRequestMessage(httpMethod, headers, url, requestBody);
-            var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            var responseBody = await response.Content.ReadAsStreamAsync();
-
-            var deserializedResponse = await JsonSerializer.DeserializeAsync<T>(responseBody);
-            return deserializedResponse;
         }
     }
 }

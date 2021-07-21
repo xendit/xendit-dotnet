@@ -46,15 +46,16 @@ You need to use secret API key in order to use functionality in this library. Th
 Example: Get Balance
 
 ```cs
-using System;
-using System.Threading.Tasks;
-using System.Net.Http;
-using Xendit.net.Model;
-using Xendit.net;
-using Xendit.net.Network;
-
 namespace XenditExample
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Net.Http;
+    using Xendit.net;
+    using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Network;
+
     class ExampleGetBalance
     {
         static async Task Main(string[] args)
@@ -64,8 +65,15 @@ namespace XenditExample
             XenditConfiguration.RequestClient = networkClient;
             XenditConfiguration.ApiKey = "xnd_development_...";
 
-            Balance balance = await Balance.Get();
-            Console.WriteLine(balance.Value);
+            try
+            {
+                Balance balance = await Balance.Get();
+                Console.WriteLine(balance.Value);
+            }
+            catch (XenditException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
     }
 }
