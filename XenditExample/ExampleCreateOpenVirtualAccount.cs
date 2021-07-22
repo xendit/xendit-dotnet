@@ -9,7 +9,7 @@ namespace XenditExample
     using Xendit.net.Model;
     using Xendit.net.Network;
 
-    class ExampleOpenVirtualAccount
+    class ExampleCreateOpenVirtualAccount
     {
         static async Task Main(string[] args)
         {
