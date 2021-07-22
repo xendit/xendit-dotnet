@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xendit.net", "xendit.net\Xendit.net.csproj", "{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XenditTest", "XenditTest\XenditTest.csproj", "{0419021E-F85A-4C77-88CB-94C6E7C63D89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_stylecop", "_stylecop", "{07EB9B75-7EBC-4A8A-9795-FCF12619D2AE}"
+	ProjectSection(SolutionItems) = preProject
+		Xendit.ruleset = Xendit.ruleset
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEA3ECCE-D142-4CE9-B9DF-A028B70A149B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0419021E-F85A-4C77-88CB-94C6E7C63D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0419021E-F85A-4C77-88CB-94C6E7C63D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0419021E-F85A-4C77-88CB-94C6E7C63D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0419021E-F85A-4C77-88CB-94C6E7C63D89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC66BA51-923C-4233-AF21-71D0707C97FF}
+	EndGlobalSection
+EndGlobal
