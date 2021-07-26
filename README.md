@@ -13,6 +13,14 @@ This library is the abstraction of Xendit API for access from applications writt
 - [Usage](#usage)
   - [Balance Service](#balance-service)
     - [Get Balance](#get-balance)
+  - [Virtual Account Services](#virtual-account-services)
+    - [Create a Virtual Account](#create-a-virtual-account)
+      - [Closed Virtual Account](#closed-virtual-account)
+      - [Open Virtual Account](#open-virtual-account)
+    - [Get a Virtual Account by ID](#get-a-virtual-account-by-id)
+    - [Update a Virtual Account](#update-a-virtual-account)
+    - [Get banks with available virtual account service](#get-banks-with-available-virtual-account-service)
+    - [Get a virtual account payment by payment ID](#get-a-virtual-account-payment-by-payment-id)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -95,4 +103,105 @@ await Balance.Get("Tax");
 
 ```cs
 Balance balance = await Balance.Get();
+```
+
+### Virtual Account Services
+
+#### Create a Virtual Account
+
+You can choose whether want to put the attributes as parameters or to put in inside a Dictionary object.
+
+##### Closed Virtual Account
+
+<table>
+<tr>
+<td>
+<pre>
+VirtualAccount.CreateClosed(
+    string externalId,
+    string bankCode,
+    string name,
+    long expectedAmount,
+    Dictionary&lt;string, object&gt; parameter
+);
+</pre>
+</td>
+<td>
+<pre>
+VirtualAccount.CreateClosed(
+    Dictionary&lt;string, object&gt; parameter
+);
+</pre>
+</td>
+</tr>
+</table>
+
+```cs
+Dictionary<string, object> closedVABody = new Dictionary<string, object>();
+closedVABody.Add("external_id", "my_external_id");
+closedVABody.Add("bank_code", "BNI");
+closedVABody.Add("name", "John Doe");
+closedVABody.Add("expected_amount", 200000000L);
+
+VirtualAccount virtualAccount = await VirtualAccount.CreateClosed(closedVABody);
+```
+
+##### Open Virtual Account
+
+<table>
+<tr>
+<td>
+<pre>
+VirtualAccount.CreateOpen(
+    string externalId,
+    string bankCode,
+    string name,
+    Dictionary&lt;string, object&gt; parameter
+);
+</pre>
+</td>
+<td>
+<pre>
+VirtualAccount.CreateOpen(
+    Dictionary&lt;string, object&gt; parameter
+);
+</pre>
+</td>
+</tr>
+</table>
+
+```cs
+Dictionary<string, object> openVAbody = new Dictionary<string, object>();
+openVAbody.Add("external_id", "my_external_id");
+openVAbody.Add("bank_code", "BNI");
+openVAbody.Add("name", "John Doe");
+
+VirtualAccount virtualAccount = await VirtualAccount.CreateOpen(openVAbody);
+```
+
+#### Get a Virtual Account by ID
+
+```cs
+VirtualAccount virtualAccount = await VirtualAccount.Get("VIRTUAL_ACCOUNT_ID");
+```
+
+#### Update a Virtual Account
+
+```cs
+Dictionary<string, object> parameter = new Dictionary<string, object>();
+parameter.Add("is_single_use", true);
+
+VirtualAccount virtualAccount = await VirtualAccount.Update("VIRTUAL_ACCOUNT_ID", parameter);
+```
+
+#### Get banks with available virtual account service
+
+```cs
+List<AvailableBank> availableBanks = await VirtualAccount.GetAvailableBanks();
+```
+
+#### Get a virtual account payment by payment ID
+
+```cs
+VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get("VIRTUAL_ACCOUNT_PAYMENT_ID");
 ```
