@@ -131,6 +131,19 @@
             return disbursement;
         }
 
+        public static async Task<AvailableBank[]> GetAvailableBanks()
+        {
+            return await GetAvailableBanks(new Dictionary<string, string>());
+        }
+
+        public static async Task<AvailableBank[]> GetAvailableBanks(Dictionary<string, string> headers)
+        {
+            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/available_disbursements_banks");
+
+            var availableBanks = await XenditConfiguration.RequestClient.Request<AvailableBank[]>(HttpMethod.Get, headers, url, null);
+            return availableBanks;
+        }
+
         private static async Task<Disbursement> CreateRequest(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/disbursements");
