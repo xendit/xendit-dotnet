@@ -23,7 +23,7 @@ namespace XenditExample
                 Dictionary<string, object> parameter = new Dictionary<string, object>();
                 parameter.Add("is_single_use", true);
 
-                VirtualAccount virtualAccount = await VirtualAccount.Update("5e2fd16370279c782d5f56a3", parameter);
+                VirtualAccount virtualAccount = await VirtualAccount.Update("virtual_account_id", parameter);
                 Console.WriteLine(virtualAccount.IsSingleUse);
             }
             catch (XenditException e)

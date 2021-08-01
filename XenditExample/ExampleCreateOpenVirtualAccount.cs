@@ -28,21 +28,11 @@ namespace XenditExample
 
             try
             {
-                /**
-                 * First option. Create directly from a properly named dictionary key value pair.
-                 * Check https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts for field name.
-                 */
                 VirtualAccount virtualAccount = await VirtualAccount.CreateOpen(openVAbody);
 
-                /**
-                 * Second option. Create with individual value of required params.
-                 */
                 VirtualAccount virtualAccount2 = await VirtualAccount.CreateOpen("my_external_id_2",
                         "PERMATA", "John Doe");
 
-                /**
-                 * Third option. Create with individual value of required params plus added additional params at the end.
-                 */
                 VirtualAccount virtualAccount3 = await VirtualAccount.CreateOpen("my_external_id_3",
                         "MANDIRI", "John Doe", additionalParams);
 

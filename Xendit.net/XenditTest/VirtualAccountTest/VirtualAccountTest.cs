@@ -208,7 +208,7 @@ namespace XenditTest.VirtualAccountTest
         }
 
         [Fact]
-        public async void VirtualAccount_ShouldSuccess_WhenCreateOpenVa_RequiredParams()
+        public async void VirtualAccount_ShouldSuccess_WhenCreateOpenVA_RequiredParams()
         {
             MockClient
             .Setup(client => client.Request<VirtualAccount>(HttpMethod.Post, new Dictionary<string, string>(), Constant.VAUrl, Constant.OpenPostVAbody))
@@ -221,7 +221,7 @@ namespace XenditTest.VirtualAccountTest
         }
 
         [Fact]
-        public async void VirtualAccount_ShouldSuccess_WhenCreateOpenVa_RequiredParams_WithCustomHeaders()
+        public async void VirtualAccount_ShouldSuccess_WhenCreateOpenVA_RequiredParams_WithCustomHeaders()
         {
             MockClient
             .Setup(client => client.Request<VirtualAccount>(HttpMethod.Post, Constant.CustomHeaders, Constant.VAUrl, Constant.OpenPostVAbody))
@@ -234,7 +234,7 @@ namespace XenditTest.VirtualAccountTest
         }
 
         [Fact]
-        public async void VirtualAccount_ShouldSuccess_WhenCreateOpenVa_AdditionalParams()
+        public async void VirtualAccount_ShouldSuccess_WhenCreateOpenVA_AdditionalParams()
         {
             Dictionary<string, object> additionalParams = new Dictionary<string, object>()
             {
@@ -252,7 +252,7 @@ namespace XenditTest.VirtualAccountTest
         }
 
         [Fact]
-        public async void VirtualAccount_ShouldSuccess_WhenCreateOpenVa_AdditionalParams_WithCustomHeaders()
+        public async void VirtualAccount_ShouldSuccess_WhenCreateOpenVA_AdditionalParams_WithCustomHeaders()
         {
             Dictionary<string, object> additionalParams = new Dictionary<string, object>()
             {

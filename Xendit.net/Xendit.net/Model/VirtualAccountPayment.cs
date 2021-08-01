@@ -38,7 +38,7 @@
         public string SenderName { get; set; }
 
         /// <summary>
-        /// Get VA payment based on its payment ID.
+        /// Get Virtual Account payment based on its payment ID.
         /// </summary>
         /// <param name="paymentId">ID of the payment to retrieve.</param>
         /// <returns>A Task of Virtual Account Payment model.</returns>
@@ -48,7 +48,7 @@
         }
 
         /// <summary>
-        /// Get VA payment based on its payment ID with custom header.
+        /// Get Virtual Account payment based on its payment ID with custom header.
         /// </summary>
         /// <param name="headers">Custom headers. e.g. "for-user-id".</param>
         /// <param name="paymentId">ID of the payment to retrieve.</param>

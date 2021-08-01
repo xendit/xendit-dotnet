@@ -17,15 +17,11 @@ namespace XenditExample
             XenditConfiguration.RequestClient = networkClient;
             XenditConfiguration.ApiKey = "xnd_development_...";
 
-            string virtualAccountId = "random_1560763705544";
+            string virtualAccountId = "random_virtual_account_id";
 
             try
             {
-                /**
-                 * Get VA  from its ID
-                 */
                 VirtualAccount virtualAccount = await VirtualAccount.Get(virtualAccountId);
-
                 Console.WriteLine(virtualAccount);
             }
             catch (XenditException e)
