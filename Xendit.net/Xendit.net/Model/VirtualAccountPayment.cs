@@ -42,9 +42,9 @@
         /// </summary>
         /// <param name="paymentId">ID of the payment to retrieve.</param>
         /// <returns>A Task of Virtual Account Payment model.</returns>
-        public static Task<VirtualAccountPayment> Get(string paymentId)
+        public static async Task<VirtualAccountPayment> Get(string paymentId)
         {
-            return Get(new Dictionary<string, string>(), paymentId);
+            return await Get(new Dictionary<string, string>(), paymentId);
         }
 
         /// <summary>

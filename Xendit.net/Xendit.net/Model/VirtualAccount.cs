@@ -58,9 +58,9 @@
         /// Get available banks.
         /// </summary>
         /// <returns>A Task of list of available banks.</returns>
-        public static Task<List<AvailableBank>> GetAvailableBanks()
+        public static async Task<List<AvailableBank>> GetAvailableBanks()
         {
-            return GetAvailableBanks(new Dictionary<string, string>());
+            return await GetAvailableBanks(new Dictionary<string, string>());
         }
 
         /// <summary>
@@ -81,9 +81,9 @@
         /// </summary>
         /// <param name="id">ID of the virtual account to retrieve.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> Get(string id)
+        public static async Task<VirtualAccount> Get(string id)
         {
-            return Get(new Dictionary<string, string>(), id);
+            return await Get(new Dictionary<string, string>(), id);
         }
 
         /// <summary>
@@ -105,9 +105,9 @@
         /// </summary>
         /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateClosed(Dictionary<string, object> parameter)
         {
-            return Create(new Dictionary<string, string>(), parameter, true);
+            return await Create(new Dictionary<string, string>(), parameter, true);
         }
 
         /// <summary>
@@ -116,9 +116,9 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
-            return Create(headers, parameter, true);
+            return await Create(headers, parameter, true);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@
         /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <param name="expectedAmount">Expected payment amount for this Virtual Account.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(string externalId, string bankCode, string name, long expectedAmount)
+        public static async Task<VirtualAccount> CreateClosed(string externalId, string bankCode, string name, long expectedAmount)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -139,7 +139,7 @@
                 { "expected_amount", expectedAmount },
             };
 
-            return Create(new Dictionary<string, string>(), parameter, true);
+            return await Create(new Dictionary<string, string>(), parameter, true);
         }
 
         /// <summary>
@@ -151,7 +151,7 @@
         /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <param name="expectedAmount">Expected payment amount for this Virtual Account.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, string externalId, string bankCode, string name, long expectedAmount)
+        public static async Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, string externalId, string bankCode, string name, long expectedAmount)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -161,7 +161,7 @@
                 { "expected_amount", expectedAmount },
             };
 
-            return Create(headers, parameter, true);
+            return await Create(headers, parameter, true);
         }
 
         /// <summary>
@@ -173,14 +173,14 @@
         /// <param name="expectedAmount">Expected payment amount for this Virtual Account.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(string externalId, string bankCode, string name, long expectedAmount, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateClosed(string externalId, string bankCode, string name, long expectedAmount, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);
             parameter.Add("name", name);
             parameter.Add("expected_amount", expectedAmount);
 
-            return Create(new Dictionary<string, string>(), parameter, true);
+            return await Create(new Dictionary<string, string>(), parameter, true);
         }
 
         /// <summary>
@@ -193,14 +193,14 @@
         /// <param name="expectedAmount">Expected payment amount for this Virtual Account.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, string externalId, string bankCode, string name, long expectedAmount, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, string externalId, string bankCode, string name, long expectedAmount, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);
             parameter.Add("name", name);
             parameter.Add("expected_amount", expectedAmount);
 
-            return Create(headers, parameter, true);
+            return await Create(headers, parameter, true);
         }
 
         /// <summary>
@@ -208,9 +208,9 @@
         /// </summary>
         /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateOpen(Dictionary<string, object> parameter)
         {
-            return Create(new Dictionary<string, string>(), parameter, false);
+            return await Create(new Dictionary<string, string>(), parameter, false);
         }
 
         /// <summary>
@@ -219,9 +219,9 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
-            return Create(headers, parameter, false);
+            return await Create(headers, parameter, false);
         }
 
         /// <summary>
@@ -231,7 +231,7 @@
         /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
         /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(string externalId, string bankCode, string name)
+        public static async Task<VirtualAccount> CreateOpen(string externalId, string bankCode, string name)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -240,7 +240,7 @@
                 { "name", name },
             };
 
-            return Create(new Dictionary<string, string>(), parameter, false);
+            return await Create(new Dictionary<string, string>(), parameter, false);
         }
 
         /// <summary>
@@ -251,7 +251,7 @@
         /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
         /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, string externalId, string bankCode, string name)
+        public static async Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, string externalId, string bankCode, string name)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -260,7 +260,7 @@
                 { "name", name },
             };
 
-            return Create(headers, parameter, false);
+            return await Create(headers, parameter, false);
         }
 
         /// <summary>
@@ -271,13 +271,13 @@
         /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(string externalId, string bankCode, string name, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateOpen(string externalId, string bankCode, string name, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);
             parameter.Add("name", name);
 
-            return Create(new Dictionary<string, string>(), parameter, false);
+            return await Create(new Dictionary<string, string>(), parameter, false);
         }
 
         /// <summary>
@@ -289,13 +289,13 @@
         /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, string externalId, string bankCode, string name, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, string externalId, string bankCode, string name, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);
             parameter.Add("name", name);
 
-            return Create(headers, parameter, false);
+            return await Create(headers, parameter, false);
         }
 
         /// <summary>
@@ -304,9 +304,9 @@
         /// <param name="id">ID of the fixed virtual account to update.</param>
         /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#update-fixed-virtual-account.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> Update(string id, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> Update(string id, Dictionary<string, object> parameter)
         {
-            return Update(new Dictionary<string, string>(), id, parameter);
+            return await Update(new Dictionary<string, string>(), id, parameter);
         }
 
         /// <summary>
