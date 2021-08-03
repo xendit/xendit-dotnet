@@ -45,12 +45,12 @@
 
         public static async Task<Disbursement> Create(Dictionary<string, object> parameter)
         {
-            return await CreateRequest(new Dictionary<string, string>(), parameter);
+            return await CreateDisbursementRequest(new Dictionary<string, string>(), parameter);
         }
 
         public static async Task<Disbursement> Create(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
-            return await CreateRequest(headers, parameter);
+            return await CreateDisbursementRequest(headers, parameter);
         }
 
         public static async Task<Disbursement> Create(string externalId, string bankCode, string accountHolderName, string accountNumber, string description, BigInteger amount)
@@ -64,7 +64,7 @@
                 { "description", description },
                 { "amount", amount },
             };
-            return await CreateRequest(new Dictionary<string, string>(), parameter);
+            return await CreateDisbursementRequest(new Dictionary<string, string>(), parameter);
         }
 
         public static async Task<Disbursement> Create(Dictionary<string, string> headers, string externalId, string bankCode, string accountHolderName, string accountNumber, string description, BigInteger amount)
@@ -78,7 +78,7 @@
                 { "description", description },
                 { "amount", amount },
             };
-            return await CreateRequest(headers, parameter);
+            return await CreateDisbursementRequest(headers, parameter);
         }
 
         public static async Task<Disbursement> Create(string externalId, string bankCode, string accountHolderName, string accountNumber, string description, BigInteger amount, Dictionary<string, object> parameter)
@@ -90,7 +90,7 @@
             parameter.Add("description", description);
             parameter.Add("amount", amount);
 
-            return await CreateRequest(new Dictionary<string, string>(), parameter);
+            return await CreateDisbursementRequest(new Dictionary<string, string>(), parameter);
         }
 
         public static async Task<Disbursement> Create(Dictionary<string, string> headers, string externalId, string bankCode, string accountHolderName, string accountNumber, string description, BigInteger amount, Dictionary<string, object> parameter)
@@ -102,7 +102,7 @@
             parameter.Add("description", description);
             parameter.Add("amount", amount);
 
-            return await CreateRequest(headers, parameter);
+            return await CreateDisbursementRequest(headers, parameter);
         }
 
         public static async Task<Disbursement> GetById(string id)
@@ -144,7 +144,7 @@
             return availableBanks;
         }
 
-        private static async Task<Disbursement> CreateRequest(Dictionary<string, string> headers, Dictionary<string, object> parameter)
+        private static async Task<Disbursement> CreateDisbursementRequest(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/disbursements");
 
