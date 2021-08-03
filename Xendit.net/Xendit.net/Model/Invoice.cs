@@ -110,7 +110,7 @@
         /// <returns>A Task of Invoice model.</returns>
         public static async Task<Invoice> GetById(Dictionary<string, string> headers, string invoiceId)
         {
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/invoices/", invoiceId);
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices/", invoiceId);
 
             var invoice = await XenditConfiguration.RequestClient.Request<Invoice>(HttpMethod.Get, headers, url, null);
             return invoice;
