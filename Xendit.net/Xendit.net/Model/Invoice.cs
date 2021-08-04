@@ -27,9 +27,8 @@
         [JsonPropertyName("merchant_profile_picture_url")]
         public string MerchantProfilePictureUrl { get; set; }
 
-        [JsonConverter(typeof(BigIntegerConverter))]
         [JsonPropertyName("amount")]
-        public BigInteger Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonPropertyName("payer_email")]
         public string PayerEmail { get; set; }
@@ -158,7 +157,7 @@
         /// <param name="externalId">ID of your choice (typically the unique identifier of an invoice in your system).</param>
         /// <param name="amount">Amount on the invoice. The minimum amount to create an invoice is 10000.</param>
         /// <returns>A Task of Invoice model.</returns>
-        public static async Task<Invoice> Create(string externalId, BigInteger amount)
+        public static async Task<Invoice> Create(string externalId, long amount)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>();
             parameter.Add("external_id", externalId);
@@ -174,7 +173,7 @@
         /// <param name="externalId">ID of your choice (typically the unique identifier of an invoice in your system).</param>
         /// <param name="amount">Amount on the invoice. The minimum amount to create an invoice is 10000.</param>
         /// <returns>A Task of Invoice model.</returns>
-        public static async Task<Invoice> Create(Dictionary<string, string> headers, string externalId, BigInteger amount)
+        public static async Task<Invoice> Create(Dictionary<string, string> headers, string externalId, long amount)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>();
             parameter.Add("external_id", externalId);

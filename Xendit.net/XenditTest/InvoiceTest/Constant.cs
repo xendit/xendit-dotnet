@@ -1,11 +1,6 @@
 ﻿namespace XenditTest.InvoiceTest
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Numerics;
-    using System.Text;
-    using System.Threading.Tasks;
     using Xendit.net.Model;
 
     internal static class Constant
@@ -15,7 +10,7 @@
             Id = "invoice_id",
             ExternalId = "external_id",
             UserId = "user_id",
-            Amount = new BigInteger(1000),
+            Amount = 1000,
             Status = "PENDING",
             MerchantName = "XENDIT",
             MerchantProfilePictureUrl = "image_url",
@@ -65,7 +60,7 @@
         internal static readonly Dictionary<string, object> InvoiceBody = new Dictionary<string, object>()
         {
             { "external_id", "external_id" },
-            { "amount", new BigInteger(1000) },
+            { "amount", 1000L },
         };
     }
 }
