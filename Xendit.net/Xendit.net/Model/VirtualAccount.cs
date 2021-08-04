@@ -72,8 +72,7 @@
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/available_virtual_account_banks");
 
-            var listAvailableBanks = await XenditConfiguration.RequestClient.Request<List<AvailableBank>>(HttpMethod.Get, headers, url, null);
-            return listAvailableBanks;
+            return await XenditConfiguration.RequestClient.Request<List<AvailableBank>>(HttpMethod.Get, headers, url, null);
         }
 
         /// <summary>
@@ -96,8 +95,7 @@
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/callback_virtual_accounts/", id);
 
-            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Get, headers, url, null);
-            return virtualAccount;
+            return await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Get, headers, url, null);
         }
 
         /// <summary>
@@ -320,8 +318,7 @@
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/callback_virtual_accounts/", id);
 
-            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(XenditHttpMethod.Patch, headers, url, parameter);
-            return virtualAccount;
+            return await XenditConfiguration.RequestClient.Request<VirtualAccount>(XenditHttpMethod.Patch, headers, url, parameter);
         }
 
         private static async Task<VirtualAccount> Create(Dictionary<string, string> headers, Dictionary<string, object> parameter, bool isClosed)
@@ -338,8 +335,7 @@
                 throw new ParamException("Suggested amount is not supported for closed Virtual Account");
             }
 
-            var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Post, headers, url, parameter);
-            return virtualAccount;
+            return await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Post, headers, url, parameter);
         }
     }
 }
