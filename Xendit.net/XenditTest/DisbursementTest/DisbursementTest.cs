@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Net.Http;
-    using System.Numerics;
     using System.Text.Json;
     using Moq;
     using Xendit.net;
@@ -149,7 +148,7 @@
         {
             var additionalParams = new Dictionary<string, object>()
             {
-                { "email_to",  "somebody@email.com" },
+                { "email_to",  "[\"somebody@email.com\"]" },
             };
 
             MockClient
@@ -167,7 +166,7 @@
         {
             var additionalParams = new Dictionary<string, object>()
             {
-                { "email_to",  "somebody@email.com" },
+                { "email_to",  "[\"somebody@email.com\"]" },
             };
 
             MockClient

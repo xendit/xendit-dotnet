@@ -39,7 +39,7 @@
 
         internal static readonly Dictionary<string, object> AdditionalDisbursementBodyWithRequiredParams = new Dictionary<string, object>()
         {
-            { "email_to", "somebody@email.com" },
+            { "email_to", "[\"somebody@email.com\"]" },
             { "external_id", "disb-1475459775872" },
             { "bank_code", "BCA" },
             { "account_holder_name", "MICHAEL CHEN" },
