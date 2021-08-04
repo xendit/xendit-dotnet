@@ -43,7 +43,7 @@
         public async void Invoice_Expire_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Invoice>(HttpMethod.Post, new Dictionary<string, string>(), Constant.InvoiceExpireUrl, null))
+                .Setup(client => client.Request<Invoice>(HttpMethod.Post, new Dictionary<string, string>(), Constant.InvoiceExpireUrl, new Dictionary<string, object>()))
                 .ReturnsAsync(Constant.ExpectedInvoice);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -56,7 +56,7 @@
         public async void Invoice_Expire_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Invoice>(HttpMethod.Post, Constant.CustomHeaders, Constant.InvoiceExpireUrl, null))
+                .Setup(client => client.Request<Invoice>(HttpMethod.Post, Constant.CustomHeaders, Constant.InvoiceExpireUrl, new Dictionary<string, object>()))
                 .ReturnsAsync(Constant.ExpectedInvoice);
 
             XenditConfiguration.RequestClient = MockClient.Object;

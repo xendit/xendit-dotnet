@@ -137,7 +137,7 @@
         {
             string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/invoices/", invoiceId, "/expire!");
 
-            var invoice = await XenditConfiguration.RequestClient.Request<Invoice>(HttpMethod.Post, headers, url, null);
+            var invoice = await XenditConfiguration.RequestClient.Request<Invoice>(HttpMethod.Post, headers, url, new Dictionary<string, object>());
             return invoice;
         }
 
