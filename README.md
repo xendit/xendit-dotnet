@@ -26,6 +26,11 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Get a disbursement by ID](#get-a-disbursement-by-id)
     - [Get a disbursement by External ID](#get-a-disbursement-by-external-id)
     - [Get banks with available disbursement service](#get-banks-with-available-disbursement-service)
+  - [Invoice services](#invoice-services)
+    - [Create an invoice](#create-an-invoice)
+    - [Get invoice by ID](#get-invoice-by-id)
+    - [Get all invoices](#get-all-invoices)
+    - [Expire an invoice](#expire-an-invoice)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -210,9 +215,7 @@ List<AvailableBank> availableBanks = await VirtualAccount.GetAvailableBanks();
 ```cs
 VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get("VIRTUAL_ACCOUNT_PAYMENT_ID");
 ```
-
 ### Disbursement Services
-
 #### Create a disbursement
 
 You can choose whether want to put the attributes as parameters or to put in inside a Dictionary object.
@@ -284,4 +287,59 @@ Disbursement disbursement = await Disbursement.GetByExternalId("external_id");
 
 ```cs
 AvailableBank[] availableBanks = await Disbursement.GetAvailableBanks();
+```
+
+### Invoice services
+
+#### Create an invoice
+
+You can choose whether want to put the attributes as parameters or to put in inside a dictionary object.
+
+<table>
+<tr>
+<td>
+<pre>
+Invoice.Create(
+    string externalId,
+    long amount,
+);
+</pre>
+</td>
+<td>
+<pre>
+Invoice.Create(
+    Dictionary&lt;string, object&gt; parameter
+);
+</pre>
+</td>
+</tr>
+</table>
+
+```cs
+Dictionary<string, object> parameter = new Dictionary<string, object>();
+parameter.Add("external_id", "my_external_id");
+parameter.Add("amount", 1000);
+parameter.Add("payer_email", "somebody@email.com")
+Invoice invoice = await Invoice.Create(parameter);
+```
+
+#### Get invoice by ID
+
+```cs
+Invoice invoice = await Invoice.GetById("EXAMPLE_ID");
+```
+
+#### Get all invoices
+
+```cs
+Dictionary<string, object> parameter = new Dictionary<string, object>();
+parameter.Add("limit", 1);
+parameter.Add("statutes", "[\"PENDING\",\"EXPIRED\"]");
+Invoice invoice = await Invoice.GetAll(parameter);
+```
+
+#### Expire an invoice
+
+```cs
+Invoice invoice = await Invoice.Expire("EXAMPLE_ID");
 ```
