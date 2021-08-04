@@ -74,7 +74,7 @@
         /// <param name="description">Description to send with the disbursement.</param>
         /// <param name="amount">Amount to disburse.</param>
         /// <returns>A Task of Disbursement model.</returns>
-        public static async Task<Disbursement> Create(string externalId, string bankCode, string accountHolderName, string accountNumber, string description, BigInteger amount)
+        public static async Task<Disbursement> Create(string externalId, string bankCode, string accountHolderName, string accountNumber, string description, long amount)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -99,7 +99,7 @@
         /// <param name="description">Description to send with the disbursement.</param>
         /// <param name="amount">Amount to disburse.</param>
         /// <returns>A Task of Disbursement model.</returns>
-        public static async Task<Disbursement> Create(Dictionary<string, string> headers, string externalId, string bankCode, string accountHolderName, string accountNumber, string description, BigInteger amount)
+        public static async Task<Disbursement> Create(Dictionary<string, string> headers, string externalId, string bankCode, string accountHolderName, string accountNumber, string description, long amount)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -124,7 +124,7 @@
         /// <param name="amount">Amount to disburse.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-disbursement.</param>
         /// <returns>A Task of Disbursement model.</returns>
-        public static async Task<Disbursement> Create(string externalId, string bankCode, string accountHolderName, string accountNumber, string description, BigInteger amount, Dictionary<string, object> parameter)
+        public static async Task<Disbursement> Create(string externalId, string bankCode, string accountHolderName, string accountNumber, string description, long amount, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);
@@ -148,7 +148,7 @@
         /// <param name="amount">Amount to disburse.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-disbursement.</param>
         /// <returns>A Task of Disbursement model.</returns>
-        public static async Task<Disbursement> Create(Dictionary<string, string> headers, string externalId, string bankCode, string accountHolderName, string accountNumber, string description, BigInteger amount, Dictionary<string, object> parameter)
+        public static async Task<Disbursement> Create(Dictionary<string, string> headers, string externalId, string bankCode, string accountHolderName, string accountNumber, string description, long amount, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);

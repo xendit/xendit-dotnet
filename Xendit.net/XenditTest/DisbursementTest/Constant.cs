@@ -34,7 +34,7 @@
             { "account_holder_name", "MICHAEL CHEN" },
             { "account_number", "1234567890" },
             { "description", "Reimbursement for shoes" },
-            { "amount", new BigInteger(90000) },
+            { "amount", 90000L },
         };
 
         internal static readonly Dictionary<string, object> AdditionalDisbursementBodyWithRequiredParams = new Dictionary<string, object>()
@@ -45,7 +45,7 @@
             { "account_holder_name", "MICHAEL CHEN" },
             { "account_number", "1234567890" },
             { "description", "Reimbursement for shoes" },
-            { "amount", new BigInteger(90000) },
+            { "amount", 90000L },
         };
 
         internal static readonly Disbursement[] ExpectedDisbursements = new Disbursement[] { ExpectedDisbursement };

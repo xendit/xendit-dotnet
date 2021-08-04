@@ -127,7 +127,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Disbursement actualDisbursement = await Disbursement.Create(externalId: Constant.ExpectedDisbursement.ExternalId, bankCode: Constant.ExpectedDisbursement.BankCode, accountHolderName: Constant.ExpectedDisbursement.AccountHolderName, accountNumber: "1234567890", description: Constant.ExpectedDisbursement.DisbursementDescription, amount: new BigInteger(90000));
+            Disbursement actualDisbursement = await Disbursement.Create(externalId: Constant.ExpectedDisbursement.ExternalId, bankCode: Constant.ExpectedDisbursement.BankCode, accountHolderName: Constant.ExpectedDisbursement.AccountHolderName, accountNumber: "1234567890", description: Constant.ExpectedDisbursement.DisbursementDescription, amount: 90000L);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
         }
 
@@ -140,7 +140,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Disbursement actualDisbursement = await Disbursement.Create(headers: Constant.CustomHeaders, externalId: (string)Constant.DisbursementBody["external_id"], bankCode: (string)Constant.DisbursementBody["bank_code"], accountHolderName: (string)Constant.DisbursementBody["account_holder_name"], accountNumber: (string)Constant.DisbursementBody["account_number"], description: (string)Constant.DisbursementBody["description"], amount: new BigInteger(90000));
+            Disbursement actualDisbursement = await Disbursement.Create(headers: Constant.CustomHeaders, externalId: (string)Constant.DisbursementBody["external_id"], bankCode: (string)Constant.DisbursementBody["bank_code"], accountHolderName: (string)Constant.DisbursementBody["account_holder_name"], accountNumber: (string)Constant.DisbursementBody["account_number"], description: (string)Constant.DisbursementBody["description"], amount: 90000L);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
         }
 
@@ -158,7 +158,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Disbursement actualDisbursement = await Disbursement.Create(externalId: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["external_id"], bankCode: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["bank_code"], accountHolderName: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_holder_name"], accountNumber: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_number"], description: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["description"], amount: new BigInteger(90000), parameter: additionalParams);
+            Disbursement actualDisbursement = await Disbursement.Create(externalId: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["external_id"], bankCode: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["bank_code"], accountHolderName: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_holder_name"], accountNumber: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_number"], description: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["description"], amount: 90000L, parameter: additionalParams);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
         }
 
@@ -176,7 +176,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Disbursement actualDisbursement = await Disbursement.Create(headers: Constant.CustomHeaders, externalId: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["external_id"], bankCode: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["bank_code"], accountHolderName: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_holder_name"], accountNumber: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_number"], description: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["description"], amount: new BigInteger(90000), parameter: additionalParams);
+            Disbursement actualDisbursement = await Disbursement.Create(headers: Constant.CustomHeaders, externalId: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["external_id"], bankCode: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["bank_code"], accountHolderName: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_holder_name"], accountNumber: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_number"], description: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["description"], amount: 90000L, parameter: additionalParams);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
         }
     }
