@@ -21,9 +21,6 @@ namespace XenditExample
 
             try
             {
-                /**
-                 * Get VA payment from payment ID
-                 */
                 VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get(virtualAccountPaymentId);
 
                 Console.WriteLine(virtualAccountPayment);

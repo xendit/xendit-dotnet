@@ -58,16 +58,16 @@
         /// Get available banks.
         /// </summary>
         /// <returns>A Task of list of available banks.</returns>
-        public static Task<List<AvailableBank>> GetAvailableBanks()
+        public static async Task<List<AvailableBank>> GetAvailableBanks()
         {
-            return GetAvailableBanks(new Dictionary<string, string>());
+            return await GetAvailableBanks(new Dictionary<string, string>());
         }
 
         /// <summary>
         /// Get available banks with headers.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <returns>A Task of list of available banks</returns>
+        /// <returns>A Task of list of available banks.</returns>
         public static async Task<List<AvailableBank>> GetAvailableBanks(Dictionary<string, string> headers)
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/available_virtual_account_banks");
@@ -79,18 +79,18 @@
         /// <summary>
         /// Get Virtual Account based on its ID.
         /// </summary>
-        /// <param name="id">ID  of the virtual account to retrieve.</param>
+        /// <param name="id">ID of the virtual account to retrieve.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> Get(string id)
+        public static async Task<VirtualAccount> Get(string id)
         {
-            return Get(new Dictionary<string, string>(), id);
+            return await Get(new Dictionary<string, string>(), id);
         }
 
         /// <summary>
         /// Get Virtual Account based on its ID with headers.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="id">id ID  of the virtual account to retrieve.</param>
+        /// <param name="id">ID of the virtual account to retrieve.</param>
         /// <returns>A Task of Virtual Account model.</returns>
         public static async Task<VirtualAccount> Get(Dictionary<string, string> headers, string id)
         {
@@ -101,35 +101,35 @@
         }
 
         /// <summary>
-        /// Create closed Virtual Account with complete parameter.
+        /// Create Closed Virtual Account with complete parameter.
         /// </summary>
-        /// <param name="parameter">params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
+        /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateClosed(Dictionary<string, object> parameter)
         {
-            return Create(new Dictionary<string, string>(), parameter, true);
+            return await Create(new Dictionary<string, string>(), parameter, true);
         }
 
         /// <summary>
-        /// Create closed Virtual Account with complete parameter and headers.
+        /// Create Closed Virtual Account with complete parameter and headers.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="parameter">params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
+        /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
-            return Create(headers, parameter, true);
+            return await Create(headers, parameter, true);
         }
 
         /// <summary>
-        /// Create closed Virtual Account with only required parameters.
+        /// Create Closed Virtual Account with only required parameters.
         /// </summary>
-        /// <param name="externalId">An ID of your choice, usually something that link Xendit VA with your internal system.</param>
-        /// <param name="bankCode">Bank code of the VA you want to create.</param>
-        /// <param name="name">Name of the VA, usually your end user's name or your company's.</param>
-        /// <param name="expectedAmount">Expected payment amount for this VA.</param>
+        /// <param name="externalId">An ID of your choice, usually something that link Xendit Virtual Account with your internal system.</param>
+        /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
+        /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
+        /// <param name="expectedAmount">Expected payment amount for this Virtual Account.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(string externalId, string bankCode, string name, long expectedAmount)
+        public static async Task<VirtualAccount> CreateClosed(string externalId, string bankCode, string name, long expectedAmount)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -139,19 +139,19 @@
                 { "expected_amount", expectedAmount },
             };
 
-            return Create(new Dictionary<string, string>(), parameter, true);
+            return await Create(new Dictionary<string, string>(), parameter, true);
         }
 
         /// <summary>
-        /// Create closed Virtual Account with only required parameters and headers.
+        /// Create Closed Virtual Account with only required parameters and headers.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="externalId">An ID of your choice, usually something that link Xendit VA with your internal system.</param>
-        /// <param name="bankCode">Bank code of the VA you want to create.</param>
-        /// <param name="name">Name of the VA, usually your end user's name or your company's.</param>
-        /// <param name="expectedAmount">Expected payment amount for this VA.</param>
+        /// <param name="externalId">An ID of your choice, usually something that link Xendit Virtual Account with your internal system.</param>
+        /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
+        /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
+        /// <param name="expectedAmount">Expected payment amount for this Virtual Account.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, string externalId, string bankCode, string name, long expectedAmount)
+        public static async Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, string externalId, string bankCode, string name, long expectedAmount)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -161,77 +161,77 @@
                 { "expected_amount", expectedAmount },
             };
 
-            return Create(headers, parameter, true);
+            return await Create(headers, parameter, true);
         }
 
         /// <summary>
-        /// Create closed VA with required parameters and can accept additional params.
+        /// Create Closed Virtual Account with required parameters and can accept additional params.
         /// </summary>
-        /// <param name="externalId">An ID of your choice, usually something that link Xendit VA with your internal system.</param>
-        /// <param name="bankCode">Bank code of the VA you want to create.</param>
-        /// <param name="name">Name of the VA, usually your end user's name or your company's.</param>
-        /// <param name="expectedAmount">Expected payment amount for this VA.</param>
+        /// <param name="externalId">An ID of your choice, usually something that link Xendit Virtual Account with your internal system.</param>
+        /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
+        /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's name.</param>
+        /// <param name="expectedAmount">Expected payment amount for this Virtual Account.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(string externalId, string bankCode, string name, long expectedAmount, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateClosed(string externalId, string bankCode, string name, long expectedAmount, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);
             parameter.Add("name", name);
             parameter.Add("expected_amount", expectedAmount);
 
-            return Create(new Dictionary<string, string>(), parameter, true);
+            return await Create(new Dictionary<string, string>(), parameter, true);
         }
 
         /// <summary>
-        /// Create closed Virtual Account using required parameters and can accept additional params, with custom headers.
+        /// Create Closed Virtual Account using required parameters and can accept additional params, with custom headers.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="externalId">An ID of your choice, usually something that link Xendit VA with your internal system.</param>
-        /// <param name="bankCode">Bank code of the VA you want to create.</param>
-        /// <param name="name">Name of the VA, usually your end user's name or your company's.</param>
-        /// <param name="expectedAmount">Expected payment amount for this VA.</param>
+        /// <param name="externalId">An ID of your choice, usually something that link Xendit Virtual Account with your internal system.</param>
+        /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
+        /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's name.</param>
+        /// <param name="expectedAmount">Expected payment amount for this Virtual Account.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, string externalId, string bankCode, string name, long expectedAmount, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateClosed(Dictionary<string, string> headers, string externalId, string bankCode, string name, long expectedAmount, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);
             parameter.Add("name", name);
             parameter.Add("expected_amount", expectedAmount);
 
-            return Create(headers, parameter, true);
+            return await Create(headers, parameter, true);
         }
 
         /// <summary>
         /// Create Open Virtual Account with complete parameter.
         /// </summary>
-        /// <param name="parameter">params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
+        /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateOpen(Dictionary<string, object> parameter)
         {
-            return Create(new Dictionary<string, string>(), parameter, false);
+            return await Create(new Dictionary<string, string>(), parameter, false);
         }
 
         /// <summary>
         /// Create Open Virtual Account with complete parameter and headers.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="parameter">params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
+        /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
-            return Create(headers, parameter, false);
+            return await Create(headers, parameter, false);
         }
 
         /// <summary>
         /// Create Open Virtual Account with only required parameters.
         /// </summary>
-        /// <param name="externalId">An ID of your choice, usually something that link Xendit VA with your internal system.</param>
-        /// <param name="bankCode">Bank code of the VA you want to create.</param>
-        /// <param name="name">Name of the VA, usually your end user's name or your company's.</param>
+        /// <param name="externalId">An ID of your choice, usually something that link Xendit Virtual Account with your internal system.</param>
+        /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
+        /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(string externalId, string bankCode, string name)
+        public static async Task<VirtualAccount> CreateOpen(string externalId, string bankCode, string name)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -240,18 +240,18 @@
                 { "name", name },
             };
 
-            return Create(new Dictionary<string, string>(), parameter, false);
+            return await Create(new Dictionary<string, string>(), parameter, false);
         }
 
         /// <summary>
         /// Create Open Virtual Account with only required parameters and custom headers.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="externalId">An ID of your choice, usually something that link Xendit VA with your internal system.</param>
-        /// <param name="bankCode">Bank code of the VA you want to create.</param>
-        /// <param name="name">Name of the VA, usually your end user's name or your company's.</param>
+        /// <param name="externalId">An ID of your choice, usually something that link Xendit Virtual Account with your internal system.</param>
+        /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
+        /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, string externalId, string bankCode, string name)
+        public static async Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, string externalId, string bankCode, string name)
         {
             Dictionary<string, object> parameter = new Dictionary<string, object>()
             {
@@ -260,42 +260,42 @@
                 { "name", name },
             };
 
-            return Create(headers, parameter, false);
+            return await Create(headers, parameter, false);
         }
 
         /// <summary>
         /// Create Open Virtual Account with required parameters and can accept additional params.
         /// </summary>
-        /// <param name="externalId">An ID of your choice, usually something that link Xendit VA with your internal system.</param>
-        /// <param name="bankCode">Bank code of the VA you want to create.</param>
-        /// <param name="name">Name of the VA, usually your end user's name or your company's.</param>
+        /// <param name="externalId">An ID of your choice, usually something that link Xendit Virtual Account with your internal system.</param>
+        /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
+        /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(string externalId, string bankCode, string name, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateOpen(string externalId, string bankCode, string name, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);
             parameter.Add("name", name);
 
-            return Create(new Dictionary<string, string>(), parameter, false);
+            return await Create(new Dictionary<string, string>(), parameter, false);
         }
 
         /// <summary>
         /// Create Open Virtual Account with required parameters and can accept additional params, with custom headers.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="externalId">An ID of your choice, usually something that link Xendit VA with your internal system.</param>
-        /// <param name="bankCode">Bank code of the VA you want to create.</param>
-        /// <param name="name">Name of the VA, usually your end user's name or your company's.</param>
+        /// <param name="externalId">An ID of your choice, usually something that link Xendit Virtual Account with your internal system.</param>
+        /// <param name="bankCode">Bank code of the Virtual Account you want to create.</param>
+        /// <param name="name">Name of the Virtual Account, usually your end user's name or your company's.</param>
         /// <param name="parameter">Optional params. Check https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, string externalId, string bankCode, string name, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> CreateOpen(Dictionary<string, string> headers, string externalId, string bankCode, string name, Dictionary<string, object> parameter)
         {
             parameter.Add("external_id", externalId);
             parameter.Add("bank_code", bankCode);
             parameter.Add("name", name);
 
-            return Create(headers, parameter, false);
+            return await Create(headers, parameter, false);
         }
 
         /// <summary>
@@ -304,9 +304,9 @@
         /// <param name="id">ID of the fixed virtual account to update.</param>
         /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#update-fixed-virtual-account.</param>
         /// <returns>A Task of Virtual Account model.</returns>
-        public static Task<VirtualAccount> Update(string id, Dictionary<string, object> parameter)
+        public static async Task<VirtualAccount> Update(string id, Dictionary<string, object> parameter)
         {
-            return Update(new Dictionary<string, string>(), id, parameter);
+            return await Update(new Dictionary<string, string>(), id, parameter);
         }
 
         /// <summary>
@@ -335,7 +335,7 @@
 
             if (isClosed && parameter.ContainsKey("suggested_amount"))
             {
-                throw new ParamException("Suggested amount is not supported for closed VA");
+                throw new ParamException("Suggested amount is not supported for closed Virtual Account");
             }
 
             var virtualAccount = await XenditConfiguration.RequestClient.Request<VirtualAccount>(HttpMethod.Post, headers, url, parameter);
