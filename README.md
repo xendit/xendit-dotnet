@@ -21,6 +21,11 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Update a Virtual Account](#update-a-virtual-account)
     - [Get banks with available virtual account service](#get-banks-with-available-virtual-account-service)
     - [Get a virtual account payment by payment ID](#get-a-virtual-account-payment-by-payment-id)
+  - [Disbursement Services](#disbursement-services)
+    - [Create a disbursement](#create-a-disbursement)
+    - [Get a disbursement by ID](#get-a-disbursement-by-id)
+    - [Get a disbursement by External ID](#get-a-disbursement-by-external-id)
+    - [Get banks with available disbursement service](#get-banks-with-available-disbursement-service)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -204,4 +209,79 @@ List<AvailableBank> availableBanks = await VirtualAccount.GetAvailableBanks();
 
 ```cs
 VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get("VIRTUAL_ACCOUNT_PAYMENT_ID");
+```
+
+### Disbursement Services
+
+#### Create a disbursement
+
+You can choose whether want to put the attributes as parameters or to put in inside a Dictionary object.
+
+<table>
+<tr>
+<td>
+<pre>
+Disbursement.Create(
+    string externalId, 
+    string bankCode, 
+    string accountHolderName, 
+    string accountNumber, 
+    string description, 
+    long amount
+);
+</pre>
+</td>
+<td>
+<pre>
+Disbursement.Create(
+    string externalId, 
+    string bankCode, 
+    string accountHolderName, 
+    string accountNumber, 
+    string description, 
+    long amount,
+    Dictionary&lt;string, object&gt; params
+);
+</pre>
+</td>
+<td>
+<pre>
+Disbursement.Create(
+    Dictionary&lt;string, object&gt; params
+);
+</pre>
+</td>
+</tr>
+</table>
+
+```cs
+Dictionary<string, object> parameter = new Dictionary<string, object>()
+{
+  { "external_id", "disb-1475459775872" },
+  { "bank_code", "BCA" },
+  { "account_holder_name", "MICHAEL CHEN" },
+  { "account_number", "1234567890" },
+  { "description", "Reimbursement for shoes" },
+  { "amount", 1 },
+};
+
+Disbursement disbursement = await Disbursement.Create(parameter);
+```
+
+#### Get a disbursement by ID
+
+```cs
+Disbursement disbursement = await Disbursement.GetById("disbursement_id");
+```
+
+#### Get a disbursement by External ID
+
+```cs
+Disbursement disbursement = await Disbursement.GetByExternalId("external_id");
+```
+
+#### Get banks with available disbursement service
+
+```cs
+AvailableBank[] availableBanks = await Disbursement.GetAvailableBanks();
 ```
