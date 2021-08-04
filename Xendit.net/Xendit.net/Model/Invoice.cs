@@ -5,6 +5,7 @@
     using System.Numerics;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Common;
 
     public class Invoice
     {
@@ -26,6 +27,7 @@
         [JsonPropertyName("merchant_profile_picture_url")]
         public string MerchantProfilePictureUrl { get; set; }
 
+        [JsonConverter(typeof(BigIntegerConverter))]
         [JsonPropertyName("amount")]
         public BigInteger Amount { get; set; }
 
@@ -241,7 +243,7 @@
                 }
             }
 
-            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/v2/invoices?", queryParams);
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", queryParams);
             var invoices = await XenditConfiguration.RequestClient.Request<Invoice[]>(HttpMethod.Get, headers, url, null);
             return invoices;
         }
