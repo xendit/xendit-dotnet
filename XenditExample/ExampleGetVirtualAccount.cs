@@ -22,6 +22,7 @@ namespace XenditExample
             try
             {
                 VirtualAccount virtualAccount = await VirtualAccount.Get(virtualAccountId);
+
                 Console.WriteLine(virtualAccount);
             }
             catch (XenditException e)
