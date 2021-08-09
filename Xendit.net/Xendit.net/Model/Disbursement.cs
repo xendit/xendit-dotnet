@@ -2,10 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Net.Http;
-    using System.Numerics;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
-    using Xendit.net.Common;
 
     public class Disbursement
     {
@@ -18,9 +16,8 @@
         [JsonPropertyName("external_id")]
         public string ExternalId { get; set; }
 
-        [JsonConverter(typeof(BigIntegerConverter))]
         [JsonPropertyName("amount")]
-        public BigInteger Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonPropertyName("bank_code")]
         public string BankCode { get; set; }
