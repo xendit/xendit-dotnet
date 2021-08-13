@@ -53,7 +53,7 @@
         public long CaptureAmount { get; set; }
 
         [JsonPropertyName("actions")]
-        public string Actions { get; set; }
+        public Dictionary<string, string> Actions { get; set; }
 
         [JsonPropertyName("is_redirect_required")]
         public bool IsRedirectRequired { get; set; }
@@ -71,7 +71,7 @@
         public string VoidedAt { get; set; }
 
         [JsonPropertyName("capture_now")]
-        public string CaptureNow { get; set; }
+        public bool CaptureNow { get; set; }
 
         [JsonPropertyName("failure_code")]
         public string FailureCode { get; set; }
@@ -96,7 +96,7 @@
             parameter.Add("reference_id", referenceId);
             parameter.Add("currency", currency);
             parameter.Add("amount", amount);
-            parameter.Add("channel_code", checkoutMethod);
+            parameter.Add("checkout_method", checkoutMethod);
             parameter.Add("channel_code", channelCode);
             parameter.Add("channel_properties", channelProperties);
             parameter.Add("payment_method_id", paymentMethodId);
@@ -183,13 +183,13 @@
 
         private static async Task<EWalletCharge> CreateChargeRequest(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
-            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/ewallet/charges");
+            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/ewallets/charges");
             return await XenditConfiguration.RequestClient.Request<EWalletCharge>(HttpMethod.Post, headers, url, parameter);
         }
 
         private static async Task<EWalletCharge> GetChargeRequest(Dictionary<string, string> headers, string id)
         {
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/ewallet/charges/", id);
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/ewallets/charges/", id);
             return await XenditConfiguration.RequestClient.Request<EWalletCharge>(HttpMethod.Get, headers, url, null);
         }
     }
