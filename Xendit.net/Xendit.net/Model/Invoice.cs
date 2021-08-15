@@ -186,8 +186,6 @@
         /// <returns>A Task of array of invoices.</returns>
         public static async Task<Invoice[]> GetAll(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
-            string queryParams = string.Empty;
-
             string[] paramList = new string[]
             {
                 "statuses",
@@ -205,15 +203,7 @@
                 "recurring_payment_id",
             };
 
-            for (int i = 0; i < paramList.Length; i++)
-            {
-                string key = paramList[i];
-                if (parameter.ContainsKey(key))
-                {
-                    queryParams += string.Format("{0}{1}{2}{3}", "&", key, "=", parameter[key]);
-                }
-            }
-
+            string queryParams = QueryParamsBuilder.Build(paramList, parameter);
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", queryParams);
             return await XenditConfiguration.RequestClient.Request<Invoice[]>(HttpMethod.Get, headers, url, null);
         }
