@@ -94,54 +94,6 @@
         public bool FixedVa { get; set; }
 
         /// <summary>
-        /// Get invoice detail by ID.
-        /// </summary>
-        /// <param name="invoiceId">ID of the invoice to retrieve.</param>
-        /// <returns>A Task of Invoice model.</returns>
-        public static async Task<Invoice> GetById(string invoiceId)
-        {
-            return await GetById(new Dictionary<string, string>(), invoiceId);
-        }
-
-        /// <summary>
-        /// Get invoice detail by ID with custom headers.
-        /// </summary>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="invoiceId">ID of the invoice to retrieve.</param>
-        /// <returns>A Task of Invoice model.</returns>
-        public static async Task<Invoice> GetById(Dictionary<string, string> headers, string invoiceId)
-        {
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices/", invoiceId);
-
-            var invoice = await XenditConfiguration.RequestClient.Request<Invoice>(HttpMethod.Get, headers, url, null);
-            return invoice;
-        }
-
-        /// <summary>
-        /// Expire an already created invoice.
-        /// </summary>
-        /// <param name="invoiceId">ID of the invoice to be expired / canceled.</param>
-        /// <returns>A Task of Invoice model.</returns>
-        public static async Task<Invoice> Expire(string invoiceId)
-        {
-            return await Expire(new Dictionary<string, string>(), invoiceId);
-        }
-
-        /// <summary>
-        /// Expire an already created invoice.
-        /// </summary>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="invoiceId">ID of the invoice to be expired / canceled.</param>
-        /// <returns>A Task of Invoice model.</returns>
-        public static async Task<Invoice> Expire(Dictionary<string, string> headers, string invoiceId)
-        {
-            string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/invoices/", invoiceId, "/expire!");
-
-            var invoice = await XenditConfiguration.RequestClient.Request<Invoice>(HttpMethod.Post, headers, url, new Dictionary<string, object>());
-            return invoice;
-        }
-
-        /// <summary>
         /// Create invoice with all parameters as dictionary.
         /// </summary>
         /// <param name="parameter">Parameter listed here https://developers.xendit.co/api-reference/#create-invoice.</param>
@@ -191,9 +143,29 @@
         public static async Task<Invoice> Create(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/v2/invoices");
+            return await XenditConfiguration.RequestClient.Request<Invoice>(HttpMethod.Post, headers, url, parameter);
+        }
 
-            var invoice = await XenditConfiguration.RequestClient.Request<Invoice>(HttpMethod.Post, headers, url, parameter);
-            return invoice;
+        /// <summary>
+        /// Get invoice detail by ID.
+        /// </summary>
+        /// <param name="invoiceId">ID of the invoice to retrieve.</param>
+        /// <returns>A Task of Invoice model.</returns>
+        public static async Task<Invoice> GetById(string invoiceId)
+        {
+            return await GetById(new Dictionary<string, string>(), invoiceId);
+        }
+
+        /// <summary>
+        /// Get invoice detail by ID with custom headers.
+        /// </summary>
+        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="invoiceId">ID of the invoice to retrieve.</param>
+        /// <returns>A Task of Invoice model.</returns>
+        public static async Task<Invoice> GetById(Dictionary<string, string> headers, string invoiceId)
+        {
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices/", invoiceId);
+            return await XenditConfiguration.RequestClient.Request<Invoice>(HttpMethod.Get, headers, url, null);
         }
 
         /// <summary>
@@ -243,8 +215,29 @@
             }
 
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", queryParams);
-            var invoices = await XenditConfiguration.RequestClient.Request<Invoice[]>(HttpMethod.Get, headers, url, null);
-            return invoices;
+            return await XenditConfiguration.RequestClient.Request<Invoice[]>(HttpMethod.Get, headers, url, null);
+        }
+
+        /// <summary>
+        /// Expire an already created invoice.
+        /// </summary>
+        /// <param name="invoiceId">ID of the invoice to be expired / canceled.</param>
+        /// <returns>A Task of Invoice model.</returns>
+        public static async Task<Invoice> Expire(string invoiceId)
+        {
+            return await Expire(new Dictionary<string, string>(), invoiceId);
+        }
+
+        /// <summary>
+        /// Expire an already created invoice.
+        /// </summary>
+        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="invoiceId">ID of the invoice to be expired / canceled.</param>
+        /// <returns>A Task of Invoice model.</returns>
+        public static async Task<Invoice> Expire(Dictionary<string, string> headers, string invoiceId)
+        {
+            string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/invoices/", invoiceId, "/expire!");
+            return await XenditConfiguration.RequestClient.Request<Invoice>(HttpMethod.Post, headers, url, new Dictionary<string, object>());
         }
     }
 }
