@@ -201,8 +201,7 @@
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/disbursements?external_id=", externalId);
 
-            var disbursement = await XenditConfiguration.RequestClient.Request<Disbursement[]>(HttpMethod.Get, headers, url, null);
-            return disbursement;
+            return await XenditConfiguration.RequestClient.Request<Disbursement[]>(HttpMethod.Get, headers, url, null);
         }
 
         /// <summary>
@@ -223,16 +222,14 @@
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/available_disbursements_banks");
 
-            var availableBanks = await XenditConfiguration.RequestClient.Request<AvailableBank[]>(HttpMethod.Get, headers, url, null);
-            return availableBanks;
+            return await XenditConfiguration.RequestClient.Request<AvailableBank[]>(HttpMethod.Get, headers, url, null);
         }
 
         private static async Task<Disbursement> CreateDisbursementRequest(Dictionary<string, string> headers, Dictionary<string, object> parameter)
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/disbursements");
 
-            var disbursement = await XenditConfiguration.RequestClient.Request<Disbursement>(HttpMethod.Post, headers, url, parameter);
-            return disbursement;
+            return await XenditConfiguration.RequestClient.Request<Disbursement>(HttpMethod.Post, headers, url, parameter);
         }
     }
 }
