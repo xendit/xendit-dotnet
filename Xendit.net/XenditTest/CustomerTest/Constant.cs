@@ -21,6 +21,17 @@
             { "API-VERSION", "2020-05-19" },
         };
 
+        internal static readonly Dictionary<string, string> NewApiVersionHeaders = new Dictionary<string, string>()
+        {
+            { "API-VERSION", "2020-10-31" },
+        };
+
+        internal static readonly Dictionary<string, string> NewApiVersionHeadersWithUserId = new Dictionary<string, string>()
+        {
+            { "for-user-id", "user-id" },
+            { "API-VERSION", "2020-10-31" },
+        };
+
         internal static readonly string CustomerUrl = "https://api.xendit.co/customers";
 
         internal static readonly Customer ExpectedCustomer = new Customer
@@ -50,5 +61,11 @@
 
         internal static readonly Customer[] ExpectedCustomers = new Customer[] { ExpectedCustomer };
         internal static readonly string CustomerIdUrl = string.Format("{0}?reference_id={1}", CustomerUrl, ExpectedCustomer.ReferenceId);
+
+        internal static readonly Customer ExpectedCustomerNewApiVersion = new Customer
+        {
+            HasMore = false,
+            Data = new Customer[] { ExpectedCustomer },
+        };
     }
 }

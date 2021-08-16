@@ -69,7 +69,7 @@
         public async void Customer_ShouldSuccess_GetByReferenceId()
         {
             MockClient
-                .Setup(client => client.Request<Customer[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.CustomerIdUrl, null))
+                .Setup(client => client.Request<Customer[]>(HttpMethod.Get, Constant.ApiVersionHeaders, Constant.CustomerIdUrl, null))
                 .ReturnsAsync(Constant.ExpectedCustomers);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -81,14 +81,50 @@
         [Fact]
         public async void Customer_ShouldSuccess_GetByReferenceId_WithHeaders()
         {
+            Dictionary<string, string> headers = new Dictionary<string, string>()
+            {
+                { "for-user-id", "user-id" },
+            };
+
             MockClient
                 .Setup(client => client.Request<Customer[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.CustomerIdUrl, null))
                 .ReturnsAsync(Constant.ExpectedCustomers);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Customer[] actualCustomers = await Customer.GetByReferenceId(Constant.CustomHeaders, Constant.ExpectedCustomer.ReferenceId);
+            Customer[] actualCustomers = await Customer.GetByReferenceId(headers, Constant.ExpectedCustomer.ReferenceId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomers), JsonSerializer.Serialize(actualCustomers));
+        }
+
+        [Fact]
+        public async void Customer_ShouldSuccess_GetByReferenceIdNew()
+        {
+            MockClient
+                .Setup(client => client.Request<Customer>(HttpMethod.Get, Constant.NewApiVersionHeaders, Constant.CustomerIdUrl, null))
+                .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
+
+            XenditConfiguration.RequestClient = MockClient.Object;
+
+            Customer actualCustomer = await Customer.GetByReferenceIdNew(Constant.ExpectedCustomer.ReferenceId);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
+        }
+
+        [Fact]
+        public async void Customer_ShouldSuccess_GetByReferenceIdNew_WithHeaders()
+        {
+            Dictionary<string, string> headers = new Dictionary<string, string>()
+            {
+                { "for-user-id", "user-id" },
+            };
+
+            MockClient
+                .Setup(client => client.Request<Customer>(HttpMethod.Get, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerIdUrl, null))
+                .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
+
+            XenditConfiguration.RequestClient = MockClient.Object;
+
+            Customer actualCustomer = await Customer.GetByReferenceIdNew(headers, Constant.ExpectedCustomer.ReferenceId);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
         }
     }
 }
