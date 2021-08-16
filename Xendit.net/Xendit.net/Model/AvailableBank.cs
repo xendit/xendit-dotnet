@@ -9,5 +9,11 @@
 
         [JsonPropertyName("code")]
         public string Code { get; set; }
+
+        [JsonPropertyName("can_disburse")]
+        public bool CanDisburse { get; set; }
+
+        [JsonPropertyName("can_name_validate")]
+        public bool CanNameValidate { get; set; }
     }
 }
