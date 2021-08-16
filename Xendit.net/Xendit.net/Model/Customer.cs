@@ -61,6 +61,12 @@
         [JsonPropertyName("kyc_documents")]
         public CustomerKycDocument[] KycDocuments { get; set; }
 
+        [JsonPropertyName("data")]
+        public Customer[] Data { get; set; }
+
+        [JsonPropertyName("has_more")]
+        public bool HasMore { get; set; }
+
         /// <summary>
         /// Create customer with required parameters for API version 2020-05-19.
         /// </summary>
@@ -127,24 +133,55 @@
         }
 
         /// <summary>
-        /// Get customer by reference id.
+        /// Get customer by reference id for API version 2020-05-19.
         /// </summary>
         /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
         /// <returns>A Task of customers array.</returns>
         public static async Task<Customer[]> GetByReferenceId(string referenceId)
         {
-            return await GetByReferenceIdRequest(new Dictionary<string, string>(), referenceId);
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+            headers.Add("API-VERSION", "2020-05-19");
+
+            return await GetByReferenceIdRequest(headers, referenceId);
         }
 
         /// <summary>
-        /// Get customer by reference id with headers.
+        /// Get customer by reference id with headers for API version 2020-05-19.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
         /// <returns>A Task of customers array.</returns>
         public static async Task<Customer[]> GetByReferenceId(Dictionary<string, string> headers, string referenceId)
         {
+            headers.Add("API-VERSION", "2020-05-19");
+
             return await GetByReferenceIdRequest(headers, referenceId);
+        }
+
+        /// <summary>
+        /// Get customer by reference id for API version 2020-10-31.
+        /// </summary>
+        /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
+        /// <returns>A Task of Customer model.</returns>
+        public static async Task<Customer> GetByReferenceIdNew(string referenceId)
+        {
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+            headers.Add("API-VERSION", "2020-10-31");
+
+            return await GetByReferenceIdNewRequest(headers, referenceId);
+        }
+
+        /// <summary>
+        /// Get customer by reference id with headers for API version 2020-10-31.
+        /// </summary>
+        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
+        /// <returns>A Task of Customer model.</returns>
+        public static async Task<Customer> GetByReferenceIdNew(Dictionary<string, string> headers, string referenceId)
+        {
+            headers.Add("API-VERSION", "2020-10-31");
+
+            return await GetByReferenceIdNewRequest(headers, referenceId);
         }
 
         private static async Task<Customer> CreateCustomerRequest(Dictionary<string, string> headers, Dictionary<string, object> parameter)
@@ -157,6 +194,12 @@
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/customers?reference_id=", referenceId);
             return await XenditConfiguration.RequestClient.Request<Customer[]>(HttpMethod.Get, headers, url, null);
+        }
+
+        private static async Task<Customer> GetByReferenceIdNewRequest(Dictionary<string, string> headers, string referenceId)
+        {
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/customers?reference_id=", referenceId);
+            return await XenditConfiguration.RequestClient.Request<Customer>(HttpMethod.Get, headers, url, null);
         }
     }
 }
