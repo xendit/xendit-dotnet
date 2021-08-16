@@ -20,14 +20,11 @@ namespace XenditExample
 
             try
             {
-                Dictionary<string, string> headers = new Dictionary<string, string>()
-                {
-                    { "API-Version", "2020-05-19" }
-                };
+                Customer[] customer1 = await Customer.GetByReferenceId("example_reference_id_1");
+                Console.WriteLine(customer1[0]);
 
-                Customer[] customer = await Customer.GetByReferenceId(headers, "example_reference_id");
-
-                Console.WriteLine(customer[0]);
+                Customer customer2 = await Customer.GetByReferenceIdNew("example_reference_id_2");
+                Console.WriteLine(customer2.Data[0]);
             }
             catch (XenditException e)
             {
