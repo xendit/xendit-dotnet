@@ -1,11 +1,6 @@
 ﻿namespace Xendit.net.Model
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Text.Json.Serialization;
-    using System.Threading.Tasks;
 
     public class CustomerAddress
     {
@@ -24,10 +19,19 @@
         [JsonPropertyName("province")]
         public string Province { get; set; }
 
+        [JsonPropertyName("province_state")]
+        public string ProvinceState { get; set; }
+
         [JsonPropertyName("state")]
         public string State { get; set; }
 
         [JsonPropertyName("postal_code")]
         public string PostalCode { get; set; }
+
+        [JsonPropertyName("category")]
+        public string Category { get; set; }
+
+        [JsonPropertyName("is_primary")]
+        public bool IsPrimary { get; set; }
     }
 }

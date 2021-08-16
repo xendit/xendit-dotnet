@@ -46,8 +46,23 @@
         [JsonPropertyName("metadata")]
         public Dictionary<string, object> Metadata { get; set; }
 
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("individual_detail")]
+        public CustomerIndividualDetail IndividualDetail { get; set; }
+
+        [JsonPropertyName("business_detail")]
+        public CustomerBusinessDetail BusinessDetail { get; set; }
+
+        [JsonPropertyName("identity_accounts")]
+        public CustomerIdentityAccount[] IdentityAccount { get; set; }
+
+        [JsonPropertyName("kyc_documents")]
+        public CustomerKycDocument[] KycDocuments { get; set; }
+
         /// <summary>
-        /// Create customer with required parameters.
+        /// Create customer with required parameters for API version 2020-05-19.
         /// </summary>
         /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
         /// <param name="givenNames"> Primary of first name/s of the customer.</param>
@@ -56,17 +71,20 @@
         /// <returns>A Task of Customer model.</returns>
         public static async Task<Customer> Create(string referenceId, string givenNames, string mobileNumber, string email)
         {
+            Dictionary<string, string> headers = new Dictionary<string, string>();
+            headers.Add("API-VERSION", "2020-05-19");
+
             Dictionary<string, object> parameter = new Dictionary<string, object>();
             parameter.Add("reference_id", referenceId);
             parameter.Add("given_names", givenNames);
             parameter.Add("mobile_number", mobileNumber);
             parameter.Add("email", email);
 
-            return await CreateCustomerRequest(new Dictionary<string, string>(), parameter);
+            return await CreateCustomerRequest(headers, parameter);
         }
 
         /// <summary>
-        /// Create customer with required parameters and headers.
+        /// Create customer with required parameters and headers for API version 2020-05-19.
         /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
@@ -76,6 +94,8 @@
         /// <returns>A Task of Customer model.</returns>
         public static async Task<Customer> Create(Dictionary<string, string> headers, string referenceId, string givenNames, string mobileNumber, string email)
         {
+            headers.Add("API-VERSION", "2020-05-19");
+
             Dictionary<string, object> parameter = new Dictionary<string, object>();
             parameter.Add("reference_id", referenceId);
             parameter.Add("given_names", givenNames);
