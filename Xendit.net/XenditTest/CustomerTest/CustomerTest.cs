@@ -43,7 +43,7 @@
         public async void Customer_ShouldSuccess_CreateRequiredParams()
         {
             MockClient
-                .Setup(client => client.Request<Customer>(HttpMethod.Post, new Dictionary<string, string>(), Constant.CustomerUrl, Constant.CustomerBody))
+                .Setup(client => client.Request<Customer>(HttpMethod.Post, Constant.ApiVersionHeaders, Constant.CustomerUrl, Constant.CustomerBody))
                 .ReturnsAsync(Constant.ExpectedCustomer);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -61,7 +61,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Customer actualCustomer = await Customer.Create(Constant.CustomHeaders, Constant.ExpectedCustomer.ReferenceId, Constant.ExpectedCustomer.GivenNames, Constant.ExpectedCustomer.MobileNumber, Constant.ExpectedCustomer.Email);
+            Customer actualCustomer = await Customer.Create(Constant.UserIdHeaders, Constant.ExpectedCustomer.ReferenceId, Constant.ExpectedCustomer.GivenNames, Constant.ExpectedCustomer.MobileNumber, Constant.ExpectedCustomer.Email);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomer), JsonSerializer.Serialize(actualCustomer));
         }
 

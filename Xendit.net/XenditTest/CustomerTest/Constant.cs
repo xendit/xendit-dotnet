@@ -8,6 +8,17 @@
         internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
         {
             { "for-user-id", "user-id" },
+            { "API-VERSION", "2020-05-19" },
+        };
+
+        internal static readonly Dictionary<string, string> UserIdHeaders = new Dictionary<string, string>()
+        {
+            { "for-user-id", "user-id" },
+        };
+
+        internal static readonly Dictionary<string, string> ApiVersionHeaders = new Dictionary<string, string>()
+        {
+            { "API-VERSION", "2020-05-19" },
         };
 
         internal static readonly string CustomerUrl = "https://api.xendit.co/customers";
