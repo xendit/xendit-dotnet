@@ -7,6 +7,7 @@ This library is the abstraction of Xendit API for access from applications writt
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [API Documentation](#api-documentation)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -30,6 +31,11 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Get invoice by ID](#get-invoice-by-id)
     - [Get all invoices](#get-all-invoices)
     - [Expire an invoice](#expire-an-invoice)
+  - [Customer services](#customer-services)
+    - [Create Customer (API version 2020-05-19)](#create-customer-api-version-2020-05-19)
+    - [Create Customer (API version 2020-10-13)](#create-customer-api-version-2020-10-13)
+    - [Get Customer by Reference ID (API version 2020-05-19)](#get-customer-by-reference-id-api-version-2020-05-19)
+    - [Get Customer by Reference ID (API version 2020-10-13)](#get-customer-by-reference-id-api-version-2020-10-13)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -683,4 +689,118 @@ Invoice invoice = new Invoice
     InvoicePaid = new NotificationType[] { NotificationType.Email }
   },
 };
+```
+
+### Customer services
+
+#### Create Customer (API version 2020-05-19)
+
+For Customer API with 2020-05-19 version, you can choose whether want to put the required attributes as parameters or to put in inside a Dictionary object.
+
+<table>
+<tr>
+<td>
+<pre>
+Customer.Create(
+    string referenceId,
+    string givenNames,
+    string mobileNumber,
+    string email
+);
+</pre>
+</td>
+<td>
+<pre>
+Customer.Create(
+    Dictionary&lt;string, object&gt; parameter
+);
+</pre>
+</td>
+</tr>
+</table>
+
+If you use required attributes as parameters and you want to use custom headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
+
+```cs
+Customer customer = await Customer.Create("example_reference_id_1", "John", "+6287774441111", "john@email.com");
+
+// DO NOT declare key of API version in the headers
+Dictionary<string, string> headers = new Dictionary<string, string>()
+{
+  { "for-user-id", "user-id" },
+};
+
+Customer customer = await Customer.Create(headers, "example_reference_id_1", "John", "+6287774441111", "john@email.com");
+```
+
+If you put parameters inside a Dictionary object, you need to declare headers with the API version as well.
+
+```cs
+// declare API version header
+Dictionary<string, string> headers = new Dictionary<string, string>()
+{
+  { "API-Version", "2020-05-19" },
+};
+
+Dictionary<string, object> parameter = new Dictionary<string, object>();
+parameter.Add("reference_id", "example_reference_id_2");
+parameter.Add("given_names", "John");
+parameter.Add("mobile_number", "+6287774441111");
+parameter.Add("email", "john@email.com");
+
+Customer customer = await Customer.Create(headers, parameter);
+```
+
+#### Create Customer (API version 2020-10-13)
+
+For Customer API with 2020-10-13 version, it can only be called using parameters inside a Dictionary object. You need to declare headers with the API version as well.
+
+```cs
+// declare API version header
+Dictionary<string, string> headers = new Dictionary<string, string>()
+{
+  { "API-Version", "2020-10-13" },
+};
+
+Dictionary<string, string> individualDetail = new Dictionary<string, string>();
+individualDetail.Add("given_names", "Johnie");
+
+Dictionary<string, object> parameter = new Dictionary<string, object>();
+parameter.Add("reference_id", "example_reference_id_3");
+parameter.Add("type", "INDIVIDUAL");
+parameter.Add("individual_detail", individualDetail);
+
+Customer customer = await Customer.Create(headers, parameter);
+```
+
+#### Get Customer by Reference ID (API version 2020-05-19)
+
+If you want to use custom headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
+
+```cs
+Customer[] customer = await Customer.GetByReferenceId("example_reference_id");
+
+// DO NOT declare key of API version in the custom headers
+Dictionary<string, string> headers = new Dictionary<string, string>()
+{
+  { "for-user-id", "user-id" },
+};
+
+Customer[] customer = await Customer.GetByReferenceId(headers, "example_reference_id");
+```
+
+#### Get Customer by Reference ID (API version 2020-10-13)
+
+If you want to use custom headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
+
+```cs
+Customer customer = await Customer.GetByReferenceIdNew("example_reference_id");
+
+// DO NOT declare key of API version in the custom headers
+Dictionary<string, string> headers = new Dictionary<string, string>()
+{
+  { "for-user-id", "user-id" },
+};
+
+Customer customer = await Customer.GetByReferenceIdNew(headers, "example_reference_id");
 ```
