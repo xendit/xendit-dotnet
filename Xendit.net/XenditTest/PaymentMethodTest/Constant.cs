@@ -1,11 +1,9 @@
 ﻿namespace XenditTest.PaymentMethodTest
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
+    using Xendit.net.Struct;
 
     internal class Constant
     {
@@ -23,7 +21,7 @@
 
         internal static readonly PaymentMethod[] ExpectedPaymentMethods = new PaymentMethod[] { ExpectedPaymentMethod };
 
-        internal static readonly Dictionary<string, object> PaymentMethodBodyProperties = new Dictionary<string, object>()
+        internal static readonly Dictionary<string, string> PaymentMethodBodyProperties = new Dictionary<string, string>()
         {
             { "id", "la-aa620619-124f-41db-995b-66a52abe036a" },
             { "channel_code", "DC_BRI" },
@@ -33,11 +31,20 @@
             { "description", null },
         };
 
+        internal static readonly PaymentMethodBody Body = new PaymentMethodBody()
+        {
+            Type = PaymentMethodAccountType.DebitCard,
+            Properties = PaymentMethodBodyProperties,
+            CustomerId = "customer-id",
+            Metadata = null,
+        };
+
         internal static readonly Dictionary<string, object> PaymentMethodBody = new Dictionary<string, object>()
         {
             { "customer_id", "customer-id" },
-            { "type", "DEBIT_CARD" },
+            { "type", PaymentMethodAccountType.DebitCard },
             { "properties", PaymentMethodBodyProperties },
+            { "metadata", null },
         };
 
         internal static readonly string CustomerId = "customer-id";

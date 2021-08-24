@@ -4,6 +4,7 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Struct;
 
     public class PaymentMethod
     {
@@ -14,7 +15,7 @@
         public string Type { get; set; }
 
         [JsonPropertyName("properties")]
-        public Dictionary<string, object> Properties { get; set; }
+        public Dictionary<string, string> Properties { get; set; }
 
         [JsonPropertyName("customer_id")]
         public string CustomerId { get; set; }
@@ -32,19 +33,20 @@
         public Dictionary<string, object> Metadata { get; set; }
 
         /// <summary>
-        /// Create payment method with all parameter as Dictionary.
+        /// Create payment method with all parameter.
         /// </summary>
         /// <param name="parameter">Parameter listed here https://developers.xendit.co/api-reference/#create-payment-method.</param>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <returns>A Task of Payment Method model.</returns>
-        public static async Task<PaymentMethod> Create(Dictionary<string, object> parameter, Dictionary<string, string> headers = null)
+        public static async Task<PaymentMethod> Create(PaymentMethodBody parameter, Dictionary<string, string> headers = null)
         {
             if (headers == null)
             {
                 headers = new Dictionary<string, string>();
             }
 
-            return await CreatePaymentMethodRequest(headers, parameter);
+            Dictionary<string, object> parameterBody = ConvertPaymentMethodBody(parameter);
+            return await CreatePaymentMethodRequest(headers, parameterBody);
         }
 
         /// <summary>
@@ -73,6 +75,19 @@
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/payment_methods?customer_id=", customerId);
             return await XenditConfiguration.RequestClient.Request<PaymentMethod[]>(HttpMethod.Get, headers, url, null);
+        }
+
+        private static Dictionary<string, object> ConvertPaymentMethodBody(PaymentMethodBody body)
+        {
+            Dictionary<string, object> parameter = new Dictionary<string, object>()
+            {
+                { "customer_id", body.CustomerId },
+                { "type", body.Type },
+                { "properties", body.Properties },
+                { "metadata", body.Metadata },
+            };
+
+            return parameter;
         }
     }
 }

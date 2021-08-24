@@ -22,7 +22,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            PaymentMethod actualPaymentMethod = await PaymentMethod.Create(Constant.PaymentMethodBody);
+            PaymentMethod actualPaymentMethod = await PaymentMethod.Create(Constant.Body);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedPaymentMethod), JsonSerializer.Serialize(actualPaymentMethod));
         }
 
@@ -35,7 +35,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            PaymentMethod actualPaymentMethod = await PaymentMethod.Create(Constant.PaymentMethodBody, Constant.CustomHeaders);
+            PaymentMethod actualPaymentMethod = await PaymentMethod.Create(Constant.Body, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedPaymentMethod), JsonSerializer.Serialize(actualPaymentMethod));
         }
 
