@@ -35,7 +35,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Invoice actualInvoice = await Invoice.GetById(Constant.CustomHeaders, Constant.InvoiceId);
+            Invoice actualInvoice = await Invoice.GetById(Constant.InvoiceId, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedInvoice), JsonSerializer.Serialize(actualInvoice));
         }
 
@@ -61,7 +61,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Invoice actualInvoice = await Invoice.GetById(Constant.CustomHeaders, Constant.InvoiceId);
+            Invoice actualInvoice = await Invoice.GetById(Constant.InvoiceId, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedInvoice), JsonSerializer.Serialize(actualInvoice));
         }
 
@@ -87,33 +87,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Invoice actualInvoice = await Invoice.Create(Constant.CustomHeaders, Constant.InvoiceBody);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedInvoice), JsonSerializer.Serialize(actualInvoice));
-        }
-
-        [Fact]
-        public async void Invoice_Create_RequiredParams_ShouldSuccess()
-        {
-            MockClient
-                .Setup(client => client.Request<Invoice>(HttpMethod.Post, new Dictionary<string, string>(), Constant.InvoiceV2Url, Constant.InvoiceBody))
-                .ReturnsAsync(Constant.ExpectedInvoice);
-
-            XenditConfiguration.RequestClient = MockClient.Object;
-
-            Invoice actualInvoice = await Invoice.Create(Constant.ExpectedInvoice.ExternalId, Constant.ExpectedInvoice.Amount);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedInvoice), JsonSerializer.Serialize(actualInvoice));
-        }
-
-        [Fact]
-        public async void Invoice_Create_RequiredParams_ShouldSuccess_WithHeaders()
-        {
-            MockClient
-                .Setup(client => client.Request<Invoice>(HttpMethod.Post, Constant.CustomHeaders, Constant.InvoiceV2Url, Constant.InvoiceBody))
-                .ReturnsAsync(Constant.ExpectedInvoice);
-
-            XenditConfiguration.RequestClient = MockClient.Object;
-
-            Invoice actualInvoice = await Invoice.Create(Constant.CustomHeaders, Constant.ExpectedInvoice.ExternalId, Constant.ExpectedInvoice.Amount);
+            Invoice actualInvoice = await Invoice.Create(Constant.InvoiceBody, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedInvoice), JsonSerializer.Serialize(actualInvoice));
         }
 
@@ -126,7 +100,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Invoice[] actualInvoiceArray = await Invoice.GetAll(new Dictionary<string, string>(), Constant.QueryParams);
+            Invoice[] actualInvoiceArray = await Invoice.GetAll(Constant.QueryParams);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedInvoiceArray), JsonSerializer.Serialize(actualInvoiceArray));
         }
 
@@ -139,7 +113,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Invoice[] actualInvoiceArray = await Invoice.GetAll(Constant.CustomHeaders, Constant.QueryParams);
+            Invoice[] actualInvoiceArray = await Invoice.GetAll(Constant.QueryParams, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedInvoiceArray), JsonSerializer.Serialize(actualInvoiceArray));
         }
     }
