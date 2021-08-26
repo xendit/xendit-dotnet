@@ -7,7 +7,8 @@ namespace XenditExample
     using Xendit.net.Model;
     using Xendit.net.Network;
     using Xendit.net.Exception;
-    using System.Collections.Generic;
+    using Xendit.net.Struct;
+    using Xendit.net.Enum;
 
     class ExampleCreateCustomer
     {
@@ -18,40 +19,50 @@ namespace XenditExample
             XenditConfiguration.RequestClient = networkClient;
             XenditConfiguration.ApiKey = "xnd_development_...";
 
-            Dictionary<string, string> headers = new Dictionary<string, string>()
-            {
-                { "API-Version", "2020-05-19" },
-            };
-
-            Dictionary<string, string> newApiVersionheaders = new Dictionary<string, string>()
-            {
-                { "API-Version", "2020-10-13" },
-            };
-
             try
             {
-                Customer customer1 = await Customer.Create("example_reference_id_1", "John", "+6287774441111", "john@email.com");
-                Console.WriteLine(customer1);
+                CustomerIndividualDetail individualDetail = new CustomerIndividualDetail
+                {
+                    GivenNames = "John",
+                    Gender = CustomerGender.Male,
+                };
 
-                Dictionary<string, object> parameter = new Dictionary<string, object>();
-                parameter.Add("reference_id", "example_reference_id_2");
-                parameter.Add("given_names", "John");
-                parameter.Add("mobile_number", "+6287774441111");
-                parameter.Add("email", "john@email.com");
+                CustomerIdentityAccount identityAccount = new CustomerIdentityAccount
+                {
+                    Country = "ID",
+                    Type = CustomerIdentityAccountType.BankAccount,
+                    Properties = new CustomerIdentityAccountProperties { AccountNumber = "account_number" }
+                };
 
-                Customer customer2 = await Customer.Create(headers, parameter);
-                Console.WriteLine(customer2);
+                CustomerKycDocument document = new CustomerKycDocument
+                {
+                    Country = "ID",
+                    Type = CustomerKycDocumentType.IdentityCard,
+                    SubType = CustomerKycDocumentSubType.NationalId,
+                };
 
-                Dictionary<string, string> individualDetail = new Dictionary<string, string>();
-                individualDetail.Add("given_names", "Johnie");
+                CustomerBody individualParameter = new CustomerBody
+                {
+                    ReferenceId = "demo_11212145",
+                    Type = CustomerType.Individual,
+                    IndividualDetail = individualDetail,
+                    IdentityAccount = new CustomerIdentityAccount[] { identityAccount },
+                    KycDocuments = new CustomerKycDocument[] { document },
+                };
 
-                Dictionary<string, object> newApiVersionParameter = new Dictionary<string, object>();
-                newApiVersionParameter.Add("reference_id", "example_reference_id_3");
-                newApiVersionParameter.Add("type", "INDIVIDUAL");
-                newApiVersionParameter.Add("individual_detail", individualDetail);
+                Customer individualCustomerDefault = await Customer.Create(individualParameter);
+                Console.WriteLine(individualCustomerDefault);
 
-                Customer customer3 = await Customer.Create(newApiVersionheaders, newApiVersionParameter);
-                Console.WriteLine(customer3);
+                CustomerBody individualParameterCustomVersion = new CustomerBody
+                {
+                    ReferenceId = "demo_11212144",
+                    Email = "john@email.com",
+                    GivenNames = "John",
+                    Addresses = new CustomerAddress[] { new CustomerAddress { Country = "ID" } }
+                };
+
+                Customer individualCustomerCustomVersion = await Customer.Create(individualParameterCustomVersion, version: "2020-05-19");
+                Console.WriteLine(individualCustomerCustomVersion);
             }
             catch (XenditException e)
             {

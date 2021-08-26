@@ -7,7 +7,6 @@ namespace XenditExample
     using Xendit.net.Model;
     using Xendit.net.Network;
     using Xendit.net.Exception;
-    using System.Collections.Generic;
 
     class ExampleGetCustomer
     {
@@ -20,11 +19,11 @@ namespace XenditExample
 
             try
             {
-                Customer[] customer1 = await Customer.GetByReferenceId("example_reference_id_1");
-                Console.WriteLine(customer1[0]);
+                Customer customerDefault = await Customer.Get("demo_11212145");
+                Console.WriteLine(customerDefault);
 
-                Customer customer2 = await Customer.GetByReferenceIdNew("example_reference_id_2");
-                Console.WriteLine(customer2.Data[0]);
+                Customer customerCustomVersion = await Customer.Get("demo_11212144", version: "2020-05-19");
+                Console.WriteLine(customerCustomVersion);
             }
             catch (XenditException e)
             {
