@@ -1,9 +1,13 @@
 ﻿namespace Xendit.net.Enum
 {
     using System.Runtime.Serialization;
+    using System.Text.Json.Serialization;
 
+    [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
     public enum CustomerIdentityAccountType
     {
+        Unknown,
+
         [EnumMember(Value = "BANK_ACCOUNT")]
         BankAccount,
 
