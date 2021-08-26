@@ -61,7 +61,7 @@ namespace XenditExample
                     Addresses = new CustomerAddress[] { new CustomerAddress { Country = "ID" } }
                 };
 
-                Customer individualCustomerCustomVersion = await Customer.Create(individualParameterCustomVersion, version: "2020-05-19");
+                Customer individualCustomerCustomVersion = await Customer.Create(individualParameterCustomVersion, version: ApiVersion.Version20200519);
                 Console.WriteLine(individualCustomerCustomVersion);
             }
             catch (XenditException e)

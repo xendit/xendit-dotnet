@@ -7,6 +7,7 @@ This library is the abstraction of Xendit API for access from applications writt
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [API Documentation](#api-documentation)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -694,7 +695,7 @@ Invoice invoice = new Invoice
 
 The library supports get customer operation for API version `2020-10-31` (recommended) and `2020-05-19`.
 
-Method `Create` has three parameters: parameter or request body using struct `CustomerBody`, optional headers, and optional API version with default value of `2020-10-31`.
+Method `Create` has three parameters: parameter or request body using struct `CustomerBody`, optional headers, and optional API version with default value of `ApiVersion.Version20201031` enum (represents `2020-10-31` version).
 
 If you want to use optional headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
 
@@ -749,7 +750,7 @@ Customer customerDefault = await Customer.Create(individualParameter);
 Console.WriteLine(customerDefault);
 
 // or you can define with the API version
-Customer customer = await Customer.Create(individualParameter, version: "2020-10-31");
+Customer customer = await Customer.Create(individualParameter, version: ApiVersion.Version20201031);
 Console.WriteLine(customer);
 ```
 
@@ -792,7 +793,7 @@ CustomerBody parameter = new CustomerBody
     Addresses = new CustomerAddress[] { new CustomerAddress { Country = "ID" } }
 };
 
-Customer customerWithVersion = await Customer.Create(parameter, version: "2020-05-19");
+Customer customerWithVersion = await Customer.Create(parameter, version: ApiVersion.Version20200519);
 ```
 
 It will return:
@@ -811,7 +812,7 @@ Customer customerWithVersion = new Customer
 
 The library supports get customer operation for API version `2020-10-31` (recommended) and `2020-05-19`.
 
-Method `Get` has three parameters: reference ID (required), optional headers, and optional API version with default value of `2020-10-31`.
+Method `Get` has three parameters: reference ID (required), optional headers, and optional API version with default value of `ApiVersion.Version20201031` enum (represents `2020-10-31` version).
 
 If you want to use custom headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
 
@@ -830,7 +831,7 @@ Here is the example of invoking method `Get` with API version of `2020-10-31`:
 ```cs
 Customer customerDefault = await Customer.Get("example_reference_id");
 
-Customer customerWithVersion = await Customer.Get("example_reference_id", version: "2020-10-31");
+Customer customerWithVersion = await Customer.Get("example_reference_id", version: ApiVersion.Version20201031);
 ```
 
 It will return:
@@ -871,7 +872,7 @@ Customer customerDefault = new Customer
 For API version of `2020-05-19`, here is the example:
 
 ```cs
-Customer customerWithVersion = await Customer.Get("example_reference_id", version: "2020-05-19");
+Customer customerWithVersion = await Customer.Get("example_reference_id", version: ApiVersion.Version20200519);
 ```
 
 It will return:

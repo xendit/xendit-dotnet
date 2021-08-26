@@ -4,6 +4,7 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Common;
     using Xendit.net.Enum;
     using Xendit.net.Struct;
 
@@ -77,10 +78,10 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="version">API version that will be used to request.</param>
         /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> Create(CustomerBody parameter, Dictionary<string, string> headers = null, string version = "2020-10-31")
+        public static async Task<Customer> Create(CustomerBody parameter, Dictionary<string, string> headers = null, ApiVersion version = ApiVersion.Version20201031)
         {
             headers = headers ?? new Dictionary<string, string>();
-            headers.Add("API-VERSION", version);
+            headers.Add("API-VERSION", ApiVersionParser.Parse(version));
 
             return await CreateCustomerRequest(headers, parameter);
         }
@@ -90,12 +91,12 @@
         /// </summary>
         /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="version">API version that will be used to request.</param>
+        /// <param name="version">API version that will be used to request using ApiVersion enum.</param>
         /// <returns>A Task of customers array.</returns>
-        public static async Task<Customer> Get(string referenceId, Dictionary<string, string> headers = null, string version = "2020-10-31")
+        public static async Task<Customer> Get(string referenceId, Dictionary<string, string> headers = null, ApiVersion version = ApiVersion.Version20201031)
         {
             headers = headers ?? new Dictionary<string, string>();
-            headers.Add("API-VERSION", version);
+            headers.Add("API-VERSION", ApiVersionParser.Parse(version));
 
             return await GetCustomerRequest(headers, referenceId);
         }

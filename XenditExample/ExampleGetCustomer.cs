@@ -4,6 +4,7 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
     using Xendit.net.Network;
     using Xendit.net.Exception;
@@ -22,7 +23,7 @@ namespace XenditExample
                 Customer customerDefault = await Customer.Get("demo_11212145");
                 Console.WriteLine(customerDefault);
 
-                Customer customerCustomVersion = await Customer.Get("demo_11212144", version: "2020-05-19");
+                Customer customerCustomVersion = await Customer.Get("demo_11212144", version: ApiVersion.Version20200519);
                 Console.WriteLine(customerCustomVersion);
             }
             catch (XenditException e)

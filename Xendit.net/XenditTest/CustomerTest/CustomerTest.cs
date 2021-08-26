@@ -5,6 +5,7 @@
     using System.Text.Json;
     using Moq;
     using Xendit.net;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
     using Xendit.net.Network;
     using Xendit.net.Struct;
@@ -49,7 +50,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Customer actualCustomer = await Customer.Create(Constant.CustomerBody, version: Constant.ApiVersion);
+            Customer actualCustomer = await Customer.Create(Constant.CustomerBody, version: ApiVersion.Version20200519);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerData), JsonSerializer.Serialize(actualCustomer));
         }
 
@@ -93,7 +94,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Customer actualCustomer = await Customer.Get(Constant.ExpectedCustomerData.ReferenceId, version: Constant.ApiVersion);
+            Customer actualCustomer = await Customer.Get(Constant.ExpectedCustomerData.ReferenceId, version: ApiVersion.Version20200519);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerOldApiVersion), JsonSerializer.Serialize(actualCustomer));
         }
     }
