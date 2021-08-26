@@ -54,7 +54,7 @@
         }
 
         [Fact]
-        public async void Customer_ShouldSuccess_GetByReferenceId_WithDefaultHeaderAndVersion()
+        public async void Customer_ShouldSuccess_Get_WithDefaultHeaderAndVersion()
         {
             MockClient
                 .Setup(client => client.Request<Dictionary<string, string>, Customer>(HttpMethod.Get, Constant.NewApiVersionHeaders, Constant.CustomerIdUrl, null))
@@ -62,12 +62,12 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Customer actualCustomer = await Customer.GetByReferenceId(Constant.ExpectedCustomerData.ReferenceId);
+            Customer actualCustomer = await Customer.Get(Constant.ExpectedCustomerData.ReferenceId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
         }
 
         [Fact]
-        public async void Customer_ShouldSuccess_GetByReferenceId_WithHeaders()
+        public async void Customer_ShouldSuccess_Get_WithHeaders()
         {
             Dictionary<string, string> headers = new Dictionary<string, string>()
             {
@@ -80,12 +80,12 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Customer actualCustomer = await Customer.GetByReferenceId(Constant.ExpectedCustomerData.ReferenceId, headers);
+            Customer actualCustomer = await Customer.Get(Constant.ExpectedCustomerData.ReferenceId, headers);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
         }
 
         [Fact]
-        public async void Customer_ShouldSuccess_GetByReferenceId_WithVersion()
+        public async void Customer_ShouldSuccess_Get_WithVersion()
         {
             MockClient
                 .Setup(client => client.Request<Dictionary<string, string>, Customer[]>(HttpMethod.Get, Constant.ApiVersionHeaders, Constant.CustomerIdUrl, null))
@@ -93,7 +93,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Customer actualCustomer = await Customer.GetByReferenceId(Constant.ExpectedCustomerData.ReferenceId, version: Constant.ApiVersion);
+            Customer actualCustomer = await Customer.Get(Constant.ExpectedCustomerData.ReferenceId, version: Constant.ApiVersion);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerOldApiVersion), JsonSerializer.Serialize(actualCustomer));
         }
     }
