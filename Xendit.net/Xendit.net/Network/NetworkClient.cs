@@ -6,9 +6,7 @@
     using System.Net.Http.Headers;
     using System.Text;
     using System.Text.Json;
-    using System.Text.Json.Serialization;
     using System.Threading.Tasks;
-    using Xendit.net.Common;
     using Xendit.net.Exception;
 
     public class NetworkClient : INetworkClient
@@ -33,12 +31,7 @@
 
                 var responseBody = await response.Content.ReadAsStreamAsync();
 
-                JsonSerializerOptions options = new JsonSerializerOptions
-                {
-                    Converters = { new JsonStringEnumMemberConverter(ScreamingSnakeCaseNamingPolicy.Instance) },
-                };
-
-                var deserializedResponse = await JsonSerializer.DeserializeAsync<TResponse>(responseBody, options);
+                var deserializedResponse = await JsonSerializer.DeserializeAsync<TResponse>(responseBody);
                 return deserializedResponse;
             }
             catch (HttpRequestException e)
@@ -77,9 +70,9 @@
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
                     IgnoreNullValues = true,
-                    Converters = { new JsonStringEnumConverter(ScreamingSnakeCaseNamingPolicy.Instance) },
                 };
 
+                Console.WriteLine(JsonSerializer.Serialize(requestBody, options));
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody, options), Encoding.UTF8, "application/json");
             }
 

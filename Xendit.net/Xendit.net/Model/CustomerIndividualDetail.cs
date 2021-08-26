@@ -20,6 +20,7 @@
         [JsonPropertyName("date_of_birth")]
         public string DateOfBirth { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("gender")]
         public CustomerGender Gender { get; set; }
 
