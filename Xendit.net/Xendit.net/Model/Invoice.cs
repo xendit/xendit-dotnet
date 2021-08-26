@@ -116,11 +116,7 @@
         /// <returns>A Task of Invoice model.</returns>
         public static async Task<Invoice> Create(InvoiceBody parameter, Dictionary<string, string> headers = null)
         {
-            if (headers == null)
-            {
-                headers = new Dictionary<string, string>();
-            }
-
+            headers = headers ?? new Dictionary<string, string>();
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/v2/invoices");
             return await XenditConfiguration.RequestClient.Request<InvoiceBody, Invoice>(HttpMethod.Post, headers, url, parameter);
         }
@@ -133,11 +129,7 @@
         /// <returns>A Task of Invoice model.</returns>
         public static async Task<Invoice> GetById(string invoiceId, Dictionary<string, string> headers = null)
         {
-            if (headers == null)
-            {
-                headers = new Dictionary<string, string>();
-            }
-
+            headers = headers ?? new Dictionary<string, string>();
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices/", invoiceId);
             return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice>(HttpMethod.Get, headers, url, null);
         }
@@ -150,11 +142,7 @@
         /// <returns>A Task of array of invoices.</returns>
         public static async Task<Invoice[]> GetAll(Dictionary<string, object> parameter, Dictionary<string, string> headers = null)
         {
-            if (headers == null)
-            {
-                headers = new Dictionary<string, string>();
-            }
-
+            headers = headers ?? new Dictionary<string, string>();
             string[] paramList = new string[]
             {
                 "statuses",
@@ -185,11 +173,7 @@
         /// <returns>A Task of Invoice model.</returns>
         public static async Task<Invoice> Expire(string invoiceId, Dictionary<string, string> headers = null)
         {
-            if (headers == null)
-            {
-                headers = new Dictionary<string, string>();
-            }
-
+            headers = headers ?? new Dictionary<string, string>();
             string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/invoices/", invoiceId, "/expire!");
             return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice>(HttpMethod.Post, headers, url, new Dictionary<string, string>());
         }
