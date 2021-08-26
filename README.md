@@ -215,7 +215,9 @@ List<AvailableBank> availableBanks = await VirtualAccount.GetAvailableBanks();
 ```cs
 VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get("VIRTUAL_ACCOUNT_PAYMENT_ID");
 ```
+
 ### Disbursement Services
+
 #### Create a disbursement
 
 You can choose whether want to put the attributes as parameters or to put in inside a Dictionary object.
@@ -293,34 +295,133 @@ AvailableBank[] availableBanks = await Disbursement.GetAvailableBanks();
 
 #### Create an invoice
 
-You can choose whether want to put the attributes as parameters or to put in inside a dictionary object.
+To create an invoice, please use struct `InvoiceBody` for parameter body. You may use these classes to construct `InvoiceBody`:
 
-<table>
-<tr>
-<td>
-<pre>
-Invoice.Create(
-    string externalId,
-    long amount,
-);
-</pre>
-</td>
-<td>
-<pre>
-Invoice.Create(
-    Dictionary&lt;string, object&gt; parameter
-);
-</pre>
-</td>
-</tr>
-</table>
+- `ItemInvoice` for `Items` property
+- `Customer` for `Customer` property
+- `CustomerAddress` for `Addresses` property in `Customer`
+- `FeeInvoice` for `Fees` property
+- `CustomerNotificationPreferenceInvoice` for `CustomerNotificationPreference` property
+
+Here is the example:
 
 ```cs
-Dictionary<string, object> parameter = new Dictionary<string, object>();
-parameter.Add("external_id", "my_external_id");
-parameter.Add("amount", 1000);
-parameter.Add("payer_email", "somebody@email.com")
+CustomerAddress addresses = new CustomerAddress
+{
+    Country = "ID",
+    StreetLine1 = "Jalan Makan",
+    StreetLine2 = "Kecamatan Kebayoran Baru",
+    City = "Jakarta Selatan",
+    Province = "Daerah Khusus Ibukota Jakarta",
+    PostalCode = "12345",
+};
+
+Customer customer = new Customer
+{
+    GivenNames = "John",
+    Email = "john@email.com",
+    MobileNumber = "+6287774441111",
+    Addresses = new CustomerAddress[] { addresses },
+};
+
+CustomerNotificationPreferenceInvoice preference = new CustomerNotificationPreferenceInvoice
+{
+    InvoicePaid = new string[] { "email" }
+};
+
+ItemInvoice item = new ItemInvoice
+{
+    Name = "shoes",
+    Quantity = 1,
+    Price = 100,
+};
+
+FeeInvoice fee = new FeeInvoice
+{
+    Type = "ADMIN",
+    Value = 200,
+};
+
+InvoiceBody parameter = new InvoiceBody
+{
+    ExternalId = "external-id",
+    Amount = 1000,
+    Customer = customer,
+    CustomerNotificationPreference = preference,
+    Items = new ItemInvoice[] { item },
+    Fees = new FeeInvoice[] { fee },
+    InvoiceDuration = 86400,
+};
+
 Invoice invoice = await Invoice.Create(parameter);
+Console.WriteLine(invoice);
+```
+
+It will return:
+
+```cs
+Invoice invoice = new Invoice
+{
+  Id = "610a306ffe63418fdb6bd0b3",
+  ExternalId = "external-id",
+  UserId = "<USER_ID>",
+  Status = "PENDING",
+  MerchantName = "<MERCHANT_NAME>",
+  MerchantProfilePictureUrl = "<MERCHANT_PROFILE_PICTURE_URL>",
+  Amount = 1000,
+  ExpiryDate = "<CREATED_DATE + INVOICE_DURATION>",
+  InvoiceUrl = "<INVOICE_URL>",
+  AvailableBanks = new AvailableBankInvoice[]
+  {
+    new AvailableBankInvoice
+    {
+      BankCode = "Mandiri",
+      CollectionType = "Pool",
+      BankAccountNumber = "8860810000525",
+      TransferAmount = 50000,
+      BankBranch = "Virtual Account",
+      AccountHolderName = "LANSUR13",
+    },
+    // ...
+  },
+  AvailableEwallets = new AvailableEwalletInvoice[]
+  {
+    new AvailableEwalletInvoice { EwalletType = "OVO" },
+    // ...
+  },
+  AvailableRetailOutlets = new AvailableRetailOutletInvoice[]
+  {
+    new AvailableRetailOutletInvoice
+    {
+      RetailOutletName = "ALFAMART",
+      PaymentCode = "ALFA123456",
+      TransferAmount = 50000,
+    },
+    // ...
+  }
+  ShouldExcludeCreditCard = false,
+  ShouldSendEmail = false,
+  Created = "<CREATED_TIMESTAMP>",
+  Updated = "<UPDATED_TIMESTAMP>",
+  Currency = "IDR",
+  Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
+  Customer = new Customer {
+    GivenNames = "John",
+    Email = "john@email.com",
+    MobileNumber = "+6287774441111",
+    Addresses = new CustomerAddress[] {
+      new CustomerAddress {
+        Country = "ID",
+        StreetLine1 = "Jalan Makan",
+        StreetLine2 = "Kecamatan Kebayoran Baru",
+        City = "Jakarta Selatan",
+        Province = "Daerah Khusus Ibukota Jakarta",
+        PostalCode = "12345"
+      }
+    },
+  },
+  CustomerNotificationPreference = new CustomerNotificationPreference { InvoicePaid = new string[] { "email" } },
+};
 ```
 
 #### Get invoice by ID
@@ -329,17 +430,221 @@ Invoice invoice = await Invoice.Create(parameter);
 Invoice invoice = await Invoice.GetById("EXAMPLE_ID");
 ```
 
+It will return:
+
+```cs
+Invoice invoice = new Invoice
+{
+  Id = "610a306ffe63418fdb6bd0b3",
+  ExternalId = "external-id",
+  UserId = "<USER_ID>",
+  Status = "PENDING",
+  MerchantName = "<MERCHANT_NAME>",
+  MerchantProfilePictureUrl = "<MERCHANT_PROFILE_PICTURE_URL>",
+  Amount = 1000,
+  ExpiryDate = "<CREATED_DATE + INVOICE_DURATION>",
+  InvoiceUrl = "<INVOICE_URL>",
+  AvailableBanks = new AvailableBankInvoice[]
+  {
+    new AvailableBankInvoice
+    {
+      BankCode = "Mandiri",
+      CollectionType = "Pool",
+      BankAccountNumber = "8860810000525",
+      TransferAmount = 50000,
+      BankBranch = "Virtual Account",
+      AccountHolderName = "LANSUR13",
+    },
+    // ...
+  },
+  AvailableEwallets = new AvailableEwalletInvoice[]
+  {
+    new AvailableEwalletInvoice { EwalletType = "OVO" },
+    // ...
+  },
+  AvailableRetailOutlets = new AvailableRetailOutletInvoice[]
+  {
+    new AvailableRetailOutletInvoice
+    {
+      RetailOutletName = "ALFAMART",
+      PaymentCode = "ALFA123456",
+      TransferAmount = 50000,
+    },
+    // ...
+  }
+  ShouldExcludeCreditCard = false,
+  ShouldSendEmail = false,
+  Created = "<CREATED_TIMESTAMP>",
+  Updated = "<UPDATED_TIMESTAMP>",
+  Currency = "IDR",
+  Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
+  Customer = new Customer {
+    GivenNames = "John",
+    Email = "john@email.com",
+    MobileNumber = "+6287774441111",
+    Addresses = new CustomerAddress[] {
+      new CustomerAddress {
+        Country = "ID",
+        StreetLine1 = "Jalan Makan",
+        StreetLine2 = "Kecamatan Kebayoran Baru",
+        City = "Jakarta Selatan",
+        Province = "Daerah Khusus Ibukota Jakarta",
+        PostalCode = "12345"
+      }
+    },
+  },
+  CustomerNotificationPreference = new CustomerNotificationPreference { InvoicePaid = new string[] { "email" } },
+};
+```
+
 #### Get all invoices
 
 ```cs
 Dictionary<string, object> parameter = new Dictionary<string, object>();
 parameter.Add("limit", 1);
 parameter.Add("statutes", "[\"PENDING\",\"EXPIRED\"]");
-Invoice invoice = await Invoice.GetAll(parameter);
+Invoice[] invoices = await Invoice.GetAll(parameter);
+```
+
+It will return:
+
+```cs
+Invoice[] invoices = new Invoice[]
+{
+  new Invoice
+  {
+    Id = "610a306ffe63418fdb6bd0b3",
+    ExternalId = "external-id",
+    UserId = "<USER_ID>",
+    Status = "PENDING",
+    MerchantName = "<MERCHANT_NAME>",
+    MerchantProfilePictureUrl = "<MERCHANT_PROFILE_PICTURE_URL>",
+    Amount = 1000,
+    ExpiryDate = "<CREATED_DATE + INVOICE_DURATION>",
+    InvoiceUrl = "<INVOICE_URL>",
+    AvailableBanks = new AvailableBankInvoice[]
+    {
+      new AvailableBankInvoice
+      {
+        BankCode = "Mandiri",
+        CollectionType = "Pool",
+        BankAccountNumber = "8860810000525",
+        TransferAmount = 50000,
+        BankBranch = "Virtual Account",
+        AccountHolderName = "LANSUR13",
+      },
+      // ...
+    },
+    AvailableEwallets = new AvailableEwalletInvoice[]
+    {
+      new AvailableEwalletInvoice { EwalletType = "OVO" },
+      // ...
+    },
+    AvailableRetailOutlets = new AvailableRetailOutletInvoice[]
+    {
+      new AvailableRetailOutletInvoice
+      {
+        RetailOutletName = "ALFAMART",
+        PaymentCode = "ALFA123456",
+        TransferAmount = 50000,
+      },
+      // ...
+    }
+    ShouldExcludeCreditCard = false,
+    ShouldSendEmail = false,
+    Created = "<CREATED_TIMESTAMP>",
+    Updated = "<UPDATED_TIMESTAMP>",
+    Currency = "IDR",
+    Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
+    Customer = new Customer {
+      GivenNames = "John",
+      Email = "john@email.com",
+      MobileNumber = "+6287774441111",
+      Addresses = new CustomerAddress[] {
+        new CustomerAddress {
+          Country = "ID",
+          StreetLine1 = "Jalan Makan",
+          StreetLine2 = "Kecamatan Kebayoran Baru",
+          City = "Jakarta Selatan",
+          Province = "Daerah Khusus Ibukota Jakarta",
+          PostalCode = "12345"
+        }
+      },
+    },
+    CustomerNotificationPreference = new CustomerNotificationPreference { InvoicePaid = new string[] { "email" } },
+  }
+};
 ```
 
 #### Expire an invoice
 
 ```cs
 Invoice invoice = await Invoice.Expire("EXAMPLE_ID");
+```
+
+It will return:
+
+```cs
+Invoice invoice = new Invoice
+{
+  Id = "610a306ffe63418fdb6bd0b3",
+  ExternalId = "external-id",
+  UserId = "<USER_ID>",
+  Status = "EXPIRED",
+  MerchantName = "<MERCHANT_NAME>",
+  MerchantProfilePictureUrl = "<MERCHANT_PROFILE_PICTURE_URL>",
+  Amount = 1000,
+  ExpiryDate = "<CREATED_DATE + INVOICE_DURATION>",
+  InvoiceUrl = "<INVOICE_URL>",
+  AvailableBanks = new AvailableBankInvoice[]
+  {
+    new AvailableBankInvoice
+    {
+      BankCode = "Mandiri",
+      CollectionType = "Pool",
+      BankAccountNumber = "8860810000525",
+      TransferAmount = 50000,
+      BankBranch = "Virtual Account",
+      AccountHolderName = "LANSUR13",
+    },
+    // ...
+  },
+  AvailableEwallets = new AvailableEwalletInvoice[]
+  {
+    new AvailableEwalletInvoice { EwalletType = "OVO" },
+    // ...
+  },
+  AvailableRetailOutlets = new AvailableRetailOutletInvoice[]
+  {
+    new AvailableRetailOutletInvoice
+    {
+      RetailOutletName = "ALFAMART",
+      PaymentCode = "ALFA123456",
+      TransferAmount = 50000,
+    },
+    // ...
+  }
+  ShouldExcludeCreditCard = false,
+  ShouldSendEmail = false,
+  Created = "<CREATED_TIMESTAMP>",
+  Updated = "<EXPIRED_UPDATED_TIMESTAMP>",
+  Currency = "IDR",
+  Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
+  Customer = new Customer {
+    GivenNames = "John",
+    Email = "john@email.com",
+    MobileNumber = "+6287774441111",
+    Addresses = new CustomerAddress[] {
+      new CustomerAddress {
+        Country = "ID",
+        StreetLine1 = "Jalan Makan",
+        StreetLine2 = "Kecamatan Kebayoran Baru",
+        City = "Jakarta Selatan",
+        Province = "Daerah Khusus Ibukota Jakarta",
+        PostalCode = "12345"
+      }
+    },
+  },
+  CustomerNotificationPreference = new CustomerNotificationPreference { InvoicePaid = new string[] { "email" } },
+};
 ```
