@@ -77,10 +77,9 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="version">API version that will be used to request.</param>
         /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> Create(CustomerBody parameter, Dictionary<string, string> headers = null, string version = null)
+        public static async Task<Customer> Create(CustomerBody parameter, Dictionary<string, string> headers = null, string version = "2020-10-31")
         {
             headers = headers ?? new Dictionary<string, string>();
-            version = version ?? "2020-10-31";
             headers.Add("API-VERSION", version);
 
             return await CreateCustomerRequest(headers, parameter);
@@ -93,10 +92,9 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="version">API version that will be used to request.</param>
         /// <returns>A Task of customers array.</returns>
-        public static async Task<Customer> Get(string referenceId, Dictionary<string, string> headers = null, string version = null)
+        public static async Task<Customer> Get(string referenceId, Dictionary<string, string> headers = null, string version = "2020-10-31")
         {
             headers = headers ?? new Dictionary<string, string>();
-            version = version ?? "2020-10-31";
             headers.Add("API-VERSION", version);
 
             return await GetCustomerRequest(headers, referenceId);
