@@ -19,19 +19,19 @@
         {
             MockClient
                 .Setup(client => client.Request<CustomerBody, Customer>(HttpMethod.Post, Constant.NewApiVersionHeaders, Constant.CustomerUrl, Constant.CustomerBody))
-                .ReturnsAsync(Constant.ExpectedCustomerData);
+                .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
             Customer actualCustomer = await Customer.Create(Constant.CustomerBody);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerData), JsonSerializer.Serialize(actualCustomer));
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
         }
 
         [Fact]
-        public async void Customer_ShouldSuccess_CreateDictionaryParameters_WithCustomHeadersAndDefaultVersion()
+        public async void Customer_ShouldSuccess_CreateDictionaryParameters_WithCustomHeaderAndDefaultVersion()
         {
             MockClient
-                .Setup(client => client.Request<CustomerBody, Customer>(HttpMethod.Post, Constant.CustomHeaders, Constant.CustomerUrl, Constant.CustomerBody))
+                .Setup(client => client.Request<CustomerBody, Customer>(HttpMethod.Post, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerUrl, Constant.CustomerBody))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -41,7 +41,20 @@
         }
 
         [Fact]
-        public async void Customer_ShouldSuccess_GetByReferenceId()
+        public async void Customer_ShouldSuccess_Create_WithVersion()
+        {
+            MockClient
+                .Setup(client => client.Request<CustomerBody, Customer>(HttpMethod.Post, Constant.ApiVersionHeaders, Constant.CustomerUrl, Constant.CustomerBody))
+                .ReturnsAsync(Constant.ExpectedCustomerData);
+
+            XenditConfiguration.RequestClient = MockClient.Object;
+
+            Customer actualCustomer = await Customer.Create(Constant.CustomerBody, version: Constant.ApiVersion);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerData), JsonSerializer.Serialize(actualCustomer));
+        }
+
+        [Fact]
+        public async void Customer_ShouldSuccess_GetByReferenceId_WithDefaultHeaderAndVersion()
         {
             MockClient
                 .Setup(client => client.Request<Dictionary<string, string>, Customer>(HttpMethod.Get, Constant.NewApiVersionHeaders, Constant.CustomerIdUrl, null))
@@ -62,13 +75,26 @@
             };
 
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, Customer>(HttpMethod.Get, Constant.CustomHeaders, Constant.CustomerIdUrl, null))
+                .Setup(client => client.Request<Dictionary<string, string>, Customer>(HttpMethod.Get, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerIdUrl, null))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
             Customer actualCustomer = await Customer.GetByReferenceId(Constant.ExpectedCustomerData.ReferenceId, headers);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
+        }
+
+        [Fact]
+        public async void Customer_ShouldSuccess_GetByReferenceId_WithVersion()
+        {
+            MockClient
+                .Setup(client => client.Request<Dictionary<string, string>, Customer[]>(HttpMethod.Get, Constant.ApiVersionHeaders, Constant.CustomerIdUrl, null))
+                .ReturnsAsync(new Customer[] { Constant.ExpectedCustomerData });
+
+            XenditConfiguration.RequestClient = MockClient.Object;
+
+            Customer actualCustomer = await Customer.GetByReferenceId(Constant.ExpectedCustomerData.ReferenceId, version: Constant.ApiVersion);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerOldApiVersion), JsonSerializer.Serialize(actualCustomer));
         }
     }
 }

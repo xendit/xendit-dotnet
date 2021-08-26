@@ -6,15 +6,17 @@
 
     internal class Constant
     {
-        internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
+        internal static readonly string ApiVersion = "2020-05-19";
+        internal static readonly Dictionary<string, string> ApiVersionHeadersWithUserId = new Dictionary<string, string>()
+        {
+            { "for-user-id", "user-id" },
+            { "API-VERSION", "2020-05-19" },
+        };
+
+        internal static readonly Dictionary<string, string> NewApiVersionHeadersWithUserId = new Dictionary<string, string>()
         {
             { "for-user-id", "user-id" },
             { "API-VERSION", "2020-10-31" },
-        };
-
-        internal static readonly Dictionary<string, string> UserIdHeaders = new Dictionary<string, string>()
-        {
-            { "for-user-id", "user-id" },
         };
 
         internal static readonly Dictionary<string, string> ApiVersionHeaders = new Dictionary<string, string>()
@@ -27,10 +29,9 @@
             { "API-VERSION", "2020-10-31" },
         };
 
-        internal static readonly Dictionary<string, string> NewApiVersionHeadersWithUserId = new Dictionary<string, string>()
+        internal static readonly Dictionary<string, string> UserIdHeaders = new Dictionary<string, string>()
         {
             { "for-user-id", "user-id" },
-            { "API-VERSION", "2020-10-31" },
         };
 
         internal static readonly string CustomerUrl = "https://api.xendit.co/customers";
