@@ -20,7 +20,7 @@
             this.client.DefaultRequestHeaders.ConnectionClose = true;
         }
 
-        public async Task<T> Request<T>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
+        public async Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, TBody requestBody)
         {
             var request = CreateRequestMessage(httpMethod, headers, url, requestBody);
             var response = await this.client.SendAsync(request);
@@ -57,7 +57,7 @@
             return base64String;
         }
 
-        private static HttpRequestMessage CreateRequestMessage(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody)
+        private static HttpRequestMessage CreateRequestMessage<TBody>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, TBody requestBody)
         {
             var request = new HttpRequestMessage
             {
@@ -67,7 +67,12 @@
 
             if (httpMethod == HttpMethod.Post || httpMethod == XenditHttpMethod.Patch)
             {
-                request.Content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    IgnoreNullValues = true,
+                };
+
+                request.Content = new StringContent(JsonSerializer.Serialize(requestBody, options), Encoding.UTF8, "application/json");
             }
 
             CheckApiKey(XenditConfiguration.ApiKey);
