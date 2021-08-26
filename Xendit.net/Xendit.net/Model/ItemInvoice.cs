@@ -7,10 +7,10 @@
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
-        [JsonPropertyName("Quantity")]
+        [JsonPropertyName("quantity")]
         public long Quantity { get; set; }
 
-        [JsonPropertyName("Price")]
+        [JsonPropertyName("price")]
         public long Price { get; set; }
     }
 }

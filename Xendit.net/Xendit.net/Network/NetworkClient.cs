@@ -31,12 +31,12 @@
 
                 var responseBody = await response.Content.ReadAsStreamAsync();
 
-                var deserializedResponse = await JsonSerializer.DeserializeAsync<T>(responseBody);
+                var deserializedResponse = await JsonSerializer.DeserializeAsync<TResponse>(responseBody);
                 return deserializedResponse;
             }
             catch (HttpRequestException e)
             {
-                throw new ApiException(e.Message, response.StatusCode.ToString(), requestBody);
+                throw new ApiException(e.Message, response.StatusCode.ToString());
             }
         }
 
@@ -71,7 +71,6 @@
                 {
                     IgnoreNullValues = true,
                 };
-
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody, options), Encoding.UTF8, "application/json");
             }
 

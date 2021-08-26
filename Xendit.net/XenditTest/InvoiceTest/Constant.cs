@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Xendit.net.Model;
+    using Xendit.net.Struct;
 
     internal static class Constant
     {
@@ -57,10 +58,10 @@
             { "for-user-id", "user-id" },
         };
 
-        internal static readonly Dictionary<string, object> InvoiceBody = new Dictionary<string, object>()
+        internal static readonly InvoiceBody InvoiceBody = new InvoiceBody
         {
-            { "external_id", "external_id" },
-            { "amount", 1000L },
+            ExternalId = "external_id",
+            Amount = 1000L,
         };
     }
 }

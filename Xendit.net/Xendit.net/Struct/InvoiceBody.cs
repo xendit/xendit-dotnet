@@ -54,13 +54,16 @@
         [JsonPropertyName("reminder_time")]
         public string ReminderTime { get; set; }
 
-        [JsonPropertyName("items")]
+        [JsonPropertyName("invoice")]
         public ItemInvoice[] Items { get; set; }
+
+        [JsonPropertyName("customer")]
+        public Customer Customer { get; set; }
 
         [JsonPropertyName("fees")]
         public FeeInvoice[] Fees { get; set; }
 
         [JsonPropertyName("customer_notification_preference")]
-        public CustomerNotificationPreferenceInvoice[] CustomerNotificationPreference { get; set; }
+        public CustomerNotificationPreferenceInvoice CustomerNotificationPreference { get; set; }
     }
 }

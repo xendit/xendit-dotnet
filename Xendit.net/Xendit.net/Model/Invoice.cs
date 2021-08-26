@@ -103,7 +103,10 @@
         public FeeInvoice[] Fees { get; set; }
 
         [JsonPropertyName("customer_notification_preference")]
-        public CustomerNotificationPreferenceInvoice[] CustomerNotificationPreference { get; set; }
+        public CustomerNotificationPreferenceInvoice CustomerNotificationPreference { get; set; }
+
+        [JsonPropertyName("customer")]
+        public Customer Customer { get; set; }
 
         /// <summary>
         /// Create invoice with all parameters as dictionary and headers.

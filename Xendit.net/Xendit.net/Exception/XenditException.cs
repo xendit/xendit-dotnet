@@ -1,7 +1,5 @@
 ﻿namespace Xendit.net.Exception
 {
-    using System.Collections.Generic;
-
     public class XenditException : System.Exception
     {
         public XenditException()
@@ -18,15 +16,12 @@
         {
         }
 
-        public XenditException(string message, string errorCode, Dictionary<string, object> context)
+        public XenditException(string message, string errorCode)
             : base(message)
         {
             this.ErrorCode = errorCode;
-            this.Context = context;
         }
 
         public string ErrorCode { get; set; }
-
-        public Dictionary<string, object> Context { get; set; }
     }
 }
