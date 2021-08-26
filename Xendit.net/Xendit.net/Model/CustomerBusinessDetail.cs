@@ -1,6 +1,7 @@
 ﻿namespace Xendit.net.Model
 {
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public class CustomerBusinessDetail
     {
@@ -8,7 +9,7 @@
         public string BusinessName { get; set; }
 
         [JsonPropertyName("business_type")]
-        public string BusinessType { get; set; }
+        public CustomerBusinessType BusinessType { get; set; }
 
         [JsonPropertyName("nature_of_business")]
         public string NatureOfBusiness { get; set; }

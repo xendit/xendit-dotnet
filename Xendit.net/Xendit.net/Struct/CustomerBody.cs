@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
 
     public struct CustomerBody
@@ -43,7 +44,7 @@
         public Dictionary<string, string> Metadata { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public CustomerType Type { get; set; }
 
         [JsonPropertyName("individual_detail")]
         public CustomerIndividualDetail IndividualDetail { get; set; }

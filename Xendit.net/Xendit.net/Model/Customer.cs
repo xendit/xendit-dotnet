@@ -4,6 +4,7 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
     using Xendit.net.Struct;
 
     public class Customer
@@ -48,7 +49,7 @@
         public Dictionary<string, object> Metadata { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public CustomerType Type { get; set; }
 
         [JsonPropertyName("individual_detail")]
         public CustomerIndividualDetail IndividualDetail { get; set; }

@@ -1,6 +1,7 @@
 ﻿namespace Xendit.net.Model
 {
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public class CustomerAddress
     {
@@ -29,7 +30,7 @@
         public string PostalCode { get; set; }
 
         [JsonPropertyName("category")]
-        public string Category { get; set; }
+        public CustomerAddressCategory Category { get; set; }
 
         [JsonPropertyName("is_primary")]
         public bool IsPrimary { get; set; }

@@ -1,6 +1,7 @@
 ﻿namespace Xendit.net.Model
 {
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public class CustomerIndividualDetail
     {
@@ -20,7 +21,7 @@
         public string DateOfBirth { get; set; }
 
         [JsonPropertyName("gender")]
-        public string Gender { get; set; }
+        public CustomerGender Gender { get; set; }
 
         [JsonPropertyName("employment")]
         public CustomerEmployment Employment { get; set; }

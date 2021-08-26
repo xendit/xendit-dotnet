@@ -1,6 +1,7 @@
 ﻿namespace Xendit.net.Model
 {
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public class CustomerKycDocument
     {
@@ -8,10 +9,10 @@
         public string Country { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public CustomerKycDocumentType Type { get; set; }
 
         [JsonPropertyName("sub_type")]
-        public string SubType { get; set; }
+        public CustomerKycDocumentSubType SubType { get; set; }
 
         [JsonPropertyName("document_name")]
         public string DocumentName { get; set; }
