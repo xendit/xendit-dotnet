@@ -111,7 +111,7 @@
         /// <summary>
         /// Create invoice with all parameters as dictionary and headers.
         /// </summary>
-        /// <param name="parameter">Parameter listed here https://developers.xendit.co/api-reference/#create-invoice.</param>
+        /// <param name="parameter">Parameter listed here <see href="https://developers.xendit.co/api-reference/#create-invoice"/>.</param>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <returns>A Task of Invoice model.</returns>
         public static async Task<Invoice> Create(InvoiceBody parameter, Dictionary<string, string> headers = null)
@@ -137,7 +137,7 @@
         /// <summary>
         /// Get all invoices by given parameters.
         /// </summary>
-        /// <param name="parameter">Parameter listed here https://developers.xendit.co/api-reference/#list-all-invoices.</param>
+        /// <param name="parameter">Parameter listed here <see href="https://developers.xendit.co/api-reference/#create-invoice"/>.</param>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <returns>A Task of array of invoices.</returns>
         public static async Task<Invoice[]> GetAll(Dictionary<string, object> parameter, Dictionary<string, string> headers = null)
