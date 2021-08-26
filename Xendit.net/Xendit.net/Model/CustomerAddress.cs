@@ -29,11 +29,12 @@
         [JsonPropertyName("postal_code")]
         public string PostalCode { get; set; }
 
+        [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: CustomerAddressCategory.Unknown)]
         [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("category")]
-        public CustomerAddressCategory Category { get; set; }
+        public CustomerAddressCategory? Category { get; set; }
 
         [JsonPropertyName("is_primary")]
-        public bool IsPrimary { get; set; }
+        public bool? IsPrimary { get; set; }
     }
 }

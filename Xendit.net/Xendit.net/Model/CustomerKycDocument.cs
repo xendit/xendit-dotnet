@@ -14,7 +14,7 @@
 
         [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("sub_type")]
-        public CustomerKycDocumentSubType SubType { get; set; }
+        public CustomerKycDocumentSubType? SubType { get; set; }
 
         [JsonPropertyName("document_name")]
         public string DocumentName { get; set; }

@@ -45,7 +45,7 @@
 
         [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("type")]
-        public CustomerType Type { get; set; }
+        public CustomerType? Type { get; set; }
 
         [JsonPropertyName("individual_detail")]
         public CustomerIndividualDetail IndividualDetail { get; set; }

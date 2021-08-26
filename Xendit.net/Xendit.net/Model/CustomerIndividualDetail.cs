@@ -22,7 +22,7 @@
 
         [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("gender")]
-        public CustomerGender Gender { get; set; }
+        public CustomerGender? Gender { get; set; }
 
         [JsonPropertyName("employment")]
         public CustomerEmployment Employment { get; set; }
