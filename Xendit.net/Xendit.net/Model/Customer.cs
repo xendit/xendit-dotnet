@@ -48,6 +48,7 @@
         [JsonPropertyName("metadata")]
         public Dictionary<string, object> Metadata { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("type")]
         public CustomerType Type { get; set; }
 

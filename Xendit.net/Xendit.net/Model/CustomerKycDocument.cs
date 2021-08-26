@@ -8,9 +8,11 @@
         [JsonPropertyName("country")]
         public string Country { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("type")]
         public CustomerKycDocumentType Type { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("sub_type")]
         public CustomerKycDocumentSubType SubType { get; set; }
 

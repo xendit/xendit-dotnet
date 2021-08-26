@@ -35,7 +35,7 @@
 
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
-                    Converters = { new JsonStringEnumConverter(ScreamingSnakeCaseNamingPolicy.Instance) },
+                    Converters = { new JsonStringEnumMemberConverter(ScreamingSnakeCaseNamingPolicy.Instance) },
                 };
 
                 var deserializedResponse = await JsonSerializer.DeserializeAsync<TResponse>(responseBody, options);

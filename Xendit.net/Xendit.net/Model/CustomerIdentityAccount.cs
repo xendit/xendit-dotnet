@@ -8,6 +8,7 @@
         [JsonPropertyName("country")]
         public string Country { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("type")]
         public CustomerIdentityAccountType Type { get; set; }
 
