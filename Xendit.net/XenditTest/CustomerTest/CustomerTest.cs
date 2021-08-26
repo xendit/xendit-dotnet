@@ -7,6 +7,7 @@
     using Xendit.net;
     using Xendit.net.Model;
     using Xendit.net.Network;
+    using Xendit.net.Struct;
     using Xunit;
 
     public class CustomerTest
@@ -17,7 +18,7 @@
         public async void Customer_ShouldSuccess_Create_WithDefaultHeaderAndVersion()
         {
             MockClient
-                .Setup(client => client.Request<Customer>(HttpMethod.Post, Constant.NewApiVersionHeaders, Constant.CustomerUrl, Constant.CustomerBody))
+                .Setup(client => client.Request<CustomerBody, Customer>(HttpMethod.Post, Constant.NewApiVersionHeaders, Constant.CustomerUrl, Constant.CustomerBody))
                 .ReturnsAsync(Constant.ExpectedCustomerData);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -30,7 +31,7 @@
         public async void Customer_ShouldSuccess_CreateDictionaryParameters_WithCustomHeadersAndDefaultVersion()
         {
             MockClient
-                .Setup(client => client.Request<Customer>(HttpMethod.Post, Constant.CustomHeaders, Constant.CustomerUrl, Constant.CustomerBody))
+                .Setup(client => client.Request<CustomerBody, Customer>(HttpMethod.Post, Constant.CustomHeaders, Constant.CustomerUrl, Constant.CustomerBody))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -43,7 +44,7 @@
         public async void Customer_ShouldSuccess_GetByReferenceId()
         {
             MockClient
-                .Setup(client => client.Request<Customer>(HttpMethod.Get, Constant.NewApiVersionHeaders, Constant.CustomerIdUrl, null))
+                .Setup(client => client.Request<Dictionary<string, string>, Customer>(HttpMethod.Get, Constant.NewApiVersionHeaders, Constant.CustomerIdUrl, null))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -61,7 +62,7 @@
             };
 
             MockClient
-                .Setup(client => client.Request<Customer>(HttpMethod.Get, Constant.CustomHeaders, Constant.CustomerIdUrl, null))
+                .Setup(client => client.Request<Dictionary<string, string>, Customer>(HttpMethod.Get, Constant.CustomHeaders, Constant.CustomerIdUrl, null))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;

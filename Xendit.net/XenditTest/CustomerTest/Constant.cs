@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Xendit.net.Model;
+    using Xendit.net.Struct;
 
     internal class Constant
     {
@@ -56,12 +57,12 @@
             Data = new Customer[] { ExpectedCustomerData },
         };
 
-        internal static readonly Dictionary<string, object> CustomerBody = new Dictionary<string, object>()
+        internal static readonly CustomerBody CustomerBody = new CustomerBody
         {
-            { "reference_id", "demo_1475801962607" },
-            { "given_names", "John" },
-            { "mobile_number", "+6287774441111" },
-            { "email", "customer@website.com" },
+            ReferenceId = "demo_1475801962607",
+            GivenNames = "John",
+            MobileNumber = "+6287774441111",
+            Email = "customer@website.com",
         };
 
         internal static readonly Customer[] ExpectedCustomers = new Customer[] { ExpectedCustomerData };

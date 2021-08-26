@@ -4,6 +4,7 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Struct;
 
     public class Customer
     {
@@ -74,7 +75,7 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="version">API version that will be used to request.</param>
         /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> Create(Dictionary<string, object> parameter, Dictionary<string, string> headers = null, string version = null)
+        public static async Task<Customer> Create(CustomerBody parameter, Dictionary<string, string> headers = null, string version = null)
         {
             headers = headers ?? new Dictionary<string, string>();
             version = version ?? "2020-10-31";
@@ -99,10 +100,10 @@
             return await GetByReferenceIdRequest(headers, referenceId);
         }
 
-        private static async Task<Customer> CreateCustomerRequest(Dictionary<string, string> headers, Dictionary<string, object> parameter)
+        private static async Task<Customer> CreateCustomerRequest(Dictionary<string, string> headers, CustomerBody parameter)
         {
             string url = string.Format("{0}/{1}", XenditConfiguration.ApiUrl, "customers");
-            return await XenditConfiguration.RequestClient.Request<Customer>(HttpMethod.Post, headers, url, parameter);
+            return await XenditConfiguration.RequestClient.Request<CustomerBody, Customer>(HttpMethod.Post, headers, url, parameter);
         }
 
         private static async Task<Customer> GetByReferenceIdRequest(Dictionary<string, string> headers, string referenceId)
@@ -111,13 +112,13 @@
 
             if (headers["API-VERSION"] == "2020-05-19")
             {
-                Customer[] customerData = await XenditConfiguration.RequestClient.Request<Customer[]>(HttpMethod.Get, headers, url, null);
+                Customer[] customerData = await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Customer[]>(HttpMethod.Get, headers, url, null);
                 Customer customer = new Customer { Data = customerData };
 
                 return customer;
             }
 
-            return await XenditConfiguration.RequestClient.Request<Customer>(HttpMethod.Get, headers, url, null);
+            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Customer>(HttpMethod.Get, headers, url, null);
         }
     }
 }
