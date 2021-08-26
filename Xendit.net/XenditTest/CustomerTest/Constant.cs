@@ -8,7 +8,7 @@
         internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
         {
             { "for-user-id", "user-id" },
-            { "API-VERSION", "2020-05-19" },
+            { "API-VERSION", "2020-10-31" },
         };
 
         internal static readonly Dictionary<string, string> UserIdHeaders = new Dictionary<string, string>()
@@ -34,7 +34,7 @@
 
         internal static readonly string CustomerUrl = "https://api.xendit.co/customers";
 
-        internal static readonly Customer ExpectedCustomer = new Customer
+        internal static readonly Customer ExpectedCustomerData = new Customer
         {
             Id = "239c16f4-866d-43e8-9341-7badafbc019f",
             ReferenceId = "demo_1475801962607",
@@ -51,6 +51,11 @@
             Metadata = null,
         };
 
+        internal static readonly Customer ExpectedCustomerOldApiVersion = new Customer
+        {
+            Data = new Customer[] { ExpectedCustomerData },
+        };
+
         internal static readonly Dictionary<string, object> CustomerBody = new Dictionary<string, object>()
         {
             { "reference_id", "demo_1475801962607" },
@@ -59,13 +64,13 @@
             { "email", "customer@website.com" },
         };
 
-        internal static readonly Customer[] ExpectedCustomers = new Customer[] { ExpectedCustomer };
-        internal static readonly string CustomerIdUrl = string.Format("{0}?reference_id={1}", CustomerUrl, ExpectedCustomer.ReferenceId);
+        internal static readonly Customer[] ExpectedCustomers = new Customer[] { ExpectedCustomerData };
+        internal static readonly string CustomerIdUrl = string.Format("{0}?reference_id={1}", CustomerUrl, ExpectedCustomerData.ReferenceId);
 
         internal static readonly Customer ExpectedCustomerNewApiVersion = new Customer
         {
             HasMore = false,
-            Data = new Customer[] { ExpectedCustomer },
+            Data = new Customer[] { ExpectedCustomerData },
         };
     }
 }

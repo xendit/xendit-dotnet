@@ -68,120 +68,35 @@
         public bool HasMore { get; set; }
 
         /// <summary>
-        /// Create customer with required parameters for API version 2020-05-19.
-        /// </summary>
-        /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
-        /// <param name="givenNames"> Primary of first name/s of the customer.</param>
-        /// <param name="mobileNumber">Mobile number of the customer in E.164 international standard.</param>
-        /// <param name="email">Email address of the customer.</param>
-        /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> Create(string referenceId, string givenNames, string mobileNumber, string email)
-        {
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("API-VERSION", "2020-05-19");
-
-            Dictionary<string, object> parameter = new Dictionary<string, object>();
-            parameter.Add("reference_id", referenceId);
-            parameter.Add("given_names", givenNames);
-            parameter.Add("mobile_number", mobileNumber);
-            parameter.Add("email", email);
-
-            return await CreateCustomerRequest(headers, parameter);
-        }
-
-        /// <summary>
-        /// Create customer with required parameters and headers for API version 2020-05-19.
-        /// </summary>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
-        /// <param name="givenNames"> Primary of first name/s of the customer.</param>
-        /// <param name="mobileNumber">Mobile number of the customer in E.164 international standard.</param>
-        /// <param name="email">Email address of the customer.</param>
-        /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> Create(Dictionary<string, string> headers, string referenceId, string givenNames, string mobileNumber, string email)
-        {
-            headers.Add("API-VERSION", "2020-05-19");
-
-            Dictionary<string, object> parameter = new Dictionary<string, object>();
-            parameter.Add("reference_id", referenceId);
-            parameter.Add("given_names", givenNames);
-            parameter.Add("mobile_number", mobileNumber);
-            parameter.Add("email", email);
-
-            return await CreateCustomerRequest(headers, parameter);
-        }
-
-        /// <summary>
-        /// Create customer with complete parameters in dictionary.
+        /// Create customer with parameters.
         /// </summary>
         /// <param name="parameter">Parameter listed here https://developers.xendit.co/api-reference/#create-customer.</param>
-        /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> Create(Dictionary<string, object> parameter)
-        {
-            return await CreateCustomerRequest(new Dictionary<string, string>(), parameter);
-        }
-
-        /// <summary>
-        /// Create customer with complete parameters in dictionary and headers.
-        /// </summary>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="parameter">Parameter listed here https://developers.xendit.co/api-reference/#create-customer.</param>
+        /// <param name="version">API version that will be used to request.</param>
         /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> Create(Dictionary<string, string> headers, Dictionary<string, object> parameter)
+        public static async Task<Customer> Create(Dictionary<string, object> parameter, Dictionary<string, string> headers = null, string version = null)
         {
+            headers = headers ?? new Dictionary<string, string>();
+            version = version ?? "2020-10-31";
+            headers.Add("API-VERSION", version);
+
             return await CreateCustomerRequest(headers, parameter);
         }
 
         /// <summary>
-        /// Get customer by reference id for API version 2020-05-19.
+        /// Get customer by reference ID.
         /// </summary>
         /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
+        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="version">API version that will be used to request.</param>
         /// <returns>A Task of customers array.</returns>
-        public static async Task<Customer[]> GetByReferenceId(string referenceId)
+        public static async Task<Customer> GetByReferenceId(string referenceId, Dictionary<string, string> headers = null, string version = null)
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("API-VERSION", "2020-05-19");
+            headers = headers ?? new Dictionary<string, string>();
+            version = version ?? "2020-10-31";
+            headers.Add("API-VERSION", version);
 
             return await GetByReferenceIdRequest(headers, referenceId);
-        }
-
-        /// <summary>
-        /// Get customer by reference id with headers for API version 2020-05-19.
-        /// </summary>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
-        /// <returns>A Task of customers array.</returns>
-        public static async Task<Customer[]> GetByReferenceId(Dictionary<string, string> headers, string referenceId)
-        {
-            headers.Add("API-VERSION", "2020-05-19");
-
-            return await GetByReferenceIdRequest(headers, referenceId);
-        }
-
-        /// <summary>
-        /// Get customer by reference id for API version 2020-10-31.
-        /// </summary>
-        /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
-        /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> GetByReferenceIdNew(string referenceId)
-        {
-            Dictionary<string, string> headers = new Dictionary<string, string>();
-            headers.Add("API-VERSION", "2020-10-31");
-
-            return await GetByReferenceIdNewRequest(headers, referenceId);
-        }
-
-        /// <summary>
-        /// Get customer by reference id with headers for API version 2020-10-31.
-        /// </summary>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
-        /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> GetByReferenceIdNew(Dictionary<string, string> headers, string referenceId)
-        {
-            headers.Add("API-VERSION", "2020-10-31");
-
-            return await GetByReferenceIdNewRequest(headers, referenceId);
         }
 
         private static async Task<Customer> CreateCustomerRequest(Dictionary<string, string> headers, Dictionary<string, object> parameter)
@@ -190,15 +105,18 @@
             return await XenditConfiguration.RequestClient.Request<Customer>(HttpMethod.Post, headers, url, parameter);
         }
 
-        private static async Task<Customer[]> GetByReferenceIdRequest(Dictionary<string, string> headers, string referenceId)
+        private static async Task<Customer> GetByReferenceIdRequest(Dictionary<string, string> headers, string referenceId)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/customers?reference_id=", referenceId);
-            return await XenditConfiguration.RequestClient.Request<Customer[]>(HttpMethod.Get, headers, url, null);
-        }
 
-        private static async Task<Customer> GetByReferenceIdNewRequest(Dictionary<string, string> headers, string referenceId)
-        {
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/customers?reference_id=", referenceId);
+            if (headers["API-VERSION"] == "2020-05-19")
+            {
+                Customer[] customerData = await XenditConfiguration.RequestClient.Request<Customer[]>(HttpMethod.Get, headers, url, null);
+                Customer customer = new Customer { Data = customerData };
+
+                return customer;
+            }
+
             return await XenditConfiguration.RequestClient.Request<Customer>(HttpMethod.Get, headers, url, null);
         }
     }
