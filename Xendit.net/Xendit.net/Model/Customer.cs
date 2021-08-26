@@ -93,13 +93,13 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="version">API version that will be used to request.</param>
         /// <returns>A Task of customers array.</returns>
-        public static async Task<Customer> GetByReferenceId(string referenceId, Dictionary<string, string> headers = null, string version = null)
+        public static async Task<Customer> Get(string referenceId, Dictionary<string, string> headers = null, string version = null)
         {
             headers = headers ?? new Dictionary<string, string>();
             version = version ?? "2020-10-31";
             headers.Add("API-VERSION", version);
 
-            return await GetByReferenceIdRequest(headers, referenceId);
+            return await GetCustomerRequest(headers, referenceId);
         }
 
         private static async Task<Customer> CreateCustomerRequest(Dictionary<string, string> headers, CustomerBody parameter)
@@ -108,7 +108,7 @@
             return await XenditConfiguration.RequestClient.Request<CustomerBody, Customer>(HttpMethod.Post, headers, url, parameter);
         }
 
-        private static async Task<Customer> GetByReferenceIdRequest(Dictionary<string, string> headers, string referenceId)
+        private static async Task<Customer> GetCustomerRequest(Dictionary<string, string> headers, string referenceId)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/customers?reference_id=", referenceId);
 
