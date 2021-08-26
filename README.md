@@ -7,7 +7,6 @@ This library is the abstraction of Xendit API for access from applications writt
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [API Documentation](#api-documentation)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -32,10 +31,8 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Get all invoices](#get-all-invoices)
     - [Expire an invoice](#expire-an-invoice)
   - [Customer services](#customer-services)
-    - [Create Customer (API version 2020-05-19)](#create-customer-api-version-2020-05-19)
-    - [Create Customer (API version 2020-10-13)](#create-customer-api-version-2020-10-13)
-    - [Get Customer by Reference ID (API version 2020-05-19)](#get-customer-by-reference-id-api-version-2020-05-19)
-    - [Get Customer by Reference ID (API version 2020-10-13)](#get-customer-by-reference-id-api-version-2020-10-13)
+    - [Create Customer](#create-customer)
+    - [Get Customer by Reference ID](#get-customer-by-reference-id)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -693,114 +690,204 @@ Invoice invoice = new Invoice
 
 ### Customer services
 
-#### Create Customer (API version 2020-05-19)
+#### Create Customer
 
-For Customer API with 2020-05-19 version, you can choose whether want to put the required attributes as parameters or to put in inside a Dictionary object.
+The library supports get customer operation for API version `2020-10-31` (recommended) and `2020-05-19`.
 
-<table>
-<tr>
-<td>
-<pre>
-Customer.Create(
-    string referenceId,
-    string givenNames,
-    string mobileNumber,
-    string email
-);
-</pre>
-</td>
-<td>
-<pre>
-Customer.Create(
-    Dictionary&lt;string, object&gt; parameter
-);
-</pre>
-</td>
-</tr>
-</table>
+Method `Create` has three parameters: parameter or request body using struct `CustomerBody`, optional headers, and optional API version with default value of `2020-10-31`.
 
-If you use required attributes as parameters and you want to use custom headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
+If you want to use optional headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
 
 ```cs
-Customer customer = await Customer.Create("example_reference_id_1", "John", "+6287774441111", "john@email.com");
-
-// DO NOT declare key of API version in the headers
-Dictionary<string, string> headers = new Dictionary<string, string>()
-{
-  { "for-user-id", "user-id" },
-};
-
-Customer customer = await Customer.Create(headers, "example_reference_id_1", "John", "+6287774441111", "john@email.com");
-```
-
-If you put parameters inside a Dictionary object, you need to declare headers with the API version as well.
-
-```cs
-// declare API version header
-Dictionary<string, string> headers = new Dictionary<string, string>()
-{
-  { "API-Version", "2020-05-19" },
-};
-
-Dictionary<string, object> parameter = new Dictionary<string, object>();
-parameter.Add("reference_id", "example_reference_id_2");
-parameter.Add("given_names", "John");
-parameter.Add("mobile_number", "+6287774441111");
-parameter.Add("email", "john@email.com");
-
-Customer customer = await Customer.Create(headers, parameter);
-```
-
-#### Create Customer (API version 2020-10-13)
-
-For Customer API with 2020-10-13 version, it can only be called using parameters inside a Dictionary object. You need to declare headers with the API version as well.
-
-```cs
-// declare API version header
-Dictionary<string, string> headers = new Dictionary<string, string>()
-{
-  { "API-Version", "2020-10-13" },
-};
-
-Dictionary<string, string> individualDetail = new Dictionary<string, string>();
-individualDetail.Add("given_names", "Johnie");
-
-Dictionary<string, object> parameter = new Dictionary<string, object>();
-parameter.Add("reference_id", "example_reference_id_3");
-parameter.Add("type", "INDIVIDUAL");
-parameter.Add("individual_detail", individualDetail);
-
-Customer customer = await Customer.Create(headers, parameter);
-```
-
-#### Get Customer by Reference ID (API version 2020-05-19)
-
-If you want to use custom headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
-
-```cs
-Customer[] customer = await Customer.GetByReferenceId("example_reference_id");
-
 // DO NOT declare key of API version in the custom headers
 Dictionary<string, string> headers = new Dictionary<string, string>()
 {
   { "for-user-id", "user-id" },
 };
 
-Customer[] customer = await Customer.GetByReferenceId(headers, "example_reference_id");
+Customer customer = await Customer.Create(CustomerBody parameter, headers);
 ```
 
-#### Get Customer by Reference ID (API version 2020-10-13)
+To construct struct `CustomerBody`, you may use these classes and enums (applicable for API version of `2020-10-31`):
+
+- Class: `CustomerIndividualDetail`, `CustomerBusinessDetail`, `CustomerIdentityAccount`, `CustomerKycDocument`, `CustomerIdentityAccountProperties`, and `CustomerAddress` (applicable for both API versions).
+- Enum: `CustomerType`, `CustomerKycDocumentType`, `CustomerKycDocumentSubType`, `CustomerIdentityAccountType`, `CustomerGender`, `CustomerBusinessType`, and `CustomerAddressCategory`.
+
+Here is the example of invoking method `Create` with API version of `2020-10-31`:
+
+```cs
+CustomerIndividualDetail individualDetail = new CustomerIndividualDetail
+{
+  GivenNames = "John",
+  Gender = CustomerGender.Male,
+};
+
+CustomerIdentityAccount identityAccount = new CustomerIdentityAccount
+{
+  Country = "ID",
+  Type = CustomerIdentityAccountType.BankAccount,
+  Properties = new CustomerIdentityAccountProperties { AccountNumber = "account_number" }
+};
+
+CustomerKycDocument document = new CustomerKycDocument
+{
+  Country = "ID",
+  Type = CustomerKycDocumentType.IdentityCard,
+  SubType = CustomerKycDocumentSubType.NationalId,
+};
+
+CustomerBody individualParameter = new CustomerBody
+{
+  ReferenceId = "demo_11212145",
+  Type = CustomerType.Individual,
+  IndividualDetail = individualDetail,
+  IdentityAccount = new CustomerIdentityAccount[] { identityAccount },
+  KycDocuments = new CustomerKycDocument[] { document },
+};
+
+Customer customerDefault = await Customer.Create(individualParameter);
+Console.WriteLine(customerDefault);
+
+// or you can define with the API version
+Customer customer = await Customer.Create(individualParameter, version: "2020-10-31");
+Console.WriteLine(customer);
+```
+
+It will return:
+
+```cs
+Customer customerDefault = new Customer
+{
+  ReferenceId = "demo_11212145",
+  Type = CustomerType.Individual,
+  IndividualDetail = new CustomerIndividualDetail { GivenNames = "John", Gender = CustomerGender.Male },
+  IdentityAccount = new CustomerIdentityAccount[]
+  {
+    new CustomerIdentityAccount
+    {
+      Country = "ID",
+      Type = CustomerIdentityAccountType.BankAccount,
+      Properties = new CustomerIdentityAccountProperties { AccountNumber = "account_number" }
+    }
+  },
+  KycDocuments = new CustomerKycDocument[]
+  {
+    new CustomerKycDocument
+    { Country = "ID",
+      Type = CustomerKycDocumentType.IdentityCard,
+      SubType = CustomerKycDocumentSubType.NationalId,
+    }
+  }
+};
+```
+
+For API version of `2020-05-19`, here is the example:
+
+```cs
+CustomerBody parameter = new CustomerBody
+{
+    ReferenceId = "demo_11212144",
+    Email = "john@email.com",
+    GivenNames = "John",
+    Addresses = new CustomerAddress[] { new CustomerAddress { Country = "ID" } }
+};
+
+Customer customerWithVersion = await Customer.Create(parameter, version: "2020-05-19");
+```
+
+It will return:
+
+```cs
+Customer customerWithVersion = new Customer
+{
+    ReferenceId = "demo_11212144",
+    Email = "john@email.com",
+    GivenNames = "John",
+    Addresses = new CustomerAddress[] { new CustomerAddress { Country = "ID" } }
+};
+```
+
+#### Get Customer by Reference ID
+
+The library supports get customer operation for API version `2020-10-31` (recommended) and `2020-05-19`.
+
+Method `Get` has three parameters: reference ID (required), optional headers, and optional API version with default value of `2020-10-31`.
 
 If you want to use custom headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
 
 ```cs
-Customer customer = await Customer.GetByReferenceIdNew("example_reference_id");
-
 // DO NOT declare key of API version in the custom headers
 Dictionary<string, string> headers = new Dictionary<string, string>()
 {
   { "for-user-id", "user-id" },
 };
 
-Customer customer = await Customer.GetByReferenceIdNew(headers, "example_reference_id");
+Customer customer = await Customer.Get("example_reference_id", headers);
+```
+
+Here is the example of invoking method `Get` with API version of `2020-10-31`:
+
+```cs
+Customer customerDefault = await Customer.Get("example_reference_id");
+
+Customer customerWithVersion = await Customer.Get("example_reference_id", version: "2020-10-31");
+```
+
+It will return:
+
+```cs
+Customer customerDefault = new Customer
+{
+  Data = new Customer[]
+  {
+    new Customer
+    {
+      ReferenceId = "example_reference_id",
+      Type = CustomerType.Individual,
+      IndividualDetail = new CustomerIndividualDetail { GivenNames = "John", Gender = CustomerGender.Male },
+      IdentityAccount = new CustomerIdentityAccount[]
+      {
+        new CustomerIdentityAccount
+        {
+          Country = "ID",
+          Type = CustomerIdentityAccountType.BankAccount,
+          Properties = new CustomerIdentityAccountProperties { AccountNumber = "account_number" }
+        }
+      },
+      KycDocuments = new CustomerKycDocument[]
+      {
+        new CustomerKycDocument
+        { Country = "ID",
+          Type = CustomerKycDocumentType.IdentityCard,
+          SubType = CustomerKycDocumentSubType.NationalId,
+        }
+      }
+    }
+  },
+  HasMore = false,
+};
+```
+
+For API version of `2020-05-19`, here is the example:
+
+```cs
+Customer customerWithVersion = await Customer.Get("example_reference_id", version: "2020-05-19");
+```
+
+It will return:
+
+```cs
+Customer customerWithVersion = new Customer
+{
+  Data = new Customer[]
+  {
+    new Customer
+    {
+      ReferenceId = "example_reference_id",
+      Email = "john@email.com",
+      GivenNames = "John",
+      Addresses = new CustomerAddress[] { new CustomerAddress { Country = "ID" } }
+    }
+  },
+};
 ```
