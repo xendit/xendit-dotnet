@@ -307,49 +307,49 @@ Here is the example:
 ```cs
 CustomerAddress addresses = new CustomerAddress
 {
-    Country = "ID",
-    StreetLine1 = "Jalan Makan",
-    StreetLine2 = "Kecamatan Kebayoran Baru",
-    City = "Jakarta Selatan",
-    Province = "Daerah Khusus Ibukota Jakarta",
-    PostalCode = "12345",
+  Country = "ID",
+  StreetLine1 = "Jalan Makan",
+  StreetLine2 = "Kecamatan Kebayoran Baru",
+  City = "Jakarta Selatan",
+  Province = "Daerah Khusus Ibukota Jakarta",
+  PostalCode = "12345",
 };
 
 Customer customer = new Customer
 {
-    GivenNames = "John",
-    Email = "john@email.com",
-    MobileNumber = "+6287774441111",
-    Addresses = new CustomerAddress[] { addresses },
+  GivenNames = "John",
+  Email = "john@email.com",
+  MobileNumber = "+6287774441111",
+  Addresses = new CustomerAddress[] { addresses },
 };
 
 CustomerNotificationPreferenceInvoice preference = new CustomerNotificationPreferenceInvoice
 {
-    InvoicePaid = new string[] { "email" }
+  InvoicePaid = new NotificationType[] { NotificationType.Email }
 };
 
 ItemInvoice item = new ItemInvoice
 {
-    Name = "shoes",
-    Quantity = 1,
-    Price = 100,
+  Name = "shoes",
+  Quantity = 1,
+  Price = 100,
 };
 
 FeeInvoice fee = new FeeInvoice
 {
-    Type = "ADMIN",
-    Value = 200,
+  Type = "ADMIN",
+  Value = 200,
 };
 
 InvoiceBody parameter = new InvoiceBody
 {
-    ExternalId = "external-id",
-    Amount = 1000,
-    Customer = customer,
-    CustomerNotificationPreference = preference,
-    Items = new ItemInvoice[] { item },
-    Fees = new FeeInvoice[] { fee },
-    InvoiceDuration = 86400,
+  ExternalId = "external-id",
+  Amount = 1000,
+  Customer = customer,
+  CustomerNotificationPreference = preference,
+  Items = new ItemInvoice[] { item },
+  Fees = new FeeInvoice[] { fee },
+  Currency = Currency.IDR,
 };
 
 Invoice invoice = await Invoice.Create(parameter);
@@ -364,7 +364,7 @@ Invoice invoice = new Invoice
   Id = "610a306ffe63418fdb6bd0b3",
   ExternalId = "external-id",
   UserId = "<USER_ID>",
-  Status = "PENDING",
+  Status = InvoiceStatus.Pending,
   MerchantName = "<MERCHANT_NAME>",
   MerchantProfilePictureUrl = "<MERCHANT_PROFILE_PICTURE_URL>",
   Amount = 1000,
@@ -374,7 +374,7 @@ Invoice invoice = new Invoice
   {
     new AvailableBankInvoice
     {
-      BankCode = "Mandiri",
+      BankCode = BankCode.Mandiri,
       CollectionType = "Pool",
       BankAccountNumber = "8860810000525",
       TransferAmount = 50000,
@@ -385,14 +385,14 @@ Invoice invoice = new Invoice
   },
   AvailableEwallets = new AvailableEwalletInvoice[]
   {
-    new AvailableEwalletInvoice { EwalletType = "OVO" },
+    new AvailableEwalletInvoice { EwalletType = EwalletType.OVO },
     // ...
   },
   AvailableRetailOutlets = new AvailableRetailOutletInvoice[]
   {
     new AvailableRetailOutletInvoice
     {
-      RetailOutletName = "ALFAMART",
+      RetailOutletName = RetailOutlet.Alfamart,
       PaymentCode = "ALFA123456",
       TransferAmount = 50000,
     },
@@ -402,7 +402,7 @@ Invoice invoice = new Invoice
   ShouldSendEmail = false,
   Created = "<CREATED_TIMESTAMP>",
   Updated = "<UPDATED_TIMESTAMP>",
-  Currency = "IDR",
+  Currency = Currency.IDR,
   Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
   Customer = new Customer {
     GivenNames = "John",
@@ -419,7 +419,10 @@ Invoice invoice = new Invoice
       }
     },
   },
-  CustomerNotificationPreference = new CustomerNotificationPreference { InvoicePaid = new string[] { "email" } },
+  CustomerNotificationPreference = new CustomerNotificationPreference
+  {
+    InvoicePaid = new NotificationType[] { NotificationType.Email }
+  },
 };
 ```
 
@@ -437,7 +440,7 @@ Invoice invoice = new Invoice
   Id = "610a306ffe63418fdb6bd0b3",
   ExternalId = "external-id",
   UserId = "<USER_ID>",
-  Status = "PENDING",
+  Status = InvoiceStatus.Pending,
   MerchantName = "<MERCHANT_NAME>",
   MerchantProfilePictureUrl = "<MERCHANT_PROFILE_PICTURE_URL>",
   Amount = 1000,
@@ -447,7 +450,7 @@ Invoice invoice = new Invoice
   {
     new AvailableBankInvoice
     {
-      BankCode = "Mandiri",
+      BankCode = BankCode.Mandiri,
       CollectionType = "Pool",
       BankAccountNumber = "8860810000525",
       TransferAmount = 50000,
@@ -458,14 +461,14 @@ Invoice invoice = new Invoice
   },
   AvailableEwallets = new AvailableEwalletInvoice[]
   {
-    new AvailableEwalletInvoice { EwalletType = "OVO" },
+    new AvailableEwalletInvoice { EwalletType = EwalletType.OVO },
     // ...
   },
   AvailableRetailOutlets = new AvailableRetailOutletInvoice[]
   {
     new AvailableRetailOutletInvoice
     {
-      RetailOutletName = "ALFAMART",
+      RetailOutletName = RetailOutlet.Alfamart,
       PaymentCode = "ALFA123456",
       TransferAmount = 50000,
     },
@@ -475,7 +478,7 @@ Invoice invoice = new Invoice
   ShouldSendEmail = false,
   Created = "<CREATED_TIMESTAMP>",
   Updated = "<UPDATED_TIMESTAMP>",
-  Currency = "IDR",
+  Currency = Currency.IDR,
   Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
   Customer = new Customer {
     GivenNames = "John",
@@ -492,7 +495,10 @@ Invoice invoice = new Invoice
       }
     },
   },
-  CustomerNotificationPreference = new CustomerNotificationPreference { InvoicePaid = new string[] { "email" } },
+  CustomerNotificationPreference = new CustomerNotificationPreference
+  {
+    InvoicePaid = new NotificationType[] { NotificationType.Email }
+  },
 };
 ```
 
@@ -524,12 +530,12 @@ It will return:
 ```cs
 Invoice[] invoices = new Invoice[]
 {
-  new Invoice
+  Invoice invoice = new Invoice
   {
     Id = "610a306ffe63418fdb6bd0b3",
     ExternalId = "external-id",
     UserId = "<USER_ID>",
-    Status = "PENDING",
+    Status = InvoiceStatus.Expired,
     MerchantName = "<MERCHANT_NAME>",
     MerchantProfilePictureUrl = "<MERCHANT_PROFILE_PICTURE_URL>",
     Amount = 1000,
@@ -539,7 +545,7 @@ Invoice[] invoices = new Invoice[]
     {
       new AvailableBankInvoice
       {
-        BankCode = "Mandiri",
+        BankCode = BankCode.Mandiri,
         CollectionType = "Pool",
         BankAccountNumber = "8860810000525",
         TransferAmount = 50000,
@@ -550,14 +556,14 @@ Invoice[] invoices = new Invoice[]
     },
     AvailableEwallets = new AvailableEwalletInvoice[]
     {
-      new AvailableEwalletInvoice { EwalletType = "OVO" },
+      new AvailableEwalletInvoice { EwalletType = EwalletType.OVO },
       // ...
     },
     AvailableRetailOutlets = new AvailableRetailOutletInvoice[]
     {
       new AvailableRetailOutletInvoice
       {
-        RetailOutletName = "ALFAMART",
+        RetailOutletName = RetailOutlet.Alfamart,
         PaymentCode = "ALFA123456",
         TransferAmount = 50000,
       },
@@ -567,7 +573,7 @@ Invoice[] invoices = new Invoice[]
     ShouldSendEmail = false,
     Created = "<CREATED_TIMESTAMP>",
     Updated = "<UPDATED_TIMESTAMP>",
-    Currency = "IDR",
+    Currency = Currency.IDR,
     Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
     Customer = new Customer {
       GivenNames = "John",
@@ -584,8 +590,11 @@ Invoice[] invoices = new Invoice[]
         }
       },
     },
-    CustomerNotificationPreference = new CustomerNotificationPreference { InvoicePaid = new string[] { "email" } },
-  }
+    CustomerNotificationPreference = new CustomerNotificationPreference
+    {
+      InvoicePaid = new NotificationType[] { NotificationType.Email }
+    },
+  },
 };
 ```
 
@@ -603,7 +612,7 @@ Invoice invoice = new Invoice
   Id = "610a306ffe63418fdb6bd0b3",
   ExternalId = "external-id",
   UserId = "<USER_ID>",
-  Status = "EXPIRED",
+  Status = InvoiceStatus.Expired,
   MerchantName = "<MERCHANT_NAME>",
   MerchantProfilePictureUrl = "<MERCHANT_PROFILE_PICTURE_URL>",
   Amount = 1000,
@@ -613,7 +622,7 @@ Invoice invoice = new Invoice
   {
     new AvailableBankInvoice
     {
-      BankCode = "Mandiri",
+      BankCode = BankCode.Mandiri,
       CollectionType = "Pool",
       BankAccountNumber = "8860810000525",
       TransferAmount = 50000,
@@ -624,14 +633,14 @@ Invoice invoice = new Invoice
   },
   AvailableEwallets = new AvailableEwalletInvoice[]
   {
-    new AvailableEwalletInvoice { EwalletType = "OVO" },
+    new AvailableEwalletInvoice { EwalletType = EwalletType.OVO },
     // ...
   },
   AvailableRetailOutlets = new AvailableRetailOutletInvoice[]
   {
     new AvailableRetailOutletInvoice
     {
-      RetailOutletName = "ALFAMART",
+      RetailOutletName = RetailOutlet.Alfamart,
       PaymentCode = "ALFA123456",
       TransferAmount = 50000,
     },
@@ -640,8 +649,8 @@ Invoice invoice = new Invoice
   ShouldExcludeCreditCard = false,
   ShouldSendEmail = false,
   Created = "<CREATED_TIMESTAMP>",
-  Updated = "<EXPIRED_UPDATED_TIMESTAMP>",
-  Currency = "IDR",
+  Updated = "<UPDATED_TIMESTAMP>",
+  Currency = Currency.IDR,
   Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
   Customer = new Customer {
     GivenNames = "John",
@@ -658,6 +667,9 @@ Invoice invoice = new Invoice
       }
     },
   },
-  CustomerNotificationPreference = new CustomerNotificationPreference { InvoicePaid = new string[] { "email" } },
+  CustomerNotificationPreference = new CustomerNotificationPreference
+  {
+    InvoicePaid = new NotificationType[] { NotificationType.Email }
+  },
 };
 ```

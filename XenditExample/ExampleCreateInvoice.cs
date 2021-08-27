@@ -59,13 +59,14 @@ namespace XenditExample
 
                 InvoiceBody parameter = new InvoiceBody
                 {
-                    ExternalId = "demo-1475804036622",
+                    ExternalId = "external-id",
                     Amount = 1000,
                     Customer = customer,
                     CustomerNotificationPreference = preference,
                     Items = new ItemInvoice[] { item },
                     Fees = new FeeInvoice[] { fee },
-                    PaymentMethods = new InvoicePaymentChannelType[] { InvoicePaymentChannelType.ShopeePay }
+                    Currency = Currency.IDR,
+                    PaymentMethods = new InvoicePaymentChannelType[] { InvoicePaymentChannelType.ShopeePay },
                 };
 
                 Invoice invoice = await Invoice.Create(parameter);
