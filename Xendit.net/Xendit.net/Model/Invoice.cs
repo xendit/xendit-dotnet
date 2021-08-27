@@ -141,10 +141,10 @@
         /// <param name="parameter">Parameter listed here <see href="https://developers.xendit.co/api-reference/#list-all-invoices"/>.</param>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <returns>A Task of array of invoices.</returns>
-        public static async Task<Invoice[]> GetAll(ListInvoiceParameter parameter, Dictionary<string, string> headers = null)
+        public static async Task<Invoice[]> GetAll(ListInvoiceParameter? parameter = null, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
-            string queryParams = QueryParamsBuilder.Build(parameter);
+            string queryParams = parameter != null ? QueryParamsBuilder.Build(parameter) : string.Empty;
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", queryParams);
             return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice[]>(HttpMethod.Get, headers, url, null);
         }

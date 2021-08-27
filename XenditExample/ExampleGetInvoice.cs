@@ -33,6 +33,9 @@ namespace XenditExample
 
                 Invoice[] invoiceArray = await Invoice.GetAll(parameter);
                 Console.WriteLine(invoiceArray);
+
+                Invoice[] invoicesWithoutParams = await Invoice.GetAll(null);
+                Console.WriteLine(invoicesWithoutParams);
             }
             catch (XenditException e)
             {

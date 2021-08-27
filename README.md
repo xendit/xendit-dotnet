@@ -7,7 +7,6 @@ This library is the abstraction of Xendit API for access from applications writt
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [API Documentation](#api-documentation)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -499,11 +498,25 @@ Invoice invoice = new Invoice
 
 #### Get all invoices
 
+To get all invoices, please use struct `ListInvoiceParameter` for defining which request parameters that you want to use. You may use these enums to construct `ListInvoiceParameter`:
+
+- `InvoiceStatus` for `Statuses` property
+- `InvoiceClientType` for `ClientType` property
+- `InvoicePaymentChannelType` for `PaymentChannels` property
+
 ```cs
-Dictionary<string, object> parameter = new Dictionary<string, object>();
-parameter.Add("limit", 1);
-parameter.Add("statutes", "[\"PENDING\",\"EXPIRED\"]");
-Invoice[] invoices = await Invoice.GetAll(parameter);
+// Invoke GetAll without specifying parameter
+Invoice[] invoicesWithoutParams = await Invoice.GetAll(null);
+
+// specify parameter using ListInvoiceParameter
+ListInvoiceParameter parameter = new ListInvoiceParameter
+{
+    Limit = 1,
+    ClientTypes = new InvoiceClientType[] { InvoiceClientType.ApiGateway, InvoiceClientType.Dashboard },
+    PaymentChannels = new InvoicePaymentChannelType[] { },
+};
+
+Invoice[] invoiceArray = await Invoice.GetAll(parameter);
 ```
 
 It will return:
