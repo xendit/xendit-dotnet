@@ -29,7 +29,6 @@
         [JsonPropertyName("postal_code")]
         public string PostalCode { get; set; }
 
-        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("category")]
         public CustomerAddressCategory? Category { get; set; }
 

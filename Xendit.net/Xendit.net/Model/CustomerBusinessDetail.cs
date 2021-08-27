@@ -8,7 +8,6 @@
         [JsonPropertyName("business_name")]
         public string BusinessName { get; set; }
 
-        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         [JsonPropertyName("business_type")]
         public CustomerBusinessType BusinessType { get; set; }
 
