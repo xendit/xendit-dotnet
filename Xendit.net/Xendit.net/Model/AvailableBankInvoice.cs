@@ -1,12 +1,12 @@
 ﻿namespace Xendit.net.Model
 {
-    using System.Numerics;
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public class AvailableBankInvoice
     {
         [JsonPropertyName("bank_code")]
-        public string BankCode { get; set; }
+        public BankCode BankCode { get; set; }
 
         [JsonPropertyName("collection_type")]
         public string CollectionType { get; set; }
@@ -15,7 +15,7 @@
         public string BankAccountNumber { get; set; }
 
         [JsonPropertyName("transfer_amount")]
-        public BigInteger TransferAmount { get; set; }
+        public long TransferAmount { get; set; }
 
         [JsonPropertyName("bank_branch")]
         public string BankBranch { get; set; }

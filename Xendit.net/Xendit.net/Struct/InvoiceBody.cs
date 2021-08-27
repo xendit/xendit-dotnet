@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
 
     public struct InvoiceBody
@@ -19,13 +20,13 @@
         public string PayerEmail { get; set; }
 
         [JsonPropertyName("should_send_email")]
-        public bool ShouldSendEmail { get; set; }
+        public bool? ShouldSendEmail { get; set; }
 
         [JsonPropertyName("customer_notification")]
-        public Dictionary<string, string[]> CustomerNotification { get; set; }
+        public Dictionary<string, NotificationType[]> CustomerNotification { get; set; }
 
         [JsonPropertyName("invoice_duration")]
-        public int InvoiceDuration { get; set; }
+        public int? InvoiceDuration { get; set; }
 
         [JsonPropertyName("success_redirect_url")]
         public string SuccessRedirectUrl { get; set; }
@@ -34,13 +35,13 @@
         public string FailureRedirectUrl { get; set; }
 
         [JsonPropertyName("payment_methods")]
-        public string[] PaymentMethods { get; set; }
+        public InvoicePaymentChannelType[] PaymentMethods { get; set; }
 
         [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+        public Currency? Currency { get; set; }
 
         [JsonPropertyName("fixed_va")]
-        public bool FixedVa { get; set; }
+        public bool? FixedVa { get; set; }
 
         [JsonPropertyName("callback_virtual_account_id")]
         public string CallbackVirtualAccountId { get; set; }
@@ -52,7 +53,7 @@
         public string ReminderTimeUnit { get; set; }
 
         [JsonPropertyName("reminder_time")]
-        public string ReminderTime { get; set; }
+        public int? ReminderTime { get; set; }
 
         [JsonPropertyName("invoice")]
         public ItemInvoice[] Items { get; set; }

@@ -4,6 +4,7 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
     using Xendit.net.Network;
     using Xendit.net.Exception;
@@ -40,7 +41,7 @@ namespace XenditExample
 
                 CustomerNotificationPreferenceInvoice preference = new CustomerNotificationPreferenceInvoice
                 {
-                    InvoicePaid = new string[] { "email" }
+                    InvoicePaid = new NotificationType[] { NotificationType.Email }
                 };
 
                 ItemInvoice item = new ItemInvoice
@@ -64,7 +65,7 @@ namespace XenditExample
                     CustomerNotificationPreference = preference,
                     Items = new ItemInvoice[] { item },
                     Fees = new FeeInvoice[] { fee },
-                    InvoiceDuration = 86400,
+                    PaymentMethods = new InvoicePaymentChannelType[] { InvoicePaymentChannelType.ShopeePay }
                 };
 
                 Invoice invoice = await Invoice.Create(parameter);

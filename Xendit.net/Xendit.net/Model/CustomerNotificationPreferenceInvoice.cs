@@ -6,19 +6,20 @@
     using System.Text;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
 
     public class CustomerNotificationPreferenceInvoice
     {
         [JsonPropertyName("invoice_created")]
-        public string[] InvoiceCreated { get; set; }
+        public NotificationType[] InvoiceCreated { get; set; }
 
         [JsonPropertyName("invoice_reminder")]
-        public string[] InvoiceReminder { get; set; }
+        public NotificationType[] InvoiceReminder { get; set; }
 
         [JsonPropertyName("invoice_paid")]
-        public string[] InvoicePaid { get; set; }
+        public NotificationType[] InvoicePaid { get; set; }
 
         [JsonPropertyName("invoice_expired")]
-        public string[] InvoiceExpired { get; set; }
+        public NotificationType[] InvoiceExpired { get; set; }
     }
 }

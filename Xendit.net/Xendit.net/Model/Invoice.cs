@@ -5,6 +5,7 @@
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
     using Xendit.net.Common;
+    using Xendit.net.Enum;
     using Xendit.net.Struct;
 
     public class Invoice
@@ -19,7 +20,7 @@
         public string ExternalId { get; set; }
 
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public InvoiceStatus Status { get; set; }
 
         [JsonPropertyName("merchant_name")]
         public string MerchantName { get; set; }
@@ -67,7 +68,7 @@
         public string MidLabel { get; set; }
 
         [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+        public Currency Currency { get; set; }
 
         [JsonPropertyName("success_redirect_url")]
         public string SuccessRedirectUrl { get; set; }
@@ -82,10 +83,10 @@
         public string CreditCardChargeId { get; set; }
 
         [JsonPropertyName("payment_method")]
-        public string PaymentMethod { get; set; }
+        public InvoicePaymentMethodType PaymentMethod { get; set; }
 
         [JsonPropertyName("payment_channel")]
-        public string PaymentChannel { get; set; }
+        public InvoicePaymentChannelType PaymentChannel { get; set; }
 
         [JsonPropertyName("payment_destination")]
         public string PaymentDestination { get; set; }

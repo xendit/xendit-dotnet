@@ -1,7 +1,7 @@
 ﻿namespace Xendit.net.Model
 {
-    using System.Numerics;
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public class AvailableRetailOutletInvoice
     {
@@ -9,9 +9,9 @@
         public string PaymentCode { get; set; }
 
         [JsonPropertyName("retail_outlet_name")]
-        public string RetailOutletName { get; set; }
+        public RetailOutlet RetailOutletName { get; set; }
 
         [JsonPropertyName("transfer_amount")]
-        public BigInteger TransferAmount { get; set; }
+        public long TransferAmount { get; set; }
     }
 }

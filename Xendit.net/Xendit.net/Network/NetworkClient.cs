@@ -71,6 +71,7 @@
                 {
                     IgnoreNullValues = true,
                 };
+                Console.WriteLine(JsonSerializer.Serialize(requestBody, options));
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody, options), Encoding.UTF8, "application/json");
             }
 

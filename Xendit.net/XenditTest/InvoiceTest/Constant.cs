@@ -1,6 +1,7 @@
 ﻿namespace XenditTest.InvoiceTest
 {
     using System.Collections.Generic;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
     using Xendit.net.Struct;
 
@@ -12,7 +13,7 @@
             ExternalId = "external_id",
             UserId = "user_id",
             Amount = 1000,
-            Status = "PENDING",
+            Status = InvoiceStatus.Pending,
             MerchantName = "XENDIT",
             MerchantProfilePictureUrl = "image_url",
             PayerEmail = "somebody@xendit.co",
@@ -27,13 +28,13 @@
             Updated = "2020-01-31T11:20:01.017Z",
             Created = "2020-01-31T11:20:01.017Z",
             MidLabel = "test_mid",
-            Currency = "IDR",
+            Currency = Currency.IDR,
             SuccessRedirectUrl = "redirect_url",
             FailureRedirectUrl = "redirect_url",
             PaidAt = "2020-01-31T11:20:01.017Z",
             CreditCardChargeId = "credit_id",
-            PaymentMethod = "transfer",
-            PaymentChannel = "BCA",
+            PaymentMethod = InvoicePaymentMethodType.BankTransfer,
+            PaymentChannel = InvoicePaymentChannelType.BCA,
             PaymentDestination = "012",
             FixedVa = true,
         };
