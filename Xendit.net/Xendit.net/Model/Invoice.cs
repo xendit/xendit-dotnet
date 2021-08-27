@@ -1,10 +1,11 @@
 ﻿namespace Xendit.net.Model
 {
     using System.Collections.Generic;
+    using System.Net;
     using System.Net.Http;
+    using System.Text.Json;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
-    using Xendit.net.Common;
     using Xendit.net.Enum;
     using Xendit.net.Struct;
 
@@ -138,31 +139,17 @@
         /// <summary>
         /// Get all invoices by given parameters.
         /// </summary>
-        /// <param name="parameter">Parameter listed here <see href="https://developers.xendit.co/api-reference/#create-invoice"/>.</param>
+        /// <param name="parameter">Parameter listed here <see href="https://developers.xendit.co/api-reference/#list-all-invoices"/>.</param>
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <returns>A Task of array of invoices.</returns>
-        public static async Task<Invoice[]> GetAll(Dictionary<string, object> parameter, Dictionary<string, string> headers = null)
+        public static async Task<Invoice[]> GetAll(ListInvoiceParameter parameter, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
-            string[] paramList = new string[]
-            {
-                "statuses",
-                "limit",
-                "created_after",
-                "created_before",
-                "paid_after",
-                "paid_before",
-                "expired_after",
-                "expired_before",
-                "last_invoice_id",
-                "client_types",
-                "payment_channels",
-                "on_demand_link",
-                "recurring_payment_id",
-            };
 
-            string queryParams = QueryParamsBuilder.Build(paramList, parameter);
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", queryParams);
+            string queryParams = JsonSerializer.Serialize(parameter, new JsonSerializerOptions { IgnoreNullValues = true });
+            string encodedQueryParams = WebUtility.UrlEncode(queryParams);
+
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", encodedQueryParams);
             return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice[]>(HttpMethod.Get, headers, url, null);
         }
 

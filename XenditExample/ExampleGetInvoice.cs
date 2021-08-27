@@ -5,6 +5,7 @@ namespace XenditExample
     using System.Threading.Tasks;
     using System.Net.Http;
     using Xendit.net;
+    using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
     using Xendit.net.Network;
@@ -24,9 +25,12 @@ namespace XenditExample
                 Invoice invoice = await Invoice.GetById(invoiceId);
                 Console.WriteLine(invoice);
 
-                Dictionary<string, object> parameter = new Dictionary<string, object>();
-                parameter.Add("limit", 1);
-                parameter.Add("statutes", "[\"PENDING\",\"EXPIRED\"]");
+                ListInvoiceParameter parameter = new ListInvoiceParameter
+                {
+                    Limit = 1,
+                    ClientTypes = new InvoiceClientType[] { InvoiceClientType.ApiGateway }
+                };
+
                 Invoice[] invoiceArray = await Invoice.GetAll(parameter);
                 Console.WriteLine(invoiceArray);
             }
