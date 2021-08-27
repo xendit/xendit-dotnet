@@ -1,11 +1,10 @@
 ﻿namespace Xendit.net.Model
 {
     using System.Collections.Generic;
-    using System.Net;
     using System.Net.Http;
-    using System.Text.Json;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Common;
     using Xendit.net.Enum;
     using Xendit.net.Struct;
 
@@ -145,11 +144,8 @@
         public static async Task<Invoice[]> GetAll(ListInvoiceParameter parameter, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
-
-            string queryParams = JsonSerializer.Serialize(parameter, new JsonSerializerOptions { IgnoreNullValues = true });
-            string encodedQueryParams = WebUtility.UrlEncode(queryParams);
-
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", encodedQueryParams);
+            string queryParams = QueryParamsBuilder.Build(parameter);
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", queryParams);
             return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice[]>(HttpMethod.Get, headers, url, null);
         }
 

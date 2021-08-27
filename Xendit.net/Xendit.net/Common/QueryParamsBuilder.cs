@@ -1,23 +1,29 @@
 ﻿namespace Xendit.net.Common
 {
-    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Text;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     public class QueryParamsBuilder
     {
-        public static string Build(string[] paramList, Dictionary<string, object> parameter)
+        public static string Build<T>(T parameter)
         {
-            string queryParams = string.Empty;
+            StringBuilder queryParams = new StringBuilder();
 
-            for (int i = 0; i < paramList.Length; i++)
+            PropertyInfo[] info = parameter.GetType().GetProperties();
+
+            foreach (PropertyInfo property in info)
             {
-                string key = paramList[i];
-                if (parameter.ContainsKey(key))
+                if (property.GetValue(parameter) != null)
                 {
-                    queryParams += string.Format("{0}{1}{2}{3}", "&", key, "=", parameter[key]);
+                    string propertyName = property.GetCustomAttribute<JsonPropertyNameAttribute>(true).Name;
+                    string serializedValue = JsonSerializer.Serialize(property.GetValue(parameter), new JsonSerializerOptions { IgnoreNullValues = true });
+                    queryParams.AppendFormat("&{0}={1}", propertyName, serializedValue);
                 }
             }
 
-            return queryParams;
+            return queryParams.ToString();
         }
     }
 }

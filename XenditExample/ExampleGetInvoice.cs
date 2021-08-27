@@ -28,7 +28,7 @@ namespace XenditExample
                 ListInvoiceParameter parameter = new ListInvoiceParameter
                 {
                     Limit = 1,
-                    ClientTypes = new InvoiceClientType[] { InvoiceClientType.ApiGateway }
+                    ClientTypes = new InvoiceClientType[] { InvoiceClientType.ApiGateway, InvoiceClientType.Dashboard }
                 };
 
                 Invoice[] invoiceArray = await Invoice.GetAll(parameter);
