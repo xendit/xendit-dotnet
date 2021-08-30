@@ -4,6 +4,7 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
     using Xendit.net.Struct;
 
     public class DirectDebitPayment
@@ -21,10 +22,10 @@
         public string PaymentMethodId { get; set; }
 
         [JsonPropertyName("currency")]
-        public long Currency { get; set; }
+        public Currency Currency { get; set; }
 
         [JsonPropertyName("amount")]
-        public string Amount { get; set; }
+        public long Amount { get; set; }
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
