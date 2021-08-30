@@ -24,6 +24,8 @@
             BaUbp,
         }
 
+        [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
+        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         public enum Status
         {
             Unknown,
@@ -35,6 +37,8 @@
             Success,
         }
 
+        [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
+        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         public enum Type
         {
             Unknown,

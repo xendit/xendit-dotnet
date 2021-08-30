@@ -17,7 +17,7 @@
         public LinkedAccountEnum.ChannelCode ChannelCode { get; set; }
 
         [JsonPropertyName("properties")]
-        public InitializedLinkedAccountProperties Properties { get; set; }
+        public LinkedAccountProperties Properties { get; set; }
 
         [JsonPropertyName("metadata")]
         public Dictionary<string, object> Metadata { get; set; }
