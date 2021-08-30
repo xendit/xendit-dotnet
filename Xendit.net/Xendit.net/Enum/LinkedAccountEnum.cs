@@ -23,5 +23,27 @@
             [EnumMember(Value = "BA_UBP")]
             BaUbp,
         }
+
+        public enum Status
+        {
+            Unknown,
+
+            [JsonPropertyName("PENDING")]
+            Pending,
+
+            [JsonPropertyName("SUCCESS")]
+            Success,
+        }
+
+        public enum Type
+        {
+            Unknown,
+
+            [JsonPropertyName("DEBIT_CARD")]
+            DebitCard,
+
+            [JsonPropertyName("BANK_ACCOUNT")]
+            BankAccount,
+        }
     }
 }
