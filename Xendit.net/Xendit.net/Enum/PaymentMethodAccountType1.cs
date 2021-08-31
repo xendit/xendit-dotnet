@@ -5,7 +5,7 @@
 
     [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
     [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum PaymentMethodAccountType
+    public enum PaymentMethodAccountType1
     {
         Unknown,
 

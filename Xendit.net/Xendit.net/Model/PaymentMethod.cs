@@ -4,6 +4,7 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
     using Xendit.net.Struct;
 
     public class PaymentMethod
@@ -12,16 +13,16 @@
         public string Id { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public PaymentMethodEnum.AccountType Type { get; set; }
 
         [JsonPropertyName("properties")]
-        public Dictionary<string, string> Properties { get; set; }
+        public PaymentMethodProperties Properties { get; set; }
 
         [JsonPropertyName("customer_id")]
         public string CustomerId { get; set; }
 
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public PaymentMethodEnum.Status Status { get; set; }
 
         [JsonPropertyName("created")]
         public string Created { get; set; }

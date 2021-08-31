@@ -10,10 +10,10 @@
         internal static readonly PaymentMethod ExpectedPaymentMethod = new PaymentMethod
         {
             Id = "payment-method-id",
-            Type = "DEBIT_CARD",
+            Type = PaymentMethodEnum.AccountType.DebitCard,
             Properties = PaymentMethodBodyProperties,
             CustomerId = "customer-id",
-            Status = "ACTIVE",
+            Status = PaymentMethodEnum.Status.Active,
             Created = "2020-03-19T05:34:55+0800",
             Updated = "2020 - 03 - 19T05:24:55 + 0800",
             Metadata = null,
@@ -21,19 +21,18 @@
 
         internal static readonly PaymentMethod[] ExpectedPaymentMethods = new PaymentMethod[] { ExpectedPaymentMethod };
 
-        internal static readonly Dictionary<string, string> PaymentMethodBodyProperties = new Dictionary<string, string>()
+        internal static readonly PaymentMethodProperties PaymentMethodBodyProperties = new PaymentMethodProperties
         {
-            { "id", "la-aa620619-124f-41db-995b-66a52abe036a" },
-            { "channel_code", "DC_BRI" },
-            { "currency", "IDR" },
-            { "card_last_four", "1234" },
-            { "card_expiry", "06/24" },
-            { "description", null },
+            ChannelCode = PaymentMethodEnum.ChannelCode.DcBRI,
+            Currency = Currency.IDR,
+            CardLastFour = "1234",
+            CardExpiry = "06/24",
+            Description = "This is example of payment method",
         };
 
         internal static readonly PaymentMethodParameter PaymentMethodBody = new PaymentMethodParameter
         {
-            Type = PaymentMethodAccountType.DebitCard,
+            Type = PaymentMethodEnum.AccountType.DebitCard,
             Properties = PaymentMethodBodyProperties,
             CustomerId = "customer-id",
             Metadata = null,
