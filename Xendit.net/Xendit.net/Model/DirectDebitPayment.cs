@@ -16,7 +16,7 @@
         public string ReferenceId { get; set; }
 
         [JsonPropertyName("channel_code")]
-        public string ChannelCode { get; set; }
+        public LinkedAccountEnum.ChannelCode ChannelCode { get; set; }
 
         [JsonPropertyName("payment_method_id")]
         public string PaymentMethodId { get; set; }
@@ -31,7 +31,7 @@
         public string Description { get; set; }
 
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public DirectDebitStatus Status { get; set; }
 
         [JsonPropertyName("failure_code")]
         public string FailureCode { get; set; }
@@ -46,7 +46,7 @@
         public string OTPExpirationTimestamp { get; set; }
 
         [JsonPropertyName("required_action")]
-        public string RequiredAction { get; set; }
+        public DirectDebitRequiredAction RequiredAction { get; set; }
 
         [JsonPropertyName("checkout_url")]
         public string CheckoutUrl { get; set; }
