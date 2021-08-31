@@ -40,11 +40,7 @@
         /// <returns>A Task of Payment Method model.</returns>
         public static async Task<PaymentMethod> Create(PaymentMethodBody parameter, Dictionary<string, string> headers = null)
         {
-            if (headers == null)
-            {
-                headers = new Dictionary<string, string>();
-            }
-
+            headers = headers ?? new Dictionary<string, string>();
             Dictionary<string, object> parameterBody = ConvertPaymentMethodBody(parameter);
             return await CreatePaymentMethodRequest(headers, parameterBody);
         }
@@ -57,11 +53,7 @@
         /// <returns>A Task of array of Payment Method models.</returns>
         public static async Task<PaymentMethod[]> Get(string customerId, Dictionary<string, string> headers = null)
         {
-            if (headers == null)
-            {
-                headers = new Dictionary<string, string>();
-            }
-
+            headers = headers ?? new Dictionary<string, string>();
             return await GetPaymentMethodRequest(headers, customerId);
         }
 
