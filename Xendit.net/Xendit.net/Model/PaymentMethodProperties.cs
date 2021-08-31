@@ -5,6 +5,9 @@
 
     public class PaymentMethodProperties
     {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
         [JsonPropertyName("channel_code")]
         public PaymentMethodEnum.ChannelCode ChannelCode { get; set; }
 
