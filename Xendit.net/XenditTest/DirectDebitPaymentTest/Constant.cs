@@ -89,7 +89,7 @@
         internal static readonly string IdempotencyKey = "idempotency-key-example";
         internal static Dictionary<string, string> Headers = new Dictionary<string, string>()
         {
-            { "idempotency-key", IdempotencyKey },
+            { "Idempotency-key", IdempotencyKey },
         };
 
         internal static Dictionary<string, string> InitialHeadersWithUserId = new Dictionary<string, string>()
@@ -100,7 +100,7 @@
         internal static Dictionary<string, string> HeadersWithUserId = new Dictionary<string, string>()
         {
             { "for-user-id", "user-id" },
-            { "idempotency-key", IdempotencyKey },
+            { "Idempotency-key", IdempotencyKey },
         };
     }
 }

@@ -85,7 +85,7 @@
         public static async Task<DirectDebitPayment> Create(DirectDebitPaymentParameter parameter, string idempotencyKey, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
-            headers.Add("idempotency-key", idempotencyKey);
+            headers.Add("Idempotency-key", idempotencyKey);
             return await CreateRequest(parameter, headers);
         }
 
