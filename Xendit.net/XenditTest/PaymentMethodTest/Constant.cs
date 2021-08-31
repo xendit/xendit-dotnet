@@ -31,20 +31,12 @@
             { "description", null },
         };
 
-        internal static readonly PaymentMethodBody Body = new PaymentMethodBody()
+        internal static readonly PaymentMethodParameter PaymentMethodBody = new PaymentMethodParameter
         {
             Type = PaymentMethodAccountType.DebitCard,
             Properties = PaymentMethodBodyProperties,
             CustomerId = "customer-id",
             Metadata = null,
-        };
-
-        internal static readonly Dictionary<string, object> PaymentMethodBody = new Dictionary<string, object>()
-        {
-            { "customer_id", "customer-id" },
-            { "type", PaymentMethodAccountType.DebitCard },
-            { "properties", PaymentMethodBodyProperties },
-            { "metadata", null },
         };
 
         internal static readonly string CustomerId = "customer-id";

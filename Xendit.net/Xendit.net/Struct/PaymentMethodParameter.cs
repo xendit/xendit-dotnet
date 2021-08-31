@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Xendit.net.Enum;
 
-    public struct PaymentMethodBody
+    public struct PaymentMethodParameter
     {
         public PaymentMethodAccountType Type { get; set; }
 

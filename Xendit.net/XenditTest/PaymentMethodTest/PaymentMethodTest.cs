@@ -7,6 +7,7 @@
     using Xendit.net;
     using Xendit.net.Model;
     using Xendit.net.Network;
+    using Xendit.net.Struct;
     using Xunit;
 
     public class PaymentMethodTest
@@ -17,12 +18,12 @@
         public async void PaymentMethod_ShouldSuccess_CreatePaymentMethod()
         {
             MockClient
-                .Setup(client => client.Request<PaymentMethod>(HttpMethod.Post, new Dictionary<string, string>(), Constant.PaymentMethodUrl, Constant.PaymentMethodBody))
+                .Setup(client => client.Request<PaymentMethodParameter, PaymentMethod>(HttpMethod.Post, new Dictionary<string, string>(), Constant.PaymentMethodUrl, Constant.PaymentMethodBody))
                 .ReturnsAsync(Constant.ExpectedPaymentMethod);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            PaymentMethod actualPaymentMethod = await PaymentMethod.Create(Constant.Body);
+            PaymentMethod actualPaymentMethod = await PaymentMethod.Create(Constant.PaymentMethodBody);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedPaymentMethod), JsonSerializer.Serialize(actualPaymentMethod));
         }
 
@@ -30,12 +31,12 @@
         public async void PaymentMethod_ShouldSuccess_CreatePaymentMethod_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<PaymentMethod>(HttpMethod.Post, Constant.CustomHeaders, Constant.PaymentMethodUrl, Constant.PaymentMethodBody))
+                .Setup(client => client.Request<PaymentMethodParameter, PaymentMethod>(HttpMethod.Post, Constant.CustomHeaders, Constant.PaymentMethodUrl, Constant.PaymentMethodBody))
                 .ReturnsAsync(Constant.ExpectedPaymentMethod);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            PaymentMethod actualPaymentMethod = await PaymentMethod.Create(Constant.Body, Constant.CustomHeaders);
+            PaymentMethod actualPaymentMethod = await PaymentMethod.Create(Constant.PaymentMethodBody, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedPaymentMethod), JsonSerializer.Serialize(actualPaymentMethod));
         }
 
@@ -43,7 +44,7 @@
         public async void PaymentMethod_ShouldSuccess_GetPaymentMethodByCustomerId()
         {
             MockClient
-                .Setup(client => client.Request<PaymentMethod[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.GetPaymentMethodByCustomerIdUrl, null))
+                .Setup(client => client.Request<Dictionary<string, string>, PaymentMethod[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.GetPaymentMethodByCustomerIdUrl, null))
                 .ReturnsAsync(Constant.ExpectedPaymentMethods);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -56,7 +57,7 @@
         public async void PaymentMethod_ShouldSuccess_GetPaymentMethodByCustomerId_WthHeaders()
         {
             MockClient
-                .Setup(client => client.Request<PaymentMethod[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetPaymentMethodByCustomerIdUrl, null))
+                .Setup(client => client.Request<Dictionary<string, string>, PaymentMethod[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetPaymentMethodByCustomerIdUrl, null))
                 .ReturnsAsync(Constant.ExpectedPaymentMethods);
 
             XenditConfiguration.RequestClient = MockClient.Object;
