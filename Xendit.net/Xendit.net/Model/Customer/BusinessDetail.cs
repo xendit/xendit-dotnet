@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
 
-    public class CustomerBusinessDetail
+    public class BusinessDetail
     {
         [JsonPropertyName("business_name")]
         public string BusinessName { get; set; }

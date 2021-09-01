@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
 
-    public class CustomerIdentityAccount
+    public class IdentityAccount
     {
         [JsonPropertyName("country")]
         public string Country { get; set; }
@@ -18,6 +18,6 @@
         public string Description { get; set; }
 
         [JsonPropertyName("properties")]
-        public CustomerIdentityAccountProperties Properties { get; set; }
+        public IdentityAccountProperties Properties { get; set; }
     }
 }

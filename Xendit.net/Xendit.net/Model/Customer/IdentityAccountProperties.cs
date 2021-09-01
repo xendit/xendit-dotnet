@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class CustomerIdentityAccountProperties
+    public class IdentityAccountProperties
     {
         [JsonPropertyName("account_number")]
         public string AccountNumber { get; set; }

@@ -41,7 +41,7 @@
         public string Nationality { get; set; }
 
         [JsonPropertyName("addresses")]
-        public CustomerAddress[] Addresses { get; set; }
+        public Address[] Addresses { get; set; }
 
         [JsonPropertyName("date_of_birth")]
         public string DateOfBirth { get; set; }
@@ -53,16 +53,16 @@
         public CustomerType Type { get; set; }
 
         [JsonPropertyName("individual_detail")]
-        public CustomerIndividualDetail IndividualDetail { get; set; }
+        public IndividualDetail IndividualDetail { get; set; }
 
         [JsonPropertyName("business_detail")]
-        public CustomerBusinessDetail BusinessDetail { get; set; }
+        public BusinessDetail BusinessDetail { get; set; }
 
         [JsonPropertyName("identity_accounts")]
-        public CustomerIdentityAccount[] IdentityAccount { get; set; }
+        public IdentityAccount[] IdentityAccount { get; set; }
 
         [JsonPropertyName("kyc_documents")]
-        public CustomerKycDocument[] KycDocuments { get; set; }
+        public KycDocument[] KycDocuments { get; set; }
 
         [JsonPropertyName("data")]
         public Customer[] Data { get; set; }
@@ -77,7 +77,7 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="version">API version that will be used to request.</param>
         /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> Create(CustomerBody parameter, Dictionary<string, string> headers = null, ApiVersion version = ApiVersion.Version20201031)
+        public static async Task<Customer> Create(CustomerParameter parameter, Dictionary<string, string> headers = null, ApiVersion version = ApiVersion.Version20201031)
         {
             headers = headers ?? new Dictionary<string, string>();
             headers.Add("API-VERSION", ApiVersionParser.Parse(version));
@@ -100,10 +100,10 @@
             return await GetCustomerRequest(headers, referenceId);
         }
 
-        private static async Task<Customer> CreateCustomerRequest(Dictionary<string, string> headers, CustomerBody parameter)
+        private static async Task<Customer> CreateCustomerRequest(Dictionary<string, string> headers, CustomerParameter parameter)
         {
             string url = string.Format("{0}/{1}", XenditConfiguration.ApiUrl, "customers");
-            return await XenditConfiguration.RequestClient.Request<CustomerBody, Customer>(HttpMethod.Post, headers, url, parameter);
+            return await XenditConfiguration.RequestClient.Request<CustomerParameter, Customer>(HttpMethod.Post, headers, url, parameter);
         }
 
         private static async Task<Customer> GetCustomerRequest(Dictionary<string, string> headers, string referenceId)

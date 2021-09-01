@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
 
-    public class CustomerIndividualDetail
+    public class IndividualDetail
     {
         [JsonPropertyName("given_names")]
         public string GivenNames { get; set; }
@@ -24,6 +24,6 @@
         public CustomerGender? Gender { get; set; }
 
         [JsonPropertyName("employment")]
-        public CustomerEmployment Employment { get; set; }
+        public Employment Employment { get; set; }
     }
 }

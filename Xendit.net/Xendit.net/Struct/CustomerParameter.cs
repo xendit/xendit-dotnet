@@ -5,7 +5,7 @@
     using Xendit.net.Enum;
     using Xendit.net.Model;
 
-    public struct CustomerBody
+    public struct CustomerParameter
     {
         [JsonPropertyName("reference_id")]
         public string ReferenceId { get; set; }
@@ -35,7 +35,7 @@
         public string Nationality { get; set; }
 
         [JsonPropertyName("addresses")]
-        public CustomerAddress[] Addresses { get; set; }
+        public Address[] Addresses { get; set; }
 
         [JsonPropertyName("date_of_birth")]
         public string DateOfBirth { get; set; }
@@ -47,15 +47,15 @@
         public CustomerType? Type { get; set; }
 
         [JsonPropertyName("individual_detail")]
-        public CustomerIndividualDetail IndividualDetail { get; set; }
+        public IndividualDetail IndividualDetail { get; set; }
 
         [JsonPropertyName("business_detail")]
-        public CustomerBusinessDetail BusinessDetail { get; set; }
+        public BusinessDetail BusinessDetail { get; set; }
 
         [JsonPropertyName("identity_accounts")]
-        public CustomerIdentityAccount[] IdentityAccount { get; set; }
+        public IdentityAccount[] IdentityAccount { get; set; }
 
         [JsonPropertyName("kyc_documents")]
-        public CustomerKycDocument[] KycDocuments { get; set; }
+        public KycDocument[] KycDocuments { get; set; }
     }
 }

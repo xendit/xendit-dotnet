@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
 
-    public class CustomerKycDocument
+    public class KycDocument
     {
         [JsonPropertyName("country")]
         public string Country { get; set; }

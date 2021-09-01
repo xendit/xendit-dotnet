@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
 
-    public class CustomerAddress
+    public class Address
     {
         [JsonPropertyName("country")]
         public string Country { get; set; }

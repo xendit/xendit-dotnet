@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class CustomerEmployment
+    public class Employment
     {
         [JsonPropertyName("employer_name")]
         public string EmployerName { get; set; }

@@ -58,7 +58,7 @@
             Data = new Customer[] { ExpectedCustomerData },
         };
 
-        internal static readonly CustomerBody CustomerBody = new CustomerBody
+        internal static readonly CustomerParameter CustomerBody = new CustomerParameter
         {
             ReferenceId = "demo_1475801962607",
             GivenNames = "John",

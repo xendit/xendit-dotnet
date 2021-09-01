@@ -19,7 +19,7 @@
         public async void Customer_ShouldSuccess_Create_WithDefaultHeaderAndVersion()
         {
             MockClient
-                .Setup(client => client.Request<CustomerBody, Customer>(HttpMethod.Post, Constant.NewApiVersionHeaders, Constant.CustomerUrl, Constant.CustomerBody))
+                .Setup(client => client.Request<CustomerParameter, Customer>(HttpMethod.Post, Constant.NewApiVersionHeaders, Constant.CustomerUrl, Constant.CustomerBody))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -32,7 +32,7 @@
         public async void Customer_ShouldSuccess_CreateDictionaryParameters_WithCustomHeaderAndDefaultVersion()
         {
             MockClient
-                .Setup(client => client.Request<CustomerBody, Customer>(HttpMethod.Post, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerUrl, Constant.CustomerBody))
+                .Setup(client => client.Request<CustomerParameter, Customer>(HttpMethod.Post, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerUrl, Constant.CustomerBody))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -45,7 +45,7 @@
         public async void Customer_ShouldSuccess_Create_WithVersion()
         {
             MockClient
-                .Setup(client => client.Request<CustomerBody, Customer>(HttpMethod.Post, Constant.ApiVersionHeaders, Constant.CustomerUrl, Constant.CustomerBody))
+                .Setup(client => client.Request<CustomerParameter, Customer>(HttpMethod.Post, Constant.ApiVersionHeaders, Constant.CustomerUrl, Constant.CustomerBody))
                 .ReturnsAsync(Constant.ExpectedCustomerData);
 
             XenditConfiguration.RequestClient = MockClient.Object;

@@ -21,48 +21,48 @@ namespace XenditExample
 
             try
             {
-                CustomerIndividualDetail individualDetail = new CustomerIndividualDetail
+                CustomerParameter individualParameterCustomVersion = new CustomerParameter
+                {
+                    ReferenceId = "demo_11212157",
+                    Email = "john@email.com",
+                    GivenNames = "John",
+                    Addresses = new Address[] { new Address { Country = "ID" } }
+                };
+
+                Customer individualCustomerVersion20200519 = await Customer.Create(individualParameterCustomVersion, version: ApiVersion.Version20200519);
+                Console.WriteLine(individualCustomerVersion20200519);
+
+                IndividualDetail individualDetail = new IndividualDetail
                 {
                     GivenNames = "John",
                     Gender = CustomerGender.Male,
                 };
 
-                CustomerIdentityAccount identityAccount = new CustomerIdentityAccount
+                IdentityAccount identityAccount = new IdentityAccount
                 {
                     Country = "ID",
                     Type = CustomerIdentityAccountType.BankAccount,
-                    Properties = new CustomerIdentityAccountProperties { AccountNumber = "account_number" }
+                    Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
                 };
 
-                CustomerKycDocument document = new CustomerKycDocument
+                KycDocument document = new KycDocument
                 {
                     Country = "ID",
                     Type = CustomerKycDocumentType.IdentityCard,
                     SubType = CustomerKycDocumentSubType.NationalId,
                 };
 
-                CustomerBody individualParameter = new CustomerBody
+                CustomerParameter individualParameter = new CustomerParameter
                 {
-                    ReferenceId = "demo_11212145",
+                    ReferenceId = "demo_11212158",
                     Type = CustomerType.Individual,
                     IndividualDetail = individualDetail,
-                    IdentityAccount = new CustomerIdentityAccount[] { identityAccount },
-                    KycDocuments = new CustomerKycDocument[] { document },
+                    IdentityAccount = new IdentityAccount[] { identityAccount },
+                    KycDocuments = new KycDocument[] { document },
                 };
 
-                Customer individualCustomerDefault = await Customer.Create(individualParameter);
-                Console.WriteLine(individualCustomerDefault);
-
-                CustomerBody individualParameterCustomVersion = new CustomerBody
-                {
-                    ReferenceId = "demo_11212144",
-                    Email = "john@email.com",
-                    GivenNames = "John",
-                    Addresses = new CustomerAddress[] { new CustomerAddress { Country = "ID" } }
-                };
-
-                Customer individualCustomerCustomVersion = await Customer.Create(individualParameterCustomVersion, version: ApiVersion.Version20200519);
-                Console.WriteLine(individualCustomerCustomVersion);
+                Customer individualCustomerVersion20201031 = await Customer.Create(individualParameter);
+                Console.WriteLine(individualCustomerVersion20201031);
             }
             catch (XenditException e)
             {
