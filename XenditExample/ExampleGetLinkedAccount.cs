@@ -21,7 +21,7 @@ namespace XenditExample
 
             try
             {
-                string linkedAccountId = "linked-account-id";
+                string linkedAccountId = "linked-account-token-id";
                 AccessibleLinkedAccount[] accessibleLinkedAccounts = await AccessibleLinkedAccount.Get(linkedAccountId);
                 Console.WriteLine(accessibleLinkedAccounts);
             }
