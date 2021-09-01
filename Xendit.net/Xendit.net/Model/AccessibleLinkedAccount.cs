@@ -26,13 +26,13 @@
         /// <param name="linkedAccountTokenId">Linked account token `id` received from Initialize Account Authorization.</param>
         /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#retrieve-accessible-accounts-by-linked-account-token"/></param>
         /// <returns>A Task of Accessible Linked Account model.</returns>
-        public static async Task<AccessibleLinkedAccount[]> Retrieve(string linkedAccountTokenId, Dictionary<string, string> headers = null)
+        public static async Task<AccessibleLinkedAccount[]> Get(string linkedAccountTokenId, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
-            return await RetrieveRequest(linkedAccountTokenId, headers);
+            return await GetRequest(linkedAccountTokenId, headers);
         }
 
-        private static async Task<AccessibleLinkedAccount[]> RetrieveRequest(string linkedAccountTokenId, Dictionary<string, string> headers)
+        private static async Task<AccessibleLinkedAccount[]> GetRequest(string linkedAccountTokenId, Dictionary<string, string> headers)
         {
             string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/linked_account_tokens/", linkedAccountTokenId, "/accounts");
             return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, AccessibleLinkedAccount[]>(HttpMethod.Get, headers, url, null);

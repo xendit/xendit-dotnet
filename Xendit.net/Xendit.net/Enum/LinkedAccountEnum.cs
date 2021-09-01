@@ -30,10 +30,10 @@
         {
             Unknown,
 
-            [JsonPropertyName("PENDING")]
+            [EnumMember(Value = "PENDING")]
             Pending,
 
-            [JsonPropertyName("SUCCESS")]
+            [EnumMember(Value = "SUCCESS")]
             Success,
         }
 
@@ -43,10 +43,10 @@
         {
             Unknown,
 
-            [JsonPropertyName("DEBIT_CARD")]
+            [EnumMember(Value = "DEBIT_CARD")]
             DebitCard,
 
-            [JsonPropertyName("BANK_ACCOUNT")]
+            [EnumMember(Value = "BANK_ACCOUNT")]
             BankAccount,
         }
     }

@@ -7,9 +7,6 @@
 
     public struct InitializedLinkedAccountParameter
     {
-        [JsonPropertyName("id")]
-        public string Id { get; set; }
-
         [JsonPropertyName("customer_id")]
         public string CustomerId { get; set; }
 
