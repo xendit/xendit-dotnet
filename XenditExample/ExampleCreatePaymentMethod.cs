@@ -26,7 +26,12 @@ namespace ConsoleApp1
                     Type = PaymentMethodEnum.AccountType.DebitCard,
                     Properties = new PaymentMethodProperties
                     {
-                        Id = "la-052d3e2d-bc4d-4c98-8072-8d232a552299"
+                        Id = "la-052d3e2d-bc4d-4c98-8072-8d232a552299",
+                        ChannelCode = PaymentMethodEnum.ChannelCode.DcBRI,
+                        Currency = Currency.IDR,
+                        CardLastFour = "1234",
+                        CardExpiry = "06/24",
+                        Description = "Payment Debit Card",
                     },
                     CustomerId = "4b7b6050-0830-440a-903b-37d527dbbaa9",
                 };
