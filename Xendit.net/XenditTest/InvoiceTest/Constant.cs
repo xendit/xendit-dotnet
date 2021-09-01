@@ -60,7 +60,7 @@
             { "for-user-id", "user-id" },
         };
 
-        internal static readonly InvoiceBody InvoiceBody = new InvoiceBody
+        internal static readonly InvoiceParameter InvoiceBody = new InvoiceParameter
         {
             ExternalId = "external_id",
             Amount = 1000L,

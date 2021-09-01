@@ -14,6 +14,6 @@
         public string MobileNumber { get; set; }
 
         [JsonPropertyName("addresses")]
-        public CustomerAddress[] Addresses { get; set; }
+        public Address[] Addresses { get; set; }
     }
 }

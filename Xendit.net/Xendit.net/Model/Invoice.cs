@@ -104,60 +104,80 @@
         public FeeInvoice[] Fees { get; set; }
 
         [JsonPropertyName("customer_notification_preference")]
-        public CustomerNotificationPreferenceInvoice CustomerNotificationPreference { get; set; }
+        public NotificationPreference CustomerNotificationPreference { get; set; }
 
         [JsonPropertyName("customer")]
         public Customer Customer { get; set; }
 
         /// <summary>
-        /// Create invoice with all parameters as dictionary and headers.
+        /// Create invoice with all parameters and headers.
         /// </summary>
-        /// <param name="parameter">Parameter listed here <see href="https://developers.xendit.co/api-reference/#create-invoice"/>.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="parameter">Parameter listed here <see cref="InvoiceParameter"/>.</param>
+        /// <param name="headers">Custom headers. e.g: "for-user-id" <see href="https://developers.xendit.co/api-reference/#create-invoice"/>.</param>
         /// <returns>A Task of Invoice model.</returns>
-        public static async Task<Invoice> Create(InvoiceBody parameter, Dictionary<string, string> headers = null)
+        public static async Task<Invoice> Create(InvoiceParameter parameter, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
-            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/v2/invoices");
-            return await XenditConfiguration.RequestClient.Request<InvoiceBody, Invoice>(HttpMethod.Post, headers, url, parameter);
+            return await CreateRequest(parameter, headers);
         }
 
         /// <summary>
         /// Get invoice detail by ID.
         /// </summary>
         /// <param name="invoiceId">ID of the invoice to retrieve.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#get-invoice"/></param>
         /// <returns>A Task of Invoice model.</returns>
         public static async Task<Invoice> GetById(string invoiceId, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices/", invoiceId);
-            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice>(HttpMethod.Get, headers, url, null);
+            return await GetByIdRequest(invoiceId, headers);
         }
 
         /// <summary>
         /// Get all invoices by given parameters.
         /// </summary>
-        /// <param name="parameter">Parameter listed here <see href="https://developers.xendit.co/api-reference/#list-all-invoices"/>.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="parameter">Parameter listed here <see cref="ListInvoiceParameter"/>.</param>
+        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso cref="https://developers.xendit.co/api-reference/#list-all-invoices"/>.</param>
         /// <returns>A Task of array of invoices.</returns>
         public static async Task<Invoice[]> GetAll(ListInvoiceParameter? parameter = null, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
             string queryParams = parameter != null ? QueryParamsBuilder.Build(parameter) : string.Empty;
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", queryParams);
-            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice[]>(HttpMethod.Get, headers, url, null);
+            return await GetAllRequest(queryParams, headers);
         }
 
         /// <summary>
         /// Expire an already created invoice.
         /// </summary>
         /// <param name="invoiceId">ID of the invoice to be expired / canceled.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#expire-invoice"/></param>
         /// <returns>A Task of Invoice model.</returns>
         public static async Task<Invoice> Expire(string invoiceId, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
+            return await ExpireRequest(invoiceId, headers);
+        }
+
+        private static async Task<Invoice> CreateRequest(InvoiceParameter parameter, Dictionary<string, string> headers)
+        {
+            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/v2/invoices");
+            return await XenditConfiguration.RequestClient.Request<InvoiceParameter, Invoice>(HttpMethod.Post, headers, url, parameter);
+        }
+
+        private static async Task<Invoice> GetByIdRequest(string invoiceId, Dictionary<string, string> headers)
+        {
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices/", invoiceId);
+            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice>(HttpMethod.Get, headers, url, null);
+        }
+
+        private static async Task<Invoice[]> GetAllRequest(string queryParams, Dictionary<string, string> headers)
+        {
+            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/v2/invoices?", queryParams);
+            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice[]>(HttpMethod.Get, headers, url, null);
+        }
+
+        private static async Task<Invoice> ExpireRequest(string invoiceId, Dictionary<string, string> headers)
+        {
             string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/invoices/", invoiceId, "/expire!");
             return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Invoice>(HttpMethod.Post, headers, url, new Dictionary<string, string>());
         }

@@ -294,18 +294,18 @@ AvailableBank[] availableBanks = await Disbursement.GetAvailableBanks();
 
 #### Create an invoice
 
-To create an invoice, please use struct `InvoiceBody` for parameter body. You may use these classes to construct `InvoiceBody`:
+To create an invoice, please use struct `InvoiceParameter` for parameter body. You may use these classes to construct `InvoiceParameter`:
 
 - `ItemInvoice` for `Items` property
 - `Customer` for `Customer` property
-- `CustomerAddress` for `Addresses` property in `Customer`
+- `Address` for `Addresses` property in `Customer`
 - `FeeInvoice` for `Fees` property
-- `CustomerNotificationPreferenceInvoice` for `CustomerNotificationPreference` property
+- `NotificationPreference` for `CustomerNotificationPreference` property
 
 Here is the example:
 
 ```cs
-CustomerAddress addresses = new CustomerAddress
+Address addresses = new Address
 {
   Country = "ID",
   StreetLine1 = "Jalan Makan",
@@ -320,10 +320,10 @@ Customer customer = new Customer
   GivenNames = "John",
   Email = "john@email.com",
   MobileNumber = "+6287774441111",
-  Addresses = new CustomerAddress[] { addresses },
+  Addresses = new Address[] { addresses },
 };
 
-CustomerNotificationPreferenceInvoice preference = new CustomerNotificationPreferenceInvoice
+NotificationPreference preference = new NotificationPreference
 {
   InvoicePaid = new NotificationType[] { NotificationType.Email }
 };
@@ -337,11 +337,11 @@ ItemInvoice item = new ItemInvoice
 
 FeeInvoice fee = new FeeInvoice
 {
-  Type = "ADMIN",
+  Type = "name_of_fee_for_internal_reference",
   Value = 200,
 };
 
-InvoiceBody parameter = new InvoiceBody
+InvoiceParameter parameter = new InvoiceParameter
 {
   ExternalId = "external-id",
   Amount = 1000,
@@ -403,13 +403,15 @@ Invoice invoice = new Invoice
   Created = "<CREATED_TIMESTAMP>",
   Updated = "<UPDATED_TIMESTAMP>",
   Currency = Currency.IDR,
-  Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
+  Fees = new FeeInvoice[] { new FeeInvoice { Type = "name_of_fee_for_internal_reference", Value = 200 } },
   Customer = new Customer {
     GivenNames = "John",
     Email = "john@email.com",
     MobileNumber = "+6287774441111",
-    Addresses = new CustomerAddress[] {
-      new CustomerAddress {
+    Addresses = new Address[]
+    {
+      new Address
+      {
         Country = "ID",
         StreetLine1 = "Jalan Makan",
         StreetLine2 = "Kecamatan Kebayoran Baru",
@@ -479,13 +481,16 @@ Invoice invoice = new Invoice
   Created = "<CREATED_TIMESTAMP>",
   Updated = "<UPDATED_TIMESTAMP>",
   Currency = Currency.IDR,
-  Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
-  Customer = new Customer {
+  Fees = new FeeInvoice[] { new FeeInvoice { Type = "name_of_fee_for_internal_reference", Value = 200 } },
+  Customer = new Customer
+  {
     GivenNames = "John",
     Email = "john@email.com",
     MobileNumber = "+6287774441111",
-    Addresses = new CustomerAddress[] {
-      new CustomerAddress {
+    Addresses = new Address[]
+    {
+      new Address
+      {
         Country = "ID",
         StreetLine1 = "Jalan Makan",
         StreetLine2 = "Kecamatan Kebayoran Baru",
@@ -574,13 +579,16 @@ Invoice[] invoices = new Invoice[]
     Created = "<CREATED_TIMESTAMP>",
     Updated = "<UPDATED_TIMESTAMP>",
     Currency = Currency.IDR,
-    Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
-    Customer = new Customer {
+    Fees = new FeeInvoice[] { new FeeInvoice { Type = "name_of_fee_for_internal_reference", Value = 200 } },
+    Customer = new Customer
+    {
       GivenNames = "John",
       Email = "john@email.com",
       MobileNumber = "+6287774441111",
-      Addresses = new CustomerAddress[] {
-        new CustomerAddress {
+      Addresses = new Address[]
+      {
+        new Address
+        {
           Country = "ID",
           StreetLine1 = "Jalan Makan",
           StreetLine2 = "Kecamatan Kebayoran Baru",
@@ -651,13 +659,16 @@ Invoice invoice = new Invoice
   Created = "<CREATED_TIMESTAMP>",
   Updated = "<UPDATED_TIMESTAMP>",
   Currency = Currency.IDR,
-  Fees = new FeeInvoice[] { new FeeInvoice { Type = "ADMIN", Value = 200 } },
-  Customer = new Customer {
+  Fees = new FeeInvoice[] { new FeeInvoice { Type = "name_of_fee_for_internal_reference", Value = 200 } },
+  Customer = new Customer
+  {
     GivenNames = "John",
     Email = "john@email.com",
     MobileNumber = "+6287774441111",
-    Addresses = new CustomerAddress[] {
-      new CustomerAddress {
+    Addresses = new Addresses[]
+    {
+      new Addresses
+      {
         Country = "ID",
         StreetLine1 = "Jalan Makan",
         StreetLine2 = "Kecamatan Kebayoran Baru",
