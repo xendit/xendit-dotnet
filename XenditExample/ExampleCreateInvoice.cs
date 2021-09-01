@@ -21,7 +21,7 @@ namespace XenditExample
 
             try
             {
-                CustomerAddress addresses = new CustomerAddress
+                Address addresses = new Address
                 {
                     Country = "ID",
                     StreetLine1 = "Jalan Makan",
@@ -36,10 +36,10 @@ namespace XenditExample
                     GivenNames = "John",
                     Email = "john@email.com",
                     MobileNumber = "+6287774441111",
-                    Addresses = new CustomerAddress[] { addresses },
+                    Addresses = new Address[] { addresses },
                 };
 
-                CustomerNotificationPreferenceInvoice preference = new CustomerNotificationPreferenceInvoice
+                NotificationPreference preference = new NotificationPreference
                 {
                     InvoicePaid = new NotificationType[] { NotificationType.Email }
                 };
@@ -53,11 +53,11 @@ namespace XenditExample
 
                 FeeInvoice fee = new FeeInvoice
                 {
-                    Type = "ADMIN",
+                    Type = "name_of_fee_for_internal_reference",
                     Value = 200,
                 };
 
-                InvoiceBody parameter = new InvoiceBody
+                InvoiceParameter parameter = new InvoiceParameter
                 {
                     ExternalId = "external-id",
                     Amount = 1000,

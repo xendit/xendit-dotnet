@@ -375,7 +375,7 @@ Invoice invoice = new Invoice
     new AvailableBankInvoice
     {
       BankCode = BankCode.Mandiri,
-      CollectionType = "Pool",
+      CollectionType = "POOL",
       BankAccountNumber = "8860810000525",
       TransferAmount = 50000,
       BankBranch = "Virtual Account",
@@ -453,7 +453,7 @@ Invoice invoice = new Invoice
     new AvailableBankInvoice
     {
       BankCode = BankCode.Mandiri,
-      CollectionType = "Pool",
+      CollectionType = "POOL",
       BankAccountNumber = "8860810000525",
       TransferAmount = 50000,
       BankBranch = "Virtual Account",
@@ -551,7 +551,7 @@ Invoice[] invoices = new Invoice[]
       new AvailableBankInvoice
       {
         BankCode = BankCode.Mandiri,
-        CollectionType = "Pool",
+        CollectionType = "POOL",
         BankAccountNumber = "8860810000525",
         TransferAmount = 50000,
         BankBranch = "Virtual Account",
@@ -631,7 +631,7 @@ Invoice invoice = new Invoice
     new AvailableBankInvoice
     {
       BankCode = BankCode.Mandiri,
-      CollectionType = "Pool",
+      CollectionType = "POOL",
       BankAccountNumber = "8860810000525",
       TransferAmount = 50000,
       BankBranch = "Virtual Account",
