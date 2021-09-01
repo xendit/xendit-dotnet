@@ -6,6 +6,6 @@
 
     public interface INetworkClient
     {
-        Task<T> Request<T>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, Dictionary<string, object> requestBody);
+        Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, TBody requestBody);
     }
 }
