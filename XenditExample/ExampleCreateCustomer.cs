@@ -21,44 +21,44 @@ namespace XenditExample
 
             try
             {
-                CustomerParameter individualParameterCustomVersion = new CustomerParameter
+                CustomerParameter individualParameterVersion20200519 = new CustomerParameter
                 {
-                    ReferenceId = "demo_11212157",
+                    ReferenceId = "demo_11212162",
                     Email = "john@email.com",
                     GivenNames = "John",
                     Addresses = new Address[] { new Address { Country = Country.Indonesia } }
                 };
 
-                Customer individualCustomerVersion20200519 = await Customer.Create(individualParameterCustomVersion, version: ApiVersion.Version20200519);
+                Customer individualCustomerVersion20200519 = await Customer.Create(individualParameterVersion20200519, version: ApiVersion.Version20200519);
                 Console.WriteLine(individualCustomerVersion20200519);
-
-                IndividualDetail individualDetail = new IndividualDetail
-                {
-                    GivenNames = "John",
-                    Gender = CustomerGender.Male,
-                };
-
-                IdentityAccount identityAccount = new IdentityAccount
-                {
-                    Country = Country.Indonesia,
-                    Type = CustomerIdentityAccountType.BankAccount,
-                    Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
-                };
-
-                KycDocument document = new KycDocument
-                {
-                    Country = Country.Indonesia,
-                    Type = CustomerKycDocumentType.IdentityCard,
-                    SubType = CustomerKycDocumentSubType.NationalId,
-                };
 
                 CustomerParameter individualParameter = new CustomerParameter
                 {
-                    ReferenceId = "demo_11212158",
+                    ReferenceId = "demo_11212163",
                     Type = CustomerType.Individual,
-                    IndividualDetail = individualDetail,
-                    IdentityAccount = new IdentityAccount[] { identityAccount },
-                    KycDocuments = new KycDocument[] { document },
+                    IndividualDetail = new IndividualDetail
+                    {
+                        GivenNames = "John",
+                        Gender = CustomerGender.Male,
+                    },
+                    IdentityAccount = new IdentityAccount[]
+                    {
+                        new IdentityAccount
+                        {
+                            Country = Country.Indonesia,
+                            Type = CustomerIdentityAccountType.BankAccount,
+                            Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
+                        }
+                    },
+                    KycDocuments = new KycDocument[]
+                    {
+                        new KycDocument
+                        {
+                            Country = Country.Indonesia,
+                            Type = CustomerKycDocumentType.IdentityCard,
+                            SubType = CustomerKycDocumentSubType.NationalId,
+                        }
+                    },
                 };
 
                 Customer individualCustomerVersion20201031 = await Customer.Create(individualParameter);
