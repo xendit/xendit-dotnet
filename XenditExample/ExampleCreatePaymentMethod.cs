@@ -35,6 +35,7 @@ namespace ConsoleApp1
                     },
                     CustomerId = "4b7b6050-0830-440a-903b-37d527dbbaa9",
                 };
+
                 PaymentMethod paymentMethod = await PaymentMethod.Create(parameter);
                 Console.WriteLine(paymentMethod);
             }

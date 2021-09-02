@@ -49,7 +49,7 @@
         /// Get payment methods by customer id.
         /// </summary>
         /// <param name="customerId">Customer object ID of interest.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
+        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/></param>
         /// <returns>A Task of array of Payment Method models.</returns>
         public static async Task<PaymentMethod[]> Get(string customerId, Dictionary<string, string> headers = null)
         {
