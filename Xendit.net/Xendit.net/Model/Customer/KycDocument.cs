@@ -6,7 +6,7 @@
     public class KycDocument
     {
         [JsonPropertyName("country")]
-        public string Country { get; set; }
+        public Country Country { get; set; }
 
         [JsonPropertyName("type")]
         public CustomerKycDocumentType Type { get; set; }

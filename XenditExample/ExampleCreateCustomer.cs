@@ -26,7 +26,7 @@ namespace XenditExample
                     ReferenceId = "demo_11212157",
                     Email = "john@email.com",
                     GivenNames = "John",
-                    Addresses = new Address[] { new Address { Country = "ID" } }
+                    Addresses = new Address[] { new Address { Country = Country.Indonesia } }
                 };
 
                 Customer individualCustomerVersion20200519 = await Customer.Create(individualParameterCustomVersion, version: ApiVersion.Version20200519);
@@ -40,14 +40,14 @@ namespace XenditExample
 
                 IdentityAccount identityAccount = new IdentityAccount
                 {
-                    Country = "ID",
+                    Country = Country.Indonesia,
                     Type = CustomerIdentityAccountType.BankAccount,
                     Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
                 };
 
                 KycDocument document = new KycDocument
                 {
-                    Country = "ID",
+                    Country = Country.Indonesia,
                     Type = CustomerKycDocumentType.IdentityCard,
                     SubType = CustomerKycDocumentSubType.NationalId,
                 };

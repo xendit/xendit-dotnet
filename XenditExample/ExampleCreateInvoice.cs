@@ -23,7 +23,7 @@ namespace XenditExample
             {
                 Address addresses = new Address
                 {
-                    Country = "ID",
+                    Country = Country.Indonesia,
                     StreetLine1 = "Jalan Makan",
                     StreetLine2 = "Kecamatan Kebayoran Baru",
                     City = "Jakarta Selatan",

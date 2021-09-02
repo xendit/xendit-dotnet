@@ -6,7 +6,7 @@
     public class IdentityAccount
     {
         [JsonPropertyName("country")]
-        public string Country { get; set; }
+        public Country Country { get; set; }
 
         [JsonPropertyName("type")]
         public CustomerIdentityAccountType Type { get; set; }

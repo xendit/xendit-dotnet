@@ -310,7 +310,7 @@ Here is the example:
 ```cs
 Address addresses = new Address
 {
-  Country = "ID",
+  Country = Country.Indonesia,
   StreetLine1 = "Jalan Makan",
   StreetLine2 = "Kecamatan Kebayoran Baru",
   City = "Jakarta Selatan",
@@ -415,7 +415,7 @@ Invoice invoice = new Invoice
     {
       new Address
       {
-        Country = "ID",
+        Country = Country.Indonesia,
         StreetLine1 = "Jalan Makan",
         StreetLine2 = "Kecamatan Kebayoran Baru",
         City = "Jakarta Selatan",
@@ -494,7 +494,7 @@ Invoice invoice = new Invoice
     {
       new Address
       {
-        Country = "ID",
+        Country = Country.Indonesia,
         StreetLine1 = "Jalan Makan",
         StreetLine2 = "Kecamatan Kebayoran Baru",
         City = "Jakarta Selatan",
@@ -592,7 +592,7 @@ Invoice[] invoices = new Invoice[]
       {
         new Address
         {
-          Country = "ID",
+          Country = Country.Indonesia,
           StreetLine1 = "Jalan Makan",
           StreetLine2 = "Kecamatan Kebayoran Baru",
           City = "Jakarta Selatan",
@@ -672,7 +672,7 @@ Invoice invoice = new Invoice
     {
       new Addresses
       {
-        Country = "ID",
+        Country = Country.Indonesia,
         StreetLine1 = "Jalan Makan",
         StreetLine2 = "Kecamatan Kebayoran Baru",
         City = "Jakarta Selatan",
@@ -724,14 +724,14 @@ IndividualDetail individualDetail = new IndividualDetail
 
 IdentityAccount identityAccount = new IdentityAccount
 {
-  Country = "ID",
+  Country = Country.Indonesia,
   Type = CustomerIdentityAccountType.BankAccount,
   Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
 };
 
 KycDocument document = new KycDocument
 {
-  Country = "ID",
+  Country = Country.Indonesia,
   Type = CustomerKycDocumentType.IdentityCard,
   SubType = CustomerKycDocumentSubType.NationalId,
 };
@@ -765,7 +765,7 @@ Customer customerDefault = new Customer
   {
     new IdentityAccount
     {
-      Country = "ID",
+      Country = Country.Indonesia,
       Type = CustomerIdentityAccountType.BankAccount,
       Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
     }
@@ -773,7 +773,7 @@ Customer customerDefault = new Customer
   KycDocuments = new KycDocument[]
   {
     new KycDocument
-    { Country = "ID",
+    { Country = Country.Indonesia,
       Type = CustomerKycDocumentType.IdentityCard,
       SubType = CustomerKycDocumentSubType.NationalId,
     }
@@ -789,7 +789,7 @@ CustomerParameter parameter = new CustomerParameter
     ReferenceId = "demo_11212144",
     Email = "john@email.com",
     GivenNames = "John",
-    Addresses = new Address[] { new Address { Country = "ID" } }
+    Addresses = new Address[] { new Address { Country = Country.Indonesia } }
 };
 
 Customer customerWithVersion = await Customer.Create(parameter, version: ApiVersion.Version20200519);
@@ -803,7 +803,7 @@ Customer customerWithVersion = new Customer
     ReferenceId = "demo_11212144",
     Email = "john@email.com",
     GivenNames = "John",
-    Addresses = new Address[] { new Address { Country = "ID" } }
+    Addresses = new Address[] { new Address { Country = Country.Indonesia } }
 };
 ```
 
@@ -849,7 +849,7 @@ Customer customerDefault = new Customer
       {
         new IdentityAccount
         {
-          Country = "ID",
+          Country = Country.Indonesia,
           Type = CustomerIdentityAccountType.BankAccount,
           Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
         }
@@ -857,7 +857,7 @@ Customer customerDefault = new Customer
       KycDocuments = new KycDocument[]
       {
         new KycDocument
-        { Country = "ID",
+        { Country = Country.Indonesia,
           Type = CustomerKycDocumentType.IdentityCard,
           SubType = CustomerKycDocumentSubType.NationalId,
         }
@@ -886,7 +886,7 @@ Customer customerWithVersion = new Customer
       ReferenceId = "example_reference_id",
       Email = "john@email.com",
       GivenNames = "John",
-      Addresses = new Address[] { new Address { Country = "ID" } }
+      Addresses = new Address[] { new Address { Country = Country.Indonesia } }
     }
   },
 };

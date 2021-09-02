@@ -6,7 +6,7 @@
     public class Address
     {
         [JsonPropertyName("country")]
-        public string Country { get; set; }
+        public Country Country { get; set; }
 
         [JsonPropertyName("street_line1")]
         public string StreetLine1 { get; set; }
