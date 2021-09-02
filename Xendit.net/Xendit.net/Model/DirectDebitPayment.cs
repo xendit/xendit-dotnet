@@ -76,10 +76,10 @@
         public Dictionary<string, object> Metadata { get; set; }
 
         /// <summary>
-        /// Create Direct Debit Payment.
+        /// Create direct debit payment.
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="DirectDebitPaymentParameter"/>.</param>
-        /// <param name="idempotencyKey">Key provided by the merchant to prevent duplicate requests. </param>
+        /// <param name="idempotencyKey">Key provided by the merchant to prevent duplicate requests.</param>
         /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#create-direct-debit-payment"/></param>
         /// <returns>A Task of Direct Debit Payment model.</returns>
         public static async Task<DirectDebitPayment> Create(DirectDebitPaymentParameter parameter, string idempotencyKey, Dictionary<string, string> headers = null)
