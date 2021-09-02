@@ -29,16 +29,16 @@
         }
 
         [Fact]
-        public async void Customer_ShouldSuccess_CreateDictionaryParameters_WithCustomHeaderAndDefaultVersion()
+        public async void Customer_ShouldSuccess_Create_WithCustomHeaderAndDefaultVersion()
         {
             MockClient
                 .Setup(client => client.Request<CustomerParameter, Customer>(HttpMethod.Post, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerUrl, Constant.CustomerBody))
-                .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
+                .ReturnsAsync(Constant.ExpectedCustomerData);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
             Customer actualCustomer = await Customer.Create(Constant.CustomerBody, Constant.UserIdHeaders);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerData), JsonSerializer.Serialize(actualCustomer));
         }
 
         [Fact]
