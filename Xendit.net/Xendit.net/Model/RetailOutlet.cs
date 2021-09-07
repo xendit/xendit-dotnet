@@ -4,6 +4,8 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
+    using Xendit.net.Network;
     using Xendit.net.Struct;
 
     public class RetailOutlet
@@ -24,13 +26,13 @@
         public string PaymentCode { get; set; }
 
         [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+        public RetailOutletEnum.Currency Currency { get; set; }
 
         [JsonPropertyName("amount")]
         public long Amount { get; set; }
 
         [JsonPropertyName("channel_code")]
-        public string ChannelCode { get; set; }
+        public RetailOutletEnum.ChannelCode ChannelCode { get; set; }
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
@@ -39,10 +41,10 @@
         public bool IsSingleUse { get; set; }
 
         [JsonPropertyName("market")]
-        public string Market { get; set; }
+        public RetailOutletEnum.Country Market { get; set; }
 
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public RetailOutletEnum.Status Status { get; set; }
 
         [JsonPropertyName("metadata")]
         public Dictionary<string, object> Metadata { get; set; }
@@ -103,7 +105,7 @@
         /// Get payments by ID of the payment code.
         /// </summary>
         /// <param name="paymentCodeId">ID of the payment code to retrieve payments made.</param>
-        /// <param name="headers">Headers listed here <see href="https://developers.xendit.co/api-reference/#get-payments-by-payment-code-id"/></param>
+        /// <param name="headers">Headers listed here <see href="https://developers.xendit.co/api-reference/#get-payments-by-payment-code-id"/>.</param>
         /// <returns>A Task of Retail Outlet model.</returns>
         public static async Task<RetailOutlet[]> GetPayments(string paymentCodeId, Dictionary<string, string> headers = null)
         {
@@ -120,7 +122,7 @@
         private static async Task<RetailOutlet> UpdateRequest(UpdateRetailOutletParameter parameter, string paymentCodeId, Dictionary<string, string> headers)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/payment_codes/", paymentCodeId);
-            return await XenditConfiguration.RequestClient.Request<UpdateRetailOutletParameter, RetailOutlet>(HttpMethod.Patch, headers, url, parameter);
+            return await XenditConfiguration.RequestClient.Request<UpdateRetailOutletParameter, RetailOutlet>(XenditHttpMethod.Patch, headers, url, parameter);
         }
 
         private static async Task<RetailOutlet> GetPaymentCodeRequest(string paymentCodeId, Dictionary<string, string> headers)

@@ -1,6 +1,7 @@
 ﻿namespace Xendit.net.Struct
 {
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public struct UpdateRetailOutletParameter
     {
@@ -11,7 +12,7 @@
         public long Amount { get; set; }
 
         [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+        public RetailOutletEnum.Currency Currency { get; set; }
 
         [JsonPropertyName("expires_at")]
         public string ExpiresAt { get; set; }

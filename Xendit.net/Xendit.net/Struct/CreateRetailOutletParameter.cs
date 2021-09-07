@@ -2,26 +2,27 @@
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public struct CreateRetailOutletParameter
     {
-        [JsonPropertyName("business_id")]
-        public string BusinessId { get; set; }
+        [JsonPropertyName("reference_id")]
+        public string ReferenceId { get; set; }
 
         [JsonPropertyName("channel_code")]
-        public string ChannelCode { get; set; }
+        public RetailOutletEnum.ChannelCode ChannelCode { get; set; }
 
         [JsonPropertyName("amount")]
         public long Amount { get; set; }
 
         [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+        public RetailOutletEnum.Currency Currency { get; set; }
 
         [JsonPropertyName("customer_name")]
         public string CustomerName { get; set; }
 
         [JsonPropertyName("market")]
-        public string Market { get; set; }
+        public RetailOutletEnum.Country Market { get; set; }
 
         [JsonPropertyName("payment_code")]
         public string PaymentCode { get; set; }
