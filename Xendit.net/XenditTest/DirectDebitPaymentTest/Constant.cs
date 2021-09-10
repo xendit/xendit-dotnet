@@ -11,7 +11,7 @@
         {
             Id = "generated-id",
             ReferenceId = "reference-id",
-            ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+            ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
             PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
             Currency = Currency.IDR,
             Amount = 10000,

@@ -12,16 +12,16 @@
             Unknown,
 
             [EnumMember(Value = "DC_BRI")]
-            DcBRI,
+            DcBri,
 
             [EnumMember(Value = "BCA_ONEKLIK")]
-            BCAOneKlik,
+            BcaOneKlik,
 
             [EnumMember(Value = "BA_BPI")]
-            BaBPI,
+            BaBpi,
 
             [EnumMember(Value = "BA_UBP")]
-            BaUBP,
+            BaUbp,
         }
     }
 }

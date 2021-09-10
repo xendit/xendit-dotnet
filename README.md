@@ -966,7 +966,7 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
 {
   Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
   ReferenceId = "reference-id",
-  ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+  ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
   PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
   Currency = Currency.IDR,
   Amount = 10000,
@@ -1013,7 +1013,7 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
 {
   Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
   ReferenceId = "reference-id",
-  ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+  ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
   PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
   Currency = Currency.IDR,
   Amount = 10000,
@@ -1051,7 +1051,7 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
 {
   Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
   ReferenceId = "reference-id",
-  ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+  ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
   PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
   Currency = Currency.IDR,
   Amount = 10000,
@@ -1090,7 +1090,7 @@ DirectDebitPayment[] directDebitPayments = new DirectDebitPayment[]
   {
     Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
     ReferenceId = "reference-id",
-    ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+    ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
     PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
     Currency = Currency.IDR,
     Amount = 10000,
