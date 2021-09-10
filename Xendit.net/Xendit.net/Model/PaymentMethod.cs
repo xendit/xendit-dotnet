@@ -37,8 +37,8 @@
         /// Create payment method with all parameter.
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="PaymentMethodParameter"/>.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#create-payment-method"/></param>
-        /// <returns>A Task of Payment Method model.</returns>
+        /// <param name="headers">Custom headers <seealso href="https://developers.xendit.co/api-reference/#create-payment-method"/>.</param>
+        /// <returns>A Task of Payment Method model <seealso cref="PaymentMethod"/>.</returns>
         public static async Task<PaymentMethod> Create(PaymentMethodParameter parameter, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
@@ -49,8 +49,8 @@
         /// Get payment methods by customer id.
         /// </summary>
         /// <param name="customerId">Customer object ID of interest.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/></param>
-        /// <returns>A Task of array of Payment Method models.</returns>
+        /// <param name="headers">Custom headers <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/>.</param>
+        /// <returns>A Task of array of Payment Method models <seealso cref="PaymentMethod"/>.</returns>
         public static async Task<PaymentMethod[]> Get(string customerId, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
@@ -66,7 +66,7 @@
         private static async Task<PaymentMethod[]> GetPaymentMethodRequest(Dictionary<string, string> headers, string customerId)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/payment_methods?customer_id=", customerId);
-            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, PaymentMethod[]>(HttpMethod.Get, headers, url, null);
+            return await XenditConfiguration.RequestClient.Request<PaymentMethod[]>(HttpMethod.Get, headers, url);
         }
     }
 }

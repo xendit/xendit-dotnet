@@ -44,7 +44,7 @@
         public async void PaymentMethod_ShouldSuccess_GetPaymentMethodByCustomerId()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, PaymentMethod[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.GetPaymentMethodByCustomerIdUrl, null))
+                .Setup(client => client.Request<PaymentMethod[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.GetPaymentMethodByCustomerIdUrl))
                 .ReturnsAsync(Constant.ExpectedPaymentMethods);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -57,7 +57,7 @@
         public async void PaymentMethod_ShouldSuccess_GetPaymentMethodByCustomerId_WthHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, PaymentMethod[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetPaymentMethodByCustomerIdUrl, null))
+                .Setup(client => client.Request<PaymentMethod[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetPaymentMethodByCustomerIdUrl))
                 .ReturnsAsync(Constant.ExpectedPaymentMethods);
 
             XenditConfiguration.RequestClient = MockClient.Object;
