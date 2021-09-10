@@ -141,13 +141,13 @@
         private static async Task<DirectDebitPayment> GetByIdRequest(string id, Dictionary<string, string> headers)
         {
             string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/direct_debits/", id, "/");
-            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, DirectDebitPayment>(HttpMethod.Get, headers, url, null);
+            return await XenditConfiguration.RequestClient.Request<DirectDebitPayment>(HttpMethod.Get, headers, url);
         }
 
         private static async Task<DirectDebitPayment[]> GetByReferenceIdRequest(string referenceId, Dictionary<string, string> headers)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/direct_debits?reference_id=", referenceId);
-            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, DirectDebitPayment[]>(HttpMethod.Get, headers, url, null);
+            return await XenditConfiguration.RequestClient.Request<DirectDebitPayment[]>(HttpMethod.Get, headers, url);
         }
     }
 }

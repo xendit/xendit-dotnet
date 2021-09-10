@@ -57,7 +57,7 @@
         public async void DirectDebitPayment_GetById_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, DirectDebitPayment>(HttpMethod.Get, new Dictionary<string, string>(), Constant.DirectDebitUrlGetById, null))
+                .Setup(client => client.Request<DirectDebitPayment>(HttpMethod.Get, new Dictionary<string, string>(), Constant.DirectDebitUrlGetById))
                 .ReturnsAsync(Constant.ExpectedDirectDebitPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -70,7 +70,7 @@
         public async void DirectDebitPayment_GetByReferenceId_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, DirectDebitPayment[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.DirectDebitUrlGetByReferenceId, null))
+                .Setup(client => client.Request<DirectDebitPayment[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.DirectDebitUrlGetByReferenceId))
                 .ReturnsAsync(Constant.ExpectedDirectDebitPayments);
 
             XenditConfiguration.RequestClient = MockClient.Object;

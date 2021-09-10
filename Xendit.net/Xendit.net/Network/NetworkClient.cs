@@ -20,6 +20,11 @@
             this.client.DefaultRequestHeaders.ConnectionClose = true;
         }
 
+        public async Task<TResponse> Request<TResponse>(HttpMethod httpMethod, Dictionary<string, string> headers, string url)
+        {
+            return await this.Request<int, TResponse>(httpMethod, headers, url, 0);
+        }
+
         public async Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, TBody requestBody)
         {
             var request = CreateRequestMessage(httpMethod, headers, url, requestBody);
@@ -72,6 +77,7 @@
                     IgnoreNullValues = true,
                 };
 
+                Console.WriteLine(JsonSerializer.Serialize(requestBody, options));
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody, options), Encoding.UTF8, "application/json");
             }
 
