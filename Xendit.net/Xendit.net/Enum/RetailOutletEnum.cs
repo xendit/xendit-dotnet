@@ -61,6 +61,9 @@
             [EnumMember(Value = "INACTIVE")]
             Inactive,
 
+            [EnumMember(Value = "EXPIRED")]
+            Expired,
+
             [EnumMember(Value = "COMPLETED")]
             Completed,
         }

@@ -31,7 +31,7 @@
         public string ExpiresAt { get; set; }
 
         [JsonPropertyName("is_single_use")]
-        public bool IsSingleUse { get; set; }
+        public bool? IsSingleUse { get; set; }
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
