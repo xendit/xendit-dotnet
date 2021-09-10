@@ -44,12 +44,12 @@
         public async void ValidatedLinkedAccount_ValidateOTP_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<ValidatedLinkedAccountParameter, ValidatedLinkedAccount>(HttpMethod.Post, new Dictionary<string, string>(), Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
+                .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccount>(HttpMethod.Post, new Dictionary<string, string>(), Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
                 .ReturnsAsync(Constant.ExpectedValidatedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOTP(Constant.ValidatedLinkedAccountParameter, Constant.LinkedAccountId);
+            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOTP(Constant.OTPCode, Constant.LinkedAccountId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedValidatedLinkedAccount), JsonSerializer.Serialize(actualValidatedLinkedAccount));
         }
 
@@ -57,12 +57,12 @@
         public async void ValidatedLinkedAccount_ValidateOTP_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<ValidatedLinkedAccountParameter, ValidatedLinkedAccount>(HttpMethod.Post, Constant.CustomHeaders, Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
+                .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccount>(HttpMethod.Post, Constant.CustomHeaders, Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
                 .ReturnsAsync(Constant.ExpectedValidatedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOTP(Constant.ValidatedLinkedAccountParameter, Constant.LinkedAccountId, Constant.CustomHeaders);
+            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOTP(Constant.OTPCode, Constant.LinkedAccountId, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedValidatedLinkedAccount), JsonSerializer.Serialize(actualValidatedLinkedAccount));
         }
 

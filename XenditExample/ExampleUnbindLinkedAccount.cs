@@ -21,8 +21,8 @@ namespace XenditExample
 
             try
             {
-                string linkedAccountId = "linked-account-token-id";
-                UnbindedLinkedAccount unbindedLinkedAccount = await UnbindedLinkedAccount.Unbind(linkedAccountId);
+                string linkedAccountTokenId = "linked-account-token-id";
+                UnbindedLinkedAccount unbindedLinkedAccount = await UnbindedLinkedAccount.Unbind(linkedAccountTokenId);
                 Console.WriteLine(unbindedLinkedAccount);
             }
             catch (XenditException e)
