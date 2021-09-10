@@ -31,8 +31,8 @@
         /// Initialize linked account tokenization.
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="InitializedLinkedAccountParameter"/>.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#initialize-linked-account-tokenization"/></param>
-        /// <returns>A Task of Initialized Linked Account model.</returns>
+        /// <param name="headers">Custom headers <seealso href="https://developers.xendit.co/api-reference/#initialize-linked-account-tokenization"/>.</param>
+        /// <returns>A Task of Initialized Linked Account model <seealso cref="InitializedLinkedAccount"/>.</returns>
         public static async Task<InitializedLinkedAccount> Initialize(InitializedLinkedAccountParameter parameter, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();

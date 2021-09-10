@@ -17,8 +17,8 @@
         /// Unlinks or unbinds a successful linked account token.
         /// </summary>
         /// <param name="linkedAccountTokenId">Linked account token `id` received from Initialize Account Authorization.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#unbind-a-linked-account-token"/></param>
-        /// <returns>A Task of Accessible Linked Account model.</returns>
+        /// <param name="headers">Custom headers <seealso href="https://developers.xendit.co/api-reference/#unbind-a-linked-account-token"/>.</param>
+        /// <returns>A Task of Accessible Linked Account model <seealso cref="AccessibleLinkedAccount"/>.</returns>
         public static async Task<UnbindedLinkedAccount> Unbind(string linkedAccountTokenId, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
