@@ -30,8 +30,6 @@ namespace XenditExample
                     CallbackUrl = "https://callback-url.com/",
                     EnableOTP = true,
                     Description = "Example Description",
-                    SuccessRedirectUrl = "https://success-url.com/",
-                    FailureRedirectUrl = "https://failure-url.com/",
                     Device = new LinkedAccountDevice
                     {
                         Id = "device-id",
