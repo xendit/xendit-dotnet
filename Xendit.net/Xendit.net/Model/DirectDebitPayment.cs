@@ -80,8 +80,8 @@
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="DirectDebitPaymentParameter"/>.</param>
         /// <param name="idempotencyKey">Key provided by the merchant to prevent duplicate requests.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#create-direct-debit-payment"/></param>
-        /// <returns>A Task of Direct Debit Payment model.</returns>
+        /// <param name="headers">Custom headers <seealso href="https://developers.xendit.co/api-reference/#create-direct-debit-payment"/>.</param>
+        /// <returns>A Task of Direct Debit Payment model <seealso cref="DirectDebitPayment"/>.</returns>
         public static async Task<DirectDebitPayment> Create(DirectDebitPaymentParameter parameter, string idempotencyKey, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
@@ -94,8 +94,8 @@
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="ValidateDirectDebitPaymentParameter"/>.</param>
         /// <param name="directDebitId">Merchant provided identifier for specified direct debit transaction.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#validate-otp-for-direct-debit-payment"/></param>
-        /// <returns>A Task of Direct Debit Payment model.</returns>
+        /// <param name="headers">Custom headers <seealso href="https://developers.xendit.co/api-reference/#validate-otp-for-direct-debit-payment"/>.</param>
+        /// <returns>A Task of Direct Debit Payment model <seealso cref="DirectDebitPayment"/>.</returns>
         public static async Task<DirectDebitPayment> ValidateOTP(ValidateDirectDebitPaymentParameter parameter, string directDebitId, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
@@ -106,8 +106,8 @@
         /// Retrieve the details of a direct debit payment by Xendit transaction ID.
         /// </summary>
         /// <param name="id">Xendit identifier for specified direct debit transaction.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-id"/></param>
-        /// <returns>A Task of Direct Debit Payment model.</returns>
+        /// <param name="headers">Custom headers <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-id"/>.</param>
+        /// <returns>A Task of Direct Debit Payment model <seealso cref="DirectDebitPayment"/>.</returns>
         public static async Task<DirectDebitPayment> GetById(string id, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
@@ -118,8 +118,8 @@
         /// Retrieve the details of a direct debit payment by merchant provided transaction ID.
         /// </summary>
         /// <param name="referenceId">Merchant provided identifier for specified direct debit transaction.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/></param>
-        /// <returns>A Task of Direct Debit Payment model.</returns>
+        /// <param name="headers">Custom headers <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/>.</param>
+        /// <returns>A Task of Direct Debit Payment model <seealso cref="DirectDebitPayment"/>.</returns>
         public static async Task<DirectDebitPayment[]> GetByReferenceId(string referenceId, Dictionary<string, string> headers = null)
         {
             headers = headers ?? new Dictionary<string, string>();
