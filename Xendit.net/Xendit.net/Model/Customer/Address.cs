@@ -1,11 +1,12 @@
 ﻿namespace Xendit.net.Model
 {
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public class Address
     {
         [JsonPropertyName("country")]
-        public string Country { get; set; }
+        public Country Country { get; set; }
 
         [JsonPropertyName("street_line1")]
         public string StreetLine1 { get; set; }
@@ -19,7 +20,19 @@
         [JsonPropertyName("province")]
         public string Province { get; set; }
 
+        [JsonPropertyName("province_state")]
+        public string ProvinceState { get; set; }
+
+        [JsonPropertyName("state")]
+        public string State { get; set; }
+
         [JsonPropertyName("postal_code")]
         public string PostalCode { get; set; }
+
+        [JsonPropertyName("category")]
+        public CustomerAddressCategory? Category { get; set; }
+
+        [JsonPropertyName("is_primary")]
+        public bool? IsPrimary { get; set; }
     }
 }
