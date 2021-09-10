@@ -35,10 +35,10 @@
             Created = "2020-03-26T05:44:26+0800",
             Updated = null,
             Metadata = null,
-            Basket = new DirectDebitBasketItem[]
+            Basket = new BasketItem[]
             {
-                new DirectDebitBasketItem { Name = "shoes", Type = "goods", Price = 2000, Quantity = 1 },
-                new DirectDebitBasketItem { Name = "shirt", Type = "goods", Price = 2000, Quantity = 1 },
+                new BasketItem { Name = "shoes", Type = "goods", Price = 2000, Quantity = 1 },
+                new BasketItem { Name = "shirt", Type = "goods", Price = 2000, Quantity = 1 },
             },
         };
 
@@ -62,10 +62,10 @@
                 AdId = "ad-id",
             },
             Metadata = null,
-            Basket = new DirectDebitBasketItem[]
+            Basket = new BasketItem[]
             {
-                new DirectDebitBasketItem { Name = "shoes", Type = "goods", Price = 2000, Quantity = 1 },
-                new DirectDebitBasketItem { Name = "shirt", Type = "goods", Price = 2000, Quantity = 1 },
+                new BasketItem { Name = "shoes", Type = "goods", Price = 2000, Quantity = 1 },
+                new BasketItem { Name = "shirt", Type = "goods", Price = 2000, Quantity = 1 },
             },
         };
 

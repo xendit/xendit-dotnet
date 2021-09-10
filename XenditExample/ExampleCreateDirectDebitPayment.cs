@@ -39,10 +39,10 @@ namespace XenditExample
                         AdId = "ad-id",
                     },
                     Metadata = null,
-                    Basket = new DirectDebitBasketItem[]
+                    Basket = new BasketItem[]
                     {
-                        new DirectDebitBasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
-                        new DirectDebitBasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+                        new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+                        new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
                     },
                 };
 

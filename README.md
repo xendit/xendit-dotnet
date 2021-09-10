@@ -921,7 +921,7 @@ To create direct debit payment, please use struct `DirectDebitPaymentParameter` 
 
 - Enum `Currency` for `Currency` property
 - `LinkedAccountDevice` for `Device` property
-- `DirectDebitBasketItem` for `Basket` property
+- `BasketItem` for `Basket` property
 
 Here is the example of invoking `Create`:
 
@@ -946,10 +946,10 @@ DirectDebitPaymentParameter directDebitPaymentParameter = new DirectDebitPayment
     AdId = "ad-id",
   },
   Metadata = null,
-  Basket = new DirectDebitBasketItem[]
+  Basket = new BasketItem[]
   {
-    new DirectDebitBasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
-    new DirectDebitBasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
   },
 };
 
@@ -982,10 +982,10 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
   Created = "2020-03-26T05:44:26+0800",
   Updated = null,
   Metadata = null,
-  Basket = new DirectDebitBasketItem[]
+  Basket = new BasketItem[]
   {
-    new DirectDebitBasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
-    new DirectDebitBasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
   },
 };
 ```
@@ -1029,10 +1029,10 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
   Created = "2020-03-26T05:44:26+0800",
   Updated = null,
   Metadata = null,
-  Basket = new DirectDebitBasketItem[]
+  Basket = new BasketItem[]
   {
-    new DirectDebitBasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
-    new DirectDebitBasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
   },
 };
 ```
@@ -1067,10 +1067,10 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
   Created = "2020-03-26T05:44:26+0800",
   Updated = null,
   Metadata = null,
-  Basket = new DirectDebitBasketItem[]
+  Basket = new BasketItem[]
   {
-    new DirectDebitBasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
-    new DirectDebitBasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
   },
 };
 ```
@@ -1106,10 +1106,10 @@ DirectDebitPayment[] directDebitPayments = new DirectDebitPayment[]
     Created = "2020-03-26T05:44:26+0800",
     Updated = null,
     Metadata = null,
-    Basket = new DirectDebitBasketItem[]
+    Basket = new BasketItem[]
     {
-      new DirectDebitBasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
-      new DirectDebitBasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+      new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+      new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
     },
   }
 };

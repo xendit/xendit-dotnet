@@ -70,7 +70,7 @@
         public string Updated { get; set; }
 
         [JsonPropertyName("basket")]
-        public DirectDebitBasketItem[] Basket { get; set; }
+        public BasketItem[] Basket { get; set; }
 
         [JsonPropertyName("metadata")]
         public Dictionary<string, object> Metadata { get; set; }

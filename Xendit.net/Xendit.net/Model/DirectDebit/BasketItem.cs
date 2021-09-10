@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
 
-    public class DirectDebitBasketItem
+    public class BasketItem
     {
         [JsonPropertyName("reference_id")]
         public string ReferenceId { get; set; }
