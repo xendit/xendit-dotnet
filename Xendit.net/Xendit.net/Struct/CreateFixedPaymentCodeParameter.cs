@@ -4,7 +4,7 @@
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
 
-    public struct CreateRetailOutletParameter
+    public struct CreateFixedPaymentCodeParameter
     {
         [JsonPropertyName("reference_id")]
         public string ReferenceId { get; set; }

@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
 
-    public struct UpdateRetailOutletParameter
+    public struct UpdateFixedPaymentCodeParameter
     {
         [JsonPropertyName("customer_name")]
         public string CustomerName { get; set; }

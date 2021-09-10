@@ -2,13 +2,13 @@
 {
     using System.Collections.Generic;
     using Xendit.net.Enum;
+    using Xendit.net.Model;
     using Xendit.net.Struct;
-    using RetailOutlet = Xendit.net.Model.RetailOutlet;
 
     internal class Constant
     {
         internal static readonly string RetailOutletUrl = "https://api.xendit.co/payment_codes";
-        internal static readonly CreateRetailOutletParameter CreateRetailOutletParameter = new CreateRetailOutletParameter
+        internal static readonly CreateFixedPaymentCodeParameter CreateFixedPaymentCodeParameter = new CreateFixedPaymentCodeParameter
         {
             ReferenceId = "reference_id",
             ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
@@ -22,7 +22,7 @@
             Metadata = null,
         };
 
-        internal static readonly RetailOutlet ExpectedRetailOutlet = new RetailOutlet
+        internal static readonly FixedPaymentCode ExpectedFixedPaymentCode = new FixedPaymentCode
         {
             Id = "pcode-559bb2df-6ae7-4fb8-bc05-f17aa07aeae1",
             BusinessId = "5f21361959ef2b788cbbe97f",
@@ -42,12 +42,12 @@
             ExpiresAt = "2021-05-30T02:38:01.327283048Z",
         };
 
-        internal static readonly RetailOutlet[] ExpectedRetailOutlets = new RetailOutlet[]
+        internal static readonly FixedPaymentCode[] ExpectedFixedPaymentCodes = new FixedPaymentCode[]
         {
-            ExpectedRetailOutlet,
+            ExpectedFixedPaymentCode,
         };
 
-        internal static readonly UpdateRetailOutletParameter UpdateRetailOutletParameter = new UpdateRetailOutletParameter
+        internal static readonly UpdateFixedPaymentCodeParameter UpdateFixedPaymentCodeParameter = new UpdateFixedPaymentCodeParameter
         {
             CustomerName = "Rika Sutanto",
             Amount = 1000,

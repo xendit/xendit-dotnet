@@ -18,65 +18,65 @@
         public async void RetailOutlet_Create_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<CreateRetailOutletParameter, RetailOutlet>(HttpMethod.Post, new Dictionary<string, string>(), Constant.RetailOutletUrl, Constant.CreateRetailOutletParameter))
-                .ReturnsAsync(Constant.ExpectedRetailOutlet);
+                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, new Dictionary<string, string>(), Constant.RetailOutletUrl, Constant.CreateFixedPaymentCodeParameter))
+                .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            RetailOutlet actualRetailOutlet = await RetailOutlet.Create(Constant.CreateRetailOutletParameter);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedRetailOutlet), JsonSerializer.Serialize(actualRetailOutlet));
+            FixedPaymentCode actualFixedPaymentCode = await RetailOutlet.CreatePaymentCode(Constant.CreateFixedPaymentCodeParameter);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedFixedPaymentCode), JsonSerializer.Serialize(actualFixedPaymentCode));
         }
 
         [Fact]
         public async void RetailOutlet_CreateWithHeader_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<CreateRetailOutletParameter, RetailOutlet>(HttpMethod.Post, Constant.Headers, Constant.RetailOutletUrl, Constant.CreateRetailOutletParameter))
-                .ReturnsAsync(Constant.ExpectedRetailOutlet);
+                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, Constant.Headers, Constant.RetailOutletUrl, Constant.CreateFixedPaymentCodeParameter))
+                .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            RetailOutlet actualRetailOutlet = await RetailOutlet.Create(Constant.CreateRetailOutletParameter, Constant.Headers);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedRetailOutlet), JsonSerializer.Serialize(actualRetailOutlet));
+            FixedPaymentCode actualFixedPaymentCode = await RetailOutlet.CreatePaymentCode(Constant.CreateFixedPaymentCodeParameter, Constant.Headers);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedFixedPaymentCode), JsonSerializer.Serialize(actualFixedPaymentCode));
         }
 
         [Fact]
         public async void RetailOutlet_Update_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<UpdateRetailOutletParameter, RetailOutlet>(XenditHttpMethod.Patch, new Dictionary<string, string>(), Constant.PaymentCodeIdUrl, Constant.UpdateRetailOutletParameter))
-                .ReturnsAsync(Constant.ExpectedRetailOutlet);
+                .Setup(client => client.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, new Dictionary<string, string>(), Constant.PaymentCodeIdUrl, Constant.UpdateFixedPaymentCodeParameter))
+                .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            RetailOutlet actualRetailOutlet = await RetailOutlet.Update(Constant.UpdateRetailOutletParameter, Constant.PaymentCodeId);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedRetailOutlet), JsonSerializer.Serialize(actualRetailOutlet));
+            FixedPaymentCode actualFixedPaymentCode = await RetailOutlet.UpdatePaymentCode(Constant.UpdateFixedPaymentCodeParameter, Constant.PaymentCodeId);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedFixedPaymentCode), JsonSerializer.Serialize(actualFixedPaymentCode));
         }
 
         [Fact]
         public async void RetailOutlet_GetPaymentCode_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, RetailOutlet>(HttpMethod.Get, new Dictionary<string, string>(), Constant.PaymentCodeIdUrl, null))
-                .ReturnsAsync(Constant.ExpectedRetailOutlet);
+                .Setup(client => client.Request<Dictionary<string, string>, FixedPaymentCode>(HttpMethod.Get, new Dictionary<string, string>(), Constant.PaymentCodeIdUrl, null))
+                .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            RetailOutlet actualRetailOutlet = await RetailOutlet.GetPaymentCode(Constant.PaymentCodeId);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedRetailOutlet), JsonSerializer.Serialize(actualRetailOutlet));
+            FixedPaymentCode actualFixedPaymentCode = await RetailOutlet.GetPaymentCode(Constant.PaymentCodeId);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedFixedPaymentCode), JsonSerializer.Serialize(actualFixedPaymentCode));
         }
 
         [Fact]
         public async void RetailOutlet_GetPayments_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, RetailOutlet[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.GetPaymentsUrl, null))
-                .ReturnsAsync(Constant.ExpectedRetailOutlets);
+                .Setup(client => client.Request<Dictionary<string, string>, FixedPaymentCode[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.GetPaymentsUrl, null))
+                .ReturnsAsync(Constant.ExpectedFixedPaymentCodes);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            RetailOutlet[] actualRetailOutlet = await RetailOutlet.GetPayments(Constant.PaymentCodeId);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedRetailOutlets), JsonSerializer.Serialize(actualRetailOutlet));
+            FixedPaymentCode[] actualFixedPaymentCodes = await RetailOutlet.GetPayments(Constant.PaymentCodeId);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedFixedPaymentCodes), JsonSerializer.Serialize(actualFixedPaymentCodes));
         }
     }
 }
