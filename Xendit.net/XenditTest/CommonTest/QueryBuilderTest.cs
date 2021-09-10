@@ -1,7 +1,4 @@
-﻿using Xunit;
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
-
-namespace XenditTest.CommonTest
+﻿namespace XenditTest.CommonTest
 {
     using Xendit.net.Common;
     using Xendit.net.Enum;
