@@ -28,7 +28,7 @@
         private static async Task<UnbindedLinkedAccount> UnbindRequest(string linkedAccountTokenId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/linked_account_tokens/", linkedAccountTokenId);
-            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, UnbindedLinkedAccount>(HttpMethod.Delete, headers, url, null);
+            return await XenditConfiguration.RequestClient.Request<UnbindedLinkedAccount>(HttpMethod.Delete, headers, url);
         }
     }
 }

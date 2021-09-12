@@ -70,7 +70,7 @@
         public async void AccessibleLinkedAccount_Get_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, AccessibleLinkedAccount[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl, null))
+                .Setup(client => client.Request<AccessibleLinkedAccount[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl))
                 .ReturnsAsync(Constant.ExpectedAccessibleLinkedAccounts);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -83,7 +83,7 @@
         public async void AccessibleLinkedAccount_Get_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, AccessibleLinkedAccount[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl, null))
+                .Setup(client => client.Request<AccessibleLinkedAccount[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl))
                 .ReturnsAsync(Constant.ExpectedAccessibleLinkedAccounts);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -96,7 +96,7 @@
         public async void UnbindedLinkedAccount_Unbind_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, UnbindedLinkedAccount>(HttpMethod.Delete, null, Constant.LinkedAccountIdUrl, null))
+                .Setup(client => client.Request<UnbindedLinkedAccount>(HttpMethod.Delete, null, Constant.LinkedAccountIdUrl))
                 .ReturnsAsync(Constant.ExpectedUnbindedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -109,7 +109,7 @@
         public async void UnbindedLinkedAccount_Unbind_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, UnbindedLinkedAccount>(HttpMethod.Delete, Constant.CustomHeaders, Constant.LinkedAccountIdUrl, null))
+                .Setup(client => client.Request<UnbindedLinkedAccount>(HttpMethod.Delete, Constant.CustomHeaders, Constant.LinkedAccountIdUrl))
                 .ReturnsAsync(Constant.ExpectedUnbindedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;

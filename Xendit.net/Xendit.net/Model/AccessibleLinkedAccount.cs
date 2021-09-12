@@ -35,7 +35,7 @@
         private static async Task<AccessibleLinkedAccount[]> GetRequest(string linkedAccountTokenId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/linked_account_tokens/", linkedAccountTokenId, "/accounts");
-            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, AccessibleLinkedAccount[]>(HttpMethod.Get, headers, url, null);
+            return await XenditConfiguration.RequestClient.Request<AccessibleLinkedAccount[]>(HttpMethod.Get, headers, url);
         }
     }
 }
