@@ -1,5 +1,6 @@
 ﻿namespace XenditTest.DirectDebitPaymentTest
 {
+    using System.Collections.Generic;
     using System.Net.Http;
     using System.Text.Json;
     using Moq;
@@ -43,12 +44,12 @@
         public async void DirectDebitPayment_ValidateOtp_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<ValidateDirectDebitPaymentParameter, DirectDebitPayment>(HttpMethod.Post, null, Constant.DirectDebitUrlValidateOTP, Constant.ValidateDirectDebitPaymentParameter))
+                .Setup(client => client.Request<Dictionary<string, string>, DirectDebitPayment>(HttpMethod.Post, null, Constant.DirectDebitUrlValidateOTP, Constant.ValidateDirectDebitPaymentParameter))
                 .ReturnsAsync(Constant.ExpectedDirectDebitPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            DirectDebitPayment actualDirectDebitPayment = await DirectDebitPayment.ValidateOtp(Constant.ValidateDirectDebitPaymentParameter, Constant.DirectDebitId);
+            DirectDebitPayment actualDirectDebitPayment = await DirectDebitPayment.ValidateOtp(Constant.OtpCode, Constant.DirectDebitId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDirectDebitPayment), JsonSerializer.Serialize(actualDirectDebitPayment));
         }
 

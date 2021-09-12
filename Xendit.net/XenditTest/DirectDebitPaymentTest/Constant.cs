@@ -74,9 +74,10 @@
             ExpectedDirectDebitPayment,
         };
 
-        internal static readonly ValidateDirectDebitPaymentParameter ValidateDirectDebitPaymentParameter = new ValidateDirectDebitPaymentParameter
+        internal static readonly string OtpCode = "otp-code";
+        internal static readonly Dictionary<string, string> ValidateDirectDebitPaymentParameter = new Dictionary<string, string>
         {
-            OTPCode = "otp-code",
+            { "otp_code",  "otp-code" },
         };
 
         internal static readonly string DirectDebitId = "generated-id";

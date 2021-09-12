@@ -992,17 +992,12 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
 
 #### Validate OTP for Direct Debit Payment
 
-To create direct debit payment, please use struct `ValidateDirectDebitPaymentParameter` for parameter body.
-
-Here is the example of invoking `ValidateOTP`:
+Here is the example of invoking `ValidateOtp`:
 
 ```cs
-ValidateDirectDebitPaymentParameter validateOTPparam = new ValidateDirectDebitPaymentParameter
-{
-    OTPCode = "123456",
-};
+string otpCode = "123456";
 
-DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOtp(validateOTPparam, "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
+DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOtp(otpCode, "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
 Console.WriteLine(directDebitPayment);
 ```
 

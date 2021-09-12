@@ -21,12 +21,8 @@ namespace XenditExample
 
             try
             {
-                ValidateDirectDebitPaymentParameter validateOtpParam = new ValidateDirectDebitPaymentParameter
-                {
-                    OTPCode = "123456",
-                };
-
-                DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOtp(validateOtpParam, "direct_debit_id");
+                string otpCode = "123456";
+                DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOtp(otpCode, "direct_debit_id");
                 Console.WriteLine(directDebitPayment);
             }
             catch (XenditException e)
