@@ -24,7 +24,7 @@ namespace XenditExample
                 string otpCode = "123456";
                 string linkedAccountTokenId = "linked-account-token-id";
 
-                ValidatedLinkedAccount validatedLinkedAccount = await ValidatedLinkedAccount.ValidateOTP(otpCode, linkedAccountTokenId);
+                ValidatedLinkedAccount validatedLinkedAccount = await ValidatedLinkedAccount.ValidateOtp(otpCode, linkedAccountTokenId);
                 Console.WriteLine(validatedLinkedAccount);
             }
             catch (XenditException e)

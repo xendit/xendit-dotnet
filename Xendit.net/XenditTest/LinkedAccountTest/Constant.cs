@@ -45,10 +45,10 @@
             ForUserId = "user-id",
         };
 
-        internal static readonly string OTPCode = "012345";
+        internal static readonly string OtpCode = "012345";
         internal static readonly Dictionary<string, string> ValidatedLinkedAccountParameter = new Dictionary<string, string>
         {
-            { "otp_code", OTPCode },
+            { "otp_code", OtpCode },
         };
 
         internal static readonly string LinkedAccountId = "lat-aa620619-124f-41db-995b-66a52abe036a";

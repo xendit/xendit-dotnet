@@ -41,7 +41,7 @@
         }
 
         [Fact]
-        public async void ValidatedLinkedAccount_ValidateOTP_ShouldSuccess()
+        public async void ValidatedLinkedAccount_ValidateOtp_ShouldSuccess()
         {
             MockClient
                 .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccount>(HttpMethod.Post, null, Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
@@ -49,12 +49,12 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOTP(Constant.OTPCode, Constant.LinkedAccountId);
+            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOtp(Constant.OtpCode, Constant.LinkedAccountId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedValidatedLinkedAccount), JsonSerializer.Serialize(actualValidatedLinkedAccount));
         }
 
         [Fact]
-        public async void ValidatedLinkedAccount_ValidateOTP_ShouldSuccess_WithHeaders()
+        public async void ValidatedLinkedAccount_ValidateOtp_ShouldSuccess_WithHeaders()
         {
             MockClient
                 .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccount>(HttpMethod.Post, Constant.CustomHeaders, Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
@@ -62,7 +62,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOTP(Constant.OTPCode, Constant.LinkedAccountId, Constant.CustomHeaders);
+            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOtp(Constant.OtpCode, Constant.LinkedAccountId, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedValidatedLinkedAccount), JsonSerializer.Serialize(actualValidatedLinkedAccount));
         }
 
