@@ -13,7 +13,7 @@
         internal static readonly InitializedLinkedAccountParameter InitializedLinkedAccountParameter = new InitializedLinkedAccountParameter
         {
             CustomerId = "customer-id",
-            ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+            ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
             Properties = new LinkedAccountProperties
             {
                 AccountMobileNumber = "+62818555988",
@@ -31,7 +31,7 @@
         {
             Id = LinkedAccountId,
             CustomerId = "customer-id",
-            ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+            ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
             AuthorizerUrl = "https://url.com/",
             Status = LinkedAccountEnum.Status.Pending,
             Metadata = new Dictionary<string, object>()
@@ -60,7 +60,7 @@
         {
             Id = LinkedAccountId,
             CustomerId = "customer-id",
-            ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+            ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
             Status = LinkedAccountEnum.Status.Success,
         };
 
@@ -69,7 +69,7 @@
             new AccessibleLinkedAccount
             {
                 Id = LinkedAccountId,
-                ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+                ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
                 Type = LinkedAccountEnum.Type.DebitCard,
                 Properties = new LinkedAccountProperties
                 {

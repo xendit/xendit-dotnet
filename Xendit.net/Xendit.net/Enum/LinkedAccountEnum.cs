@@ -15,7 +15,7 @@
             DcBri,
 
             [EnumMember(Value = "BCA_ONEKLIK")]
-            BcaOneKlik,
+            BcaOneklik,
 
             [EnumMember(Value = "BA_BPI")]
             BaBpi,

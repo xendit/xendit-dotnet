@@ -24,7 +24,7 @@ namespace XenditExample
                 InitializedLinkedAccountParameter parameter = new InitializedLinkedAccountParameter
                 {
                     CustomerId = "customer-id",
-                    ChannelCode = LinkedAccountEnum.ChannelCode.DcBRI,
+                    ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
                     Properties = new LinkedAccountProperties
                     {
                         AccountMobileNumber = "+62818555988",
