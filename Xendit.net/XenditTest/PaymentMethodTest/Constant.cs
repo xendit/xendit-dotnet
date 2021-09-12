@@ -43,9 +43,9 @@
         internal static readonly string PaymentMethodUrl = "https://api.xendit.co/payment_methods";
         internal static readonly string GetPaymentMethodByCustomerIdUrl = string.Format("{0}{1}{2}", PaymentMethodUrl, "?customer_id=", CustomerId);
 
-        internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
+        internal static readonly HeaderParameter CustomHeaders = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
+            ForUserId = "user-id",
         };
     }
 }

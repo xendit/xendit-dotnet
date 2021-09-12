@@ -7,6 +7,7 @@
     using System.Text;
     using System.Text.Json;
     using System.Threading.Tasks;
+    using Xendit.net.Common;
     using Xendit.net.Exception;
     using Xendit.net.Struct;
 
