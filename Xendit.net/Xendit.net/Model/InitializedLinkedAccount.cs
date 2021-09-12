@@ -31,15 +31,14 @@
         /// Initialize linked account tokenization.
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="InitializedLinkedAccountParameter"/>.</param>
-        /// <param name="headers">Custom headers <seealso href="https://developers.xendit.co/api-reference/#initialize-linked-account-tokenization"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#initialize-linked-account-tokenization"/>.</param>
         /// <returns>A Task of Initialized Linked Account model <seealso cref="InitializedLinkedAccount"/>.</returns>
-        public static async Task<InitializedLinkedAccount> Initialize(InitializedLinkedAccountParameter parameter, Dictionary<string, string> headers = null)
+        public static async Task<InitializedLinkedAccount> Initialize(InitializedLinkedAccountParameter parameter, HeaderParameter? headers = null)
         {
-            headers = headers ?? new Dictionary<string, string>();
             return await InitializeRequest(parameter, headers);
         }
 
-        private static async Task<InitializedLinkedAccount> InitializeRequest(InitializedLinkedAccountParameter parameter, Dictionary<string, string> headers)
+        private static async Task<InitializedLinkedAccount> InitializeRequest(InitializedLinkedAccountParameter parameter, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/linked_account_tokens/auth");
             return await XenditConfiguration.RequestClient.Request<InitializedLinkedAccountParameter, InitializedLinkedAccount>(HttpMethod.Post, headers, url, parameter);

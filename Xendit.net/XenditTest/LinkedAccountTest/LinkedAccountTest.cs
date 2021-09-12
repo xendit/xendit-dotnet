@@ -18,7 +18,7 @@
         public async void InitializedLinkedAccount_Initialize_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<InitializedLinkedAccountParameter, InitializedLinkedAccount>(HttpMethod.Post, new Dictionary<string, string>(), Constant.LinkedAccountAuthUrl, Constant.InitializedLinkedAccountParameter))
+                .Setup(client => client.Request<InitializedLinkedAccountParameter, InitializedLinkedAccount>(HttpMethod.Post, null, Constant.LinkedAccountAuthUrl, Constant.InitializedLinkedAccountParameter))
                 .ReturnsAsync(Constant.ExpectedInitializedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -44,7 +44,7 @@
         public async void ValidatedLinkedAccount_ValidateOTP_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccount>(HttpMethod.Post, new Dictionary<string, string>(), Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
+                .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccount>(HttpMethod.Post, null, Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
                 .ReturnsAsync(Constant.ExpectedValidatedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -70,7 +70,7 @@
         public async void AccessibleLinkedAccount_Get_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, AccessibleLinkedAccount[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.LinkedAccountAccessibleUrl, null))
+                .Setup(client => client.Request<Dictionary<string, string>, AccessibleLinkedAccount[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl, null))
                 .ReturnsAsync(Constant.ExpectedAccessibleLinkedAccounts);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -83,7 +83,7 @@
         public async void AccessibleLinkedAccount_Get_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, AccessibleLinkedAccount[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.LinkedAccountAccessibleUrl, null))
+                .Setup(client => client.Request<Dictionary<string, string>, AccessibleLinkedAccount[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl, null))
                 .ReturnsAsync(Constant.ExpectedAccessibleLinkedAccounts);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -96,7 +96,7 @@
         public async void UnbindedLinkedAccount_Unbind_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, UnbindedLinkedAccount>(HttpMethod.Delete, new Dictionary<string, string>(), Constant.LinkedAccountIdUrl, null))
+                .Setup(client => client.Request<Dictionary<string, string>, UnbindedLinkedAccount>(HttpMethod.Delete, null, Constant.LinkedAccountIdUrl, null))
                 .ReturnsAsync(Constant.ExpectedUnbindedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;

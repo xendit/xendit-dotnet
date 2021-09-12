@@ -40,9 +40,9 @@
             },
         };
 
-        internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
+        internal static readonly HeaderParameter CustomHeaders = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
+            ForUserId = "user-id",
         };
 
         internal static readonly string OTPCode = "012345";
