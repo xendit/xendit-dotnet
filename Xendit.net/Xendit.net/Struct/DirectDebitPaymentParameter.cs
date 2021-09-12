@@ -23,7 +23,7 @@
         public string CallbackUrl { get; set; }
 
         [JsonPropertyName("enable_otp")]
-        public bool EnableOTP { get; set; }
+        public bool EnableOtp { get; set; }
 
         [JsonPropertyName("description")]
         public string Description { get; set; }

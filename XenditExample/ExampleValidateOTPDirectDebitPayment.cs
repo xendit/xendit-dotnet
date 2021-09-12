@@ -10,7 +10,7 @@ namespace XenditExample
     using Xendit.net.Struct;
     using Xendit.net.Enum;
 
-    class ExampleValidateOTPDirectDebitPayment
+    class ExampleValidateOtpDirectDebitPayment
     {
         static async Task Main(string[] args)
         {
@@ -21,12 +21,12 @@ namespace XenditExample
 
             try
             {
-                ValidateDirectDebitPaymentParameter validateOTPparam = new ValidateDirectDebitPaymentParameter
+                ValidateDirectDebitPaymentParameter validateOtpParam = new ValidateDirectDebitPaymentParameter
                 {
                     OTPCode = "123456",
                 };
 
-                DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOTP(validateOTPparam, "direct_debit_id");
+                DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOtp(validateOtpParam, "direct_debit_id");
                 Console.WriteLine(directDebitPayment);
             }
             catch (XenditException e)

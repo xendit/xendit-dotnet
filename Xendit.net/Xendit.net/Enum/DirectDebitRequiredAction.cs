@@ -13,7 +13,7 @@
         ValidateOnRedirect,
 
         [EnumMember(Value = "VALIDATE_OTP")]
-        ValidateOTP,
+        ValidateOtp,
 
         [EnumMember(Value = null)]
         Null,

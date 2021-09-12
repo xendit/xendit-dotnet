@@ -28,7 +28,7 @@ namespace XenditExample
                     Currency = Currency.IDR,
                     Amount = 10000,
                     CallbackUrl = "https://callback-url.com/",
-                    EnableOTP = true,
+                    EnableOtp = true,
                     Description = "Example Description",
                     Device = new LinkedAccountDevice
                     {

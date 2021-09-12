@@ -37,13 +37,13 @@
         public string FailureCode { get; set; }
 
         [JsonPropertyName("is_otp_required")]
-        public bool IsOTPRequired { get; set; }
+        public bool IsOtpRequired { get; set; }
 
         [JsonPropertyName("otp_mobile_number")]
-        public string OTPMobileNumber { get; set; }
+        public string OtpMobileNumber { get; set; }
 
         [JsonPropertyName("otp_expiration_timestamp")]
-        public string OTPExpirationTimestamp { get; set; }
+        public string OtpExpirationTimestamp { get; set; }
 
         [JsonPropertyName("required_action")]
         public DirectDebitRequiredAction RequiredAction { get; set; }
@@ -96,9 +96,9 @@
         /// <param name="directDebitId">Merchant provided identifier for specified direct debit transaction.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#validate-otp-for-direct-debit-payment"/>.</param>
         /// <returns>A Task of Direct Debit Payment model <seealso cref="DirectDebitPayment"/>.</returns>
-        public static async Task<DirectDebitPayment> ValidateOTP(ValidateDirectDebitPaymentParameter parameter, string directDebitId, HeaderParameter? headers = null)
+        public static async Task<DirectDebitPayment> ValidateOtp(ValidateDirectDebitPaymentParameter parameter, string directDebitId, HeaderParameter? headers = null)
         {
-            return await ValidateOTPRequest(parameter, directDebitId, headers);
+            return await ValidateOtpRequest(parameter, directDebitId, headers);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@
             return await XenditConfiguration.RequestClient.Request<DirectDebitPaymentParameter, DirectDebitPayment>(HttpMethod.Post, headers, url, parameter);
         }
 
-        private static async Task<DirectDebitPayment> ValidateOTPRequest(ValidateDirectDebitPaymentParameter parameter, string directDebitId, HeaderParameter? headers)
+        private static async Task<DirectDebitPayment> ValidateOtpRequest(ValidateDirectDebitPaymentParameter parameter, string directDebitId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/direct_debits/", directDebitId, "/validate_otp/");
             return await XenditConfiguration.RequestClient.Request<ValidateDirectDebitPaymentParameter, DirectDebitPayment>(HttpMethod.Post, headers, url, parameter);

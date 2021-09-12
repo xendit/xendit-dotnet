@@ -40,7 +40,7 @@
         }
 
         [Fact]
-        public async void DirectDebitPayment_ValidateOTP_ShouldSuccess()
+        public async void DirectDebitPayment_ValidateOtp_ShouldSuccess()
         {
             MockClient
                 .Setup(client => client.Request<ValidateDirectDebitPaymentParameter, DirectDebitPayment>(HttpMethod.Post, null, Constant.DirectDebitUrlValidateOTP, Constant.ValidateDirectDebitPaymentParameter))
@@ -48,7 +48,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            DirectDebitPayment actualDirectDebitPayment = await DirectDebitPayment.ValidateOTP(Constant.ValidateDirectDebitPaymentParameter, Constant.DirectDebitId);
+            DirectDebitPayment actualDirectDebitPayment = await DirectDebitPayment.ValidateOtp(Constant.ValidateDirectDebitPaymentParameter, Constant.DirectDebitId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDirectDebitPayment), JsonSerializer.Serialize(actualDirectDebitPayment));
         }
 
