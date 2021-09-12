@@ -87,20 +87,20 @@
         internal static readonly string DirectDebitUrlGetByReferenceId = string.Format("{0}?reference_id={1}", DirectDebitUrl, ReferenceId);
 
         internal static readonly string IdempotencyKey = "idempotency-key-example";
-        internal static Dictionary<string, string> Headers = new Dictionary<string, string>()
+        internal static HeaderParameter Headers = new HeaderParameter
         {
-            { "Idempotency-key", IdempotencyKey },
+            Idempotencykey = IdempotencyKey,
         };
 
-        internal static Dictionary<string, string> InitialHeadersWithUserId = new Dictionary<string, string>()
+        internal static HeaderParameter InitialHeadersWithUserId = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
+            ForUserId = "user-id",
         };
 
-        internal static Dictionary<string, string> HeadersWithUserId = new Dictionary<string, string>()
+        internal static HeaderParameter HeadersWithUserId = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
-            { "Idempotency-key", IdempotencyKey },
+            ForUserId = "user-id",
+            Idempotencykey = IdempotencyKey,
         };
     }
 }

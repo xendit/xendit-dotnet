@@ -7,7 +7,9 @@
     using System.Text;
     using System.Text.Json;
     using System.Threading.Tasks;
+    using Xendit.net.Common;
     using Xendit.net.Exception;
+    using Xendit.net.Struct;
 
     public class NetworkClient : INetworkClient
     {
@@ -20,12 +22,12 @@
             this.client.DefaultRequestHeaders.ConnectionClose = true;
         }
 
-        public async Task<TResponse> Request<TResponse>(HttpMethod httpMethod, Dictionary<string, string> headers, string url)
+        public async Task<TResponse> Request<TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url)
         {
             return await this.Request<int, TResponse>(httpMethod, headers, url, 0);
         }
 
-        public async Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, TBody requestBody)
+        public async Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url, TBody requestBody)
         {
             var request = CreateRequestMessage(httpMethod, headers, url, requestBody);
             var response = await this.client.SendAsync(request);
@@ -62,8 +64,9 @@
             return base64String;
         }
 
-        private static HttpRequestMessage CreateRequestMessage<TBody>(HttpMethod httpMethod, Dictionary<string, string> headers, string url, TBody requestBody)
+        private static HttpRequestMessage CreateRequestMessage<TBody>(HttpMethod httpMethod, HeaderParameter? headers, string url, TBody requestBody)
         {
+            Dictionary<string, string> headerDictionary = HeaderToDictionaryBuilder.Build(headers);
             var request = new HttpRequestMessage
             {
                 Method = new HttpMethod(httpMethod.ToString()),
@@ -85,7 +88,7 @@
             string apiKeyBase64 = EncodeToBase64String(XenditConfiguration.ApiKey);
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", apiKeyBase64);
 
-            foreach (var header in headers)
+            foreach (var header in headerDictionary)
             {
                 request.Headers.Add(header.Key, header.Value);
             }
