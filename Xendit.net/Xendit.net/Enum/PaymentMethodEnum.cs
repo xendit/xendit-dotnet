@@ -38,19 +38,19 @@
             Unknown,
 
             [EnumMember(Value = "DC_BRI")]
-            DcBRI,
+            DcBri,
 
             [EnumMember(Value = "BCA_ONEKLIK")]
-            BCAOneKlik,
+            BcaOneklik,
 
             [EnumMember(Value = "BCA_KLIKPAY")]
-            BCAKlikPay,
+            BcaKlikpay,
 
             [EnumMember(Value = "BA_BPI")]
-            BaBPI,
+            BaBpi,
 
             [EnumMember(Value = "BA_UBP")]
-            BaUBP,
+            BaUbp,
         }
     }
 }

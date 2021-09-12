@@ -27,7 +27,7 @@ namespace ConsoleApp1
                     Properties = new PaymentMethodProperties
                     {
                         Id = "la-052d3e2d-bc4d-4c98-8072-8d232a552299",
-                        ChannelCode = PaymentMethodEnum.ChannelCode.DcBRI,
+                        ChannelCode = PaymentMethodEnum.ChannelCode.DcBri,
                         Currency = Currency.IDR,
                         CardLastFour = "1234",
                         CardExpiry = "06/24",

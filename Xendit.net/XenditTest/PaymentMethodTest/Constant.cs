@@ -23,7 +23,7 @@
 
         internal static readonly PaymentMethodProperties PaymentMethodBodyProperties = new PaymentMethodProperties
         {
-            ChannelCode = PaymentMethodEnum.ChannelCode.DcBRI,
+            ChannelCode = PaymentMethodEnum.ChannelCode.DcBri,
             Currency = Currency.IDR,
             CardLastFour = "1234",
             CardExpiry = "06/24",
