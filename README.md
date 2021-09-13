@@ -44,6 +44,9 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
     - [Get Accessible Accounts by Linked Account Token](#get-accessible-accounts-by-linked-account-token)
     - [Unbind Linked Account Token](#unbind-linked-account-token)
+  - [Payment Methods Services](#payment-methods-services)
+    - [Create Payment Methods](#create-payment-methods)
+    - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1227,4 +1230,91 @@ UnbindedLinkedAccount unbindedLinkedAccount = new UnbindedLinkedAccount
   Id = "linked-account-token-id",
   IsDeleted = true,
 }
+```
+
+### Payment Methods Services
+
+#### Create Payment Methods
+
+To create payment methods, please use struct `PaymentMethodParameter` for parameter body. You may use these enum and classes to construct `PaymentMethodParameter`:
+
+- Enum `PaymentMethodEnum.AccountType` for `Type` property
+- `PaymentMethodProperties` for `Properties` property
+
+Here is the example:
+
+```cs
+PaymentMethodParameter parameter = new PaymentMethodParameter
+{
+  Type = PaymentMethodEnum.AccountType.DebitCard,
+  Properties = new PaymentMethodProperties
+  {
+    Id = "la-052d3e2d-bc4d-4c98-8072-8d232a552299",
+    ChannelCode = PaymentMethodEnum.ChannelCode.DcBri,
+    Currency = Currency.IDR,
+    CardLastFour = "1234",
+    CardExpiry = "06/24",
+    Description = "Payment Debit Card",
+  },
+  CustomerId = "4b7b6050-0830-440a-903b-37d527dbbaa9",
+};
+PaymentMethod paymentMethod = await PaymentMethod.Create(parameter);
+Console.WriteLine(paymentMethod);
+```
+
+It will return:
+
+```cs
+PaymentMethod paymentMethod = new PaymentMethod
+{
+  Id = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
+  Type = PaymentMethodEnum.AccountType.DebitCard,
+  Properties = new PaymentMethodProperties
+  {
+    Id = "la-052d3e2d-bc4d-4c98-8072-8d232a552299",
+    ChannelCode = PaymentMethodEnum.ChannelCode.DcBri,
+    Currency = Currency.IDR,
+    CardLastFour = "1234",
+    CardExpiry = "06/24",
+    Description = "Payment Debit Card",
+  },
+  CustomerId = "4b7b6050-0830-440a-903b-37d527dbbaa9",
+  Status = PaymentMethodEnum.Status.Active,
+  Created = "2020-03-19T05:34:55+0800",
+  Updated = "2020-03-19T05:34:55+0800",
+  Metadata = null,
+};
+```
+
+#### Get Payment Methods by Customer ID
+
+```cs
+PaymentMethod[] paymentMethods = await PaymentMethod.Get("4b7b6050-0830-440a-903b-37d527dbbaa9");
+```
+
+It will return
+
+```cs
+PaymentMethod[] paymentMethods = new PaymentMethods[]
+{
+  new PaymentMethod
+  {
+    Id = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
+    Type = PaymentMethodEnum.AccountType.DebitCard,
+    Properties = new PaymentMethodProperties
+    {
+      Id = "la-052d3e2d-bc4d-4c98-8072-8d232a552299",
+      ChannelCode = PaymentMethodEnum.ChannelCode.DcBri,
+      Currency = Currency.IDR,
+      CardLastFour = "1234",
+      CardExpiry = "06/24",
+      Description = "Payment Debit Card",
+    },
+    CustomerId = "4b7b6050-0830-440a-903b-37d527dbbaa9",
+    Status = PaymentMethodEnum.Status.Active,
+    Created = "2020-03-19T05:34:55+0800",
+    Updated = "2020-03-19T05:34:55+0800",
+    Metadata = null,
+  }
+};
 ```
