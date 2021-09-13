@@ -1,6 +1,5 @@
 ﻿namespace XenditTest.RetailOutletTest
 {
-    using System.Collections.Generic;
     using Xendit.net.Enum;
     using Xendit.net.Model;
     using Xendit.net.Struct;
@@ -59,9 +58,9 @@
         internal static readonly string PaymentCodeId = "payment_code_id";
         internal static readonly string PaymentCodeIdUrl = string.Format("{0}/{1}", RetailOutletUrl, PaymentCodeId);
         internal static readonly string GetPaymentsUrl = string.Format("{0}/payments", PaymentCodeIdUrl);
-        internal static readonly Dictionary<string, string> Headers = new Dictionary<string, string>()
+        internal static readonly HeaderParameter Headers = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
+            ForUserId = "user-id",
         };
     }
 }

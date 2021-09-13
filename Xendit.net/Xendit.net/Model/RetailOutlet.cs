@@ -12,11 +12,10 @@
         /// Create fixed payment code.
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="CreateFixedPaymentCodeParameter"/>.</param>
-        /// <param name="headers">Header listed here <see href="https://developers.xendit.co/api-reference/#create-payment-code"/>.</param>
-        /// <returns>A Task of Fixed Payment Code model.</returns>
-        public static async Task<FixedPaymentCode> CreatePaymentCode(CreateFixedPaymentCodeParameter parameter, Dictionary<string, string> headers = null)
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#create-payment-code"/>.</param>
+        /// <returns>A Task of Fixed Payment Code model <seealso cref="FixedPaymentCode"/>.</returns>
+        public static async Task<FixedPaymentCode> CreatePaymentCode(CreateFixedPaymentCodeParameter parameter, HeaderParameter? headers = null)
         {
-            headers = headers ?? new Dictionary<string, string>();
             return await CreatePaymentCodeRequest(parameter, headers);
         }
 
@@ -25,11 +24,10 @@
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="UpdateFixedPaymentCodeParameter"/>.</param>
         /// <param name="paymentCodeId">ID of the payment code to be updated.</param>
-        /// <param name="headers">Headers listed here <see href="https://developers.xendit.co/api-reference/#update-payment-code"/>.</param>
-        /// <returns>A Task of Fixed Payment Code model.</returns>
-        public static async Task<FixedPaymentCode> UpdatePaymentCode(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, Dictionary<string, string> headers = null)
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#update-payment-code"/>.</param>
+        /// <returns>A Task of Fixed Payment Code model <seealso cref="FixedPaymentCode"/>.</returns>
+        public static async Task<FixedPaymentCode> UpdatePaymentCode(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, HeaderParameter? headers = null)
         {
-            headers = headers ?? new Dictionary<string, string>();
             return await UpdatePaymentCodeRequest(parameter, paymentCodeId, headers);
         }
 
@@ -37,11 +35,10 @@
         /// Get fixed payment code by ID.
         /// </summary>
         /// <param name="paymentCodeId">ID of the payment code to retrieve.</param>
-        /// <param name="headers">Headers listed here <see href="https://developers.xendit.co/api-reference/#get-payment-code"/>.</param>
-        /// <returns>A Task of Fixed Payment Code model.</returns>
-        public static async Task<FixedPaymentCode> GetPaymentCode(string paymentCodeId, Dictionary<string, string> headers = null)
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#get-payment-code"/>.</param>
+        /// <returns>A Task of Fixed Payment Code model <seealso cref="FixedPaymentCode"/>.</returns>
+        public static async Task<FixedPaymentCode> GetPaymentCode(string paymentCodeId, HeaderParameter? headers = null)
         {
-            headers = headers ?? new Dictionary<string, string>();
             return await GetPaymentCodeRequest(paymentCodeId, headers);
         }
 
@@ -49,36 +46,35 @@
         /// Get payments by ID of the payment code.
         /// </summary>
         /// <param name="paymentCodeId">ID of the payment code to retrieve payments made.</param>
-        /// <param name="headers">Headers listed here <see href="https://developers.xendit.co/api-reference/#get-payments-by-payment-code-id"/>.</param>
-        /// <returns>A Task of Fixed Payment Code model.</returns>
-        public static async Task<FixedPaymentCode[]> GetPayments(string paymentCodeId, Dictionary<string, string> headers = null)
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#get-payments-by-payment-code-id"/>.</param>
+        /// <returns>A Task of Fixed Payment Code model <seealso cref="FixedPaymentCode"/>.</returns>
+        public static async Task<FixedPaymentCode[]> GetPayments(string paymentCodeId, HeaderParameter? headers = null)
         {
-            headers = headers ?? new Dictionary<string, string>();
             return await GetPaymentsRequest(paymentCodeId, headers);
         }
 
-        private static async Task<FixedPaymentCode> CreatePaymentCodeRequest(CreateFixedPaymentCodeParameter parameter, Dictionary<string, string> headers)
+        private static async Task<FixedPaymentCode> CreatePaymentCodeRequest(CreateFixedPaymentCodeParameter parameter, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/payment_codes");
             return await XenditConfiguration.RequestClient.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, headers, url, parameter);
         }
 
-        private static async Task<FixedPaymentCode> UpdatePaymentCodeRequest(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, Dictionary<string, string> headers)
+        private static async Task<FixedPaymentCode> UpdatePaymentCodeRequest(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/payment_codes/", paymentCodeId);
             return await XenditConfiguration.RequestClient.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, headers, url, parameter);
         }
 
-        private static async Task<FixedPaymentCode> GetPaymentCodeRequest(string paymentCodeId, Dictionary<string, string> headers)
+        private static async Task<FixedPaymentCode> GetPaymentCodeRequest(string paymentCodeId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/payment_codes/", paymentCodeId);
-            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, FixedPaymentCode>(HttpMethod.Get, headers, url, null);
+            return await XenditConfiguration.RequestClient.Request<FixedPaymentCode>(HttpMethod.Get, headers, url);
         }
 
-        private static async Task<FixedPaymentCode[]> GetPaymentsRequest(string paymentCodeId, Dictionary<string, string> headers)
+        private static async Task<FixedPaymentCode[]> GetPaymentsRequest(string paymentCodeId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/payment_codes/", paymentCodeId, "/payments");
-            return await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, FixedPaymentCode[]>(HttpMethod.Get, headers, url, null);
+            return await XenditConfiguration.RequestClient.Request<FixedPaymentCode[]>(HttpMethod.Get, headers, url);
         }
     }
 }

@@ -18,7 +18,7 @@
         public async void RetailOutlet_Create_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, new Dictionary<string, string>(), Constant.RetailOutletUrl, Constant.CreateFixedPaymentCodeParameter))
+                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, null, Constant.RetailOutletUrl, Constant.CreateFixedPaymentCodeParameter))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -44,7 +44,7 @@
         public async void RetailOutlet_Update_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, new Dictionary<string, string>(), Constant.PaymentCodeIdUrl, Constant.UpdateFixedPaymentCodeParameter))
+                .Setup(client => client.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, null, Constant.PaymentCodeIdUrl, Constant.UpdateFixedPaymentCodeParameter))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -57,7 +57,7 @@
         public async void RetailOutlet_GetPaymentCode_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, FixedPaymentCode>(HttpMethod.Get, new Dictionary<string, string>(), Constant.PaymentCodeIdUrl, null))
+                .Setup(client => client.Request<FixedPaymentCode>(HttpMethod.Get, null, Constant.PaymentCodeIdUrl))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -70,7 +70,7 @@
         public async void RetailOutlet_GetPayments_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, FixedPaymentCode[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.GetPaymentsUrl, null))
+                .Setup(client => client.Request<FixedPaymentCode[]>(HttpMethod.Get, null, Constant.GetPaymentsUrl))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCodes);
 
             XenditConfiguration.RequestClient = MockClient.Object;
