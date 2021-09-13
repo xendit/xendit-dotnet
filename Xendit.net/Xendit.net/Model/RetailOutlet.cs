@@ -45,7 +45,7 @@
         }
 
         /// <summary>
-        /// Get payments by ID of the payment code.
+        /// Get payments by payment code ID.
         /// </summary>
         /// <param name="paymentCodeId">ID of the payment code to retrieve payments made.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#get-payments-by-payment-code-id"/>.</param>
