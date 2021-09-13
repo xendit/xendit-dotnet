@@ -4,6 +4,7 @@
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
     using Xendit.net.Model;
+    using Xendit.net.Model.DirectDebit;
 
     public class DirectDebitPaymentParameter
     {

@@ -5,7 +5,7 @@
     using System.Text.Json;
     using Moq;
     using Xendit.net;
-    using Xendit.net.Model;
+    using Xendit.net.Model.DirectDebit;
     using Xendit.net.Network;
     using Xendit.net.Struct;
     using Xunit;

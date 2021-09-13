@@ -1,4 +1,4 @@
-﻿namespace Xendit.net.Model
+﻿namespace Xendit.net.Model.DirectDebit
 {
     using System.Text.Json.Serialization;
 
