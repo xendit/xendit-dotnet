@@ -1,4 +1,4 @@
-﻿namespace XenditTest.EWalletChargeTest
+﻿namespace XenditTest.EWalletTest
 {
     using System.Collections.Generic;
     using Xendit.net.Enum;
@@ -74,8 +74,36 @@
             XApiVersion = ApiVersion.Version20210125,
         };
 
+        internal static readonly HeaderParameter PaymentApiVersionHeaders = new HeaderParameter
+        {
+            XApiVersion = ApiVersion.Version20200201,
+        };
+
         internal static readonly string ChargeId = "charge-id";
         internal static readonly string EWalletChargeUrl = "https://api.xendit.co/ewallets/charges";
         internal static readonly string GetChargeUrl = string.Format("{0}/{1}", EWalletChargeUrl, ChargeId);
+
+        internal static readonly string ExternalId = "external-id";
+        internal static readonly EWalletEnum.PaymentType PaymentType = EWalletEnum.PaymentType.Ovo;
+        internal static readonly string EWalletPaymentUrl = "https://api.xendit.co/ewallets";
+        internal static readonly string GetEWalletPaymentUrl = "https://api.xendit.co/ewallets?external_id=external-id&ewallet_type=OVO";
+
+        internal static readonly EWalletPayment ExpectedEWalletPayment = new EWalletPayment
+        {
+            Amount = 1000,
+            BusinessId = "business-id",
+            ExternalId = "external-id",
+            EWalletType = EWalletEnum.PaymentType.Ovo,
+            Status = EWalletEnum.Status.Pending,
+            TransactionDate = "2020-01-14T11:48:47.903Z",
+        };
+
+        internal static readonly EWalletPaymentParameter EWalletPaymentParameter = new EWalletPaymentParameter
+        {
+            ExternalId = "external-id",
+            Amount = 1000,
+            Phone = "08123123123",
+            EWalletType = EWalletEnum.PaymentType.Ovo,
+        };
     }
 }

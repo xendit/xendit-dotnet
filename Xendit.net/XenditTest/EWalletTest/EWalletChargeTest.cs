@@ -1,4 +1,4 @@
-﻿namespace XenditTest.EWalletChargeTest
+﻿namespace XenditTest.EWalletTest
 {
     using System.Collections.Generic;
     using System.Net.Http;

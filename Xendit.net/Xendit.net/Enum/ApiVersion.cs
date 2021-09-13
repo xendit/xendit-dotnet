@@ -19,6 +19,6 @@
         Version20200201,
 
         [EnumMember(Value = "2019-02-04")]
-        Version20200204,
+        Version20190204,
     }
 }

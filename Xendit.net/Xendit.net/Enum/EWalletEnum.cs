@@ -79,6 +79,15 @@
 
             [EnumMember(Value = "VOIDED")]
             Voided,
+
+            [EnumMember(Value = "COMPLETED")]
+            Completed,
+
+            [EnumMember(Value = "PAID")]
+            Paid,
+
+            [EnumMember(Value = "EXPIRED")]
+            Expired,
         }
 
         [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
@@ -92,6 +101,22 @@
 
             [EnumMember(Value = "SERVICE")]
             Service,
+        }
+
+        [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
+        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
+        public enum PaymentType
+        {
+            Unknown,
+
+            [EnumMember(Value = "OVO")]
+            Ovo,
+
+            [EnumMember(Value = "DANA")]
+            Dana,
+
+            [EnumMember(Value = "LINKAJA")]
+            Linkaja,
         }
     }
 }

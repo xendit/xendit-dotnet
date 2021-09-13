@@ -81,7 +81,7 @@
         /// <summary>
         /// Create new e-wallet charge with all parameter.
         /// </summary>
-        /// <param name="parameter">Parameter listed here https://developers.xendit.co/api-reference/#create-ewallet-charge. </param>
+        /// <param name="parameter">Parameter listed here <see cref="EWalletChargeParameter"/>. </param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-ewallet-charge"/>.</param>
         /// <param name="apiVersion">API version that will be used to request. Use values listed on <see href="https://developers.xendit.co/api-reference/#ewallets"/>.</param>
         /// <returns>A Task of E-Wallet Charge model <seealso cref="EWalletCharge"/>.</returns>
