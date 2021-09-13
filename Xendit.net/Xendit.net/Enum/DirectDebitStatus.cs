@@ -5,14 +5,17 @@
 
     [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
     [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-    public enum ApiVersion
+    public enum DirectDebitStatus
     {
         Unknown,
 
-        [EnumMember(Value = "2020-10-31")]
-        Version20201031,
+        [EnumMember(Value = "PENDING")]
+        Pending,
 
-        [EnumMember(Value = "2020-05-19")]
-        Version20200519,
+        [EnumMember(Value = "COMPLETED")]
+        Completed,
+
+        [EnumMember(Value = "FAILED")]
+        Failed,
     }
 }

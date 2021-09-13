@@ -33,6 +33,11 @@ This library is the abstraction of Xendit API for access from applications writt
   - [Customer services](#customer-services)
     - [Create Customer](#create-customer)
     - [Get Customer by Reference ID](#get-customer-by-reference-id)
+  - [Direct Debit Payment Services](#direct-debit-payment-services)
+    - [Create Direct Debit Payment](#create-direct-debit-payment)
+    - [Validate OTP for Direct Debit Payment](#validate-otp-for-direct-debit-payment)
+    - [Get Direct Debit Payment by ID](#get-direct-debit-payment-by-id)
+    - [Get Direct Debit Payments by Reference ID](#get-direct-debit-payments-by-reference-id)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -889,5 +894,218 @@ Customer customerWithVersion = new Customer
       Addresses = new Address[] { new Address { Country = Country.Indonesia } }
     }
   },
+};
+```
+
+### Direct Debit Payment Services
+
+#### Create Direct Debit Payment
+
+Method `Create` has three parameters: parameter or request body using `DirectDebitPaymentParameter`, idempotency key (required), and optional headers.
+
+If you want to use optional headers (e.g. for-user-id), DO NOT declare the idempotency key in the headers since we already declare it automatically.
+
+```cs
+// DO NOT declare key of idempotency key in the custom headers
+Dictionary<string, string> headers = new Dictionary<string, string>()
+{
+  { "for-user-id", "user-id" },
+};
+
+string idempotencyKey = "idempotency-key-example";
+
+DirectDebitPayment directDebitPayment = await DirectDebitPayment.Create(parameter, idempotencyKey, headers);
+```
+
+To create direct debit payment, please use struct `DirectDebitPaymentParameter` for parameter body. You may use these enum and classes to construct `DirectDebitPaymentParameter`:
+
+- Enum `Currency` for `Currency` property
+- `LinkedAccountDevice` for `Device` property
+- `BasketItem` for `Basket` property
+
+Here is the example of invoking `Create`:
+
+```cs
+DirectDebitPaymentParameter directDebitPaymentParameter = new DirectDebitPaymentParameter
+{
+  ReferenceId = "reference-id",
+  PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
+  Currency = Currency.IDR,
+  Amount = 10000,
+  CallbackUrl = "https://callback-url.com/",
+  EnableOtp = true,
+  Description = "Example Description",
+  SuccessRedirectUrl = "https://success-url.com/",
+  FailureRedirectUrl = "https://failure-url.com/",
+  Device = new LinkedAccountDevice
+  {
+    Id = "device-id",
+    IpAddress = "255.255.255.255",
+    UserAgent = "App",
+    Imei = "imei-example",
+    AdId = "ad-id",
+  },
+  Metadata = null,
+  Basket = new BasketItem[]
+  {
+    new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+  },
+};
+
+string idempotencyKey = "fa9b53a1-f81a-47ff-8fde-b2eec3546b66";
+
+DirectDebitPayment directDebitPayment = await DirectDebitPayment.Create(directDebitPaymentParameter, idempotencyKey);
+Console.WriteLine(directDebitPayment);
+```
+
+It will return:
+
+```cs
+DirectDebitPayment directDebitPayment = new DirectDebitPayment
+{
+  Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
+  ReferenceId = "reference-id",
+  ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
+  PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
+  Currency = Currency.IDR,
+  Amount = 10000,
+  Description = "Example Description",
+  Status = DirectDebitStatus.Pending,
+  FailureCode = null,
+  IsOtpRequired = true,
+  OtpMobileNumber = "+6287774441111",
+  OtpExpirationTimestamp = "2020-03-26T05:44:26+0800",
+  RequiredAction = DirectDebitRequiredAction.ValidateOtp,
+  SuccessRedirectUrl = null,
+  FailureRedirectUrl = null,
+  Created = "2020-03-26T05:44:26+0800",
+  Updated = null,
+  Metadata = null,
+  Basket = new BasketItem[]
+  {
+    new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+  },
+};
+```
+
+#### Validate OTP for Direct Debit Payment
+
+Here is the example of invoking `ValidateOtp`:
+
+```cs
+string otpCode = "123456";
+
+DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOtp(otpCode, "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
+Console.WriteLine(directDebitPayment);
+```
+
+It will return:
+
+```cs
+DirectDebitPayment directDebitPayment = new DirectDebitPayment
+{
+  Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
+  ReferenceId = "reference-id",
+  ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
+  PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
+  Currency = Currency.IDR,
+  Amount = 10000,
+  Description = "Example Description",
+  Status = DirectDebitStatus.Pending,
+  FailureCode = null,
+  IsOtpRequired = true,
+  OtpMobileNumber = "+6287774441111",
+  OtpExpirationTimestamp = "2020-03-26T05:44:26+0800",
+  RequiredAction = DirectDebitRequiredAction.ValidateOtp,
+  SuccessRedirectUrl = null,
+  FailureRedirectUrl = null,
+  Created = "2020-03-26T05:44:26+0800",
+  Updated = null,
+  Metadata = null,
+  Basket = new BasketItem[]
+  {
+    new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+  },
+};
+```
+
+#### Get Direct Debit Payment by ID
+
+```cs
+DirectDebitPayment directDebitPayment = await DirectDebitPayment.GetById("ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
+Console.WriteLine(directDebitPayment);
+```
+
+It will return:
+
+```cs
+DirectDebitPayment directDebitPayment = new DirectDebitPayment
+{
+  Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
+  ReferenceId = "reference-id",
+  ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
+  PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
+  Currency = Currency.IDR,
+  Amount = 10000,
+  Description = "Example Description",
+  Status = DirectDebitStatus.Pending,
+  FailureCode = null,
+  IsOtpRequired = true,
+  OtpMobileNumber = "+6287774441111",
+  OtpExpirationTimestamp = "2020-03-26T05:44:26+0800",
+  RequiredAction = DirectDebitRequiredAction.ValidateOtp,
+  SuccessRedirectUrl = null,
+  FailureRedirectUrl = null,
+  Created = "2020-03-26T05:44:26+0800",
+  Updated = null,
+  Metadata = null,
+  Basket = new BasketItem[]
+  {
+    new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+    new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+  },
+};
+```
+
+#### Get Direct Debit Payments by Reference ID
+
+```cs
+DirectDebitPayment[] directDebitPayments = await DirectDebitPayment.GetByReferenceId("reference-id");
+Console.WriteLine(directDebitPayments);
+```
+
+It will return:
+
+```cs
+DirectDebitPayment[] directDebitPayments = new DirectDebitPayment[]
+{
+  {
+    Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
+    ReferenceId = "reference-id",
+    ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
+    PaymentMethodId = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
+    Currency = Currency.IDR,
+    Amount = 10000,
+    Description = "Example Description",
+    Status = DirectDebitStatus.Pending,
+    FailureCode = null,
+    IsOtpRequired = true,
+    OtpMobileNumber = "+6287774441111",
+    OtpExpirationTimestamp = "2020-03-26T05:44:26+0800",
+    RequiredAction = DirectDebitRequiredAction.ValidateOtp,
+    SuccessRedirectUrl = null,
+    FailureRedirectUrl = null,
+    Created = "2020-03-26T05:44:26+0800",
+    Updated = null,
+    Metadata = null,
+    Basket = new BasketItem[]
+    {
+      new BasketItem { Name = "Black shoes", Type = "goods", Price = 2000, Quantity = 1 },
+      new BasketItem { Name = "Blue shirt", Type = "apparel", Price = 2000, Quantity = 1 },
+    },
+  }
 };
 ```
