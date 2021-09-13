@@ -1239,7 +1239,7 @@ UnbindedLinkedAccount unbindedLinkedAccount = await UnbindedLinkedAccount.Unbind
 
 It will return:
 
-```cs
+````cs
 UnbindedLinkedAccount unbindedLinkedAccount = new UnbindedLinkedAccount
 {
   Id = "linked-account-token-id",
@@ -1489,3 +1489,4 @@ FixedPaymentCode[] fixedPaymentCodes = new FixedPaymentCode[]
   // ...
 }
 ```
+````
