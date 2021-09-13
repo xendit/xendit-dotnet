@@ -1,7 +1,10 @@
 ﻿namespace XenditTest.EWalletChargeTest
 {
     using System.Collections.Generic;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
+    using Xendit.net.Model.EWallet;
+    using Xendit.net.Struct;
 
     internal class Constant
     {
@@ -10,12 +13,12 @@
             Id = "charge-id",
             BusinessId = "5f218745736e619164dc8608",
             ReferenceId = "test-reference-id",
-            Status = "PENDING",
-            Currency = "IDR",
+            Status = EWalletEnum.Status.Pending,
+            Currency = Xendit.net.Enum.Currency.IDR,
             ChargeAmount = 1000,
             CaptureAmount = 1000,
-            CheckoutMethod = "ONE_TIME_PAYMENT",
-            ChannelCode = "ID_SHOPEEPAY",
+            CheckoutMethod = EWalletEnum.CheckoutMethod.OneTimePayment,
+            ChannelCode = EWalletEnum.ChannelCode.IdShopeepay,
             ChannelProperties = new Dictionary<string, string>()
             {
                 { "success_redirect_url",  "https://dashboard.xendit.co/register/1" },
@@ -44,32 +47,31 @@
         };
 
         internal static readonly string ReferenceId = "test-reference-id";
-        internal static readonly string Currency = "IDR";
         internal static readonly long Amount = 1000;
-        internal static readonly string CheckoutMethod = "ONE_TIME_PAYMENT";
-        internal static readonly string ChannelCode = "ID_SHOPEEPAY";
-        internal static readonly Dictionary<string, string> ChannelProperties = new Dictionary<string, string>()
+        internal static readonly EWalletChargeProperties ChannelProperties = new EWalletChargeProperties
         {
-            { "success_redirect_url",  "https://dashboard.xendit.co/register/1" },
+            SuccessRedirectUrl = "https://dashboard.xendit.co/register/1",
         };
 
-        internal static readonly Dictionary<string, object> EWalletBody = new Dictionary<string, object>()
+        internal static readonly EWalletChargeParameter EWalletBody = new EWalletChargeParameter
         {
-            { "reference_id", ReferenceId },
-            { "currency", Currency },
-            { "amount", Amount },
-            { "checkout_method", CheckoutMethod },
-            { "channel_code", ChannelCode },
-            { "channel_properties", ChannelProperties },
-            { "payment_method_id", null },
-            { "customer_id", null },
-            { "basket", null },
-            { "metadata", null },
+            ReferenceId = ReferenceId,
+            Currency = Xendit.net.Enum.Currency.IDR,
+            Amount = Amount,
+            CheckoutMethod = EWalletEnum.CheckoutMethod.OneTimePayment,
+            ChannelCode = EWalletEnum.ChannelCode.IdShopeepay,
+            ChannelProperties = ChannelProperties,
         };
 
-        internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
+        internal static readonly HeaderParameter ApiVersionHeaders = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
+            XApiVersion = ApiVersion.Version20210125,
+        };
+
+        internal static readonly HeaderParameter CustomHeaders = new HeaderParameter
+        {
+            ForUserId = "user-id",
+            XApiVersion = ApiVersion.Version20210125,
         };
 
         internal static readonly string ChargeId = "charge-id";

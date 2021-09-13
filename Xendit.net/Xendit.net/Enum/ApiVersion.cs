@@ -14,5 +14,11 @@
 
         [EnumMember(Value = "2020-05-19")]
         Version20200519,
+
+        [EnumMember(Value = "2020-02-01")]
+        Version20200201,
+
+        [EnumMember(Value = "2019-02-04")]
+        Version20200204,
     }
 }

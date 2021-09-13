@@ -1,9 +1,10 @@
-﻿namespace Xendit.net.Model
+﻿namespace Xendit.net.Model.EWallet
 {
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
-    public class EWalletBasketItem
+    public class BasketItem
     {
         [JsonPropertyName("reference_id")]
         public string ReferenceId { get; set; }
@@ -24,7 +25,7 @@
         public long Quantity { get; set; }
 
         [JsonPropertyName("type")]
-        public string Type { get; set; }
+        public EWalletEnum.ProductType Type { get; set; }
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
