@@ -37,5 +37,13 @@
 
             Assert.Equal(expectedHeaders, HeaderToDictionaryBuilder.Build(parameter));
         }
+
+        [Fact]
+        public void HeaderToDictionaryBuilder_Build_NullParameter()
+        {
+            Dictionary<string, string> expectedHeaders = new Dictionary<string, string>() { };
+
+            Assert.Equal(expectedHeaders, HeaderToDictionaryBuilder.Build(null));
+        }
     }
 }

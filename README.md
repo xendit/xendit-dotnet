@@ -7,6 +7,7 @@ This library is the abstraction of Xendit API for access from applications writt
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [API Documentation](#api-documentation)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -38,6 +39,11 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Validate OTP for Direct Debit Payment](#validate-otp-for-direct-debit-payment)
     - [Get Direct Debit Payment by ID](#get-direct-debit-payment-by-id)
     - [Get Direct Debit Payments by Reference ID](#get-direct-debit-payments-by-reference-id)
+  - [Linked Account Services](#linked-account-services)
+    - [Initialize Linked Account Tokenization](#initialize-linked-account-tokenization)
+    - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
+    - [Get Accessible Accounts by Linked Account Token](#get-accessible-accounts-by-linked-account-token)
+    - [Unbind Linked Account Token](#unbind-linked-account-token)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1108,4 +1114,117 @@ DirectDebitPayment[] directDebitPayments = new DirectDebitPayment[]
     },
   }
 };
+```
+
+### Linked Account Services
+
+#### Initialize Linked Account Tokenization
+
+To initialize linked account tokenization, use struct `InitializedLinkedAccountParameter`. You may use these enum and class to construct `InitializedLinkedAccountParameter`:
+
+- Enum `LinkedAccountEnum.ChannelCode` for `ChannelCode` property
+- `LinkedAccountProperties` for `Properties` property
+
+Here is the example:
+
+```cs
+InitializedLinkedAccountParameter parameter = new InitializedLinkedAccountParameter
+{
+  CustomerId = "customer-id",
+  ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
+  Properties = new LinkedAccountProperties
+  {
+    AccountMobileNumber = "+62818555988",
+    CardLastFour = "4444",
+    CardExpiry = "06/24",
+    AccountEmail = "test@email.com",
+  },
+  Metadata = new Dictionary<string, object>()
+  {
+    { "example-metadata", "here is the example" },
+  },
+}
+
+InitializedLinkedAccount initializedLinkedAccount = await InitializedLinkedAccount.Initialize(parameter);
+```
+
+It will return:
+
+```cs
+InitializedLinkedAccount initializedLinkedAccount = new InitializedLinkedAccount
+{
+  Id = "linked-account-token-id",
+  CustomerId = "customer-id",
+  ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
+  AuthorizerUrl = "https://example.com/",
+  Status = LinkedAccountEnum.Status.Pending,
+  Metadata = new Dictionary<string, object>()
+  {
+    { "example-metadata", "here is the example" },
+  },
+};
+```
+
+#### Validate OTP for Linked Account Token
+
+```cs
+string otpCode = "123456";
+string linkedAccountTokenId = "linked-account-token-id";
+
+ValidatedLinkedAccount validatedLinkedAccount = await ValidatedLinkedAccount.ValidateOtp(otpCode,linkedAccountTokenId);
+```
+
+It will return:
+
+```cs
+ValidatedLinkedAccount validatedLinkedAccount = new ValidatedLinkedAccount
+{
+  Id = "linked-account-token-id",
+  CustomerId = "customer-id",
+  ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
+  Status = LinkedAccountEnum.Status.Success,
+}
+```
+
+#### Get Accessible Accounts by Linked Account Token
+
+```cs
+AccessibleLinkedAccount[] accessibleLinkedAccounts = await AccessibleLinkedAccount.Get("linked-account-token-id");
+```
+
+It will return:
+
+```cs
+AccessibleLinkedAccount[] accessibleLinkedAccounts = new AccessibleLinkedAccount[]
+{
+  new AccessibleLinkedAccount
+  {
+    Id = "linked-account-token-id",
+    ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
+    Type = LinkedAccountEnum.Type.DebitCard,
+    Properties = new LinkedAccountProperties
+    {
+      AccountMobileNumber = "+62818555988",
+      CardLastFour = "4444",
+      CardExpiry = "06/24",
+      AccountEmail = "test@email.com",
+    },
+  },
+};
+```
+
+#### Unbind Linked Account Token
+
+```cs
+UnbindedLinkedAccount unbindedLinkedAccount = await UnbindedLinkedAccount.Unbind("linked-account-token-id");
+```
+
+It will return:
+
+```cs
+UnbindedLinkedAccount unbindedLinkedAccount = new UnbindedLinkedAccount
+{
+  Id = "linked-account-token-id",
+  IsDeleted = true,
+}
 ```
