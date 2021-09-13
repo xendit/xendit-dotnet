@@ -27,8 +27,8 @@ namespace XenditExample
                     ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
                     CustomerName = "Rika Sutanto",
                     Amount = 50,
-                    Currency = RetailOutletEnum.Currency.PHP,
-                    Market = RetailOutletEnum.Country.Philippines,
+                    Currency = Currency.PHP,
+                    Market = Country.Philippines,
                     PaymentCode = "12345678",
                     Description = "Example payment code",
                 };

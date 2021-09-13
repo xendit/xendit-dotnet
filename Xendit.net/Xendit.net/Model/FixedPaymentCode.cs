@@ -22,7 +22,7 @@
         public string PaymentCode { get; set; }
 
         [JsonPropertyName("currency")]
-        public RetailOutletEnum.Currency Currency { get; set; }
+        public Currency Currency { get; set; }
 
         [JsonPropertyName("amount")]
         public long Amount { get; set; }
@@ -37,7 +37,7 @@
         public bool IsSingleUse { get; set; }
 
         [JsonPropertyName("market")]
-        public RetailOutletEnum.Country Market { get; set; }
+        public Country Market { get; set; }
 
         [JsonPropertyName("status")]
         public RetailOutletEnum.Status Status { get; set; }

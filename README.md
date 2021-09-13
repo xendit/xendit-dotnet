@@ -47,6 +47,11 @@ This library is the abstraction of Xendit API for access from applications writt
   - [Payment Methods Services](#payment-methods-services)
     - [Create Payment Methods](#create-payment-methods)
     - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
+  - [Retail Outlet Services](#retail-outlet-services)
+    - [Create Fixed Payment Code](#create-fixed-payment-code)
+    - [Update Fixed Payment Code](#update-fixed-payment-code)
+    - [Get Payment Code](#get-payment-code)
+    - [Get Payments By Payment Code ID](#get-payments-by-payment-code-id)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1317,4 +1322,160 @@ PaymentMethod[] paymentMethods = new PaymentMethods[]
     Metadata = null,
   }
 };
+```
+
+### Retail Outlet Services
+
+This library supports Retail Outlet API for Philippines (PH).
+
+#### Create Fixed Payment Code
+
+To create a payment code, please use struct `CreateFixedPaymentCodeParameter` for parameter body. You may use these enums to construct `CreateFixedPaymentCodeParameter`:
+
+- `RetailOutletEnum.ChannelCode` for `ChannelCode` property
+- `Currency` for `Currency` property with enum value of `Currency.PHP`
+- `Country` for `Market` property with enum value of `Country.Philippines`
+
+Here is the example:
+
+```cs
+CreateFixedPaymentCodeParameter parameter = new CreateFixedPaymentCodeParameter
+{
+  ReferenceId = "demo_payment_code_id",
+  ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
+  CustomerName = "Rika Sutanto",
+  Amount = 50,
+  Currency = Currency.PHP,
+  Market = Country.Philippines,
+  PaymentCode = "12345678",
+  Description = "Example payment code",
+};
+
+FixedPaymentCode fixedPaymentCode = await RetailOutlet.CreatePaymentCode(parameter);
+```
+
+It will return:
+
+```cs
+FixedPaymentCode fixedPaymentCode = new FixedPaymentCode
+{
+  Id = "<GENERATED_ID>",
+  BusinessId = "<BUSINESS_ID>"
+  ReferenceId = "demo_payment_code_id",
+  ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
+  CustomerName = "Rika Sutanto",
+  Amount = 50,
+  Currency = Currency.PHP,
+  Market = Country.Philippines,
+  PaymentCode = "12345678",
+  Description = "Example payment code",
+  IsSingleUse = true,
+  Status = RetailOutletEnum.Status.Active,
+  Metadata = null,
+  CreatedAt = "2021-01-01T02:38:01.385383888Z",
+  UpdatedAt = "2021-01-01T02:38:01.385383888Z",
+  ExpiresAt = "2021-05-30T02:38:01.327283048Z",
+}
+```
+
+#### Update Fixed Payment Code
+
+To update payment code, please use struct `UpdateFixedPaymentCodeParameter` for parameter body. You may use these enums to construct `UpdateFixedPaymentCodeParameter`:
+
+- `Currency` for `Currency` property with enum value of `Currency.PHP`.
+
+Here is the example:
+
+```cs
+UpdateFixedPaymentCodeParameter parameter = new UpdateFixedPaymentCodeParameter
+{
+    CustomerName = "Rika Sutanto",
+    Amount = 100,
+    Currency = Currency.PHP,
+    Description = "Example updated payment code",
+};
+
+FixedPaymentCode fixedPaymentCode = await RetailOutlet.UpdatePaymentCode(parameter, "example_payment_code_id");
+```
+
+It will return:
+
+```cs
+FixedPaymentCode fixedPaymentCode = new FixedPaymentCode
+{
+  Id = "<GENERATED_ID>",
+  BusinessId = "<BUSINESS_ID>"
+  ReferenceId = "demo_payment_code_id",
+  ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
+  CustomerName = "Rika Sutanto",
+  Amount = 100,
+  Currency = Currency.PHP,
+  Market = Country.Philippines,
+  PaymentCode = "12345678",
+  Description = "Example updated payment code",
+  IsSingleUse = true,
+  Status = RetailOutletEnum.Status.Active,
+  Metadata = null,
+  CreatedAt = "2021-01-01T02:38:01.385383888Z",
+  UpdatedAt = "2021-01-01T02:38:01.385383888Z",
+  ExpiresAt = "2021-05-30T02:38:01.327283048Z",
+}
+```
+
+#### Get Payment Code
+
+```cs
+FixedPaymentCode fixedPaymentCode = await RetailOutlet.GetPaymentCode("example_payment_code_id");
+```
+
+It will return:
+
+```cs
+FixedPaymentCode fixedPaymentCode = new FixedPaymentCode
+{
+  Id = "<GENERATED_ID>",
+  BusinessId = "<BUSINESS_ID>"
+  ReferenceId = "demo_payment_code_id",
+  ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
+  CustomerName = "Rika Sutanto",
+  Amount = 50,
+  Currency = Currency.PHP,
+  Market = Country.Philippines,
+  PaymentCode = "12345678",
+  Description = "Example payment code",
+  IsSingleUse = true,
+  Status = RetailOutletEnum.Status.Active,
+  Metadata = null,
+  CreatedAt = "2021-01-01T02:38:01.385383888Z",
+  UpdatedAt = "2021-01-01T02:38:01.385383888Z",
+  ExpiresAt = "2021-05-30T02:38:01.327283048Z",
+}
+```
+
+#### Get Payments By Payment Code ID
+
+```cs
+FixedPaymentCode[] fixedPaymentCodes = await RetailOutlet.GetPaymentCode("example_payment_code_id");
+```
+
+It will return:
+
+```cs
+FixedPaymentCode[] fixedPaymentCodes = new FixedPaymentCode[]
+{
+  new FixedPaymentCode
+  {
+    Id = "<GENERATED_ID>",
+    PaymentCodeId = "<PAYMENT_CODE_ID>"
+    ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
+    Amount = 50,
+    Currency = Currency.PHP,
+    PaymentCode = "12345678",
+    Remarks = "<REMARKS>",
+    Status = RetailOutletEnum.Status.Completed,
+    CreatedAt = "2021-01-01T02:38:01.385383888Z",
+    UpdatedAt = "2021-01-01T02:38:01.385383888Z",
+  },
+  // ...
+}
 ```

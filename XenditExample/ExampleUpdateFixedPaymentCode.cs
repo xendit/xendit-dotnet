@@ -25,7 +25,7 @@ namespace XenditExample
                 {
                     CustomerName = "Rika Sutanto",
                     Amount = 100,
-                    Currency = RetailOutletEnum.Currency.PHP,
+                    Currency = Currency.PHP,
                     Description = "Example updated payment code",
                 };
 

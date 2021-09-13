@@ -12,9 +12,23 @@
             ReferenceId = "reference_id",
             ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
             Amount = 1000,
-            Currency = RetailOutletEnum.Currency.PHP,
+            Currency = Currency.PHP,
             CustomerName = "Rika Sutanto",
-            Market = RetailOutletEnum.Country.Philippines,
+            Market = Country.Philippines,
+            ExpiresAt = "2021-05-30T02:38:01.327283048Z",
+            IsSingleUse = false,
+            Description = "Example of payment code",
+            Metadata = null,
+        };
+
+        internal static readonly CreateFixedPaymentCodeParameter InvalidCreateFixedPaymentCodeParameter = new CreateFixedPaymentCodeParameter
+        {
+            ReferenceId = "reference_id",
+            ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
+            Amount = 1000,
+            Currency = Currency.IDR,
+            CustomerName = "Rika Sutanto",
+            Market = Country.Indonesia,
             ExpiresAt = "2021-05-30T02:38:01.327283048Z",
             IsSingleUse = false,
             Description = "Example of payment code",
@@ -28,12 +42,12 @@
             ReferenceId = "reference_id",
             CustomerName = "Rika Sutanto",
             PaymentCode = "TEST906558",
-            Currency = RetailOutletEnum.Currency.PHP,
+            Currency = Currency.PHP,
             Amount = 1000,
             IsSingleUse = false,
             ChannelCode = RetailOutletEnum.ChannelCode.SevenEleven,
             Description = "Example of payment code",
-            Market = RetailOutletEnum.Country.Philippines,
+            Market = Country.Philippines,
             Status = RetailOutletEnum.Status.Active,
             Metadata = null,
             CreatedAt = "2021-05-30T02:38:01.327283048Z",
@@ -50,7 +64,16 @@
         {
             CustomerName = "Rika Sutanto",
             Amount = 1000,
-            Currency = RetailOutletEnum.Currency.PHP,
+            Currency = Currency.PHP,
+            ExpiresAt = "2021-05-30T02:38:01.327283048Z",
+            Description = "Example of payment code",
+        };
+
+        internal static readonly UpdateFixedPaymentCodeParameter InvalidUpdateFixedPaymentCodeParameter = new UpdateFixedPaymentCodeParameter
+        {
+            CustomerName = "Rika Sutanto",
+            Amount = 1000,
+            Currency = Currency.IDR,
             ExpiresAt = "2021-05-30T02:38:01.327283048Z",
             Description = "Example of payment code",
         };

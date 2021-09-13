@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
+    using Xendit.net.Exception;
     using Xendit.net.Network;
     using Xendit.net.Struct;
 
@@ -55,12 +57,22 @@
 
         private static async Task<FixedPaymentCode> CreatePaymentCodeRequest(CreateFixedPaymentCodeParameter parameter, HeaderParameter? headers)
         {
+            if (parameter.Currency != Currency.PHP && parameter.Market != Country.Philippines)
+            {
+                throw new ParamException("Create Payment Code can only accept Currency.PHP and Country.Philippines");
+            }
+
             string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/payment_codes");
             return await XenditConfiguration.RequestClient.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, headers, url, parameter);
         }
 
         private static async Task<FixedPaymentCode> UpdatePaymentCodeRequest(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, HeaderParameter? headers)
         {
+            if (parameter.Currency != Currency.PHP)
+            {
+                throw new ParamException("Update Payment Code can only accept Currency.PHP");
+            }
+
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/payment_codes/", paymentCodeId);
             return await XenditConfiguration.RequestClient.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, headers, url, parameter);
         }

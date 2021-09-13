@@ -31,26 +31,6 @@
 
         [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
         [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-        public enum Currency
-        {
-            Unknown,
-
-            [EnumMember(Value = "PHP")]
-            PHP,
-        }
-
-        [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
-        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
-        public enum Country
-        {
-            Unknown,
-
-            [EnumMember(Value = "PH")]
-            Philippines,
-        }
-
-        [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
-        [JsonConverter(typeof(JsonStringEnumMemberConverter))]
         public enum Status
         {
             Unknown,

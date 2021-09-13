@@ -12,7 +12,7 @@
         public long Amount { get; set; }
 
         [JsonPropertyName("currency")]
-        public RetailOutletEnum.Currency Currency { get; set; }
+        public Currency Currency { get; set; }
 
         [JsonPropertyName("expires_at")]
         public string ExpiresAt { get; set; }
