@@ -1,6 +1,7 @@
 ﻿namespace Xendit.net.Struct
 {
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public struct DisbursementParameter
     {
@@ -8,7 +9,7 @@
         public string ExternalId { get; set; }
 
         [JsonPropertyName("bank_code")]
-        public string BankCode { get; set; }
+        public DisbursementChannelCode BankCode { get; set; }
 
         [JsonPropertyName("account_holder_name")]
         public string AccountHolderName { get; set; }

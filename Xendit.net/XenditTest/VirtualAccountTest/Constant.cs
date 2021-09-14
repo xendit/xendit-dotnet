@@ -1,5 +1,6 @@
 ﻿namespace XenditTest.VirtualAccountTest
 {
+    using Xendit.net.Enum;
     using Xendit.net.Model;
     using Xendit.net.Struct;
 
@@ -19,10 +20,10 @@
         internal static readonly VirtualAccount ExpectedVirtualAccount = new VirtualAccount
         {
             IsClosed = false,
-            Status = "ACTIVE",
-            Currency = "IDR",
+            Status = VirtualAccountEnum.Status.Active,
+            BankCode = VirtualAccountEnum.BankCode.Bni,
+            Currency = Currency.IDR,
             OwnerId = "owner-id",
-            BankCode = "BNI",
             MerchantCode = "1",
             Name = "Rika",
             AccountNumber = "8808999992622802",
@@ -34,10 +35,10 @@
         internal static readonly VirtualAccount ExpectedUpdatedVirtualAccount = new VirtualAccount
         {
             IsClosed = false,
-            Status = "ACTIVE",
-            Currency = "IDR",
+            Status = VirtualAccountEnum.Status.Active,
+            BankCode = VirtualAccountEnum.BankCode.Bni,
+            Currency = Currency.IDR,
             OwnerId = "owner-id",
-            BankCode = "BNI",
             MerchantCode = "1",
             Name = "Rika",
             AccountNumber = "8808999992622802",
@@ -55,7 +56,7 @@
         internal static readonly CreateVirtualAccountParameter ClosedPostVAbody = new CreateVirtualAccountParameter
         {
             ExternalId = "demo-1475804036622",
-            BankCode = "BNI",
+            BankCode = VirtualAccountEnum.BankCode.Bni,
             Name = "Rika Sutanto",
             ExpectedAmount = 8000,
             IsClosed = true,
@@ -64,10 +65,9 @@
         internal static readonly VirtualAccount ExpectedCreatedClosedVirtualAccount = new VirtualAccount
         {
             IsClosed = true,
-            Status = "ACTIVE",
-            Currency = "IDR",
+            Status = VirtualAccountEnum.Status.Active,
+            Currency = Currency.IDR,
             OwnerId = "owner-id",
-            BankCode = "BNI",
             MerchantCode = "1",
             Name = "Rika Sutanto",
             AccountNumber = "8808999992622802",
@@ -81,10 +81,10 @@
         internal static readonly VirtualAccount ExpectedCreatedOpenVirtualAccount = new VirtualAccount
         {
             IsClosed = false,
-            Status = "ACTIVE",
-            Currency = "IDR",
+            Status = VirtualAccountEnum.Status.Active,
+            Currency = Currency.IDR,
             OwnerId = "owner-id",
-            BankCode = "BNI",
+            BankCode = VirtualAccountEnum.BankCode.Bni,
             MerchantCode = "1",
             Name = "Rika Sutanto",
             AccountNumber = "8808999992622802",
@@ -108,7 +108,7 @@
             CallbackVirtualAccountId = "598d5f71bf64853820c49a18",
             ExternalId = "demo-1502437214715",
             MerchantCode = "77517",
-            BankCode = "BNI",
+            BankCode = VirtualAccountEnum.BankCode.Bni,
             Amount = 5000,
             SenderName = "JOHN DOE",
             TransactionTimestamp = "2017-08-11T11:14:57.080Z",

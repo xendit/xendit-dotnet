@@ -3,6 +3,7 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
     using Xendit.net.Struct;
 
     public class VirtualAccountPayment
@@ -26,7 +27,7 @@
         public string AccountNumber { get; set; }
 
         [JsonPropertyName("bank_code")]
-        public string BankCode { get; set; }
+        public VirtualAccountEnum.BankCode BankCode { get; set; }
 
         [JsonPropertyName("amount")]
         public int Amount { get; set; }

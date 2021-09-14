@@ -3,6 +3,7 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
     using Xendit.net.Network;
     using Xendit.net.Struct;
 
@@ -18,7 +19,7 @@
         public string ExternalId { get; set; }
 
         [JsonPropertyName("bank_code")]
-        public string BankCode { get; set; }
+        public VirtualAccountEnum.BankCode BankCode { get; set; }
 
         [JsonPropertyName("merchant_code")]
         public string MerchantCode { get; set; }
@@ -39,10 +40,10 @@
         public bool IsSingleUse { get; set; }
 
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public VirtualAccountEnum.Status Status { get; set; }
 
         [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+        public Currency Currency { get; set; }
 
         [JsonPropertyName("expected_amount")]
         public long ExpectedAmount { get; set; }

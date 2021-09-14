@@ -1,5 +1,6 @@
 ﻿namespace XenditTest.DisbursementTest
 {
+    using Xendit.net.Enum;
     using Xendit.net.Model;
     using Xendit.net.Struct;
 
@@ -16,11 +17,11 @@
             Id = "57f1ce05bb1a631a65eee662",
             ExternalId = "disb-1475459775872",
             UserId = "5785e6334d7b410667d355c4",
-            BankCode = "BCA",
+            BankCode = DisbursementChannelCode.Bca,
             AccountHolderName = "MICHAEL CHEN",
             Amount = 90000,
             DisbursementDescription = "Reimbursement for shoes",
-            Status = "PENDING",
+            Status = DisbursementStatus.Pending,
             EmailTo = new string[] { "somebody@email.com" },
             EmailCC = new string[] { "somebody.else@gmail.com" },
             EmailBCC = new string[] { "someone@mail.com" },
@@ -29,7 +30,7 @@
         internal static readonly DisbursementParameter DisbursementBody = new DisbursementParameter
         {
             ExternalId = "disb-1475459775872",
-            BankCode = "BCA",
+            BankCode = DisbursementChannelCode.Bca,
             AccountHolderName = "MICHAEL CHEN",
             AccountNumber = "1234567890",
             Description = "Reimbursement for shoes",

@@ -3,6 +3,7 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
     using Xendit.net.Struct;
 
     public class Disbursement
@@ -20,7 +21,7 @@
         public long Amount { get; set; }
 
         [JsonPropertyName("bank_code")]
-        public string BankCode { get; set; }
+        public DisbursementChannelCode BankCode { get; set; }
 
         [JsonPropertyName("account_holder_name")]
         public string AccountHolderName { get; set; }
@@ -29,7 +30,7 @@
         public string DisbursementDescription { get; set; }
 
         [JsonPropertyName("status")]
-        public string Status { get; set; }
+        public DisbursementStatus Status { get; set; }
 
         [JsonPropertyName("email_to")]
         public string[] EmailTo { get; set; }
