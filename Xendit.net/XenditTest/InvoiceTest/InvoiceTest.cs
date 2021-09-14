@@ -96,7 +96,7 @@
         public async void Invoice_GetAll_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, Invoice[]>(HttpMethod.Get, null, Constant.InvoiceListUrl, null))
+                .Setup(client => client.Request<Invoice[]>(HttpMethod.Get, null, Constant.InvoiceListUrl))
                 .ReturnsAsync(Constant.ExpectedInvoiceArray);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -109,7 +109,7 @@
         public async void Invoice_GetAll_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, Invoice[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.InvoiceListUrl, null))
+                .Setup(client => client.Request<Invoice[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.InvoiceListUrl))
                 .ReturnsAsync(Constant.ExpectedInvoiceArray);
 
             XenditConfiguration.RequestClient = MockClient.Object;

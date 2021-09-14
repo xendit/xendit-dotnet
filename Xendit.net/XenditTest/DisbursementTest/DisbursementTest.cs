@@ -1,6 +1,5 @@
 ﻿namespace XenditTest.DisbursementTest
 {
-    using System.Collections.Generic;
     using System.Net.Http;
     using System.Text.Json;
     using Moq;
@@ -57,7 +56,7 @@
         public async void Disbursement_ShouldSuccess_GetById_WithCustomHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Disbursement>(HttpMethod.Get, null, Constant.DisbursementIdUrl))
+                .Setup(client => client.Request<Disbursement>(HttpMethod.Get, Constant.CustomHeaders, Constant.DisbursementIdUrl))
                 .ReturnsAsync(Constant.ExpectedDisbursement);
 
             XenditConfiguration.RequestClient = MockClient.Object;
