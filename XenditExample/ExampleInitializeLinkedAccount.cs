@@ -36,7 +36,7 @@ namespace XenditExample
                     {
                         { "example-metadata", "here is the example" },
                     },
-                }
+                };
 
                 InitializedLinkedAccount initializedLinkedAccount = await InitializedLinkedAccount.Initialize(parameter);
                 Console.WriteLine(initializedLinkedAccount);

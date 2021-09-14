@@ -8,6 +8,7 @@ namespace XenditExample
     using Xendit.net.Exception;
     using Xendit.net.Model;
     using Xendit.net.Network;
+    using Xendit.net.Struct;
 
     class ExampleUpdateVirtualAccount
     {
@@ -20,11 +21,14 @@ namespace XenditExample
 
             try
             {
-                Dictionary<string, object> parameter = new Dictionary<string, object>();
-                parameter.Add("is_single_use", true);
+                UpdateVirtualAccountParameter parameter = new UpdateVirtualAccountParameter
+                {
+                    IsSingleUse = true,
+                    ExpectedAmount = 20000,
+                };
 
-                VirtualAccount virtualAccount = await VirtualAccount.Update("virtual_account_id", parameter);
-                Console.WriteLine(virtualAccount.IsSingleUse);
+                VirtualAccount virtualAccount = await VirtualAccount.Update(parameter, "virtual_account_id");
+                Console.WriteLine(virtualAccount);
             }
             catch (XenditException e)
             {
