@@ -1,6 +1,5 @@
 ﻿namespace Xendit.net.Model
 {
-    using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net.Enum;
@@ -15,7 +14,7 @@
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="CreateFixedPaymentCodeParameter"/>.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#create-payment-code"/>.</param>
-        /// <returns>A Task of Fixed Payment Code model <seealso cref="FixedPaymentCode"/>.</returns>
+        /// <returns>A Task of <see cref="FixedPaymentCode"/>.</returns>
         public static async Task<FixedPaymentCode> CreatePaymentCode(CreateFixedPaymentCodeParameter parameter, HeaderParameter? headers = null)
         {
             return await CreatePaymentCodeRequest(parameter, headers);
@@ -27,7 +26,7 @@
         /// <param name="parameter">Parameter listed here <see cref="UpdateFixedPaymentCodeParameter"/>.</param>
         /// <param name="paymentCodeId">ID of the payment code to be updated.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#update-payment-code"/>.</param>
-        /// <returns>A Task of Fixed Payment Code model <seealso cref="FixedPaymentCode"/>.</returns>
+        /// <returns>A Task of <see cref="FixedPaymentCode"/>.</returns>
         public static async Task<FixedPaymentCode> UpdatePaymentCode(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, HeaderParameter? headers = null)
         {
             return await UpdatePaymentCodeRequest(parameter, paymentCodeId, headers);
@@ -38,7 +37,7 @@
         /// </summary>
         /// <param name="paymentCodeId">ID of the payment code to retrieve.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#get-payment-code"/>.</param>
-        /// <returns>A Task of Fixed Payment Code model <seealso cref="FixedPaymentCode"/>.</returns>
+        /// <returns>A Task of <see cref="FixedPaymentCode"/>.</returns>
         public static async Task<FixedPaymentCode> GetPaymentCode(string paymentCodeId, HeaderParameter? headers = null)
         {
             return await GetPaymentCodeRequest(paymentCodeId, headers);
@@ -49,7 +48,7 @@
         /// </summary>
         /// <param name="paymentCodeId">ID of the payment code to retrieve payments made.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#get-payments-by-payment-code-id"/>.</param>
-        /// <returns>A Task of Fixed Payment Code model <seealso cref="FixedPaymentCode"/>.</returns>
+        /// <returns>A Task of <see cref="FixedPaymentCode[]"/>.</returns>
         public static async Task<FixedPaymentCode[]> GetPayments(string paymentCodeId, HeaderParameter? headers = null)
         {
             return await GetPaymentsRequest(paymentCodeId, headers);
@@ -57,7 +56,7 @@
 
         private static async Task<FixedPaymentCode> CreatePaymentCodeRequest(CreateFixedPaymentCodeParameter parameter, HeaderParameter? headers)
         {
-            if (parameter.Currency != Currency.PHP && parameter.Market != Country.Philippines)
+            if (parameter.Currency != Currency.PHP || parameter.Market != Country.Philippines)
             {
                 throw new ParamException("Create Payment Code can only accept Currency.PHP and Country.Philippines");
             }

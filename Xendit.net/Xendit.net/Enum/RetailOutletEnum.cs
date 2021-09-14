@@ -26,7 +26,7 @@
             Cebuana,
 
             [EnumMember(Value = "ECPAY")]
-            ECPay,
+            Ecpay,
         }
 
         [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
