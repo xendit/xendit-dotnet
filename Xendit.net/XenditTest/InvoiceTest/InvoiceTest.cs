@@ -18,7 +18,7 @@
         public async void Invoice_GetById_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, Invoice>(HttpMethod.Get, new Dictionary<string, string>(), Constant.InvoiceByIdUrl, null))
+                .Setup(client => client.Request<Invoice>(HttpMethod.Get, null, Constant.InvoiceByIdUrl))
                 .ReturnsAsync(Constant.ExpectedInvoice);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -31,7 +31,7 @@
         public async void Invoice_GetById_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, Invoice>(HttpMethod.Get, Constant.CustomHeaders, Constant.InvoiceByIdUrl, null))
+                .Setup(client => client.Request<Invoice>(HttpMethod.Get, Constant.CustomHeaders, Constant.InvoiceByIdUrl))
                 .ReturnsAsync(Constant.ExpectedInvoice);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -44,7 +44,7 @@
         public async void Invoice_Expire_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, Invoice>(HttpMethod.Post, new Dictionary<string, string>(), Constant.InvoiceExpireUrl, new Dictionary<string, string>()))
+                .Setup(client => client.Request<Dictionary<string, string>, Invoice>(HttpMethod.Post, null, Constant.InvoiceExpireUrl, new Dictionary<string, string>()))
                 .ReturnsAsync(Constant.ExpectedInvoice);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -70,7 +70,7 @@
         public async void Invoice_Create_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<InvoiceParameter, Invoice>(HttpMethod.Post, new Dictionary<string, string>(), Constant.InvoiceV2Url, Constant.InvoiceBody))
+                .Setup(client => client.Request<InvoiceParameter, Invoice>(HttpMethod.Post, null, Constant.InvoiceV2Url, Constant.InvoiceBody))
                 .ReturnsAsync(Constant.ExpectedInvoice);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -96,7 +96,7 @@
         public async void Invoice_GetAll_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, Invoice[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.InvoiceListUrl, null))
+                .Setup(client => client.Request<Dictionary<string, string>, Invoice[]>(HttpMethod.Get, null, Constant.InvoiceListUrl, null))
                 .ReturnsAsync(Constant.ExpectedInvoiceArray);
 
             XenditConfiguration.RequestClient = MockClient.Object;
