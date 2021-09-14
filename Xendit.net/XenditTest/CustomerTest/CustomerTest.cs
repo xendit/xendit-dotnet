@@ -70,18 +70,13 @@
         [Fact]
         public async void Customer_ShouldSuccess_Get_WithHeaders()
         {
-            Dictionary<string, string> headers = new Dictionary<string, string>()
-            {
-                { "for-user-id", "user-id" },
-            };
-
             MockClient
                 .Setup(client => client.Request<Dictionary<string, string>, Customer>(HttpMethod.Get, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerIdUrl, null))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Customer actualCustomer = await Customer.Get(Constant.ExpectedCustomerData.ReferenceId, headers);
+            Customer actualCustomer = await Customer.Get(Constant.ExpectedCustomerData.ReferenceId, Constant.UserIdHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
         }
 

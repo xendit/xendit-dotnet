@@ -4,7 +4,6 @@
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
-    using Xendit.net.Common;
     using Xendit.net.Enum;
     using Xendit.net.Struct;
 
@@ -77,12 +76,12 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="version">API version that will be used to request.</param>
         /// <returns>A Task of Customer model.</returns>
-        public static async Task<Customer> Create(CustomerParameter parameter, Dictionary<string, string> headers = null, ApiVersion version = ApiVersion.Version20201031)
+        public static async Task<Customer> Create(CustomerParameter parameter, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
         {
-            headers = headers ?? new Dictionary<string, string>();
-            headers.Add("API-VERSION", ApiVersionParser.Parse(version));
+            HeaderParameter validHeaders = headers ?? new HeaderParameter { };
+            validHeaders.ApiVersion = version;
 
-            return await CreateCustomerRequest(headers, parameter);
+            return await CreateCustomerRequest(parameter, validHeaders);
         }
 
         /// <summary>
@@ -92,25 +91,25 @@
         /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
         /// <param name="version">API version that will be used to request using ApiVersion enum.</param>
         /// <returns>A Task of customers array.</returns>
-        public static async Task<Customer> Get(string referenceId, Dictionary<string, string> headers = null, ApiVersion version = ApiVersion.Version20201031)
+        public static async Task<Customer> Get(string referenceId, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
         {
-            headers = headers ?? new Dictionary<string, string>();
-            headers.Add("API-VERSION", ApiVersionParser.Parse(version));
+            HeaderParameter validHeaders = headers ?? new HeaderParameter { };
+            validHeaders.ApiVersion = version;
 
-            return await GetCustomerRequest(headers, referenceId);
+            return await GetCustomerRequest(referenceId, validHeaders);
         }
 
-        private static async Task<Customer> CreateCustomerRequest(Dictionary<string, string> headers, CustomerParameter parameter)
+        private static async Task<Customer> CreateCustomerRequest(CustomerParameter parameter, HeaderParameter? headers)
         {
             string url = string.Format("{0}/{1}", XenditConfiguration.ApiUrl, "customers");
             return await XenditConfiguration.RequestClient.Request<CustomerParameter, Customer>(HttpMethod.Post, headers, url, parameter);
         }
 
-        private static async Task<Customer> GetCustomerRequest(Dictionary<string, string> headers, string referenceId)
+        private static async Task<Customer> GetCustomerRequest(string referenceId, HeaderParameter headers)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/customers?reference_id=", referenceId);
 
-            if (headers["API-VERSION"] == "2020-05-19")
+            if (headers.ApiVersion == ApiVersion.Version20200519)
             {
                 Customer[] customerData = await XenditConfiguration.RequestClient.Request<Dictionary<string, string>, Customer[]>(HttpMethod.Get, headers, url, null);
                 Customer customer = new Customer { Data = customerData };

@@ -1,6 +1,7 @@
 ﻿namespace XenditTest.CustomerTest
 {
     using System.Collections.Generic;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
     using Xendit.net.Struct;
 
@@ -13,25 +14,25 @@
             { "API-VERSION", "2020-05-19" },
         };
 
-        internal static readonly Dictionary<string, string> NewApiVersionHeadersWithUserId = new Dictionary<string, string>()
+        internal static readonly HeaderParameter NewApiVersionHeadersWithUserId = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
-            { "API-VERSION", "2020-10-31" },
+            ForUserId = "user-id",
+            ApiVersion = Xendit.net.Enum.ApiVersion.Version20201031,
         };
 
-        internal static readonly Dictionary<string, string> ApiVersionHeaders = new Dictionary<string, string>()
+        internal static readonly HeaderParameter ApiVersionHeaders = new HeaderParameter
         {
-            { "API-VERSION", "2020-05-19" },
+            ApiVersion = Xendit.net.Enum.ApiVersion.Version20200519,
         };
 
-        internal static readonly Dictionary<string, string> NewApiVersionHeaders = new Dictionary<string, string>()
+        internal static readonly HeaderParameter NewApiVersionHeaders = new HeaderParameter
         {
-            { "API-VERSION", "2020-10-31" },
+            ApiVersion = Xendit.net.Enum.ApiVersion.Version20201031,
         };
 
-        internal static readonly Dictionary<string, string> UserIdHeaders = new Dictionary<string, string>()
+        internal static readonly HeaderParameter UserIdHeaders = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
+            ForUserId = "user-id",
         };
 
         internal static readonly string CustomerUrl = "https://api.xendit.co/customers";
