@@ -72,10 +72,10 @@
         /// <summary>
         /// Create customer with parameters.
         /// </summary>
-        /// <param name="parameter">Parameter listed here https://developers.xendit.co/api-reference/#create-customer.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="version">API version that will be used to request.</param>
-        /// <returns>A Task of Customer model.</returns>
+        /// <param name="parameter">Parameter listed here .</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-customer"/>.</param>
+        /// <param name="version">API version that will be used to request <see cref="ApiVersion"/>.</param>
+        /// <returns>A Task of <see cref="Customer"/>.</returns>
         public static async Task<Customer> Create(CustomerParameter parameter, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
         {
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };
@@ -88,9 +88,9 @@
         /// Get customer by reference ID.
         /// </summary>
         /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <param name="version">API version that will be used to request using ApiVersion enum.</param>
-        /// <returns>A Task of customers array.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-customer-by-reference-id"/>.</param>
+        /// <param name="version">API version that will be used to request <see cref="ApiVersion"/>.</param>
+        /// <returns>A Task of <see cref="Customer[]"/>.</returns>
         public static async Task<Customer> Get(string referenceId, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
         {
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };

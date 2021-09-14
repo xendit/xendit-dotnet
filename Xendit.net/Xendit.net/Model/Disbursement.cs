@@ -44,9 +44,9 @@
         /// <summary>
         /// Create disbursement with parameters.
         /// </summary>
-        /// <param name="parameter">Parameter listed here https://developers.xendit.co/api-reference/#create-disbursement.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <returns>A Task of Disbursement model.</returns>
+        /// <param name="parameter">Parameter listed here <see cref="DisbursementParameter"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-disbursement"/>.</param>
+        /// <returns>A Task of <see cref="Disbursement"/>.</returns>
         public static async Task<Disbursement> Create(DisbursementParameter parameter, HeaderParameter? headers = null)
         {
             return await CreateDisbursementRequest(parameter, headers);
@@ -56,8 +56,8 @@
         /// Get disbursement object by ID.
         /// </summary>
         /// <param name="id">ID of disbursement.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <returns>A Task of Disbursement model.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-disbursement-by-id"/>.</param>
+        /// <returns>A Task of <see cref="Disbursement"/>.</returns>
         public static async Task<Disbursement> GetById(string id, HeaderParameter? headers = null)
         {
             return await GetByIdRequest(id, headers);
@@ -67,8 +67,8 @@
         /// Get disbursement object by external ID.
         /// </summary>
         /// <param name="externalId">External ID of disbursement.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <returns>A Task of Disbursement model.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-disbursements-by-external-id"/>.</param>
+        /// <returns>A Task of <see cref="Disbursement[]"/>.</returns>
         public static async Task<Disbursement[]> GetByExternalId(string externalId, HeaderParameter? headers = null)
         {
             return await GetByExternalIdRequest(externalId, headers);
@@ -77,7 +77,7 @@
         /// <summary>
         /// Get available banks for disbursement.
         /// </summary>
-        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-available-banks">.</see></param>
         /// <returns>A Task of <see cref="AvailableBank[]"/>.</returns>
         public static async Task<AvailableBank[]> GetAvailableBanks(HeaderParameter? headers = null)
         {

@@ -42,19 +42,14 @@
         /// Get Virtual Account payment based on its payment ID.
         /// </summary>
         /// <param name="paymentId">ID of the payment to retrieve.</param>
-        /// <returns>A Task of Virtual Account Payment model.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-virtual-account-payment"/>.</param>
+        /// <returns>A Task of <see cref="VirtualAccountPayment"/>.</returns>
         public static async Task<VirtualAccountPayment> Get(string paymentId, HeaderParameter? headers = null)
         {
             return await GetRequest(paymentId, headers);
         }
 
-        /// <summary>
-        /// Get Virtual Account payment based on its payment ID with custom header.
-        /// </summary>
-        /// <param name="paymentId">ID of the payment to retrieve.</param>
-        /// <param name="headers">Custom headers. e.g. "for-user-id".</param>
-        /// <returns>A Task of Virtual Account Payment model.</returns>
-        public static async Task<VirtualAccountPayment> GetRequest(string paymentId, HeaderParameter? headers)
+        private static async Task<VirtualAccountPayment> GetRequest(string paymentId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/callback_virtual_account_payments/payment_id=", paymentId);
 

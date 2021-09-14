@@ -57,8 +57,9 @@
         /// <summary>
         /// Create Closed Virtual Account with complete parameter.
         /// </summary>
-        /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts.</param>
-        /// <returns>A Task of Virtual Account model.</returns>
+        /// <param name="parameter">Parameter listed here <see cref="CreateVirtualAccountParameter"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see cref="https://developers.xendit.co/api-reference/#create-fixed-virtual-accounts"/>.</param>
+        /// <returns>A Task of <see cref="VirtualAccount"/>.</returns>
         public static async Task<VirtualAccount> Create(CreateVirtualAccountParameter parameter, HeaderParameter? headers = null)
         {
             return await CreateRequest(parameter, headers);
@@ -68,8 +69,8 @@
         /// Get Virtual Account based on its ID.
         /// </summary>
         /// <param name="id">ID of the virtual account to retrieve.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id".</param>
-        /// <returns>A Task of Virtual Account model.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-virtual-account"/>.</param>
+        /// <returns>A Task of <see cref="VirtualAccount"/>.</returns>
         public static async Task<VirtualAccount> Get(string id, HeaderParameter? headers = null)
         {
             return await GetRequest(id, headers);
@@ -78,14 +79,20 @@
         /// <summary>
         /// Update Virtual Account based on its ID.
         /// </summary>
+        /// <param name="parameter">Parameter listed here <see cref="UpdateVirtualAccountParameter"/>.</param>
         /// <param name="id">ID of the fixed virtual account to update.</param>
-        /// <param name="parameter">Params listed here https://developers.xendit.co/api-reference/#update-fixed-virtual-account.</param>
-        /// <returns>A Task of Virtual Account model.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#update-fixed-virtual-account"/>.</param>
+        /// <returns>A Task of <see cref="VirtualAccount"/>.</returns>
         public static async Task<VirtualAccount> Update(UpdateVirtualAccountParameter parameter, string id, HeaderParameter? headers = null)
         {
             return await UpdateRequest(parameter, id, headers);
         }
 
+        /// <summary>
+        /// Get Virtual Account available banks.
+        /// </summary>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-virtual-account-banks"/>.</param>
+        /// <returns>A Task of <see cref="AvailableBank[]"/>.</returns>
         public static async Task<AvailableBank[]> GetAvailableBanks(HeaderParameter? headers = null)
         {
             return await GetAvailableBanksRequest(headers);

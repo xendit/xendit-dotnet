@@ -6,8 +6,8 @@
     using System.Threading.Tasks;
     using Xendit.net.Common;
     using Xendit.net.Enum;
-    using Xendit.net.Model.Customer;
     using Xendit.net.Struct;
+    using CustomerObject = Xendit.net.Model.Customer;
 
     public class Invoice
     {
@@ -108,14 +108,14 @@
         public NotificationPreference CustomerNotificationPreference { get; set; }
 
         [JsonPropertyName("customer")]
-        public CustomerType Customer { get; set; }
+        public CustomerObject.Customer Customer { get; set; }
 
         /// <summary>
-        /// Create invoice with all parameters and headers.
+        /// Create invoice with parameters and headers.
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="InvoiceParameter"/>.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id" <see href="https://developers.xendit.co/api-reference/#create-invoice"/>.</param>
-        /// <returns>A Task of Invoice model.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-invoice"/>.</param>
+        /// <returns>A Task of <see cref="Invoice"/>.</returns>
         public static async Task<Invoice> Create(InvoiceParameter parameter, HeaderParameter? headers = null)
         {
             return await CreateRequest(parameter, headers);
@@ -125,8 +125,8 @@
         /// Get invoice detail by ID.
         /// </summary>
         /// <param name="invoiceId">ID of the invoice to retrieve.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#get-invoice"/></param>
-        /// <returns>A Task of Invoice model.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-invoice"/></param>
+        /// <returns>A Task of <see cref="Invoice"/>.</returns>
         public static async Task<Invoice> GetById(string invoiceId, HeaderParameter? headers = null)
         {
             return await GetByIdRequest(invoiceId, headers);
@@ -136,8 +136,8 @@
         /// Get all invoices by given parameters.
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="ListInvoiceParameter"/>.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso cref="https://developers.xendit.co/api-reference/#list-all-invoices"/>.</param>
-        /// <returns>A Task of array of invoices.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <seealso cref="https://developers.xendit.co/api-reference/#list-all-invoices"/>.</param>
+        /// <returns>A Task of <see cref="Invoice[]"/>.</returns>
         public static async Task<Invoice[]> GetAll(ListInvoiceParameter? parameter = null, HeaderParameter? headers = null)
         {
             string queryParams = parameter != null ? QueryParamsBuilder.Build(parameter) : string.Empty;
@@ -148,8 +148,8 @@
         /// Expire an already created invoice.
         /// </summary>
         /// <param name="invoiceId">ID of the invoice to be expired / canceled.</param>
-        /// <param name="headers">Custom headers. e.g: "for-user-id". <seealso href="https://developers.xendit.co/api-reference/#expire-invoice"/></param>
-        /// <returns>A Task of Invoice model.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#expire-invoice"/>.</param>
+        /// <returns>A Task of <see cref="Invoice"/>.</returns>
         public static async Task<Invoice> Expire(string invoiceId, HeaderParameter? headers = null)
         {
             return await ExpireRequest(invoiceId, headers);

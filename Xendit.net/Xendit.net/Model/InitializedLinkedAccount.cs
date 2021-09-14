@@ -32,7 +32,7 @@
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="InitializedLinkedAccountParameter"/>.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#initialize-linked-account-tokenization"/>.</param>
-        /// <returns>A Task of Initialized Linked Account model <seealso cref="InitializedLinkedAccount"/>.</returns>
+        /// <returns>A Task of <see cref="InitializedLinkedAccount"/>.</returns>
         public static async Task<InitializedLinkedAccount> Initialize(InitializedLinkedAccountParameter parameter, HeaderParameter? headers = null)
         {
             return await InitializeRequest(parameter, headers);
