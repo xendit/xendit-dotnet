@@ -8,8 +8,8 @@
     {
         internal static readonly AvailableBank[] ExpectedAvailableBanks = new AvailableBank[]
         {
-            new AvailableBank { Name = "Bank Negara Indonesia", Code = "BNI" },
-            new AvailableBank { Name = "Bank Rakyat Indonesia", Code = "BRI" },
+            new AvailableBank { Name = "Bank Negara Indonesia", Code = DisbursementChannelCode.Bni },
+            new AvailableBank { Name = "Bank Rakyat Indonesia", Code = DisbursementChannelCode.Bri },
         };
 
         internal static readonly HeaderParameter CustomHeaders = new HeaderParameter

@@ -8,8 +8,8 @@
     {
         internal static readonly AvailableBank[] ExpectedAvailableBanks =
         {
-            new AvailableBank { Name = "Bank Negara Indonesia", Code = "BNI", CanDisburse = true, CanNameValidate = true },
-            new AvailableBank { Name = "Bank Rakyat Indonesia", Code = "BRI", CanDisburse = true, CanNameValidate = true },
+            new AvailableBank { Name = "Bank Negara Indonesia", Code = DisbursementChannelCode.Bni, CanDisburse = true, CanNameValidate = true },
+            new AvailableBank { Name = "Bank Rakyat Indonesia", Code = DisbursementChannelCode.Bri, CanDisburse = true, CanNameValidate = true },
         };
 
         internal static readonly Disbursement ExpectedDisbursement = new Disbursement

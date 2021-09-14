@@ -15,8 +15,6 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Get Balance](#get-balance)
   - [Virtual Account Services](#virtual-account-services)
     - [Create a Virtual Account](#create-a-virtual-account)
-      - [Closed Virtual Account](#closed-virtual-account)
-      - [Open Virtual Account](#open-virtual-account)
     - [Get a Virtual Account by ID](#get-a-virtual-account-by-id)
     - [Update a Virtual Account](#update-a-virtual-account)
     - [Get banks with available virtual account service](#get-banks-with-available-virtual-account-service)
@@ -117,92 +115,53 @@ namespace XenditExample
 
 #### Get Balance
 
-The `accountType` parameter is optional. You can use `accountType` in enum or in string type (`"Cash"`, `"Holding"`, `"Tax"`)
-
-```cs
-await Balance.Get();
-
-await Balance.Get(AccountType.Holding);
-
-await Balance.Get("Tax");
-```
+The `accountType` parameter is optional. You can use `accountType` in enum (`"Cash"`, `"Holding"`, `"Tax"`)
 
 ```cs
 Balance balance = await Balance.Get();
+
+Balance holdingBalance = await Balance.Get(AccountType.Holding);
+```
+
+It will return:
+
+```cs
+Balance balance = new Balance
+{
+  Value = 100000,
+};
 ```
 
 ### Virtual Account Services
 
 #### Create a Virtual Account
 
-You can choose whether want to put the attributes as parameters or to put in inside a Dictionary object.
-
-##### Closed Virtual Account
-
-<table>
-<tr>
-<td>
-<pre>
-VirtualAccount.CreateClosed(
-    string externalId,
-    string bankCode,
-    string name,
-    long expectedAmount,
-    Dictionary&lt;string, object&gt; parameter
-);
-</pre>
-</td>
-<td>
-<pre>
-VirtualAccount.CreateClosed(
-    Dictionary&lt;string, object&gt; parameter
-);
-</pre>
-</td>
-</tr>
-</table>
+To create a virtual account, use struct `CreateVirtualAccountParameter`. You may use `VirtualAccountEnum.BankCode` for `BankCode` property.
 
 ```cs
-Dictionary<string, object> closedVABody = new Dictionary<string, object>();
-closedVABody.Add("external_id", "my_external_id");
-closedVABody.Add("bank_code", "BNI");
-closedVABody.Add("name", "John Doe");
-closedVABody.Add("expected_amount", 200000000L);
+VirtualAccountParameter parameter = new VirtualAccountParameter
+{ 
+  ExternalId = "my_external_id",
+  BankCode = VirtualAccountEnum.BankCode.Bni,
+  Name = "John Doe",
+  ExpectedAmount = 200000,
+};
 
-VirtualAccount virtualAccount = await VirtualAccount.CreateClosed(closedVABody);
+VirtualAccount virtualAccount = await VirtualAccount.Create(parameter);
 ```
 
-##### Open Virtual Account
-
-<table>
-<tr>
-<td>
-<pre>
-VirtualAccount.CreateOpen(
-    string externalId,
-    string bankCode,
-    string name,
-    Dictionary&lt;string, object&gt; parameter
-);
-</pre>
-</td>
-<td>
-<pre>
-VirtualAccount.CreateOpen(
-    Dictionary&lt;string, object&gt; parameter
-);
-</pre>
-</td>
-</tr>
-</table>
-
+It will return:
 ```cs
-Dictionary<string, object> openVAbody = new Dictionary<string, object>();
-openVAbody.Add("external_id", "my_external_id");
-openVAbody.Add("bank_code", "BNI");
-openVAbody.Add("name", "John Doe");
-
-VirtualAccount virtualAccount = await VirtualAccount.CreateOpen(openVAbody);
+VirtualAccount virtualAccount = new VirtualAccount
+{
+  ExternalId = "my_external_id",
+  BankCode = VirtualAccountEnum.BankCode.Bni,
+  Name = "John Doe",
+  ExpectedAmount = 200000,
+  IsSingleUse = false,
+  IsClosed = false,
+  ExpirationDate = "2021-09-27T17:00:00.000Z",
+};
 ```
 
 #### Get a Virtual Account by ID
@@ -211,19 +170,58 @@ VirtualAccount virtualAccount = await VirtualAccount.CreateOpen(openVAbody);
 VirtualAccount virtualAccount = await VirtualAccount.Get("VIRTUAL_ACCOUNT_ID");
 ```
 
+It will return:
+```cs
+VirtualAccount virtualAccount = new VirtualAccount
+{
+  Id = "VIRTUAL_ACCOUNT_ID",
+  ExternalId = "my_external_id",
+  OwnerId = "owner-id",
+  BankCode = VirtualAccountEnum.BankCode.Bni,
+  MerchantCode = "8888",
+  Name = "John Doe",
+  ExpectedAmount = 200000,
+  IsSingleUse = false,
+  IsClosed = false,
+  ExpirationDate = "2021-09-27T17:00:00.000Z",
+  Status = VirtualAccountEnum.Status.Pending,
+  Currency = Currency.IDR,
+};
+```
+
 #### Update a Virtual Account
 
-```cs
-Dictionary<string, object> parameter = new Dictionary<string, object>();
-parameter.Add("is_single_use", true);
+To update a virtual account, use struct `UpdateVirtualAccountParameter`. 
 
-VirtualAccount virtualAccount = await VirtualAccount.Update("VIRTUAL_ACCOUNT_ID", parameter);
+```cs
+UpdateVirtualAccountParameter parameter = new UpdateVirtualAccountParameter
+{
+    IsSingleUse = true,
+    ExpectedAmount = 20000,
+};
+
+VirtualAccount virtualAccount = await VirtualAccount.Update(parameter, "virtual_account_id");
 ```
 
 #### Get banks with available virtual account service
 
 ```cs
-List<AvailableBank> availableBanks = await VirtualAccount.GetAvailableBanks();
+AvailableBank[] availableBanks = await VirtualAccount.GetAvailableBanks();
+```
+
+It will return:
+
+```cs
+AvailableBank[] availableBanks = new AvailableBank[]
+{
+  new AvailableBank
+  {
+    Name = "Bank Mandiri",
+    Code = DisbursementChannelCode.Mandiri,
+    IsActivated = true,
+  },
+  // ...
+};
 ```
 
 #### Get a virtual account payment by payment ID
@@ -232,61 +230,60 @@ List<AvailableBank> availableBanks = await VirtualAccount.GetAvailableBanks();
 VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get("VIRTUAL_ACCOUNT_PAYMENT_ID");
 ```
 
+It will return:
+
+```cs
+VirtualAccountPayment virtualAccountPayment = new VirtualAccountPayment
+{
+  Id = "598d91b1191029596846047f",
+  PaymentId = "5f218745736e619164dc8608",
+  CallbackVirtualAccountId = "598d5f71bf64853820c49a18",
+  ExternalId = "demo-1502437214715",
+  BankCode = VirtualAccountEnum.BankCode.Bni,
+  MerchantCode = "8888",
+  SenderName = "John Doe",
+  Amount = 200000,
+  AccountNumber = "8808999939380502",
+  TransactionTimestamp = "2021-07-24T05:22:55.115Z",
+};
+```
+
 ### Disbursement Services
 
 #### Create a disbursement
 
-You can choose whether want to put the attributes as parameters or to put in inside a Dictionary object.
+To create a disbursement, use struct `DisbursementParameter`. You may use `DisbursementChannelCode` for `BankCode` property.
 
-<table>
-<tr>
-<td>
-<pre>
-Disbursement.Create(
-    string externalId, 
-    string bankCode, 
-    string accountHolderName, 
-    string accountNumber, 
-    string description, 
-    long amount
-);
-</pre>
-</td>
-<td>
-<pre>
-Disbursement.Create(
-    string externalId, 
-    string bankCode, 
-    string accountHolderName, 
-    string accountNumber, 
-    string description, 
-    long amount,
-    Dictionary&lt;string, object&gt; params
-);
-</pre>
-</td>
-<td>
-<pre>
-Disbursement.Create(
-    Dictionary&lt;string, object&gt; params
-);
-</pre>
-</td>
-</tr>
-</table>
+Here is the example of `Create`:
 
 ```cs
-Dictionary<string, object> parameter = new Dictionary<string, object>()
+DisbursementParameter parameter = new DisbursementParameter
 {
-  { "external_id", "disb-1475459775872" },
-  { "bank_code", "BCA" },
-  { "account_holder_name", "MICHAEL CHEN" },
-  { "account_number", "1234567890" },
-  { "description", "Reimbursement for shoes" },
-  { "amount", 1 },
+  ExternalId = "disb-1475459775872",
+  BankCode = DisbursementChannelCode.Bca,
+  AccountHolderName = "MICHAEL CHEN",
+  AccountNumber = "1234567890",
+  Description = "Reimbursement for shoes",
+  Amount = 1000,
 };
 
 Disbursement disbursement = await Disbursement.Create(parameter);
+```
+
+It will return:
+
+```cs
+Disbursement disbursement = new Disbursement
+{
+  Id = "generated-id",
+  ExternalId = "disb-1475459775872",
+  UserId = "user-id",
+  BankCode = DisbursementChannelCode.Bca,
+  AccountHolderName = "MICHAEL CHEN",
+  DisbursementDescription = "Reimbursement for shoes",
+  Amount = 1000,
+  Status = DisbursementStatus.Pending,
+};
 ```
 
 #### Get a disbursement by ID
@@ -295,16 +292,67 @@ Disbursement disbursement = await Disbursement.Create(parameter);
 Disbursement disbursement = await Disbursement.GetById("disbursement_id");
 ```
 
+It will return:
+
+```cs
+Disbursement disbursement = new Disbursement
+{
+  Id = "disbursement_id",
+  ExternalId = "disb-1475459775872",
+  UserId = "user-id",
+  BankCode = DisbursementChannelCode.Bca,
+  AccountHolderName = "MICHAEL CHEN",
+  DisbursementDescription = "Reimbursement for shoes",
+  Amount = 1000,
+  Status = DisbursementStatus.Pending,
+};
+```
+
 #### Get a disbursement by External ID
 
 ```cs
-Disbursement disbursement = await Disbursement.GetByExternalId("external_id");
+Disbursement[] disbursements = await Disbursement.GetByExternalId("external_id");
+```
+
+It will return:
+
+```cs
+Disbursement[] disbursements = new Disbursement[]
+{
+  new Disbursement
+  {
+    Id = "disbursement_id",
+    ExternalId = "disb-1475459775872",
+    UserId = "user-id",
+    BankCode = DisbursementChannelCode.Bca,
+    AccountHolderName = "MICHAEL CHEN",
+    DisbursementDescription = "Reimbursement for shoes",
+    Amount = 1000,
+    Status = DisbursementStatus.Pending,
+  }
+};
 ```
 
 #### Get banks with available disbursement service
 
 ```cs
 AvailableBank[] availableBanks = await Disbursement.GetAvailableBanks();
+```
+
+It will return:
+
+```cs
+AvailableBank[] availableBanks = new AvailableBank[]
+{
+  new AvailableBank
+  {
+    Name = "Bank Mandiri",
+    Code = DisbursementChannelCode.Mandiri,
+    CanDisburse = true,
+    CanNameValidate = true,
+  },
+  // ...
+};
 ```
 
 ### Invoice services
@@ -710,18 +758,6 @@ The library supports get customer operation for API version `2020-10-31` (recomm
 
 Method `Create` has three parameters: parameter or request body using struct `CustomerParameter`, optional headers, and optional API version with default value of `ApiVersion.Version20201031` enum (represents `2020-10-31` version).
 
-If you want to use optional headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
-
-```cs
-// DO NOT declare key of API version in the custom headers
-Dictionary<string, string> headers = new Dictionary<string, string>()
-{
-  { "for-user-id", "user-id" },
-};
-
-Customer customer = await Customer.Create(CustomerParameter parameter, headers);
-```
-
 To construct struct `CustomerParameter`, you may use these classes and enums (applicable for API version of `2020-10-31`):
 
 - Class: `IndividualDetail`, `BusinessDetail`, `IdentityAccount`, `KycDocument`, `IdentityAccountProperties`, and `Address` (applicable for both API versions).
@@ -827,18 +863,6 @@ The library supports get customer operation for API version `2020-10-31` (recomm
 
 Method `Get` has three parameters: reference ID (required), optional headers, and optional API version with default value of `ApiVersion.Version20201031` enum (represents `2020-10-31` version).
 
-If you want to use custom headers (e.g. `for-user-id`), DO NOT declare API version in the headers since we already declare it automatically.
-
-```cs
-// DO NOT declare key of API version in the custom headers
-Dictionary<string, string> headers = new Dictionary<string, string>()
-{
-  { "for-user-id", "user-id" },
-};
-
-Customer customer = await Customer.Get("example_reference_id", headers);
-```
-
 Here is the example of invoking method `Get` with API version of `2020-10-31`:
 
 ```cs
@@ -911,20 +935,6 @@ Customer customerWithVersion = new Customer
 #### Create Direct Debit Payment
 
 Method `Create` has three parameters: parameter or request body using `DirectDebitPaymentParameter`, idempotency key (required), and optional headers.
-
-If you want to use optional headers (e.g. for-user-id), DO NOT declare the idempotency key in the headers since we already declare it automatically.
-
-```cs
-// DO NOT declare key of idempotency key in the custom headers
-Dictionary<string, string> headers = new Dictionary<string, string>()
-{
-  { "for-user-id", "user-id" },
-};
-
-string idempotencyKey = "idempotency-key-example";
-
-DirectDebitPayment directDebitPayment = await DirectDebitPayment.Create(parameter, idempotencyKey, headers);
-```
 
 To create direct debit payment, please use struct `DirectDebitPaymentParameter` for parameter body. You may use these enum and classes to construct `DirectDebitPaymentParameter`:
 
@@ -1146,7 +1156,7 @@ InitializedLinkedAccountParameter parameter = new InitializedLinkedAccountParame
   {
     { "example-metadata", "here is the example" },
   },
-}
+};
 
 InitializedLinkedAccount initializedLinkedAccount = await InitializedLinkedAccount.Initialize(parameter);
 ```
@@ -1186,7 +1196,7 @@ ValidatedLinkedAccount validatedLinkedAccount = new ValidatedLinkedAccount
   CustomerId = "customer-id",
   ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
   Status = LinkedAccountEnum.Status.Success,
-}
+};
 ```
 
 #### Get Accessible Accounts by Linked Account Token
@@ -1229,7 +1239,7 @@ UnbindedLinkedAccount unbindedLinkedAccount = new UnbindedLinkedAccount
 {
   Id = "linked-account-token-id",
   IsDeleted = true,
-}
+};
 ```
 
 ### Payment Methods Services
