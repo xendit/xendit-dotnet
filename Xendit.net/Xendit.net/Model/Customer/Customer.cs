@@ -1,4 +1,4 @@
-﻿namespace Xendit.net.Model
+﻿namespace Xendit.net.Model.Customer
 {
     using System.Collections.Generic;
     using System.Net.Http;

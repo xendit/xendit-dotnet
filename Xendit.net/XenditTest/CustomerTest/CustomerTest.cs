@@ -6,7 +6,7 @@
     using Moq;
     using Xendit.net;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
+    using Xendit.net.Model.Customer;
     using Xendit.net.Network;
     using Xendit.net.Struct;
     using Xunit;

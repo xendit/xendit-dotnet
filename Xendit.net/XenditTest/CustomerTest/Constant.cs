@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
+    using Xendit.net.Model.Customer;
     using Xendit.net.Struct;
 
     internal class Constant

@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Xendit.net.Common;
     using Xendit.net.Enum;
+    using Xendit.net.Model.Customer;
     using Xendit.net.Struct;
 
     public class Invoice
@@ -107,7 +108,7 @@
         public NotificationPreference CustomerNotificationPreference { get; set; }
 
         [JsonPropertyName("customer")]
-        public Customer Customer { get; set; }
+        public CustomerType Customer { get; set; }
 
         /// <summary>
         /// Create invoice with all parameters and headers.
