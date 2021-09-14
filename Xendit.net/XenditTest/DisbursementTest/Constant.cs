@@ -1,8 +1,7 @@
 ﻿namespace XenditTest.DisbursementTest
 {
-    using System.Collections.Generic;
-    using System.Numerics;
     using Xendit.net.Model;
+    using Xendit.net.Struct;
 
     internal static class Constant
     {
@@ -27,25 +26,14 @@
             EmailBCC = new string[] { "someone@mail.com" },
         };
 
-        internal static readonly Dictionary<string, object> DisbursementBody = new Dictionary<string, object>()
+        internal static readonly DisbursementParameter DisbursementBody = new DisbursementParameter
         {
-            { "external_id", "disb-1475459775872" },
-            { "bank_code", "BCA" },
-            { "account_holder_name", "MICHAEL CHEN" },
-            { "account_number", "1234567890" },
-            { "description", "Reimbursement for shoes" },
-            { "amount", 90000L },
-        };
-
-        internal static readonly Dictionary<string, object> AdditionalDisbursementBodyWithRequiredParams = new Dictionary<string, object>()
-        {
-            { "email_to", "[\"somebody@email.com\"]" },
-            { "external_id", "disb-1475459775872" },
-            { "bank_code", "BCA" },
-            { "account_holder_name", "MICHAEL CHEN" },
-            { "account_number", "1234567890" },
-            { "description", "Reimbursement for shoes" },
-            { "amount", 90000L },
+            ExternalId = "disb-1475459775872",
+            BankCode = "BCA",
+            AccountHolderName = "MICHAEL CHEN",
+            AccountNumber = "1234567890",
+            Description = "Reimbursement for shoes",
+            Amount = 90000,
         };
 
         internal static readonly Disbursement[] ExpectedDisbursements = new Disbursement[] { ExpectedDisbursement };
@@ -57,9 +45,9 @@
         internal static readonly string DisbursementIdUrl = string.Format("{0}/{1}", DisbursementUrl, ExpectedDisbursementId);
         internal static readonly string DisbursementExternalIdUrl = string.Format("{0}?external_id={1}", DisbursementUrl, ExpectedDisbursementExternalId);
 
-        internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
+        internal static readonly HeaderParameter CustomHeaders = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
+            ForUserId = "user-id",
         };
 
         internal static readonly string AvailableBankUrl = "https://api.xendit.co/available_disbursements_banks";

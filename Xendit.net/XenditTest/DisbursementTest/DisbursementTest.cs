@@ -7,6 +7,7 @@
     using Xendit.net;
     using Xendit.net.Model;
     using Xendit.net.Network;
+    using Xendit.net.Struct;
     using Xunit;
 
     public class DisbursementTest
@@ -17,7 +18,7 @@
         public async void Disbursement_ShouldSuccess_GetAvailableBanks()
         {
             MockClient
-                .Setup(client => client.Request<AvailableBank[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.AvailableBankUrl, null))
+                .Setup(client => client.Request<AvailableBank[]>(HttpMethod.Get, null, Constant.AvailableBankUrl))
                 .ReturnsAsync(Constant.ExpectedAvailableBanks);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -30,7 +31,7 @@
         public async void Disbursement_ShouldSuccess_GetAvailableBanks_WithCustomHeaders()
         {
             MockClient
-                .Setup(client => client.Request<AvailableBank[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.AvailableBankUrl, null))
+                .Setup(client => client.Request<AvailableBank[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.AvailableBankUrl))
                 .ReturnsAsync(Constant.ExpectedAvailableBanks);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -43,7 +44,7 @@
         public async void Disbursement_ShouldSuccess_GetById()
         {
             MockClient
-                .Setup(client => client.Request<Disbursement>(HttpMethod.Get, new Dictionary<string, string>(), Constant.DisbursementIdUrl, null))
+                .Setup(client => client.Request<Disbursement>(HttpMethod.Get, null, Constant.DisbursementIdUrl))
                 .ReturnsAsync(Constant.ExpectedDisbursement);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -56,12 +57,12 @@
         public async void Disbursement_ShouldSuccess_GetById_WithCustomHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Disbursement>(HttpMethod.Get, Constant.CustomHeaders, Constant.DisbursementIdUrl, null))
+                .Setup(client => client.Request<Disbursement>(HttpMethod.Get, null, Constant.DisbursementIdUrl))
                 .ReturnsAsync(Constant.ExpectedDisbursement);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Disbursement actualDisbursement = await Disbursement.GetById(Constant.CustomHeaders, Constant.ExpectedDisbursementId);
+            Disbursement actualDisbursement = await Disbursement.GetById(Constant.ExpectedDisbursementId, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
         }
 
@@ -69,7 +70,7 @@
         public async void Disbursement_ShouldSuccess_GetByExternalId()
         {
             MockClient
-                .Setup(client => client.Request<Disbursement[]>(HttpMethod.Get, new Dictionary<string, string>(), Constant.DisbursementExternalIdUrl, null))
+                .Setup(client => client.Request<Disbursement[]>(HttpMethod.Get, null, Constant.DisbursementExternalIdUrl))
                 .ReturnsAsync(Constant.ExpectedDisbursements);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -82,12 +83,12 @@
         public async void Disbursement_ShouldSuccess_GetByExternalId_WithCustomHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Disbursement[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.DisbursementExternalIdUrl, null))
+                .Setup(client => client.Request<Disbursement[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.DisbursementExternalIdUrl))
                 .ReturnsAsync(Constant.ExpectedDisbursements);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Disbursement[] actualDisbursements = await Disbursement.GetByExternalId(Constant.CustomHeaders, Constant.ExpectedDisbursementExternalId);
+            Disbursement[] actualDisbursements = await Disbursement.GetByExternalId(Constant.ExpectedDisbursementExternalId, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursements), JsonSerializer.Serialize(actualDisbursements));
         }
 
@@ -95,7 +96,7 @@
         public async void Disbursement_ShouldSuccess_WhenCreate()
         {
             MockClient
-                .Setup(client => client.Request<Disbursement>(HttpMethod.Post, new Dictionary<string, string>(), Constant.DisbursementUrl, Constant.DisbursementBody))
+                .Setup(client => client.Request<DisbursementParameter, Disbursement>(HttpMethod.Post, null, Constant.DisbursementUrl, Constant.DisbursementBody))
                 .ReturnsAsync(Constant.ExpectedDisbursement);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -108,74 +109,12 @@
         public async void Disbursement_ShouldSuccess_WhenCreate_WithCustomHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Disbursement>(HttpMethod.Post, Constant.CustomHeaders, Constant.DisbursementUrl, Constant.DisbursementBody))
+                .Setup(client => client.Request<DisbursementParameter, Disbursement>(HttpMethod.Post, Constant.CustomHeaders, Constant.DisbursementUrl, Constant.DisbursementBody))
                 .ReturnsAsync(Constant.ExpectedDisbursement);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            Disbursement actualDisbursement = await Disbursement.Create(Constant.CustomHeaders, Constant.DisbursementBody);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
-        }
-
-        [Fact]
-        public async void Disbursement_ShouldSuccess_WhenCreate_RequiredParams()
-        {
-            MockClient
-                .Setup(client => client.Request<Disbursement>(HttpMethod.Post, new Dictionary<string, string>(), Constant.DisbursementUrl, Constant.DisbursementBody))
-                .ReturnsAsync(Constant.ExpectedDisbursement);
-
-            XenditConfiguration.RequestClient = MockClient.Object;
-
-            Disbursement actualDisbursement = await Disbursement.Create(externalId: Constant.ExpectedDisbursement.ExternalId, bankCode: Constant.ExpectedDisbursement.BankCode, accountHolderName: Constant.ExpectedDisbursement.AccountHolderName, accountNumber: "1234567890", description: Constant.ExpectedDisbursement.DisbursementDescription, amount: 90000L);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
-        }
-
-        [Fact]
-        public async void Disbursement_ShouldSuccess_WhenCreate_RequiredParams_WithCustomHeaders()
-        {
-            MockClient
-                .Setup(client => client.Request<Disbursement>(HttpMethod.Post, Constant.CustomHeaders, Constant.DisbursementUrl, Constant.DisbursementBody))
-                .ReturnsAsync(Constant.ExpectedDisbursement);
-
-            XenditConfiguration.RequestClient = MockClient.Object;
-
-            Disbursement actualDisbursement = await Disbursement.Create(headers: Constant.CustomHeaders, externalId: (string)Constant.DisbursementBody["external_id"], bankCode: (string)Constant.DisbursementBody["bank_code"], accountHolderName: (string)Constant.DisbursementBody["account_holder_name"], accountNumber: (string)Constant.DisbursementBody["account_number"], description: (string)Constant.DisbursementBody["description"], amount: 90000L);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
-        }
-
-        [Fact]
-        public async void Disbursement_ShouldSuccess_WhenCreate_AdditionalParams()
-        {
-            var additionalParams = new Dictionary<string, object>()
-            {
-                { "email_to",  "[\"somebody@email.com\"]" },
-            };
-
-            MockClient
-                .Setup(client => client.Request<Disbursement>(HttpMethod.Post, new Dictionary<string, string>(), Constant.DisbursementUrl, Constant.AdditionalDisbursementBodyWithRequiredParams))
-                    .ReturnsAsync(Constant.ExpectedDisbursement);
-
-            XenditConfiguration.RequestClient = MockClient.Object;
-
-            Disbursement actualDisbursement = await Disbursement.Create(externalId: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["external_id"], bankCode: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["bank_code"], accountHolderName: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_holder_name"], accountNumber: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_number"], description: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["description"], amount: 90000L, parameter: additionalParams);
-            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
-        }
-
-        [Fact]
-        public async void Disbursement_ShouldSuccess_WhenCreate_AdditionalParams_CustomHeaders()
-        {
-            var additionalParams = new Dictionary<string, object>()
-            {
-                { "email_to",  "[\"somebody@email.com\"]" },
-            };
-
-            MockClient
-                .Setup(client => client.Request<Disbursement>(HttpMethod.Post, Constant.CustomHeaders, Constant.DisbursementUrl, Constant.AdditionalDisbursementBodyWithRequiredParams))
-                    .ReturnsAsync(Constant.ExpectedDisbursement);
-
-            XenditConfiguration.RequestClient = MockClient.Object;
-
-            Disbursement actualDisbursement = await Disbursement.Create(headers: Constant.CustomHeaders, externalId: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["external_id"], bankCode: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["bank_code"], accountHolderName: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_holder_name"], accountNumber: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["account_number"], description: (string)Constant.AdditionalDisbursementBodyWithRequiredParams["description"], amount: 90000L, parameter: additionalParams);
+            Disbursement actualDisbursement = await Disbursement.Create(Constant.DisbursementBody, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDisbursement), JsonSerializer.Serialize(actualDisbursement));
         }
     }
