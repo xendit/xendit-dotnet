@@ -1,19 +1,19 @@
 ﻿namespace XenditTest.VirtualAccountTest
 {
-    using System.Collections.Generic;
     using Xendit.net.Model;
+    using Xendit.net.Struct;
 
     internal static class Constant
     {
-        internal static readonly List<AvailableBank> ExpectedAvailableBanks = new List<AvailableBank>()
+        internal static readonly AvailableBank[] ExpectedAvailableBanks = new AvailableBank[]
         {
             new AvailableBank { Name = "Bank Negara Indonesia", Code = "BNI" },
             new AvailableBank { Name = "Bank Rakyat Indonesia", Code = "BRI" },
         };
 
-        internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
+        internal static readonly HeaderParameter CustomHeaders = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
+            ForUserId = "user-id",
         };
 
         internal static readonly VirtualAccount ExpectedVirtualAccount = new VirtualAccount
@@ -47,45 +47,18 @@
             ExpectedAmount = 6000,
         };
 
-        internal static readonly Dictionary<string, object> UpdateVAbody = new Dictionary<string, object>()
+        internal static readonly UpdateVirtualAccountParameter UpdateVAbody = new UpdateVirtualAccountParameter
         {
-            { "expiration_date", "2019-11-12T23:46:00.000Z" },
+            ExpirationDate = "2019-11-12T23:46:00.000Z",
         };
 
-        internal static readonly Dictionary<string, object> ClosedPostVAbody = new Dictionary<string, object>()
+        internal static readonly CreateVirtualAccountParameter ClosedPostVAbody = new CreateVirtualAccountParameter
         {
-            { "external_id", "demo-1475804036622" },
-            { "bank_code", "BNI" },
-            { "name", "Rika Sutanto" },
-            { "expected_amount", 6000L },
-            { "is_closed", true },
-        };
-
-        internal static readonly Dictionary<string, object> OpenPostVAbody = new Dictionary<string, object>()
-        {
-            { "external_id", "demo-1475804036622" },
-            { "bank_code", "BNI" },
-            { "name", "Rika Sutanto" },
-            { "is_closed", false },
-        };
-
-        internal static readonly Dictionary<string, object> ClosedPostVAbodyWithAdditionalParams = new Dictionary<string, object>()
-        {
-            { "expiration_date", "2019-11-12T23:46:00.000Z" },
-            { "external_id", "demo-1475804036622" },
-            { "bank_code", "BNI" },
-            { "name", "Rika Sutanto" },
-            { "expected_amount", 6000L },
-            { "is_closed", true },
-        };
-
-        internal static readonly Dictionary<string, object> OpenPostVAbodyWithAdditionalParams = new Dictionary<string, object>()
-        {
-            { "expiration_date", "2019-11-12T23:46:00.000Z" },
-            { "external_id", "demo-1475804036622" },
-            { "bank_code", "BNI" },
-            { "name", "Rika Sutanto" },
-            { "is_closed", false },
+            ExternalId = "demo-1475804036622",
+            BankCode = "BNI",
+            Name = "Rika Sutanto",
+            ExpectedAmount = 8000,
+            IsClosed = true,
         };
 
         internal static readonly VirtualAccount ExpectedCreatedClosedVirtualAccount = new VirtualAccount
