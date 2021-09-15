@@ -136,7 +136,7 @@
         /// Get all invoices by given parameters.
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="ListInvoiceParameter"/>.</param>
-        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <seealso cref="https://developers.xendit.co/api-reference/#list-all-invoices"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see cref="https://developers.xendit.co/api-reference/#list-all-invoices"/>.</param>
         /// <returns>A Task of <see cref="Invoice[]"/>.</returns>
         public static async Task<Invoice[]> GetAll(ListInvoiceParameter? parameter = null, HeaderParameter? headers = null)
         {

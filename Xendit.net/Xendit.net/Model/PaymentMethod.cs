@@ -37,7 +37,7 @@
         /// Create payment method with all parameter.
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="PaymentMethodParameter"/>.</param>
-        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <seealso href="https://developers.xendit.co/api-reference/#create-payment-method"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-payment-method"/>.</param>
         /// <returns>A Task of <see cref="PaymentMethod"/>.</returns>
         public static async Task<PaymentMethod> Create(PaymentMethodParameter parameter, HeaderParameter? headers = null)
         {
@@ -48,7 +48,7 @@
         /// Get payment methods by customer id.
         /// </summary>
         /// <param name="customerId">Customer object ID of interest.</param>
-        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/>.</param>
         /// <returns>A Task of <see cref="PaymentMethod[]"/>.</returns>
         public static async Task<PaymentMethod[]> Get(string customerId, HeaderParameter? headers = null)
         {

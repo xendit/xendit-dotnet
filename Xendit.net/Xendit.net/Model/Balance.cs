@@ -16,7 +16,7 @@
         /// Get balance from your account based on given account type.
         /// </summary>
         /// <param name="accountType">Selected balance type <see cref="BalanceAccountType"/>.</param>
-        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <seealso href="https://developers.xendit.co/api-reference/#get-balance"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-balance"/>.</param>
         /// <returns>A Task of <see cref="Balance"/>.</returns>
         public static async Task<Balance> Get(BalanceAccountType? accountType = null, HeaderParameter? headers = null)
         {

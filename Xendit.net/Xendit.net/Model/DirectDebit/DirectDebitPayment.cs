@@ -80,7 +80,7 @@
         /// </summary>
         /// <param name="parameter">Parameter listed here <see cref="DirectDebitPaymentParameter"/>.</param>
         /// <param name="idempotencyKey">Key provided by the merchant to prevent duplicate requests.</param>
-        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <seealso href="https://developers.xendit.co/api-reference/#create-direct-debit-payment"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-direct-debit-payment"/>.</param>
         /// <returns>A Task of <see cref="DirectDebitPayment"/>.</returns>
         public static async Task<DirectDebitPayment> Create(DirectDebitPaymentParameter parameter, string idempotencyKey, HeaderParameter? headers = null)
         {
@@ -110,7 +110,7 @@
         /// Retrieve the details of a direct debit payment by Xendit transaction ID.
         /// </summary>
         /// <param name="id">Xendit identifier for specified direct debit transaction.</param>
-        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-id"/>.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-payment-by-id"/>.</param>
         /// <returns>A Task of <see cref="DirectDebitPayment"/>.</returns>
         public static async Task<DirectDebitPayment> GetById(string id, HeaderParameter? headers = null)
         {
@@ -121,8 +121,8 @@
         /// Retrieve the details of a direct debit payment by merchant provided transaction ID.
         /// </summary>
         /// <param name="referenceId">Merchant provided identifier for specified direct debit transaction.</param>
-        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <seealso href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/>.</param>
-        /// <returns>A Task of <seealso cref="DirectDebitPayment"/>.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/>.</param>
+        /// <returns>A Task of <see cref="DirectDebitPayment"/>.</returns>
         public static async Task<DirectDebitPayment[]> GetByReferenceId(string referenceId, HeaderParameter? headers = null)
         {
             return await GetByReferenceIdRequest(referenceId, headers);

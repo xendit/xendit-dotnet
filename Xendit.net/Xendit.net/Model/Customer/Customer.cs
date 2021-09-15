@@ -72,7 +72,7 @@
         /// <summary>
         /// Create customer with parameters.
         /// </summary>
-        /// <param name="parameter">Parameter listed here .</param>
+        /// <param name="parameter">Parameter listed here <see cref="CustomerParameter"/>.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-customer"/>.</param>
         /// <param name="version">API version that will be used to request <see cref="ApiVersion"/>.</param>
         /// <returns>A Task of <see cref="Customer"/>.</returns>
