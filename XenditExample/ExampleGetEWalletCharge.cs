@@ -7,6 +7,7 @@ namespace XenditExample
     using Xendit.net;
     using Xendit.net.Exception;
     using Xendit.net.Model;
+    using Xendit.net.Model.EWallet;
     using Xendit.net.Network;
 
     class ExampleGetEWalletCharge

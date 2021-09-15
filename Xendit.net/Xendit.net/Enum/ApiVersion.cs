@@ -9,6 +9,9 @@
     {
         Unknown,
 
+        [EnumMember(Value = "2021-01-25")]
+        Version20210125,
+
         [EnumMember(Value = "2020-10-31")]
         Version20201031,
 

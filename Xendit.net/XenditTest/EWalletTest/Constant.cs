@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
     using Xendit.net.Model.EWallet;
     using Xendit.net.Struct;
 
@@ -14,21 +13,20 @@
             BusinessId = "5f218745736e619164dc8608",
             ReferenceId = "test-reference-id",
             Status = EWalletEnum.Status.Pending,
-            Currency = Xendit.net.Enum.Currency.IDR,
+            Currency = Currency.IDR,
             ChargeAmount = 1000,
             CaptureAmount = 1000,
             CheckoutMethod = EWalletEnum.CheckoutMethod.OneTimePayment,
             ChannelCode = EWalletEnum.ChannelCode.IdShopeepay,
-            ChannelProperties = new Dictionary<string, string>()
+            ChannelProperties = new EWalletChargeProperties
             {
-                { "success_redirect_url",  "https://dashboard.xendit.co/register/1" },
+                SuccessRedirectUrl = "https://dashboard.xendit.co/register/1",
             },
-            Actions = new Dictionary<string, string>()
+            Actions = new Actions
             {
-                { "desktop_web_checkout_url",  "https://dashboard.xendit.co/register/1" },
-                { "mobile_web_checkout_url", null },
-                { "mobile_deeplink_checkout_url",  "https://deeplinkcheckout.this/" },
-                { "qr_checkout_string", "ID123XenditQRTest321DI" },
+                DesktopWebCheckoutUrl = "https://dashboard.xendit.co/register/1",
+                MobileDeeplinkCheckoutUrl = "https://deeplinkcheckout.this/",
+                QrCheckoutString = "ID123XenditQRTest321DI",
             },
             IsRedirectRequired = true,
             CallbackUrl = "https://calling-back.com/xendit/shopeepay",
@@ -56,7 +54,7 @@
         internal static readonly EWalletChargeParameter EWalletBody = new EWalletChargeParameter
         {
             ReferenceId = ReferenceId,
-            Currency = Xendit.net.Enum.Currency.IDR,
+            Currency = Currency.IDR,
             Amount = Amount,
             CheckoutMethod = EWalletEnum.CheckoutMethod.OneTimePayment,
             ChannelCode = EWalletEnum.ChannelCode.IdShopeepay,

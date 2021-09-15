@@ -34,7 +34,7 @@
         public EWalletEnum.ChannelCode ChannelCode { get; set; }
 
         [JsonPropertyName("channel_properties")]
-        public Dictionary<string, string> ChannelProperties { get; set; }
+        public EWalletChargeProperties ChannelProperties { get; set; }
 
         [JsonPropertyName("payment_method_id")]
         public string PaymentMethodId { get; set; }
@@ -55,7 +55,7 @@
         public long CaptureAmount { get; set; }
 
         [JsonPropertyName("actions")]
-        public Dictionary<string, string> Actions { get; set; }
+        public Actions Actions { get; set; }
 
         [JsonPropertyName("is_redirect_required")]
         public bool IsRedirectRequired { get; set; }
@@ -84,7 +84,7 @@
         /// <param name="parameter">Parameter listed here <see cref="EWalletChargeParameter"/>. </param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-ewallet-charge"/>.</param>
         /// <param name="apiVersion">API version that will be used to request. Use values listed on <see href="https://developers.xendit.co/api-reference/#ewallets"/>.</param>
-        /// <returns>A Task of E-Wallet Charge model <seealso cref="EWalletCharge"/>.</returns>
+        /// <returns>A Task of <see cref="EWalletCharge"/>.</returns>
         public static async Task<EWalletCharge> Create(EWalletChargeParameter parameter, HeaderParameter? headers = null, ApiVersion apiVersion = ApiVersion.Version20210125)
         {
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };
@@ -98,7 +98,7 @@
         /// <param name="chargeId">E-Wallet charge ID.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-ewallet-charge-status"/>.</param>
         /// <param name="apiVersion">API version that will be used to request. Use values listed on <see href="https://developers.xendit.co/api-reference/#ewallets"/>.</param>
-        /// <returns>A Task of E-Wallet Charge model <seealso cref="EWalletCharge"/>.</returns>
+        /// <returns>A Task of <see cref="EWalletCharge"/>.</returns>
         public static async Task<EWalletCharge> Get(string chargeId, HeaderParameter? headers = null, ApiVersion apiVersion = ApiVersion.Version20210125)
         {
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };

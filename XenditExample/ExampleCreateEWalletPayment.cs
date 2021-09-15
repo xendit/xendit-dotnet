@@ -12,7 +12,7 @@ namespace XenditExample
     using Xendit.net.Network;
     using Xendit.net.Struct;
 
-    class ExampleCreateEWalletCharge
+    class ExampleCreateEWalletPayment
     {
         static async Task Main(string[] args)
         {
@@ -23,21 +23,19 @@ namespace XenditExample
 
             try
             {
-                EWalletChargeParameter parameter = new EWalletChargeParameter
+                EWalletPaymentParameter parameter = new EWalletPaymentParameter
                 {
-                    ReferenceId = "demo-reference-id",
-                    Currency = Currency.IDR,
-                    Amount = 1000,
-                    CheckoutMethod = EWalletEnum.CheckoutMethod.OneTimePayment,
-                    ChannelCode = EWalletEnum.ChannelCode.IdOvo,
-                    ChannelProperties = new EWalletChargeProperties
-                    {
-                        MobileNumber = "+628123123123",
-                    },
+                    ExternalId = "example-external-id",
+                    Amount = 100000,
+                    Phone = "08123123123",
+                    EWalletType = EWalletEnum.PaymentType.Ovo,
                 };
 
-                EWalletCharge eWalletCharge = await EWalletCharge.Create(parameter);
-                Console.WriteLine(eWalletCharge);
+                EWalletPayment eWalletPayment = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20200201);
+                Console.WriteLine(eWalletCheWalletPaymentarge);
+
+                EWalletPayment eWalletPayment2 = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20190204);
+                Console.WriteLine(eWalletPayment2);
             }
             catch (XenditException e)
             {
