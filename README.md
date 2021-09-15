@@ -59,22 +59,29 @@ Please check [Xendit API Reference](https://developers.xendit.co/api-reference/)
 
 ## Installation
 
-- Add project reference manually.
-
-  Copy this line into your project's `csproj` file. Change the reference to Xendit.net directory if needed.
-
-  ```
-  <ItemGroup>
-    <ProjectReference Include="..\Xendit.net\Xendit.net\Xendit.net.csproj" />
-  </ItemGroup>
-  ```
-
-- Add project reference through `.NET CLI`.
-  Run this command:
-
+- If you use .NET CLI:
   ```bash
-  dotnet add your_project.csproj reference <Xendit.net.csproj_Directory>
+  dotnet add package Xendit.net
   ```
+
+- If you use Package Manager:
+  ```bash
+  Install-Package Xendit.net
+  ```
+
+- If you use PackageReference:
+
+  Copy this line into your project's `csproj` file.
+  ```bash
+  <PackageReference Include="Xendit.net" Version="<VERSION>" />
+  ```
+
+- If you want to install through Visual Studio:
+  1. Open Solution Explorer.
+  2. Click right on the project.
+  3. Click on `Manage NuGet Packages...`
+  4. Select on `Browse` tab and search `Xendit.net` by Xendit
+  5. Select version that you want to use and click Install
 
 ## Usage
 
