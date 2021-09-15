@@ -17,10 +17,9 @@ namespace XenditExample
             XenditConfiguration.RequestClient = networkClient;
             XenditConfiguration.ApiKey = "xnd_development_...";
 
-            string virtualAccountPaymentId = "random_1560763705544";
-
             try
             {
+                string virtualAccountPaymentId = "random_1560763705544";
                 VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get(virtualAccountPaymentId);
 
                 Console.WriteLine(virtualAccountPayment);
@@ -31,3 +30,4 @@ namespace XenditExample
             }
         }
     }
+}

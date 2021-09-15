@@ -1,28 +1,29 @@
 ﻿namespace XenditTest.VirtualAccountTest
 {
-    using System.Collections.Generic;
+    using Xendit.net.Enum;
     using Xendit.net.Model;
+    using Xendit.net.Struct;
 
     internal static class Constant
     {
-        internal static readonly List<AvailableBank> ExpectedAvailableBanks = new List<AvailableBank>()
+        internal static readonly AvailableBank[] ExpectedAvailableBanks = new AvailableBank[]
         {
-            new AvailableBank { Name = "Bank Negara Indonesia", Code = "BNI" },
-            new AvailableBank { Name = "Bank Rakyat Indonesia", Code = "BRI" },
+            new AvailableBank { Name = "Bank Negara Indonesia", Code = DisbursementChannelCode.Bni },
+            new AvailableBank { Name = "Bank Rakyat Indonesia", Code = DisbursementChannelCode.Bri },
         };
 
-        internal static readonly Dictionary<string, string> CustomHeaders = new Dictionary<string, string>()
+        internal static readonly HeaderParameter CustomHeaders = new HeaderParameter
         {
-            { "for-user-id", "user-id" },
+            ForUserId = "user-id",
         };
 
         internal static readonly VirtualAccount ExpectedVirtualAccount = new VirtualAccount
         {
             IsClosed = false,
-            Status = "ACTIVE",
-            Currency = "IDR",
+            Status = VirtualAccountEnum.Status.Active,
+            BankCode = VirtualAccountEnum.BankCode.Bni,
+            Currency = Currency.IDR,
             OwnerId = "owner-id",
-            BankCode = "BNI",
             MerchantCode = "1",
             Name = "Rika",
             AccountNumber = "8808999992622802",
@@ -34,10 +35,10 @@
         internal static readonly VirtualAccount ExpectedUpdatedVirtualAccount = new VirtualAccount
         {
             IsClosed = false,
-            Status = "ACTIVE",
-            Currency = "IDR",
+            Status = VirtualAccountEnum.Status.Active,
+            BankCode = VirtualAccountEnum.BankCode.Bni,
+            Currency = Currency.IDR,
             OwnerId = "owner-id",
-            BankCode = "BNI",
             MerchantCode = "1",
             Name = "Rika",
             AccountNumber = "8808999992622802",
@@ -47,54 +48,26 @@
             ExpectedAmount = 6000,
         };
 
-        internal static readonly Dictionary<string, object> UpdateVAbody = new Dictionary<string, object>()
+        internal static readonly UpdateVirtualAccountParameter UpdateVAbody = new UpdateVirtualAccountParameter
         {
-            { "expiration_date", "2019-11-12T23:46:00.000Z" },
+            ExpirationDate = "2019-11-12T23:46:00.000Z",
         };
 
-        internal static readonly Dictionary<string, object> ClosedPostVAbody = new Dictionary<string, object>()
+        internal static readonly CreateVirtualAccountParameter ClosedPostVAbody = new CreateVirtualAccountParameter
         {
-            { "external_id", "demo-1475804036622" },
-            { "bank_code", "BNI" },
-            { "name", "Rika Sutanto" },
-            { "expected_amount", 6000L },
-            { "is_closed", true },
-        };
-
-        internal static readonly Dictionary<string, object> OpenPostVAbody = new Dictionary<string, object>()
-        {
-            { "external_id", "demo-1475804036622" },
-            { "bank_code", "BNI" },
-            { "name", "Rika Sutanto" },
-            { "is_closed", false },
-        };
-
-        internal static readonly Dictionary<string, object> ClosedPostVAbodyWithAdditionalParams = new Dictionary<string, object>()
-        {
-            { "expiration_date", "2019-11-12T23:46:00.000Z" },
-            { "external_id", "demo-1475804036622" },
-            { "bank_code", "BNI" },
-            { "name", "Rika Sutanto" },
-            { "expected_amount", 6000L },
-            { "is_closed", true },
-        };
-
-        internal static readonly Dictionary<string, object> OpenPostVAbodyWithAdditionalParams = new Dictionary<string, object>()
-        {
-            { "expiration_date", "2019-11-12T23:46:00.000Z" },
-            { "external_id", "demo-1475804036622" },
-            { "bank_code", "BNI" },
-            { "name", "Rika Sutanto" },
-            { "is_closed", false },
+            ExternalId = "demo-1475804036622",
+            BankCode = VirtualAccountEnum.BankCode.Bni,
+            Name = "Rika Sutanto",
+            ExpectedAmount = 8000,
+            IsClosed = true,
         };
 
         internal static readonly VirtualAccount ExpectedCreatedClosedVirtualAccount = new VirtualAccount
         {
             IsClosed = true,
-            Status = "ACTIVE",
-            Currency = "IDR",
+            Status = VirtualAccountEnum.Status.Active,
+            Currency = Currency.IDR,
             OwnerId = "owner-id",
-            BankCode = "BNI",
             MerchantCode = "1",
             Name = "Rika Sutanto",
             AccountNumber = "8808999992622802",
@@ -108,10 +81,10 @@
         internal static readonly VirtualAccount ExpectedCreatedOpenVirtualAccount = new VirtualAccount
         {
             IsClosed = false,
-            Status = "ACTIVE",
-            Currency = "IDR",
+            Status = VirtualAccountEnum.Status.Active,
+            Currency = Currency.IDR,
             OwnerId = "owner-id",
-            BankCode = "BNI",
+            BankCode = VirtualAccountEnum.BankCode.Bni,
             MerchantCode = "1",
             Name = "Rika Sutanto",
             AccountNumber = "8808999992622802",
@@ -135,7 +108,7 @@
             CallbackVirtualAccountId = "598d5f71bf64853820c49a18",
             ExternalId = "demo-1502437214715",
             MerchantCode = "77517",
-            BankCode = "BNI",
+            BankCode = VirtualAccountEnum.BankCode.Bni,
             Amount = 5000,
             SenderName = "JOHN DOE",
             TransactionTimestamp = "2017-08-11T11:14:57.080Z",

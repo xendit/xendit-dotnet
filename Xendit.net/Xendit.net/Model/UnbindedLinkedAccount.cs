@@ -18,8 +18,8 @@
         /// Unlinks or unbinds a successful linked account token.
         /// </summary>
         /// <param name="linkedAccountTokenId">Linked account token `id` received from Initialize Account Authorization.</param>
-        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <seealso href="https://developers.xendit.co/api-reference/#unbind-a-linked-account-token"/>.</param>
-        /// <returns>A Task of Accessible Linked Account model <seealso cref="AccessibleLinkedAccount"/>.</returns>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#unbind-a-linked-account-token"/>.</param>
+        /// <returns>A Task of <see cref="UnbindedLinkedAccount"/>.</returns>
         public static async Task<UnbindedLinkedAccount> Unbind(string linkedAccountTokenId, HeaderParameter? headers = null)
         {
             return await UnbindRequest(linkedAccountTokenId, headers);

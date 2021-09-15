@@ -26,7 +26,7 @@
         /// </summary>
         /// <param name="linkedAccountTokenId">Linked account token `id` received from Initialize Account Authorization.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#retrieve-accessible-accounts-by-linked-account-token"/>.</param>
-        /// <returns>A Task of Accessible Linked Account model <seealso cref="AccessibleLinkedAccount"/>.</returns>
+        /// <returns>A Task of <see cref="AccessibleLinkedAccount[]"/>.</returns>
         public static async Task<AccessibleLinkedAccount[]> Get(string linkedAccountTokenId, HeaderParameter? headers = null)
         {
             return await GetRequest(linkedAccountTokenId, headers);

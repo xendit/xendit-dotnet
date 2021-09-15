@@ -1,9 +1,10 @@
 ﻿namespace Xendit.net.Model
 {
-    using System.Collections.Generic;
     using System.Net.Http;
     using System.Text.Json.Serialization;
     using System.Threading.Tasks;
+    using Xendit.net.Enum;
+    using Xendit.net.Struct;
 
     public class VirtualAccountPayment
     {
@@ -26,7 +27,7 @@
         public string AccountNumber { get; set; }
 
         [JsonPropertyName("bank_code")]
-        public string BankCode { get; set; }
+        public VirtualAccountEnum.BankCode BankCode { get; set; }
 
         [JsonPropertyName("amount")]
         public int Amount { get; set; }
@@ -41,24 +42,18 @@
         /// Get Virtual Account payment based on its payment ID.
         /// </summary>
         /// <param name="paymentId">ID of the payment to retrieve.</param>
-        /// <returns>A Task of Virtual Account Payment model.</returns>
-        public static async Task<VirtualAccountPayment> Get(string paymentId)
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-virtual-account-payment"/>.</param>
+        /// <returns>A Task of <see cref="VirtualAccountPayment"/>.</returns>
+        public static async Task<VirtualAccountPayment> Get(string paymentId, HeaderParameter? headers = null)
         {
-            return await Get(new Dictionary<string, string>(), paymentId);
+            return await GetRequest(paymentId, headers);
         }
 
-        /// <summary>
-        /// Get Virtual Account payment based on its payment ID with custom header.
-        /// </summary>
-        /// <param name="headers">Custom headers. e.g. "for-user-id".</param>
-        /// <param name="paymentId">ID of the payment to retrieve.</param>
-        /// <returns>A Task of Virtual Account Payment model.</returns>
-        public static async Task<VirtualAccountPayment> Get(Dictionary<string, string> headers, string paymentId)
+        private static async Task<VirtualAccountPayment> GetRequest(string paymentId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/callback_virtual_account_payments/payment_id=", paymentId);
 
-            var virtualAccountPayment = await XenditConfiguration.RequestClient.Request<VirtualAccountPayment>(HttpMethod.Get, headers, url, null);
-            return virtualAccountPayment;
+            return await XenditConfiguration.RequestClient.Request<VirtualAccountPayment>(HttpMethod.Get, headers, url);
         }
     }
 }

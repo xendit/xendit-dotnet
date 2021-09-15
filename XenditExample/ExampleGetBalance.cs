@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Net.Http;
     using Xendit.net;
+    using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
     using Xendit.net.Network;
@@ -21,6 +22,9 @@
             {
                 Balance balance = await Balance.Get();
                 Console.WriteLine(balance.Value);
+
+                Balance balanceWithType = await Balance.Get(BalanceAccountType.Holding);
+                Console.WriteLine(balanceWithType.Value);
             }
             catch (XenditException e)
             {

@@ -17,7 +17,7 @@
         public async void VirtualAccountPayment_ShouldSuccess_GetVirtualAccountPayment()
         {
             MockClient
-                .Setup(client => client.Request<VirtualAccountPayment>(HttpMethod.Get, new Dictionary<string, string>(), Constant.VirtualAccountPaymentUrl, null))
+                .Setup(client => client.Request<VirtualAccountPayment>(HttpMethod.Get, null, Constant.VirtualAccountPaymentUrl))
                 .ReturnsAsync(Constant.ExpectedVirtualAccountPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;

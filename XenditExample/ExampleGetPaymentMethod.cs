@@ -1,4 +1,4 @@
-namespace ConsoleApp1
+namespace XenditExample
 {
     using System;
     using System.Net.Http;

@@ -1,6 +1,7 @@
 ﻿namespace Xendit.net.Model
 {
     using System.Text.Json.Serialization;
+    using Xendit.net.Enum;
 
     public class AvailableBank
     {
@@ -8,7 +9,7 @@
         public string Name { get; set; }
 
         [JsonPropertyName("code")]
-        public string Code { get; set; }
+        public DisbursementChannelCode Code { get; set; }
 
         [JsonPropertyName("can_disburse")]
         public bool CanDisburse { get; set; }

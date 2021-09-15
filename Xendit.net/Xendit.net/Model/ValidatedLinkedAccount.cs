@@ -27,7 +27,7 @@
         /// <param name="otpCode">OTP received by the customer from the partner bank for account linking.</param>
         /// <param name="linkedAccountTokenId">Linked account token id received from Initialize Account Authorization.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#validate-otp-for-linked-account-token"/>.</param>
-        /// <returns>A Task of Validated Linked Account model <seealso cref="ValidatedLinkedAccount"/>.</returns>
+        /// <returns>A Task of <see cref="ValidatedLinkedAccount"/>.</returns>
         public static async Task<ValidatedLinkedAccount> ValidateOtp(string otpCode, string linkedAccountTokenId, HeaderParameter? headers = null)
         {
             Dictionary<string, string> parameter = new Dictionary<string, string>()

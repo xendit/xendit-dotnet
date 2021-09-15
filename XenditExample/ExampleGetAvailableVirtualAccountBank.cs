@@ -20,9 +20,9 @@ namespace XenditExample
 
             try
             {
-                List<AvailableBank> availableBanks = await VirtualAccount.GetAvailableBanks();
+                AvailableBank[] availableBanks = await VirtualAccount.GetAvailableBanks();
 
-                availableBanks.ForEach(bank => Console.WriteLine(bank.Name));
+                Console.WriteLine(availableBanks[0]);
             }
             catch (XenditException e)
             {
@@ -30,3 +30,4 @@ namespace XenditExample
             }
         }
     }
+}

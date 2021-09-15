@@ -5,12 +5,13 @@ namespace XenditExample
     using System.Threading.Tasks;
     using System.Net.Http;
     using Xendit.net;
+    using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
     using Xendit.net.Network;
     using Xendit.net.Struct;
 
-    class ExampleUpdateVirtualAccount
+    class ExampleCreateVirtualAccount
     {
         static async Task Main(string[] args)
         {
@@ -21,13 +22,15 @@ namespace XenditExample
 
             try
             {
-                UpdateVirtualAccountParameter parameter = new UpdateVirtualAccountParameter
-                {
-                    IsSingleUse = true,
-                    ExpectedAmount = 20000,
+                VirtualAccountParameter parameter = new VirtualAccountParameter
+                { 
+                    ExternalId = "my_external_id",
+                    BankCode = VirtualAccountEnum.BankCode.Bni,
+                    Name = "John Doe",
+                    ExpectedAmount = 200000,
                 };
 
-                VirtualAccount virtualAccount = await VirtualAccount.Update(parameter, "virtual_account_id");
+                VirtualAccount virtualAccount = await VirtualAccount.Create(parameter);
                 Console.WriteLine(virtualAccount);
             }
             catch (XenditException e)
