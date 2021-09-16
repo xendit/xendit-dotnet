@@ -42,14 +42,12 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
     - [Get Accessible Accounts by Linked Account Token](#get-accessible-accounts-by-linked-account-token)
     - [Unbind Linked Account Token](#unbind-linked-account-token)
-  - [Payment Methods Services](#payment-methods-services)
-    - [Create Payment Methods](#create-payment-methods)
-    - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
-  - [Retail Outlet Services](#retail-outlet-services)
-    - [Create Fixed Payment Code](#create-fixed-payment-code)
-    - [Update Fixed Payment Code](#update-fixed-payment-code)
-    - [Get Payment Code](#get-payment-code)
-    - [Get Payments By Payment Code ID](#get-payments-by-payment-code-id)
+  - [E-Wallet Service](#e-wallet-service)
+    - [Create E-Wallet Charge (API version `2020-01-25`)](#create-e-wallet-charge-api-version-2020-01-25)
+    - [Get E-Wallet Charge (API version `2020-01-25`)](#get-e-wallet-charge-api-version-2020-01-25)
+    - [Create E-Wallet Payment (API version `2020-02-01`)](#create-e-wallet-payment-api-version-2020-02-01)
+    - [Create E-Wallet Payment (API version `2019-02-04`)](#create-e-wallet-payment-api-version-2019-02-04)
+    - [Get E-Wallet Payment](#get-e-wallet-payment)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -145,7 +143,7 @@ To create a virtual account, use struct `CreateVirtualAccountParameter`. You may
 
 ```cs
 VirtualAccountParameter parameter = new VirtualAccountParameter
-{ 
+{
   ExternalId = "my_external_id",
   BankCode = VirtualAccountEnum.BankCode.Bni,
   Name = "John Doe",
@@ -156,6 +154,7 @@ VirtualAccount virtualAccount = await VirtualAccount.Create(parameter);
 ```
 
 It will return:
+
 ```cs
 VirtualAccount virtualAccount = new VirtualAccount
 {
@@ -176,6 +175,7 @@ VirtualAccount virtualAccount = await VirtualAccount.Get("VIRTUAL_ACCOUNT_ID");
 ```
 
 It will return:
+
 ```cs
 VirtualAccount virtualAccount = new VirtualAccount
 {
@@ -196,7 +196,7 @@ VirtualAccount virtualAccount = new VirtualAccount
 
 #### Update a Virtual Account
 
-To update a virtual account, use struct `UpdateVirtualAccountParameter`. 
+To update a virtual account, use struct `UpdateVirtualAccountParameter`.
 
 ```cs
 UpdateVirtualAccountParameter parameter = new UpdateVirtualAccountParameter
@@ -1490,3 +1490,205 @@ FixedPaymentCode[] fixedPaymentCodes = new FixedPaymentCode[]
 }
 ```
 ````
+
+### E-Wallet Service
+
+#### Create E-Wallet Charge (API version `2020-01-25`)
+
+To create an e-wallet charge, use struct `EWalletChargeParameter`. You may use these enums and classes to construct `EWalletChargeParameter`:
+
+- Enum `Currency` for `Currency` property
+- Enum `EWalletEnum.CheckoutMethod` for `CheckoutMethod` property
+- Enum `EWalletEnum.ChannelCode` for `ChannelCode` property
+- `EWalletChargeProperties` for `ChannelProperties` property
+- `BasketItem` for `Basket` property
+
+Here is the example of invoking `Create` method:
+
+```cs
+EWalletChargeParameter parameter = new EWalletChargeParameter
+{
+  ReferenceId = "demo-reference-id",
+  Currency = Currency.IDR,
+  Amount = 1000,
+  CheckoutMethod = EWalletEnum.CheckoutMethod.OneTimePayment,
+  ChannelCode = EWalletEnum.ChannelCode.IdOvo,
+  ChannelProperties = new EWalletChargeProperties
+  {
+    MobileNumber = "+628123123123",
+  },
+};
+
+EWalletCharge eWalletCharge = await EWalletCharge.Create(parameter);
+
+// define API version
+EWalletCharge eWalletCharge = await EWalletCharge.Create(parameter, apiVersion: ApiVersion.Version20210125);
+```
+
+It will return:
+
+```cs
+EWalletCharge eWalletCharge = new EWalletCharge
+{
+  Id = "<GENERATED_ID>",
+  BusinessId = "<MERCHANT_BUSINESS_ID>",
+  ReferenceId = "demo-reference-id",
+  Status = EWalletEnum.Status.Pending,
+  Currency = Currency.IDR,
+  ChargeAmount = 1000,
+  CaptureAmount = 1000,
+  CheckoutMethod = EWalletEnum.CheckoutMethod.OneTimePayment,
+  ChannelCode = EWalletEnum.ChannelCode.IdOvo,
+  ChannelProperties = new EWalletChargeProperties
+  {
+    MobileNumber = "+628123123123",
+  },
+  Actions = null,
+  IsRedirectRequired = false,
+  CallbackUrl = "<CALLBACK_URL",
+  Created = "2017-07-21T17:32:28Z",
+  Updated = "2017-07-21T17:32:28Z",
+  Voided = null,
+  customerId = null,
+  PaymentMethodId = null,
+  FailureCode = null,
+  Basket = null,
+  Metadata = null,
+};
+```
+
+#### Get E-Wallet Charge (API version `2020-01-25`)
+
+```cs
+EWalletCharge eWalletCharge = await EWalletCharge.Get("CHARGE_ID");
+```
+
+It will return:
+
+```cs
+EWalletCharge eWalletCharge = new EWalletCharge
+{
+  Id = "<GENERATED_ID>",
+  BusinessId = "<MERCHANT_BUSINESS_ID>",
+  ReferenceId = "demo-reference-id",
+  Status = EWalletEnum.Status.Pending,
+  Currency = Currency.IDR,
+  ChargeAmount = 1000,
+  CaptureAmount = 1000,
+  CheckoutMethod = EWalletEnum.CheckoutMethod.OneTimePayment,
+  ChannelCode = EWalletEnum.ChannelCode.IdOvo,
+  ChannelProperties = new EWalletChargeProperties
+  {
+    MobileNumber = "+628123123123",
+  },
+  Actions = null,
+  IsRedirectRequired = false,
+  CallbackUrl = "<CALLBACK_URL",
+  Created = "2017-07-21T17:32:28Z",
+  Updated = "2017-07-21T17:32:28Z",
+  Voided = null,
+  customerId = null,
+  PaymentMethodId = null,
+  FailureCode = null,
+  Basket = null,
+  Metadata = null,
+};
+```
+
+#### Create E-Wallet Payment (API version `2020-02-01`)
+
+To create an e-wallet Payment, use struct `EWalletPaymentParameter`. You may use these enum and class to construct `EWalletPaymentParameter`:
+
+- Enum `EWalletEnum.PaymentType` for `EWalletType` property
+- `Item` for `Items` property
+
+Here is the example of invoking `Create` method:
+
+```cs
+EWalletPaymentParameter parameter = new EWalletPaymentParameter
+{
+  ExternalId = "example-external-id",
+  Amount = 100000,
+  Phone = "08123123123",
+  EWalletType = EWalletEnum.PaymentType.Ovo,
+};
+
+// if we don't pass API version parameter, it uses default value of API version 2020-02-01
+EWalletPayment eWalletPayment = await EWalletPayment.Create(parameter);
+
+// define API version
+EWalletPayment eWalletPayment = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20200201);
+```
+
+It will return:
+
+```cs
+EWalletPaymentParameter parameter = new EWalletPaymentParameter
+{
+  BusinessId = "<MERCHANT_BUSINESS_ID>",
+  ExternalId = "example-external-id",
+  Amount = 100000,
+  Phone = "08123123123",
+  EWalletType = EWalletEnum.PaymentType.Ovo,
+  Status = EWalletEnum.Status.Pending,
+  Created = "2020-02-20T00:00:00.000Z",
+};
+```
+
+#### Create E-Wallet Payment (API version `2019-02-04`)
+
+To create an e-wallet Payment, use struct `EWalletPaymentParameter`. You may use these enum and class to construct `EWalletPaymentParameter`:
+
+- Enum `EWalletEnum.PaymentType` for `EWalletType` property
+- `Item` for `Items` property
+
+Here is the example of invoking `Create` method of API version `2019-02-04`:
+
+```cs
+EWalletPaymentParameter parameter = new EWalletPaymentParameter
+{
+  ExternalId = "example-external-id",
+  Amount = 100000,
+  Phone = "08123123123",
+  EWalletType = EWalletEnum.PaymentType.Ovo,
+};
+
+// define API version
+EWalletPayment eWalletPayment = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20190204);
+```
+
+It will return:
+
+```cs
+EWalletPaymentParameter parameter = new EWalletPaymentParameter
+{
+  BusinessId = "<MERCHANT_BUSINESS_ID>",
+  ExternalId = "example-external-id",
+  Amount = 100000,
+  Phone = "08123123123",
+  EWalletType = EWalletEnum.PaymentType.Ovo,
+  Status = EWalletEnum.Status.Pending,
+  Created = "2020-02-20T00:00:00.000Z",
+};
+```
+
+#### Get E-Wallet Payment
+
+```cs
+EWalletPayment eWalletPayment = await EWalletPayment.Get("example-external-id", EWalletEnum.PaymentType.Ovo);
+```
+
+It will return:
+
+```cs
+EWalletPaymentParameter parameter = new EWalletPaymentParameter
+{
+  BusinessId = "<MERCHANT_BUSINESS_ID>",
+  ExternalId = "example-external-id",
+  Amount = 100000,
+  Phone = "08123123123",
+  EWalletType = EWalletEnum.PaymentType.Ovo,
+  Status = EWalletEnum.Status.Completed,
+  TransactionDate = "2020-02-20T00:00:00.000Z",
+};
+```
