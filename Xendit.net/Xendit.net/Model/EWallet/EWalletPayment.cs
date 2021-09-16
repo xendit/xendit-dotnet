@@ -27,6 +27,15 @@
         [JsonPropertyName("transaction_date")]
         public string TransactionDate { get; set; }
 
+        [JsonPropertyName("expiration_date")]
+        public string ExpirationDate { get; set; }
+
+        [JsonPropertyName("payment_timestamp")]
+        public string PaymentTimestamp { get; set; }
+
+        [JsonPropertyName("expired_at")]
+        public string ExpiredAt { get; set; }
+
         [JsonPropertyName("checkout_url")]
         public string CheckoutUrl { get; set; }
 
