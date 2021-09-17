@@ -42,12 +42,14 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
     - [Get Accessible Accounts by Linked Account Token](#get-accessible-accounts-by-linked-account-token)
     - [Unbind Linked Account Token](#unbind-linked-account-token)
-  - [E-Wallet Service](#e-wallet-service)
-    - [Create E-Wallet Charge (API version `2020-01-25`)](#create-e-wallet-charge-api-version-2020-01-25)
-    - [Get E-Wallet Charge (API version `2020-01-25`)](#get-e-wallet-charge-api-version-2020-01-25)
-    - [Create E-Wallet Payment (API version `2020-02-01`)](#create-e-wallet-payment-api-version-2020-02-01)
-    - [Create E-Wallet Payment (API version `2019-02-04`)](#create-e-wallet-payment-api-version-2019-02-04)
-    - [Get E-Wallet Payment](#get-e-wallet-payment)
+  - [Payment Methods Services](#payment-methods-services)
+    - [Create Payment Methods](#create-payment-methods)
+    - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
+  - [Retail Outlet Services](#retail-outlet-services)
+    - [Create Fixed Payment Code](#create-fixed-payment-code)
+    - [Update Fixed Payment Code](#update-fixed-payment-code)
+    - [Get Payment Code](#get-payment-code)
+    - [Get Payments By Payment Code ID](#get-payments-by-payment-code-id)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1239,7 +1241,7 @@ UnbindedLinkedAccount unbindedLinkedAccount = await UnbindedLinkedAccount.Unbind
 
 It will return:
 
-````cs
+```cs
 UnbindedLinkedAccount unbindedLinkedAccount = new UnbindedLinkedAccount
 {
   Id = "linked-account-token-id",
