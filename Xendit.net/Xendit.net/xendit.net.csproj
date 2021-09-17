@@ -16,9 +16,30 @@
 		<PackageReference Include="System.Net.Http" Version="4.3.4" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="..\..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
 
 	<PropertyGroup>
 		<CodeAnalysisRuleSet>..\_stylecop\Xendit.ruleset</CodeAnalysisRuleSet>
+		<Description>Official class library for Xendit API</Description>
+		<Company>Xendit</Company>
+		<Authors>Xendit</Authors>
+		<PackageTags>xendit;payment;gateway</PackageTags>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/xendit/xendit-dotnet</PackageProjectUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageReleaseNotes>
+			v1.0.0 - Add Balance, Customer, Disbursement, Invoice, Retail Outlet (PH), Virtual Account
+		</PackageReleaseNotes>
+		<RepositoryUrl>https://github.com/xendit/xendit-dotnet</RepositoryUrl>
+		<ApplicationIcon />
+		<Win32Resource />
 	</PropertyGroup>
 
 </Project>
