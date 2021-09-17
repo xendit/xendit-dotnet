@@ -77,8 +77,8 @@ Please check [Xendit API Reference](https://developers.xendit.co/api-reference/)
   ```
 
 - If you want to install through Visual Studio:
-  1. Open Solution Explorer.
-  2. Click right on the project.
+  1. Open Solution Explorer
+  2. Click right on the project
   3. Click on `Manage NuGet Packages...`
   4. Select on `Browse` tab and search `Xendit.net` by Xendit
   5. Select version that you want to use and click Install
@@ -89,7 +89,7 @@ You need to use secret API key in order to use functionality in this library. Th
 
 Example: Get Balance
 
-```cs
+```csharp
 namespace XenditExample
 {
     using System;
@@ -129,7 +129,7 @@ namespace XenditExample
 
 The `accountType` parameter is optional. You can use `accountType` in enum (`"Cash"`, `"Holding"`, `"Tax"`)
 
-```cs
+```csharp
 Balance balance = await Balance.Get();
 
 Balance holdingBalance = await Balance.Get(AccountType.Holding);
@@ -137,7 +137,7 @@ Balance holdingBalance = await Balance.Get(AccountType.Holding);
 
 It will return:
 
-```cs
+```csharp
 Balance balance = new Balance
 {
   Value = 100000,
@@ -150,7 +150,7 @@ Balance balance = new Balance
 
 To create a virtual account, use struct `CreateVirtualAccountParameter`. You may use `VirtualAccountEnum.BankCode` for `BankCode` property.
 
-```cs
+```csharp
 VirtualAccountParameter parameter = new VirtualAccountParameter
 { 
   ExternalId = "my_external_id",
@@ -163,7 +163,7 @@ VirtualAccount virtualAccount = await VirtualAccount.Create(parameter);
 ```
 
 It will return:
-```cs
+```csharp
 VirtualAccount virtualAccount = new VirtualAccount
 {
   ExternalId = "my_external_id",
@@ -178,12 +178,12 @@ VirtualAccount virtualAccount = new VirtualAccount
 
 #### Get a Virtual Account by ID
 
-```cs
+```csharp
 VirtualAccount virtualAccount = await VirtualAccount.Get("VIRTUAL_ACCOUNT_ID");
 ```
 
 It will return:
-```cs
+```csharp
 VirtualAccount virtualAccount = new VirtualAccount
 {
   Id = "VIRTUAL_ACCOUNT_ID",
@@ -205,7 +205,7 @@ VirtualAccount virtualAccount = new VirtualAccount
 
 To update a virtual account, use struct `UpdateVirtualAccountParameter`. 
 
-```cs
+```csharp
 UpdateVirtualAccountParameter parameter = new UpdateVirtualAccountParameter
 {
     IsSingleUse = true,
@@ -217,13 +217,13 @@ VirtualAccount virtualAccount = await VirtualAccount.Update(parameter, "virtual_
 
 #### Get banks with available virtual account service
 
-```cs
+```csharp
 AvailableBank[] availableBanks = await VirtualAccount.GetAvailableBanks();
 ```
 
 It will return:
 
-```cs
+```csharp
 AvailableBank[] availableBanks = new AvailableBank[]
 {
   new AvailableBank
@@ -238,13 +238,13 @@ AvailableBank[] availableBanks = new AvailableBank[]
 
 #### Get a virtual account payment by payment ID
 
-```cs
+```csharp
 VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get("VIRTUAL_ACCOUNT_PAYMENT_ID");
 ```
 
 It will return:
 
-```cs
+```csharp
 VirtualAccountPayment virtualAccountPayment = new VirtualAccountPayment
 {
   Id = "598d91b1191029596846047f",
@@ -268,7 +268,7 @@ To create a disbursement, use struct `DisbursementParameter`. You may use `Disbu
 
 Here is the example of `Create`:
 
-```cs
+```csharp
 DisbursementParameter parameter = new DisbursementParameter
 {
   ExternalId = "disb-1475459775872",
@@ -284,7 +284,7 @@ Disbursement disbursement = await Disbursement.Create(parameter);
 
 It will return:
 
-```cs
+```csharp
 Disbursement disbursement = new Disbursement
 {
   Id = "generated-id",
@@ -300,13 +300,13 @@ Disbursement disbursement = new Disbursement
 
 #### Get a disbursement by ID
 
-```cs
+```csharp
 Disbursement disbursement = await Disbursement.GetById("disbursement_id");
 ```
 
 It will return:
 
-```cs
+```csharp
 Disbursement disbursement = new Disbursement
 {
   Id = "disbursement_id",
@@ -322,13 +322,13 @@ Disbursement disbursement = new Disbursement
 
 #### Get a disbursement by External ID
 
-```cs
+```csharp
 Disbursement[] disbursements = await Disbursement.GetByExternalId("external_id");
 ```
 
 It will return:
 
-```cs
+```csharp
 Disbursement[] disbursements = new Disbursement[]
 {
   new Disbursement
@@ -347,13 +347,13 @@ Disbursement[] disbursements = new Disbursement[]
 
 #### Get banks with available disbursement service
 
-```cs
+```csharp
 AvailableBank[] availableBanks = await Disbursement.GetAvailableBanks();
 ```
 
 It will return:
 
-```cs
+```csharp
 AvailableBank[] availableBanks = new AvailableBank[]
 {
   new AvailableBank
@@ -381,7 +381,7 @@ To create an invoice, please use struct `InvoiceParameter` for parameter body. Y
 
 Here is the example:
 
-```cs
+```csharp
 Address addresses = new Address
 {
   Country = Country.Indonesia,
@@ -435,7 +435,7 @@ Console.WriteLine(invoice);
 
 It will return:
 
-```cs
+```csharp
 Invoice invoice = new Invoice
 {
   Id = "610a306ffe63418fdb6bd0b3",
@@ -507,13 +507,13 @@ Invoice invoice = new Invoice
 
 #### Get invoice by ID
 
-```cs
+```csharp
 Invoice invoice = await Invoice.GetById("EXAMPLE_ID");
 ```
 
 It will return:
 
-```cs
+```csharp
 Invoice invoice = new Invoice
 {
   Id = "610a306ffe63418fdb6bd0b3",
@@ -592,7 +592,7 @@ To get all invoices, please use struct `ListInvoiceParameter` for defining which
 - `InvoiceClientType` for `ClientType` property
 - `InvoicePaymentChannelType` for `PaymentChannels` property
 
-```cs
+```csharp
 // Invoke GetAll without specifying parameter
 Invoice[] invoicesWithoutParams = await Invoice.GetAll(null);
 
@@ -609,7 +609,7 @@ Invoice[] invoiceArray = await Invoice.GetAll(parameter);
 
 It will return:
 
-```cs
+```csharp
 Invoice[] invoices = new Invoice[]
 {
   Invoice invoice = new Invoice
@@ -685,13 +685,13 @@ Invoice[] invoices = new Invoice[]
 
 #### Expire an invoice
 
-```cs
+```csharp
 Invoice invoice = await Invoice.Expire("EXAMPLE_ID");
 ```
 
 It will return:
 
-```cs
+```csharp
 Invoice invoice = new Invoice
 {
   Id = "610a306ffe63418fdb6bd0b3",
@@ -777,7 +777,7 @@ To construct struct `CustomerParameter`, you may use these classes and enums (ap
 
 Here is the example of invoking method `Create` with API version of `2020-10-31`:
 
-```cs
+```csharp
 IndividualDetail individualDetail = new IndividualDetail
 {
   GivenNames = "John",
@@ -817,7 +817,7 @@ Console.WriteLine(customer);
 
 It will return:
 
-```cs
+```csharp
 Customer customerDefault = new Customer
 {
   ReferenceId = "demo_11212145",
@@ -845,7 +845,7 @@ Customer customerDefault = new Customer
 
 For API version of `2020-05-19`, here is the example:
 
-```cs
+```csharp
 CustomerParameter parameter = new CustomerParameter
 {
     ReferenceId = "demo_11212144",
@@ -859,7 +859,7 @@ Customer customerWithVersion = await Customer.Create(parameter, version: ApiVers
 
 It will return:
 
-```cs
+```csharp
 Customer customerWithVersion = new Customer
 {
     ReferenceId = "demo_11212144",
@@ -877,7 +877,7 @@ Method `Get` has three parameters: reference ID (required), optional headers, an
 
 Here is the example of invoking method `Get` with API version of `2020-10-31`:
 
-```cs
+```csharp
 Customer customerDefault = await Customer.Get("example_reference_id");
 
 Customer customerWithVersion20201031 = await Customer.Get("example_reference_id", version: ApiVersion.Version20201031);
@@ -885,7 +885,7 @@ Customer customerWithVersion20201031 = await Customer.Get("example_reference_id"
 
 It will return:
 
-```cs
+```csharp
 Customer customerDefault = new Customer
 {
   Data = new Customer[]
@@ -920,13 +920,13 @@ Customer customerDefault = new Customer
 
 For API version of `2020-05-19`, here is the example:
 
-```cs
+```csharp
 Customer customerWithVersion = await Customer.Get("example_reference_id", version: ApiVersion.Version20200519);
 ```
 
 It will return:
 
-```cs
+```csharp
 Customer customerWithVersion = new Customer
 {
   Data = new Customer[]
@@ -956,7 +956,7 @@ To create direct debit payment, please use struct `DirectDebitPaymentParameter` 
 
 Here is the example of invoking `Create`:
 
-```cs
+```csharp
 DirectDebitPaymentParameter directDebitPaymentParameter = new DirectDebitPaymentParameter
 {
   ReferenceId = "reference-id",
@@ -992,7 +992,7 @@ Console.WriteLine(directDebitPayment);
 
 It will return:
 
-```cs
+```csharp
 DirectDebitPayment directDebitPayment = new DirectDebitPayment
 {
   Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
@@ -1025,7 +1025,7 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
 
 Here is the example of invoking `ValidateOtp`:
 
-```cs
+```csharp
 string otpCode = "123456";
 
 DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOtp(otpCode, "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
@@ -1034,7 +1034,7 @@ Console.WriteLine(directDebitPayment);
 
 It will return:
 
-```cs
+```csharp
 DirectDebitPayment directDebitPayment = new DirectDebitPayment
 {
   Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
@@ -1065,14 +1065,14 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
 
 #### Get Direct Debit Payment by ID
 
-```cs
+```csharp
 DirectDebitPayment directDebitPayment = await DirectDebitPayment.GetById("ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
 Console.WriteLine(directDebitPayment);
 ```
 
 It will return:
 
-```cs
+```csharp
 DirectDebitPayment directDebitPayment = new DirectDebitPayment
 {
   Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
@@ -1103,14 +1103,14 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
 
 #### Get Direct Debit Payments by Reference ID
 
-```cs
+```csharp
 DirectDebitPayment[] directDebitPayments = await DirectDebitPayment.GetByReferenceId("reference-id");
 Console.WriteLine(directDebitPayments);
 ```
 
 It will return:
 
-```cs
+```csharp
 DirectDebitPayment[] directDebitPayments = new DirectDebitPayment[]
 {
   {
@@ -1152,7 +1152,7 @@ To initialize linked account tokenization, use struct `InitializedLinkedAccountP
 
 Here is the example:
 
-```cs
+```csharp
 InitializedLinkedAccountParameter parameter = new InitializedLinkedAccountParameter
 {
   CustomerId = "customer-id",
@@ -1175,7 +1175,7 @@ InitializedLinkedAccount initializedLinkedAccount = await InitializedLinkedAccou
 
 It will return:
 
-```cs
+```csharp
 InitializedLinkedAccount initializedLinkedAccount = new InitializedLinkedAccount
 {
   Id = "linked-account-token-id",
@@ -1192,7 +1192,7 @@ InitializedLinkedAccount initializedLinkedAccount = new InitializedLinkedAccount
 
 #### Validate OTP for Linked Account Token
 
-```cs
+```csharp
 string otpCode = "123456";
 string linkedAccountTokenId = "linked-account-token-id";
 
@@ -1201,7 +1201,7 @@ ValidatedLinkedAccount validatedLinkedAccount = await ValidatedLinkedAccount.Val
 
 It will return:
 
-```cs
+```csharp
 ValidatedLinkedAccount validatedLinkedAccount = new ValidatedLinkedAccount
 {
   Id = "linked-account-token-id",
@@ -1213,13 +1213,13 @@ ValidatedLinkedAccount validatedLinkedAccount = new ValidatedLinkedAccount
 
 #### Get Accessible Accounts by Linked Account Token
 
-```cs
+```csharp
 AccessibleLinkedAccount[] accessibleLinkedAccounts = await AccessibleLinkedAccount.Get("linked-account-token-id");
 ```
 
 It will return:
 
-```cs
+```csharp
 AccessibleLinkedAccount[] accessibleLinkedAccounts = new AccessibleLinkedAccount[]
 {
   new AccessibleLinkedAccount
@@ -1240,13 +1240,13 @@ AccessibleLinkedAccount[] accessibleLinkedAccounts = new AccessibleLinkedAccount
 
 #### Unbind Linked Account Token
 
-```cs
+```csharp
 UnbindedLinkedAccount unbindedLinkedAccount = await UnbindedLinkedAccount.Unbind("linked-account-token-id");
 ```
 
 It will return:
 
-```cs
+```csharp
 UnbindedLinkedAccount unbindedLinkedAccount = new UnbindedLinkedAccount
 {
   Id = "linked-account-token-id",
@@ -1265,7 +1265,7 @@ To create payment methods, please use struct `PaymentMethodParameter` for parame
 
 Here is the example:
 
-```cs
+```csharp
 PaymentMethodParameter parameter = new PaymentMethodParameter
 {
   Type = PaymentMethodEnum.AccountType.DebitCard,
@@ -1286,7 +1286,7 @@ Console.WriteLine(paymentMethod);
 
 It will return:
 
-```cs
+```csharp
 PaymentMethod paymentMethod = new PaymentMethod
 {
   Id = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
@@ -1310,13 +1310,13 @@ PaymentMethod paymentMethod = new PaymentMethod
 
 #### Get Payment Methods by Customer ID
 
-```cs
+```csharp
 PaymentMethod[] paymentMethods = await PaymentMethod.Get("4b7b6050-0830-440a-903b-37d527dbbaa9");
 ```
 
 It will return
 
-```cs
+```csharp
 PaymentMethod[] paymentMethods = new PaymentMethods[]
 {
   new PaymentMethod
@@ -1355,7 +1355,7 @@ To create a payment code, please use struct `CreateFixedPaymentCodeParameter` fo
 
 Here is the example:
 
-```cs
+```csharp
 CreateFixedPaymentCodeParameter parameter = new CreateFixedPaymentCodeParameter
 {
   ReferenceId = "demo_payment_code_id",
@@ -1373,7 +1373,7 @@ FixedPaymentCode fixedPaymentCode = await RetailOutlet.CreatePaymentCode(paramet
 
 It will return:
 
-```cs
+```csharp
 FixedPaymentCode fixedPaymentCode = new FixedPaymentCode
 {
   Id = "<GENERATED_ID>",
@@ -1403,7 +1403,7 @@ To update payment code, please use struct `UpdateFixedPaymentCodeParameter` for 
 
 Here is the example:
 
-```cs
+```csharp
 UpdateFixedPaymentCodeParameter parameter = new UpdateFixedPaymentCodeParameter
 {
     CustomerName = "Rika Sutanto",
@@ -1417,7 +1417,7 @@ FixedPaymentCode fixedPaymentCode = await RetailOutlet.UpdatePaymentCode(paramet
 
 It will return:
 
-```cs
+```csharp
 FixedPaymentCode fixedPaymentCode = new FixedPaymentCode
 {
   Id = "<GENERATED_ID>",
@@ -1441,13 +1441,13 @@ FixedPaymentCode fixedPaymentCode = new FixedPaymentCode
 
 #### Get Payment Code
 
-```cs
+```csharp
 FixedPaymentCode fixedPaymentCode = await RetailOutlet.GetPaymentCode("example_payment_code_id");
 ```
 
 It will return:
 
-```cs
+```csharp
 FixedPaymentCode fixedPaymentCode = new FixedPaymentCode
 {
   Id = "<GENERATED_ID>",
@@ -1471,13 +1471,13 @@ FixedPaymentCode fixedPaymentCode = new FixedPaymentCode
 
 #### Get Payments By Payment Code ID
 
-```cs
+```csharp
 FixedPaymentCode[] fixedPaymentCodes = await RetailOutlet.GetPaymentCode("example_payment_code_id");
 ```
 
 It will return:
 
-```cs
+```csharp
 FixedPaymentCode[] fixedPaymentCodes = new FixedPaymentCode[]
 {
   new FixedPaymentCode
