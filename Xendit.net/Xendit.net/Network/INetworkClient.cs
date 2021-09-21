@@ -6,8 +6,8 @@
 
     public interface INetworkClient
     {
-        Task<TResponse> Request<TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url);
+        Task<TResponse> Request<TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url, string apiKey, string baseUrl);
 
-        Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url, TBody requestBody);
+        Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url, string apiKey, string baseUrl, TBody requestBody);
     }
 }

@@ -11,6 +11,9 @@ This library is the abstraction of Xendit API for access from applications writt
 - [API Documentation](#api-documentation)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [API Key](#api-key)
+    - [Global Variable](#global-variable)
+    - [`XenditClient` instance](#xenditclient-instance)
   - [Balance Service](#balance-service)
     - [Get Balance](#get-balance)
   - [Virtual Account Services](#virtual-account-services)
@@ -78,9 +81,13 @@ Please check [Xendit API Reference](https://developers.xendit.co/api-reference/)
 
 ## Usage
 
+### API Key
+
 You need to use secret API key in order to use functionality in this library. The key can be obtained from your [Xendit Dashboard](https://dashboard.xendit.co/settings/developers#api-keys).
 
-Example: Get Balance
+To add API Key, you have 2 options: Use global variable or use `XenditClient` instance.
+
+#### Global Variable
 
 ```cs
 namespace XenditExample
@@ -89,6 +96,7 @@ namespace XenditExample
     using System.Threading.Tasks;
     using System.Net.Http;
     using Xendit.net;
+    using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
     using Xendit.net.Network;
@@ -104,8 +112,46 @@ namespace XenditExample
 
             try
             {
-                Balance balance = await Balance.Get();
-                Console.WriteLine(balance.Value);
+                BalanceResponse balanceResponse = await Balance.Get();
+                Console.WriteLine(balanceResponse.Balance);
+            }
+            catch (XenditException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
+}
+```
+
+#### `XenditClient` instance
+
+```cs
+namespace XenditExample
+{
+    using System;
+    using System.Threading.Tasks;
+    using System.Net.Http;
+    using Xendit.net;
+    using Xendit.net.Enum;
+    using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Network;
+
+    class ExampleGetBalance
+    {
+        static async Task Main(string[] args)
+        {
+            try
+            {
+                string apiKey = "xnd_development_...";
+                string baseUrl = "https://api.xendit.co";
+                HttpClient httpClient = new HttpClient();
+                NetworkClient networkClient = new NetworkClient(httpClient);
+                XenditClient client = new XenditClient(apiKey, baseUrl, networkClient);
+              
+                BalanceResponse balanceResponse = await client.Balance.Get();
+                Console.WriteLine(balanceResponse.Balance);
             }
             catch (XenditException e)
             {
@@ -123,17 +169,17 @@ namespace XenditExample
 The `accountType` parameter is optional. You can use `accountType` in enum (`"Cash"`, `"Holding"`, `"Tax"`)
 
 ```cs
-Balance balance = await Balance.Get();
+BalanceResponse balance = await Balance.Get();
 
-Balance holdingBalance = await Balance.Get(AccountType.Holding);
+BalanceResponse holdingBalance = await Balance.Get(AccountType.Holding);
 ```
 
 It will return:
 
 ```cs
-Balance balance = new Balance
+BalanceResponse balance = new BalanceResponse
 {
-  Value = 100000,
+  Balance = 100000,
 };
 ```
 

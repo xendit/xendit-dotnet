@@ -22,14 +22,18 @@
             this.client.DefaultRequestHeaders.ConnectionClose = true;
         }
 
-        public async Task<TResponse> Request<TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url)
+        public async Task<TResponse> Request<TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url, string apiKey, string baseUrl)
         {
-            return await this.Request<int, TResponse>(httpMethod, headers, url, 0);
+            return await this.Request<int, TResponse>(httpMethod, headers, url, apiKey, baseUrl, 0);
         }
 
-        public async Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url, TBody requestBody)
+        public async Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url, string apiKey, string baseUrl, TBody requestBody)
         {
-            var request = CreateRequestMessage(httpMethod, headers, url, requestBody);
+            baseUrl = baseUrl ?? XenditConfiguration.BaseUrl;
+            apiKey = apiKey ?? XenditConfiguration.ApiKey;
+
+            url = baseUrl + url;
+            var request = CreateRequestMessage(httpMethod, headers, url, apiKey, requestBody);
             var response = await this.client.SendAsync(request);
 
             try
@@ -64,7 +68,7 @@
             return base64String;
         }
 
-        private static HttpRequestMessage CreateRequestMessage<TBody>(HttpMethod httpMethod, HeaderParameter? headers, string url, TBody requestBody)
+        private static HttpRequestMessage CreateRequestMessage<TBody>(HttpMethod httpMethod, HeaderParameter? headers, string url, string apiKey, TBody requestBody)
         {
             Dictionary<string, string> headerDictionary = HeaderToDictionaryBuilder.Build(headers);
             var request = new HttpRequestMessage
@@ -82,8 +86,8 @@
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody, options), Encoding.UTF8, "application/json");
             }
 
-            CheckApiKey(XenditConfiguration.ApiKey);
-            string apiKeyBase64 = EncodeToBase64String(XenditConfiguration.ApiKey);
+            CheckApiKey(apiKey);
+            string apiKeyBase64 = EncodeToBase64String(apiKey);
             request.Headers.Authorization = new AuthenticationHeaderValue("Basic", apiKeyBase64);
 
             foreach (var header in headerDictionary)
