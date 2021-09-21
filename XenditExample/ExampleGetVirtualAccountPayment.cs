@@ -20,7 +20,7 @@ namespace XenditExample
             try
             {
                 string virtualAccountPaymentId = "random_1560763705544";
-                VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get(virtualAccountPaymentId);
+                VirtualAccountPaymentResponse virtualAccountPayment = await VirtualAccountPayment.Get(virtualAccountPaymentId);
 
                 Console.WriteLine(virtualAccountPayment);
             }

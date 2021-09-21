@@ -30,7 +30,7 @@ namespace XenditExample
                     ExpectedAmount = 200000,
                 };
 
-                VirtualAccount virtualAccount = await VirtualAccount.Create(parameter);
+                VirtualAccountResponse virtualAccount = await VirtualAccount.Create(parameter);
                 Console.WriteLine(virtualAccount);
             }
             catch (XenditException e)

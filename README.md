@@ -198,13 +198,13 @@ VirtualAccountParameter parameter = new VirtualAccountParameter
   ExpectedAmount = 200000,
 };
 
-VirtualAccount virtualAccount = await VirtualAccount.Create(parameter);
+VirtualAccountResponse virtualAccount = await VirtualAccount.Create(parameter);
 ```
 
 It will return:
 
 ```cs
-VirtualAccount virtualAccount = new VirtualAccount
+VirtualAccountResponse virtualAccount = new VirtualAccountResponse
 {
   ExternalId = "my_external_id",
   BankCode = VirtualAccountEnum.BankCode.Bni,
@@ -225,7 +225,7 @@ VirtualAccount virtualAccount = await VirtualAccount.Get("VIRTUAL_ACCOUNT_ID");
 It will return:
 
 ```cs
-VirtualAccount virtualAccount = new VirtualAccount
+VirtualAccountResponse virtualAccount = new VirtualAccountResponse
 {
   Id = "VIRTUAL_ACCOUNT_ID",
   ExternalId = "my_external_id",
@@ -253,7 +253,26 @@ UpdateVirtualAccountParameter parameter = new UpdateVirtualAccountParameter
     ExpectedAmount = 20000,
 };
 
-VirtualAccount virtualAccount = await VirtualAccount.Update(parameter, "virtual_account_id");
+VirtualAccountResponse virtualAccount = await VirtualAccount.Update(parameter, "virtual_account_id");
+```
+
+It will return:
+```cs
+VirtualAccountResponse virtualAccount = new VirtualAccountResponse
+{
+  Id = "VIRTUAL_ACCOUNT_ID",
+  ExternalId = "my_external_id",
+  OwnerId = "owner-id",
+  BankCode = VirtualAccountEnum.BankCode.Bni,
+  MerchantCode = "8888",
+  Name = "John Doe",
+  ExpectedAmount = 20000,
+  IsSingleUse = true,
+  IsClosed = false,
+  ExpirationDate = "2021-09-27T17:00:00.000Z",
+  Status = VirtualAccountEnum.Status.Pending,
+  Currency = Currency.IDR,
+};
 ```
 
 #### Get banks with available virtual account service
@@ -280,13 +299,13 @@ AvailableBank[] availableBanks = new AvailableBank[]
 #### Get a virtual account payment by payment ID
 
 ```cs
-VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get("VIRTUAL_ACCOUNT_PAYMENT_ID");
+VirtualAccountPaymentResponse virtualAccountPayment = await VirtualAccountPayment.Get("VIRTUAL_ACCOUNT_PAYMENT_ID");
 ```
 
 It will return:
 
 ```cs
-VirtualAccountPayment virtualAccountPayment = new VirtualAccountPayment
+VirtualAccountPaymentResponse virtualAccountPayment = new VirtualAccountPaymentResponse
 {
   Id = "598d91b1191029596846047f",
   PaymentId = "5f218745736e619164dc8608",

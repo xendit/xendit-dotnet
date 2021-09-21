@@ -21,7 +21,7 @@ namespace XenditExample
 
             try
             {
-                VirtualAccount virtualAccount = await VirtualAccount.Get(virtualAccountId);
+                VirtualAccountResponse virtualAccount = await VirtualAccount.Get(virtualAccountId);
 
                 Console.WriteLine(virtualAccount);
             }
