@@ -2,6 +2,7 @@
 {
     using Xendit.net.Enum;
     using Xendit.net.Model;
+    using Xendit.net.Model.VirtualAccount;
     using Xendit.net.Struct;
 
     internal static class Constant
@@ -17,7 +18,7 @@
             ForUserId = "user-id",
         };
 
-        internal static readonly VirtualAccount ExpectedVirtualAccount = new VirtualAccount
+        internal static readonly VirtualAccountResponse ExpectedVirtualAccount = new VirtualAccountResponse
         {
             IsClosed = false,
             Status = VirtualAccountEnum.Status.Active,
@@ -32,7 +33,7 @@
             Id = "virtual-account-id",
         };
 
-        internal static readonly VirtualAccount ExpectedUpdatedVirtualAccount = new VirtualAccount
+        internal static readonly VirtualAccountResponse ExpectedUpdatedVirtualAccount = new VirtualAccountResponse
         {
             IsClosed = false,
             Status = VirtualAccountEnum.Status.Active,
@@ -62,7 +63,7 @@
             IsClosed = true,
         };
 
-        internal static readonly VirtualAccount ExpectedCreatedClosedVirtualAccount = new VirtualAccount
+        internal static readonly VirtualAccountResponse ExpectedCreatedClosedVirtualAccount = new VirtualAccountResponse
         {
             IsClosed = true,
             Status = VirtualAccountEnum.Status.Active,
@@ -78,7 +79,7 @@
             ExternalId = "demo-1475804036622",
         };
 
-        internal static readonly VirtualAccount ExpectedCreatedOpenVirtualAccount = new VirtualAccount
+        internal static readonly VirtualAccountResponse ExpectedCreatedOpenVirtualAccount = new VirtualAccountResponse
         {
             IsClosed = false,
             Status = VirtualAccountEnum.Status.Active,
@@ -95,13 +96,13 @@
         };
 
         internal static readonly string VAId = "virtual-account-id";
-        internal static readonly string VAUrl = "https://api.xendit.co/callback_virtual_accounts";
+        internal static readonly string VAUrl = "/callback_virtual_accounts";
         internal static readonly string VAUrlWithId = string.Format("{0}/{1}", VAUrl, VAId);
-        internal static readonly string AvailableBankUrl = "https://api.xendit.co/available_virtual_account_banks";
+        internal static readonly string AvailableBankUrl = "/available_virtual_account_banks";
 
         internal static readonly string PaymentId = "1502450097080";
-        internal static readonly string VirtualAccountPaymentUrl = string.Format("https://api.xendit.co/callback_virtual_account_payments/payment_id={0}", PaymentId);
-        internal static readonly VirtualAccountPayment ExpectedVirtualAccountPayment = new VirtualAccountPayment
+        internal static readonly string VirtualAccountPaymentUrl = string.Format("/callback_virtual_account_payments/payment_id={0}", PaymentId);
+        internal static readonly VirtualAccountPaymentResponse ExpectedVirtualAccountPayment = new VirtualAccountPaymentResponse
         {
             Id = "598d91b1191029596846047f",
             PaymentId = "1502450097080",
@@ -113,5 +114,8 @@
             SenderName = "JOHN DOE",
             TransactionTimestamp = "2017-08-11T11:14:57.080Z",
         };
+
+        internal static readonly string ApiKey = "api-key";
+        internal static readonly string BaseUrl = "https://api.xendit.co";
     }
 }

@@ -1,11 +1,10 @@
 ﻿namespace XenditTest.VirtualAccountTest
 {
-    using System.Collections.Generic;
     using System.Net.Http;
     using System.Text.Json;
     using Moq;
     using Xendit.net;
-    using Xendit.net.Model;
+    using Xendit.net.Model.VirtualAccount;
     using Xendit.net.Network;
     using Xunit;
 
@@ -17,12 +16,25 @@
         public async void VirtualAccountPayment_ShouldSuccess_GetVirtualAccountPayment()
         {
             MockClient
-                .Setup(client => client.Request<VirtualAccountPayment>(HttpMethod.Get, null, Constant.VirtualAccountPaymentUrl))
+                .Setup(mockClient => mockClient.Request<VirtualAccountPaymentResponse>(HttpMethod.Get, null, Constant.VirtualAccountPaymentUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedVirtualAccountPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            VirtualAccountPayment actualVirtualAccountPayment = await VirtualAccountPayment.Get(Constant.PaymentId);
+            VirtualAccountPaymentResponse actualVirtualAccountPayment = await VirtualAccountPayment.Get(Constant.PaymentId);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedVirtualAccountPayment), JsonSerializer.Serialize(actualVirtualAccountPayment));
+        }
+
+        [Fact]
+        public async void VirtualAccountPaymentClient_ShouldSuccess_GetVirtualAccountPayment()
+        {
+            MockClient
+                .Setup(mockClient => mockClient.Request<VirtualAccountPaymentResponse>(HttpMethod.Get, null, Constant.VirtualAccountPaymentUrl, Constant.ApiKey, Constant.BaseUrl))
+                .ReturnsAsync(Constant.ExpectedVirtualAccountPayment);
+
+            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+
+            VirtualAccountPaymentResponse actualVirtualAccountPayment = await client.VirtualAccountPayment.Get(Constant.PaymentId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedVirtualAccountPayment), JsonSerializer.Serialize(actualVirtualAccountPayment));
         }
     }
