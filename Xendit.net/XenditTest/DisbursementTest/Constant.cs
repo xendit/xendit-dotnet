@@ -2,6 +2,7 @@
 {
     using Xendit.net.Enum;
     using Xendit.net.Model;
+    using Xendit.net.Model.Disbursement;
     using Xendit.net.Struct;
 
     internal static class Constant
@@ -12,7 +13,7 @@
             new AvailableBank { Name = "Bank Rakyat Indonesia", Code = DisbursementChannelCode.Bri, CanDisburse = true, CanNameValidate = true },
         };
 
-        internal static readonly Disbursement ExpectedDisbursement = new Disbursement
+        internal static readonly DisbursementResponse ExpectedDisbursement = new DisbursementResponse
         {
             Id = "57f1ce05bb1a631a65eee662",
             ExternalId = "disb-1475459775872",
@@ -37,12 +38,12 @@
             Amount = 90000,
         };
 
-        internal static readonly Disbursement[] ExpectedDisbursements = new Disbursement[] { ExpectedDisbursement };
+        internal static readonly DisbursementResponse[] ExpectedDisbursements = new DisbursementResponse[] { ExpectedDisbursement };
 
         internal static readonly string ExpectedDisbursementId = "57f1ce05bb1a631a65eee662";
         internal static readonly string ExpectedDisbursementExternalId = "disb-1475459775872";
 
-        internal static readonly string DisbursementUrl = "https://api.xendit.co/disbursements";
+        internal static readonly string DisbursementUrl = "/disbursements";
         internal static readonly string DisbursementIdUrl = string.Format("{0}/{1}", DisbursementUrl, ExpectedDisbursementId);
         internal static readonly string DisbursementExternalIdUrl = string.Format("{0}?external_id={1}", DisbursementUrl, ExpectedDisbursementExternalId);
 
@@ -51,6 +52,8 @@
             ForUserId = "user-id",
         };
 
-        internal static readonly string AvailableBankUrl = "https://api.xendit.co/available_disbursements_banks";
+        internal static readonly string AvailableBankUrl = "/available_disbursements_banks";
+        internal static readonly string ApiKey = "api-key";
+        internal static readonly string BaseUrl = "https://api.xendit.co";
     }
 }

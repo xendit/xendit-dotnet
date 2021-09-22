@@ -7,7 +7,9 @@ namespace XenditExample
     using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
+    using Xendit.net.Model.Disbursement;
     using Xendit.net.Network;
+    using Xendit.net.Struct;
 
     class ExampleCreateDisbursement
     {
@@ -30,8 +32,8 @@ namespace XenditExample
                     Amount = 1000,
                 };
 
-                Disbursement disbursement = await Disbursement.Create(parameter);
-                Console.WriteLine(disbursement1);
+                DisbursementResponse disbursement = await Disbursement.Create(parameter);
+                Console.WriteLine(disbursement);
             }
             catch (XenditException e)
             {
