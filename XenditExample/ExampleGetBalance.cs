@@ -23,12 +23,8 @@
                 BalanceResponse balance = await Balance.Get();
                 Console.WriteLine(balance.Balance);
 
-                HttpClient httpClient2 = new HttpClient();
-                NetworkClient networkClient2 = new NetworkClient(httpClient2);
-                XenditClient client = new XenditClient("xnd_development_...2", "https://api.xendit.co", networkClient2);
-
-                BalanceResponse balanceWithType = await client.Balance.Get(BalanceAccountType.Holding);
-                Console.WriteLine(balanceWithType.Balance);
+                BalanceResponse balanceWithType = await Balance.Get(BalanceAccountType.Holding);
+                Console.WriteLine(balanceWithType.Balance)
             }
             catch (XenditException e)
             {

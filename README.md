@@ -96,7 +96,6 @@ namespace XenditExample
     using System.Threading.Tasks;
     using System.Net.Http;
     using Xendit.net;
-    using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
     using Xendit.net.Network;
@@ -105,13 +104,13 @@ namespace XenditExample
     {
         static async Task Main(string[] args)
         {
-            HttpClient httpClient = new HttpClient();
-            NetworkClient networkClient = new NetworkClient(httpClient);
-            XenditConfiguration.RequestClient = networkClient;
-            XenditConfiguration.ApiKey = "xnd_development_...";
-
             try
             {
+                HttpClient httpClient = new HttpClient();
+                NetworkClient networkClient = new NetworkClient(httpClient);
+                XenditConfiguration.RequestClient = networkClient;
+                XenditConfiguration.ApiKey = "xnd_development_...";
+
                 BalanceResponse balanceResponse = await Balance.Get();
                 Console.WriteLine(balanceResponse.Balance);
             }
@@ -133,7 +132,6 @@ namespace XenditExample
     using System.Threading.Tasks;
     using System.Net.Http;
     using Xendit.net;
-    using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
     using Xendit.net.Network;
@@ -219,7 +217,7 @@ VirtualAccountResponse virtualAccount = new VirtualAccountResponse
 #### Get a Virtual Account by ID
 
 ```cs
-VirtualAccount virtualAccount = await VirtualAccount.Get("VIRTUAL_ACCOUNT_ID");
+VirtualAccountResponse virtualAccount = await VirtualAccount.Get("VIRTUAL_ACCOUNT_ID");
 ```
 
 It will return:
