@@ -22,5 +22,8 @@
 
         [JsonPropertyName("API-VERSION")]
         public ApiVersion? ApiVersion { get; set; }
+
+        [JsonPropertyName("X-API-VERSION")]
+        public ApiVersion? XApiVersion { get; set; }
     }
 }

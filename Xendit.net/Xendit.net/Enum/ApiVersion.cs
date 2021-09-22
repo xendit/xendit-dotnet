@@ -9,10 +9,19 @@
     {
         Unknown,
 
+        [EnumMember(Value = "2021-01-25")]
+        Version20210125,
+
         [EnumMember(Value = "2020-10-31")]
         Version20201031,
 
         [EnumMember(Value = "2020-05-19")]
         Version20200519,
+
+        [EnumMember(Value = "2020-02-01")]
+        Version20200201,
+
+        [EnumMember(Value = "2019-02-04")]
+        Version20190204,
     }
 }
