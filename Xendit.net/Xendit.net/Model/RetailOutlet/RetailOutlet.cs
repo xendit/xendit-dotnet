@@ -1,10 +1,6 @@
-﻿namespace Xendit.net.Model
+﻿namespace Xendit.net.Model.RetailOutlet
 {
-    using System.Net.Http;
     using System.Threading.Tasks;
-    using Xendit.net.Enum;
-    using Xendit.net.Exception;
-    using Xendit.net.Network;
     using Xendit.net.Struct;
 
     public class RetailOutlet
@@ -56,36 +52,26 @@
 
         private static async Task<FixedPaymentCode> CreatePaymentCodeRequest(CreateFixedPaymentCodeParameter parameter, HeaderParameter? headers)
         {
-            if (parameter.Currency != Currency.PHP || parameter.Market != Country.Philippines)
-            {
-                throw new ParamException("Create Payment Code can only accept Currency.PHP and Country.Philippines");
-            }
-
-            string url = string.Format("{0}{1}", XenditConfiguration.ApiUrl, "/payment_codes");
-            return await XenditConfiguration.RequestClient.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, headers, url, parameter);
+            RetailOutletClient client = new RetailOutletClient();
+            return await client.CreatePaymentCode(parameter, headers);
         }
 
         private static async Task<FixedPaymentCode> UpdatePaymentCodeRequest(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, HeaderParameter? headers)
         {
-            if (parameter.Currency != Currency.PHP)
-            {
-                throw new ParamException("Update Payment Code can only accept Currency.PHP");
-            }
-
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/payment_codes/", paymentCodeId);
-            return await XenditConfiguration.RequestClient.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, headers, url, parameter);
+            RetailOutletClient client = new RetailOutletClient();
+            return await client.UpdatePaymentCode(parameter, paymentCodeId, headers);
         }
 
         private static async Task<FixedPaymentCode> GetPaymentCodeRequest(string paymentCodeId, HeaderParameter? headers)
         {
-            string url = string.Format("{0}{1}{2}", XenditConfiguration.ApiUrl, "/payment_codes/", paymentCodeId);
-            return await XenditConfiguration.RequestClient.Request<FixedPaymentCode>(HttpMethod.Get, headers, url);
+            RetailOutletClient client = new RetailOutletClient();
+            return await client.GetPaymentCode(paymentCodeId, headers);
         }
 
         private static async Task<FixedPaymentCode[]> GetPaymentsRequest(string paymentCodeId, HeaderParameter? headers)
         {
-            string url = string.Format("{0}{1}{2}{3}", XenditConfiguration.ApiUrl, "/payment_codes/", paymentCodeId, "/payments");
-            return await XenditConfiguration.RequestClient.Request<FixedPaymentCode[]>(HttpMethod.Get, headers, url);
+            RetailOutletClient client = new RetailOutletClient();
+            return await client.GetPayments(paymentCodeId, headers);
         }
     }
 }

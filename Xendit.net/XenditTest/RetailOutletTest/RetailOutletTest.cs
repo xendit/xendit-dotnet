@@ -1,12 +1,11 @@
 ﻿namespace XenditTest.RetailOutletTest
 {
-    using System.Collections.Generic;
     using System.Net.Http;
     using System.Text.Json;
     using Moq;
     using Xendit.net;
     using Xendit.net.Exception;
-    using Xendit.net.Model;
+    using Xendit.net.Model.RetailOutlet;
     using Xendit.net.Network;
     using Xendit.net.Struct;
     using Xunit;
@@ -19,7 +18,7 @@
         public async void RetailOutlet_Create_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, null, Constant.RetailOutletUrl, Constant.CreateFixedPaymentCodeParameter))
+                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, null, Constant.RetailOutletUrl, null, null, Constant.CreateFixedPaymentCodeParameter))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -32,7 +31,7 @@
         public async void RetailOutlet_CreateWithOtherThanPhilippines_ThrowsParamException()
         {
             MockClient
-                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, null, Constant.RetailOutletUrl, Constant.InvalidCreateFixedPaymentCodeParameter))
+                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, null, Constant.RetailOutletUrl, null, null, Constant.InvalidCreateFixedPaymentCodeParameter))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -45,7 +44,7 @@
         public async void RetailOutlet_CreateWithHeader_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, Constant.Headers, Constant.RetailOutletUrl, Constant.CreateFixedPaymentCodeParameter))
+                .Setup(client => client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, Constant.Headers, Constant.RetailOutletUrl, null, null, Constant.CreateFixedPaymentCodeParameter))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -58,7 +57,7 @@
         public async void RetailOutlet_Update_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, null, Constant.PaymentCodeIdUrl, Constant.UpdateFixedPaymentCodeParameter))
+                .Setup(client => client.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, null, Constant.PaymentCodeIdUrl, null, null, Constant.UpdateFixedPaymentCodeParameter))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -71,7 +70,7 @@
         public async void RetailOutlet_UpdateWithOtherThanPhilippinesCurrency_ThrowsParamException()
         {
             MockClient
-                .Setup(client => client.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, null, Constant.PaymentCodeIdUrl, Constant.UpdateFixedPaymentCodeParameter))
+                .Setup(client => client.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, null, Constant.PaymentCodeIdUrl, null, null, Constant.UpdateFixedPaymentCodeParameter))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -84,7 +83,7 @@
         public async void RetailOutlet_GetPaymentCode_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<FixedPaymentCode>(HttpMethod.Get, null, Constant.PaymentCodeIdUrl))
+                .Setup(client => client.Request<FixedPaymentCode>(HttpMethod.Get, null, Constant.PaymentCodeIdUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCode);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -97,7 +96,7 @@
         public async void RetailOutlet_GetPayments_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<FixedPaymentCode[]>(HttpMethod.Get, null, Constant.GetPaymentsUrl))
+                .Setup(client => client.Request<FixedPaymentCode[]>(HttpMethod.Get, null, Constant.GetPaymentsUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedFixedPaymentCodes);
 
             XenditConfiguration.RequestClient = MockClient.Object;

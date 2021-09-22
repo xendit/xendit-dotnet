@@ -4,6 +4,7 @@
     using Xendit.net.Model.Customer;
     using Xendit.net.Model.Disbursement;
     using Xendit.net.Model.Invoice;
+    using Xendit.net.Model.RetailOutlet;
     using Xendit.net.Model.VirtualAccount;
     using Xendit.net.Network;
 
@@ -17,6 +18,7 @@
             this.Disbursement = new DisbursementClient(apiKey, requestClient, baseUrl);
             this.Invoice = new InvoiceClient(apiKey, requestClient, baseUrl);
             this.Customer = new CustomerClient(apiKey, requestClient, baseUrl);
+            this.RetailOutlet = new RetailOutletClient(apiKey, requestClient, baseUrl);
         }
 
         public BalanceClient Balance { get; private set; }
@@ -30,5 +32,7 @@
         public InvoiceClient Invoice { get; private set; }
 
         public CustomerClient Customer { get; private set; }
+
+        public RetailOutletClient RetailOutlet { get; private set; }
     }
 }
