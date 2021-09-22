@@ -21,7 +21,7 @@
                 .Setup(mockClient => mockClient.Request<AvailableBank[]>(HttpMethod.Get, null, Constant.AvailableBankUrl, Constant.ApiKey, Constant.BaseUrl))
                 .ReturnsAsync(Constant.ExpectedAvailableBanks);
 
-            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
 
             AvailableBank[] actualAvailableBanks = await client.VirtualAccount.GetAvailableBanks();
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedAvailableBanks), JsonSerializer.Serialize(actualAvailableBanks));
@@ -34,7 +34,7 @@
                 .Setup(mockClient => mockClient.Request<AvailableBank[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.AvailableBankUrl, Constant.ApiKey, Constant.BaseUrl))
                 .ReturnsAsync(Constant.ExpectedAvailableBanks);
 
-            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
 
             AvailableBank[] actualAvailableBanks = await client.VirtualAccount.GetAvailableBanks(Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedAvailableBanks), JsonSerializer.Serialize(actualAvailableBanks));
@@ -47,7 +47,7 @@
                 .Setup(mockClient => mockClient.Request<VirtualAccountResponse>(HttpMethod.Get, null, Constant.VAUrlWithId, Constant.ApiKey, Constant.BaseUrl))
                 .ReturnsAsync(Constant.ExpectedVirtualAccount);
 
-            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
 
             VirtualAccountResponse actualVirtualAccount = await client.VirtualAccount.Get(Constant.VAId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedVirtualAccount), JsonSerializer.Serialize(actualVirtualAccount));
@@ -60,7 +60,7 @@
                 .Setup(mockClient => mockClient.Request<VirtualAccountResponse>(HttpMethod.Get, Constant.CustomHeaders, Constant.VAUrlWithId, Constant.ApiKey, Constant.BaseUrl))
                 .ReturnsAsync(Constant.ExpectedVirtualAccount);
 
-            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
 
             VirtualAccountResponse actualVirtualAccount = await client.VirtualAccount.Get(headers: Constant.CustomHeaders, id: Constant.VAId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedVirtualAccount), JsonSerializer.Serialize(actualVirtualAccount));
@@ -73,7 +73,7 @@
             .Setup(mockClient => mockClient.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, null, Constant.VAUrlWithId, Constant.ApiKey, Constant.BaseUrl, Constant.UpdateVAbody))
             .ReturnsAsync(Constant.ExpectedUpdatedVirtualAccount);
 
-            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
 
             VirtualAccountResponse actualUpdatedVirtualAccount = await client.VirtualAccount.Update(id: Constant.VAId, parameter: Constant.UpdateVAbody);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedUpdatedVirtualAccount), JsonSerializer.Serialize(actualUpdatedVirtualAccount));
@@ -86,7 +86,7 @@
             .Setup(mockClient => mockClient.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, Constant.CustomHeaders, Constant.VAUrlWithId, Constant.ApiKey, Constant.BaseUrl, Constant.UpdateVAbody))
             .ReturnsAsync(Constant.ExpectedUpdatedVirtualAccount);
 
-            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
 
             VirtualAccountResponse actualUpdatedVirtualAccount = await client.VirtualAccount.Update(headers: Constant.CustomHeaders, id: Constant.VAId, parameter: Constant.UpdateVAbody);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedUpdatedVirtualAccount), JsonSerializer.Serialize(actualUpdatedVirtualAccount));
@@ -99,7 +99,7 @@
             .Setup(mockClient => mockClient.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, null, Constant.VAUrl, Constant.ApiKey, Constant.BaseUrl, Constant.ClosedPostVAbody))
             .ReturnsAsync(Constant.ExpectedCreatedClosedVirtualAccount);
 
-            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
 
             VirtualAccountResponse actualCreatedClosedVirtualAccount = await client.VirtualAccount.Create(parameter: Constant.ClosedPostVAbody);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCreatedClosedVirtualAccount), JsonSerializer.Serialize(actualCreatedClosedVirtualAccount));
@@ -112,7 +112,7 @@
             .Setup(mockClient => mockClient.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, Constant.CustomHeaders, Constant.VAUrl, Constant.ApiKey, Constant.BaseUrl, Constant.ClosedPostVAbody))
             .ReturnsAsync(Constant.ExpectedCreatedClosedVirtualAccount);
 
-            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
 
             VirtualAccountResponse actualCreatedClosedVirtualAccount = await client.VirtualAccount.Create(headers: Constant.CustomHeaders, parameter: Constant.ClosedPostVAbody);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCreatedClosedVirtualAccount), JsonSerializer.Serialize(actualCreatedClosedVirtualAccount));

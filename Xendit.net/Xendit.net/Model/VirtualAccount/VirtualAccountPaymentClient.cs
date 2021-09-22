@@ -7,8 +7,8 @@
 
     public class VirtualAccountPaymentClient : BaseClient
     {
-        public VirtualAccountPaymentClient(string apiKey = null, string baseUrl = null, INetworkClient requestClient = null)
-            : base(apiKey, baseUrl, requestClient)
+        public VirtualAccountPaymentClient(string apiKey = null, INetworkClient requestClient = null, string baseUrl = null)
+            : base(apiKey, requestClient, baseUrl)
         {
         }
 

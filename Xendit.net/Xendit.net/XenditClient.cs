@@ -6,11 +6,11 @@
 
     public class XenditClient
     {
-        public XenditClient(string apiKey, string baseUrl, INetworkClient requestClient)
+        public XenditClient(string apiKey, INetworkClient requestClient, string baseUrl = "https://api.xendit.co")
         {
-            this.Balance = new BalanceClient(apiKey, baseUrl, requestClient);
-            this.VirtualAccount = new VirtualAccountClient(apiKey, baseUrl, requestClient);
-            this.VirtualAccountPayment = new VirtualAccountPaymentClient(apiKey, baseUrl, requestClient);
+            this.Balance = new BalanceClient(apiKey, requestClient, baseUrl);
+            this.VirtualAccount = new VirtualAccountClient(apiKey, requestClient, baseUrl);
+            this.VirtualAccountPayment = new VirtualAccountPaymentClient(apiKey, requestClient, baseUrl);
         }
 
         public BalanceClient Balance { get; private set; }

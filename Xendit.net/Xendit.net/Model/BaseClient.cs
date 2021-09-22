@@ -8,7 +8,7 @@
         protected string baseUrl;
         protected INetworkClient requestClient;
 
-        public BaseClient(string apiKey = null, string baseUrl = null, INetworkClient requestClient = null)
+        public BaseClient(string apiKey = null, INetworkClient requestClient = null, string baseUrl = null)
         {
             this.apiKey = apiKey;
             this.baseUrl = baseUrl;

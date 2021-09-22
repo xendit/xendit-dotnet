@@ -32,7 +32,7 @@
                 .Setup(mockClient => mockClient.Request<VirtualAccountPaymentResponse>(HttpMethod.Get, null, Constant.VirtualAccountPaymentUrl, Constant.ApiKey, Constant.BaseUrl))
                 .ReturnsAsync(Constant.ExpectedVirtualAccountPayment);
 
-            XenditClient client = new XenditClient(Constant.ApiKey, Constant.BaseUrl, MockClient.Object);
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
 
             VirtualAccountPaymentResponse actualVirtualAccountPayment = await client.VirtualAccountPayment.Get(Constant.PaymentId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedVirtualAccountPayment), JsonSerializer.Serialize(actualVirtualAccountPayment));

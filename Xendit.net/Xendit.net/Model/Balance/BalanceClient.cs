@@ -9,8 +9,8 @@
 
     public class BalanceClient : BaseClient
     {
-        public BalanceClient(string apiKey = null, string baseUrl = null, INetworkClient requestClient = null)
-            : base(apiKey, baseUrl, requestClient)
+        public BalanceClient(string apiKey = null, INetworkClient requestClient = null, string baseUrl = null)
+            : base(apiKey, requestClient, baseUrl)
         {
         }
 
