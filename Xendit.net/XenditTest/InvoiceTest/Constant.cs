@@ -1,14 +1,13 @@
 ﻿namespace XenditTest.InvoiceTest
 {
-    using System.Collections.Generic;
     using Xendit.net.Common;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
+    using Xendit.net.Model.Invoice;
     using Xendit.net.Struct;
 
     internal static class Constant
     {
-        internal static readonly Invoice ExpectedInvoice = new Invoice
+        internal static readonly InvoiceResponse ExpectedInvoice = new InvoiceResponse
         {
             Id = "invoice_id",
             ExternalId = "external_id",
@@ -46,14 +45,14 @@
             ClientTypes = new InvoiceClientType[] { InvoiceClientType.ApiGateway, InvoiceClientType.Dashboard },
         };
 
-        internal static readonly Invoice[] ExpectedInvoiceArray = new Invoice[] { ExpectedInvoice };
+        internal static readonly InvoiceResponse[] ExpectedInvoiceArray = new InvoiceResponse[] { ExpectedInvoice };
 
         internal static readonly string InvoiceId = "invoice_id";
-        internal static readonly string InvoiceV2Url = "https://api.xendit.co/v2/invoices";
+        internal static readonly string InvoiceV2Url = "/v2/invoices";
         internal static readonly string InvoiceByIdUrl = string.Format("{0}/{1}", InvoiceV2Url, InvoiceId);
         internal static readonly string InvoiceListUrl = string.Format("{0}?{1}", InvoiceV2Url, QueryParamsBuilder.Build(QueryParams));
 
-        internal static readonly string InvoiceExpireUrl = string.Format("https://api.xendit.co/invoices/{0}/expire!", InvoiceId);
+        internal static readonly string InvoiceExpireUrl = string.Format("/invoices/{0}/expire!", InvoiceId);
 
         internal static readonly HeaderParameter CustomHeaders = new HeaderParameter
         {
@@ -65,5 +64,8 @@
             ExternalId = "external_id",
             Amount = 1000L,
         };
+
+        internal static readonly string ApiKey = "api-key";
+        internal static readonly string BaseUrl = "https://api.xendit.co";
     }
 }

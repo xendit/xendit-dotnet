@@ -435,7 +435,7 @@ To create an invoice, please use struct `InvoiceParameter` for parameter body. Y
 - `Customer` for `Customer` property
 - `Address` for `Addresses` property in `Customer`
 - `FeeInvoice` for `Fees` property
-- `NotificationPreference` for `CustomerNotificationPreference` property
+- `NotificationPreference` for `NotificationPreference` property
 
 Here is the example:
 
@@ -481,7 +481,7 @@ InvoiceParameter parameter = new InvoiceParameter
   ExternalId = "external-id",
   Amount = 1000,
   Customer = customer,
-  CustomerNotificationPreference = preference,
+  NotificationPreference = preference,
   Items = new ItemInvoice[] { item },
   Fees = new FeeInvoice[] { fee },
   Currency = Currency.IDR,
@@ -556,7 +556,7 @@ Invoice invoice = new Invoice
       }
     },
   },
-  CustomerNotificationPreference = new CustomerNotificationPreference
+  NotificationPreference = new NotificationPreference
   {
     InvoicePaid = new NotificationType[] { NotificationType.Email }
   },
@@ -635,7 +635,7 @@ Invoice invoice = new Invoice
       }
     },
   },
-  CustomerNotificationPreference = new CustomerNotificationPreference
+  NotificationPreference = new NotificationPreference
   {
     InvoicePaid = new NotificationType[] { NotificationType.Email }
   },
@@ -733,7 +733,7 @@ Invoice[] invoices = new Invoice[]
         }
       },
     },
-    CustomerNotificationPreference = new CustomerNotificationPreference
+    NotificationPreference = new NotificationPreference
     {
       InvoicePaid = new NotificationType[] { NotificationType.Email }
     },
@@ -813,7 +813,7 @@ Invoice invoice = new Invoice
       }
     },
   },
-  CustomerNotificationPreference = new CustomerNotificationPreference
+  NotificationPreference = new NotificationPreference
   {
     InvoicePaid = new NotificationType[] { NotificationType.Email }
   },

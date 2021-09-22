@@ -1,11 +1,6 @@
-﻿namespace Xendit.net.Model
+﻿namespace Xendit.net.Model.Invoice
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Text.Json.Serialization;
-    using System.Threading.Tasks;
     using Xendit.net.Enum;
 
     public class NotificationPreference

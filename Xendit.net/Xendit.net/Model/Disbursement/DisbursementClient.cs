@@ -7,8 +7,8 @@
 
     public class DisbursementClient : BaseClient
     {
-        public DisbursementClient(string apiKey = null, INetworkClient networkClient = null, string baseUrl = null)
-            : base(apiKey, networkClient, baseUrl)
+        public DisbursementClient(string apiKey = null, INetworkClient requestClient = null, string baseUrl = null)
+            : base(apiKey, requestClient, baseUrl)
         {
         }
 

@@ -62,7 +62,7 @@ namespace XenditExample
                     ExternalId = "external-id",
                     Amount = 1000,
                     Customer = customer,
-                    CustomerNotificationPreference = preference,
+                    NotificationPreference = preference,
                     Items = new ItemInvoice[] { item },
                     Fees = new FeeInvoice[] { fee },
                     Currency = Currency.IDR,

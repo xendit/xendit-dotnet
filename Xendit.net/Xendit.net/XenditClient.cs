@@ -1,7 +1,9 @@
 ﻿namespace Xendit.net
 {
     using Xendit.net.Model.Balance;
+    using Xendit.net.Model.Customer;
     using Xendit.net.Model.Disbursement;
+    using Xendit.net.Model.Invoice;
     using Xendit.net.Model.VirtualAccount;
     using Xendit.net.Network;
 
@@ -13,6 +15,8 @@
             this.VirtualAccount = new VirtualAccountClient(apiKey, requestClient, baseUrl);
             this.VirtualAccountPayment = new VirtualAccountPaymentClient(apiKey, requestClient, baseUrl);
             this.Disbursement = new DisbursementClient(apiKey, requestClient, baseUrl);
+            this.Invoice = new InvoiceClient(apiKey, requestClient, baseUrl);
+            this.Customer = new CustomerClient(apiKey, requestClient, baseUrl);
         }
 
         public BalanceClient Balance { get; private set; }
@@ -22,5 +26,9 @@
         public VirtualAccountPaymentClient VirtualAccountPayment { get; private set; }
 
         public DisbursementClient Disbursement { get; private set; }
+
+        public InvoiceClient Invoice { get; private set; }
+
+        public CustomerClient Customer { get; private set; }
     }
 }
