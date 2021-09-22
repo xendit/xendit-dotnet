@@ -27,7 +27,7 @@ namespace XenditExample
                     ExpectedAmount = 20000,
                 };
 
-                VirtualAccount virtualAccount = await VirtualAccount.Update(parameter, "virtual_account_id");
+                VirtualAccountResponse virtualAccount = await VirtualAccount.Update(parameter, "virtual_account_id");
                 Console.WriteLine(virtualAccount);
             }
             catch (XenditException e)
