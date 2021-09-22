@@ -5,17 +5,11 @@
     using Xendit.net.Network;
     using Xendit.net.Struct;
 
-    public class VirtualAccountClient
+    public class VirtualAccountClient : BaseClient
     {
-        private string apiKey;
-        private string baseUrl;
-        private INetworkClient requestClient;
-
         public VirtualAccountClient(string apiKey = null, string baseUrl = null, INetworkClient requestClient = null)
+            : base(apiKey, baseUrl, requestClient)
         {
-            this.apiKey = apiKey;
-            this.baseUrl = baseUrl;
-            this.requestClient = requestClient;
         }
 
         /// <summary>

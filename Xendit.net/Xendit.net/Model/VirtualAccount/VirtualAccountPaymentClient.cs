@@ -5,17 +5,11 @@
     using Xendit.net.Network;
     using Xendit.net.Struct;
 
-    public class VirtualAccountPaymentClient
+    public class VirtualAccountPaymentClient : BaseClient
     {
-        private string apiKey;
-        private string baseUrl;
-        private INetworkClient requestClient;
-
         public VirtualAccountPaymentClient(string apiKey = null, string baseUrl = null, INetworkClient requestClient = null)
+            : base(apiKey, baseUrl, requestClient)
         {
-            this.apiKey = apiKey;
-            this.baseUrl = baseUrl;
-            this.requestClient = requestClient;
         }
 
         /// <summary>
@@ -26,7 +20,7 @@
         /// <returns>A Task of <see cref="VirtualAccountPaymentResponse"/>.</returns>
         public async Task<VirtualAccountPaymentResponse> Get(string paymentId, HeaderParameter? headers = null)
         {
-            return await GetRequest(paymentId, headers);
+            return await this.GetRequest(paymentId, headers);
         }
 
         private async Task<VirtualAccountPaymentResponse> GetRequest(string paymentId, HeaderParameter? headers)

@@ -6,15 +6,8 @@
 
     public class XenditClient
     {
-        private string apiKey;
-        private string baseUrl;
-        private INetworkClient requestClient;
-
         public XenditClient(string apiKey, string baseUrl, INetworkClient requestClient)
         {
-            this.apiKey = apiKey;
-            this.baseUrl = baseUrl;
-            this.requestClient = requestClient;
             this.Balance = new BalanceClient(apiKey, baseUrl, requestClient);
             this.VirtualAccount = new VirtualAccountClient(apiKey, baseUrl, requestClient);
             this.VirtualAccountPayment = new VirtualAccountPaymentClient(apiKey, baseUrl, requestClient);
