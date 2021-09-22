@@ -5,7 +5,7 @@ namespace XenditExample
     using System.Net.Http;
     using Xendit.net;
     using Xendit.net.Exception;
-    using Xendit.net.Model;
+    using Xendit.net.Model.VirtualAccount;
     using Xendit.net.Network;
 
     class ExampleGetVirtualAccount

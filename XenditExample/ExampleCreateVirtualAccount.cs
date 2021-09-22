@@ -7,7 +7,7 @@ namespace XenditExample
     using Xendit.net;
     using Xendit.net.Enum;
     using Xendit.net.Exception;
-    using Xendit.net.Model;
+    using Xendit.net.Model.VirtualAccount;
     using Xendit.net.Network;
     using Xendit.net.Struct;
 
