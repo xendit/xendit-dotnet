@@ -1,4 +1,4 @@
-﻿namespace Xendit.net.Model
+﻿namespace Xendit.net.Model.PaymentMethod
 {
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;

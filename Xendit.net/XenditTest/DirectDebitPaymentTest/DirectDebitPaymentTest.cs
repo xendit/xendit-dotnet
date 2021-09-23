@@ -18,12 +18,12 @@
         public async void DirectDebitPayment_Create_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<DirectDebitPaymentParameter, DirectDebitPayment>(HttpMethod.Post, Constant.Headers, Constant.DirectDebitUrl, Constant.DirectDebitPaymentParameter))
+                .Setup(client => client.Request<DirectDebitPaymentParameter, DirectDebitPaymentResponse>(HttpMethod.Post, Constant.Headers, Constant.DirectDebitUrl, null, null, Constant.DirectDebitPaymentParameter))
                 .ReturnsAsync(Constant.ExpectedDirectDebitPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            DirectDebitPayment actualDirectDebitPayment = await DirectDebitPayment.Create(Constant.DirectDebitPaymentParameter, Constant.IdempotencyKey);
+            DirectDebitPaymentResponse actualDirectDebitPayment = await DirectDebitPayment.Create(Constant.DirectDebitPaymentParameter, Constant.IdempotencyKey);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDirectDebitPayment), JsonSerializer.Serialize(actualDirectDebitPayment));
         }
 
@@ -31,12 +31,12 @@
         public async void DirectDebitPayment_Create_ShouldSuccess_WithCustomHeader()
         {
             MockClient
-                .Setup(client => client.Request<DirectDebitPaymentParameter, DirectDebitPayment>(HttpMethod.Post, Constant.HeadersWithUserId, Constant.DirectDebitUrl, Constant.DirectDebitPaymentParameter))
+                .Setup(client => client.Request<DirectDebitPaymentParameter, DirectDebitPaymentResponse>(HttpMethod.Post, Constant.HeadersWithUserId, Constant.DirectDebitUrl, null, null, Constant.DirectDebitPaymentParameter))
                 .ReturnsAsync(Constant.ExpectedDirectDebitPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            DirectDebitPayment actualDirectDebitPayment = await DirectDebitPayment.Create(Constant.DirectDebitPaymentParameter, Constant.IdempotencyKey, Constant.InitialHeadersWithUserId);
+            DirectDebitPaymentResponse actualDirectDebitPayment = await DirectDebitPayment.Create(Constant.DirectDebitPaymentParameter, Constant.IdempotencyKey, Constant.InitialHeadersWithUserId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDirectDebitPayment), JsonSerializer.Serialize(actualDirectDebitPayment));
         }
 
@@ -44,12 +44,12 @@
         public async void DirectDebitPayment_ValidateOtp_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, DirectDebitPayment>(HttpMethod.Post, null, Constant.DirectDebitUrlValidateOTP, Constant.ValidateDirectDebitPaymentParameter))
+                .Setup(client => client.Request<Dictionary<string, string>, DirectDebitPaymentResponse>(HttpMethod.Post, null, Constant.DirectDebitUrlValidateOTP, null, null, Constant.ValidateDirectDebitPaymentParameter))
                 .ReturnsAsync(Constant.ExpectedDirectDebitPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            DirectDebitPayment actualDirectDebitPayment = await DirectDebitPayment.ValidateOtp(Constant.OtpCode, Constant.DirectDebitId);
+            DirectDebitPaymentResponse actualDirectDebitPayment = await DirectDebitPayment.ValidateOtp(Constant.OtpCode, Constant.DirectDebitId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDirectDebitPayment), JsonSerializer.Serialize(actualDirectDebitPayment));
         }
 
@@ -57,12 +57,12 @@
         public async void DirectDebitPayment_GetById_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<DirectDebitPayment>(HttpMethod.Get, null, Constant.DirectDebitUrlGetById))
+                .Setup(client => client.Request<DirectDebitPaymentResponse>(HttpMethod.Get, null, Constant.DirectDebitUrlGetById, null, null))
                 .ReturnsAsync(Constant.ExpectedDirectDebitPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            DirectDebitPayment actualDirectDebitPayment = await DirectDebitPayment.GetById(Constant.DirectDebitId);
+            DirectDebitPaymentResponse actualDirectDebitPayment = await DirectDebitPayment.GetById(Constant.DirectDebitId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDirectDebitPayment), JsonSerializer.Serialize(actualDirectDebitPayment));
         }
 
@@ -70,12 +70,12 @@
         public async void DirectDebitPayment_GetByReferenceId_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<DirectDebitPayment[]>(HttpMethod.Get, null, Constant.DirectDebitUrlGetByReferenceId))
+                .Setup(client => client.Request<DirectDebitPaymentResponse[]>(HttpMethod.Get, null, Constant.DirectDebitUrlGetByReferenceId, null, null))
                 .ReturnsAsync(Constant.ExpectedDirectDebitPayments);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            DirectDebitPayment[] actualDirectDebitPayments = await DirectDebitPayment.GetByReferenceId(Constant.ReferenceId);
+            DirectDebitPaymentResponse[] actualDirectDebitPayments = await DirectDebitPayment.GetByReferenceId(Constant.ReferenceId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedDirectDebitPayments), JsonSerializer.Serialize(actualDirectDebitPayments));
         }
     }

@@ -2,13 +2,13 @@
 {
     using System.Collections.Generic;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
     using Xendit.net.Model.DirectDebit;
+    using Xendit.net.Model.LinkedAccountToken;
     using Xendit.net.Struct;
 
     internal class Constant
     {
-        internal static readonly DirectDebitPayment ExpectedDirectDebitPayment = new DirectDebitPayment
+        internal static readonly DirectDebitPaymentResponse ExpectedDirectDebitPayment = new DirectDebitPaymentResponse
         {
             Id = "generated-id",
             ReferenceId = "reference-id",
@@ -54,7 +54,7 @@
             Description = "Example Description",
             SuccessRedirectUrl = "https://success-url.com/",
             FailureRedirectUrl = "https://failure-url.com/",
-            Device = new LinkedAccountDevice
+            Device = new LinkedAccountTokenDevice
             {
                 Id = "device-id",
                 IpAddress = "255.255.255.255",
@@ -70,7 +70,7 @@
             },
         };
 
-        internal static readonly DirectDebitPayment[] ExpectedDirectDebitPayments = new DirectDebitPayment[]
+        internal static readonly DirectDebitPaymentResponse[] ExpectedDirectDebitPayments = new DirectDebitPaymentResponse[]
         {
             ExpectedDirectDebitPayment,
         };
@@ -83,12 +83,15 @@
 
         internal static readonly string DirectDebitId = "generated-id";
         internal static readonly string ReferenceId = "reference-id";
-        internal static readonly string DirectDebitUrl = "https://api.xendit.co/direct_debits";
+        internal static readonly string DirectDebitUrl = "/direct_debits";
         internal static readonly string DirectDebitUrlValidateOTP = string.Format("{0}/{1}/{2}", DirectDebitUrl, DirectDebitId, "validate_otp/");
         internal static readonly string DirectDebitUrlGetById = string.Format("{0}/{1}/", DirectDebitUrl, DirectDebitId);
         internal static readonly string DirectDebitUrlGetByReferenceId = string.Format("{0}?reference_id={1}", DirectDebitUrl, ReferenceId);
 
         internal static readonly string IdempotencyKey = "idempotency-key-example";
+        internal static readonly string ApiKey = "api-key";
+        internal static readonly string BaseUrl = "https://api.xendit.co";
+
         internal static HeaderParameter Headers = new HeaderParameter
         {
             Idempotencykey = IdempotencyKey,

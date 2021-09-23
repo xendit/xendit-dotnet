@@ -5,12 +5,12 @@
     using System.Text.Json;
     using Moq;
     using Xendit.net;
-    using Xendit.net.Model;
+    using Xendit.net.Model.LinkedAccountToken;
     using Xendit.net.Network;
     using Xendit.net.Struct;
     using Xunit;
 
-    public class LinkedAccountTest
+    public class LinkedAccountTokenTest
     {
         private static readonly Mock<INetworkClient> MockClient = new Mock<INetworkClient>();
 
@@ -18,12 +18,12 @@
         public async void InitializedLinkedAccount_Initialize_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<InitializedLinkedAccountParameter, InitializedLinkedAccount>(HttpMethod.Post, null, Constant.LinkedAccountAuthUrl, Constant.InitializedLinkedAccountParameter))
+                .Setup(client => client.Request<InitializedLinkedAccountTokenParameter, InitializedLinkedAccountTokenResponse>(HttpMethod.Post, null, Constant.LinkedAccountAuthUrl, null, null, Constant.InitializedLinkedAccountParameter))
                 .ReturnsAsync(Constant.ExpectedInitializedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            InitializedLinkedAccount actualInitializedLinkedAccount = await InitializedLinkedAccount.Initialize(Constant.InitializedLinkedAccountParameter);
+            InitializedLinkedAccountTokenResponse actualInitializedLinkedAccount = await LinkedAccountToken.Initialize(Constant.InitializedLinkedAccountParameter);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedInitializedLinkedAccount), JsonSerializer.Serialize(actualInitializedLinkedAccount));
         }
 
@@ -31,12 +31,12 @@
         public async void InitializedLinkedAccount_Initialize_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<InitializedLinkedAccountParameter, InitializedLinkedAccount>(HttpMethod.Post, Constant.CustomHeaders, Constant.LinkedAccountAuthUrl, Constant.InitializedLinkedAccountParameter))
+                .Setup(client => client.Request<InitializedLinkedAccountTokenParameter, InitializedLinkedAccountTokenResponse>(HttpMethod.Post, Constant.CustomHeaders, Constant.LinkedAccountAuthUrl, null, null, Constant.InitializedLinkedAccountParameter))
                 .ReturnsAsync(Constant.ExpectedInitializedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            InitializedLinkedAccount actualInitializedLinkedAccount = await InitializedLinkedAccount.Initialize(Constant.InitializedLinkedAccountParameter, Constant.CustomHeaders);
+            InitializedLinkedAccountTokenResponse actualInitializedLinkedAccount = await LinkedAccountToken.Initialize(Constant.InitializedLinkedAccountParameter, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedInitializedLinkedAccount), JsonSerializer.Serialize(actualInitializedLinkedAccount));
         }
 
@@ -44,12 +44,12 @@
         public async void ValidatedLinkedAccount_ValidateOtp_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccount>(HttpMethod.Post, null, Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
+                .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccountTokenResponse>(HttpMethod.Post, null, Constant.LinkedAccountValidateUrl, null, null, Constant.ValidatedLinkedAccountParameter))
                 .ReturnsAsync(Constant.ExpectedValidatedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOtp(Constant.OtpCode, Constant.LinkedAccountId);
+            ValidatedLinkedAccountTokenResponse actualValidatedLinkedAccount = await LinkedAccountToken.ValidateOtp(Constant.OtpCode, Constant.LinkedAccountId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedValidatedLinkedAccount), JsonSerializer.Serialize(actualValidatedLinkedAccount));
         }
 
@@ -57,12 +57,12 @@
         public async void ValidatedLinkedAccount_ValidateOtp_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccount>(HttpMethod.Post, Constant.CustomHeaders, Constant.LinkedAccountValidateUrl, Constant.ValidatedLinkedAccountParameter))
+                .Setup(client => client.Request<Dictionary<string, string>, ValidatedLinkedAccountTokenResponse>(HttpMethod.Post, Constant.CustomHeaders, Constant.LinkedAccountValidateUrl, null, null, Constant.ValidatedLinkedAccountParameter))
                 .ReturnsAsync(Constant.ExpectedValidatedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            ValidatedLinkedAccount actualValidatedLinkedAccount = await ValidatedLinkedAccount.ValidateOtp(Constant.OtpCode, Constant.LinkedAccountId, Constant.CustomHeaders);
+            ValidatedLinkedAccountTokenResponse actualValidatedLinkedAccount = await LinkedAccountToken.ValidateOtp(Constant.OtpCode, Constant.LinkedAccountId, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedValidatedLinkedAccount), JsonSerializer.Serialize(actualValidatedLinkedAccount));
         }
 
@@ -70,12 +70,12 @@
         public async void AccessibleLinkedAccount_Get_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<AccessibleLinkedAccount[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl))
+                .Setup(client => client.Request<AccessibleLinkedAccountTokenResponse[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedAccessibleLinkedAccounts);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            AccessibleLinkedAccount[] actualAccessibleLinkedAccounts = await AccessibleLinkedAccount.Get(Constant.LinkedAccountId);
+            AccessibleLinkedAccountTokenResponse[] actualAccessibleLinkedAccounts = await LinkedAccountToken.Get(Constant.LinkedAccountId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedAccessibleLinkedAccounts), JsonSerializer.Serialize(actualAccessibleLinkedAccounts));
         }
 
@@ -83,12 +83,12 @@
         public async void AccessibleLinkedAccount_Get_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<AccessibleLinkedAccount[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl))
+                .Setup(client => client.Request<AccessibleLinkedAccountTokenResponse[]>(HttpMethod.Get, null, Constant.LinkedAccountAccessibleUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedAccessibleLinkedAccounts);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            AccessibleLinkedAccount[] actualAccessibleLinkedAccounts = await AccessibleLinkedAccount.Get(Constant.LinkedAccountId);
+            AccessibleLinkedAccountTokenResponse[] actualAccessibleLinkedAccounts = await LinkedAccountToken.Get(Constant.LinkedAccountId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedAccessibleLinkedAccounts), JsonSerializer.Serialize(actualAccessibleLinkedAccounts));
         }
 
@@ -96,12 +96,12 @@
         public async void UnbindedLinkedAccount_Unbind_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<UnbindedLinkedAccount>(HttpMethod.Delete, null, Constant.LinkedAccountIdUrl))
+                .Setup(client => client.Request<UnbindedLinkedAccountTokenResponse>(HttpMethod.Delete, null, Constant.LinkedAccountIdUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedUnbindedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            UnbindedLinkedAccount actualUnbindedLinkedAccount = await UnbindedLinkedAccount.Unbind(Constant.LinkedAccountId);
+            UnbindedLinkedAccountTokenResponse actualUnbindedLinkedAccount = await LinkedAccountToken.Unbind(Constant.LinkedAccountId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedUnbindedLinkedAccount), JsonSerializer.Serialize(actualUnbindedLinkedAccount));
         }
 
@@ -109,12 +109,12 @@
         public async void UnbindedLinkedAccount_Unbind_ShouldSuccess_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<UnbindedLinkedAccount>(HttpMethod.Delete, Constant.CustomHeaders, Constant.LinkedAccountIdUrl))
+                .Setup(client => client.Request<UnbindedLinkedAccountTokenResponse>(HttpMethod.Delete, Constant.CustomHeaders, Constant.LinkedAccountIdUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedUnbindedLinkedAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            UnbindedLinkedAccount actualUnbindedLinkedAccount = await UnbindedLinkedAccount.Unbind(Constant.LinkedAccountId, Constant.CustomHeaders);
+            UnbindedLinkedAccountTokenResponse actualUnbindedLinkedAccount = await LinkedAccountToken.Unbind(Constant.LinkedAccountId, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedUnbindedLinkedAccount), JsonSerializer.Serialize(actualUnbindedLinkedAccount));
         }
     }

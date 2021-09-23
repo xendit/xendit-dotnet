@@ -1,8 +1,8 @@
-﻿namespace Xendit.net.Model
+﻿namespace Xendit.net.Model.LinkedAccountToken
 {
     using System.Text.Json.Serialization;
 
-    public class LinkedAccountProperties
+    public class LinkedAccountTokenProperties
     {
         [JsonPropertyName("account_mobile_number")]
         public string AccountMobileNumber { get; set; }
@@ -26,6 +26,6 @@
         public string CallbackUrl { get; set; }
 
         [JsonPropertyName("device")]
-        public LinkedAccountDevice Device { get; set; }
+        public LinkedAccountTokenDevice Device { get; set; }
     }
 }

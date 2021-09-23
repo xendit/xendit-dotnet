@@ -1,8 +1,8 @@
-﻿namespace Xendit.net.Model
+﻿namespace Xendit.net.Model.LinkedAccountToken
 {
     using System.Text.Json.Serialization;
 
-    public class LinkedAccountDevice
+    public class LinkedAccountTokenDevice
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }

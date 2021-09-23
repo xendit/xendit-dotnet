@@ -3,18 +3,18 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
-    using Xendit.net.Model.PaymentMethod;
+    using Xendit.net.Model.LinkedAccountToken;
 
-    public struct PaymentMethodParameter
+    public struct InitializedLinkedAccountTokenParameter
     {
-        [JsonPropertyName("type")]
-        public PaymentMethodEnum.AccountType Type { get; set; }
-
-        [JsonPropertyName("properties")]
-        public PaymentMethodProperties Properties { get; set; }
-
         [JsonPropertyName("customer_id")]
         public string CustomerId { get; set; }
+
+        [JsonPropertyName("channel_code")]
+        public LinkedAccountEnum.ChannelCode ChannelCode { get; set; }
+
+        [JsonPropertyName("properties")]
+        public LinkedAccountTokenProperties Properties { get; set; }
 
         [JsonPropertyName("metadata")]
         public Dictionary<string, object> Metadata { get; set; }

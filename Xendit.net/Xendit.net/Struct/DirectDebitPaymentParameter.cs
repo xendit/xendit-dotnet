@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
     using Xendit.net.Model.DirectDebit;
+    using Xendit.net.Model.LinkedAccountToken;
 
     public class DirectDebitPaymentParameter
     {
@@ -36,7 +36,7 @@
         public string FailureRedirectUrl { get; set; }
 
         [JsonPropertyName("device")]
-        public LinkedAccountDevice Device { get; set; }
+        public LinkedAccountTokenDevice Device { get; set; }
 
         [JsonPropertyName("basket")]
         public BasketItem[] Basket { get; set; }
