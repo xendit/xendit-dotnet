@@ -17,12 +17,12 @@
         public async void EWalletPayment_Create_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<EWalletPaymentParameter, EWalletPayment>(HttpMethod.Post, Constant.PaymentApiVersionHeaders, Constant.EWalletPaymentUrl, Constant.EWalletPaymentParameter))
+                .Setup(client => client.Request<EWalletPaymentParameter, EWalletPaymentResponse>(HttpMethod.Post, Constant.PaymentApiVersionHeaders, Constant.EWalletPaymentUrl, null, null, Constant.EWalletPaymentParameter))
                 .ReturnsAsync(Constant.ExpectedEWalletPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            EWalletPayment actualEWalletPayment = await EWalletPayment.Create(Constant.EWalletPaymentParameter);
+            EWalletPaymentResponse actualEWalletPayment = await EWalletPayment.Create(Constant.EWalletPaymentParameter);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedEWalletPayment), JsonSerializer.Serialize(actualEWalletPayment));
         }
 
@@ -30,12 +30,12 @@
         public async void EWalletPayment_Get_ShouldSuccess()
         {
             MockClient
-                .Setup(client => client.Request<EWalletPayment>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetEWalletPaymentUrl))
+                .Setup(client => client.Request<EWalletPaymentResponse>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetEWalletPaymentUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedEWalletPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            EWalletPayment actualEWalletPayment = await EWalletPayment.Get(Constant.ExternalId, Constant.PaymentType, Constant.CustomHeaders);
+            EWalletPaymentResponse actualEWalletPayment = await EWalletPayment.Get(Constant.ExternalId, Constant.PaymentType, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedEWalletPayment), JsonSerializer.Serialize(actualEWalletPayment));
         }
     }

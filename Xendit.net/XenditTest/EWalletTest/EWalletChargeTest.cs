@@ -1,11 +1,9 @@
 ﻿namespace XenditTest.EWalletTest
 {
-    using System.Collections.Generic;
     using System.Net.Http;
     using System.Text.Json;
     using Moq;
     using Xendit.net;
-    using Xendit.net.Model;
     using Xendit.net.Model.EWallet;
     using Xendit.net.Network;
     using Xendit.net.Struct;
@@ -19,12 +17,12 @@
         public async void EWalletCharge_ShouldSuccess_GetByChargeId()
         {
             MockClient
-                .Setup(client => client.Request<EWalletCharge>(HttpMethod.Get, Constant.ApiVersionHeaders, Constant.GetChargeUrl))
+                .Setup(client => client.Request<EWalletChargeResponse>(HttpMethod.Get, Constant.ApiVersionHeaders, Constant.GetChargeUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedEWalletCharge);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            EWalletCharge actualEWalletCharge = await EWalletCharge.Get(Constant.ChargeId);
+            EWalletChargeResponse actualEWalletCharge = await EWalletCharge.Get(Constant.ChargeId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedEWalletCharge), JsonSerializer.Serialize(actualEWalletCharge));
         }
 
@@ -32,12 +30,12 @@
         public async void EWalletCharge_ShouldSuccess_GetByChargeId_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<EWalletCharge>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetChargeUrl))
+                .Setup(client => client.Request<EWalletChargeResponse>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetChargeUrl, null, null))
                 .ReturnsAsync(Constant.ExpectedEWalletCharge);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            EWalletCharge actualEWalletCharge = await EWalletCharge.Get(Constant.ChargeId, Constant.CustomHeaders);
+            EWalletChargeResponse actualEWalletCharge = await EWalletCharge.Get(Constant.ChargeId, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedEWalletCharge), JsonSerializer.Serialize(actualEWalletCharge));
         }
 
@@ -45,12 +43,12 @@
         public async void EWalletCharge_ShouldSuccess_Create()
         {
             MockClient
-                .Setup(client => client.Request<EWalletChargeParameter, EWalletCharge>(HttpMethod.Post, Constant.ApiVersionHeaders, Constant.EWalletChargeUrl, Constant.EWalletBody))
+                .Setup(client => client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, Constant.ApiVersionHeaders, Constant.EWalletChargeUrl, null, null, Constant.EWalletBody))
                 .ReturnsAsync(Constant.ExpectedEWalletCharge);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            EWalletCharge actualEWalletCharge = await EWalletCharge.Create(Constant.EWalletBody);
+            EWalletChargeResponse actualEWalletCharge = await EWalletCharge.Create(Constant.EWalletBody);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedEWalletCharge), JsonSerializer.Serialize(actualEWalletCharge));
         }
 
@@ -58,12 +56,12 @@
         public async void EWalletCharge_ShouldSuccess_Create_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<EWalletChargeParameter, EWalletCharge>(HttpMethod.Post, Constant.CustomHeaders, Constant.EWalletChargeUrl, Constant.EWalletBody))
+                .Setup(client => client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, Constant.CustomHeaders, Constant.EWalletChargeUrl, null, null, Constant.EWalletBody))
                 .ReturnsAsync(Constant.ExpectedEWalletCharge);
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            EWalletCharge actualEWalletCharge = await EWalletCharge.Create(Constant.EWalletBody, Constant.CustomHeaders);
+            EWalletChargeResponse actualEWalletCharge = await EWalletCharge.Create(Constant.EWalletBody, Constant.CustomHeaders);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedEWalletCharge), JsonSerializer.Serialize(actualEWalletCharge));
         }
     }

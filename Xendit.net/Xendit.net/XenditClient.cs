@@ -4,6 +4,7 @@
     using Xendit.net.Model.Customer;
     using Xendit.net.Model.DirectDebit;
     using Xendit.net.Model.Disbursement;
+    using Xendit.net.Model.EWallet;
     using Xendit.net.Model.Invoice;
     using Xendit.net.Model.LinkedAccountToken;
     using Xendit.net.Model.PaymentMethod;
@@ -25,6 +26,8 @@
             this.DirectDebitPayment = new DirectDebitPaymentClient(apiKey, requestClient, baseUrl);
             this.PaymentMethod = new PaymentMethodClient(apiKey, requestClient, baseUrl);
             this.LinkedAccountToken = new LinkedAccountTokenClient(apiKey, requestClient, baseUrl);
+            this.EWalletCharge = new EWalletChargeClient(apiKey, requestClient, baseUrl);
+            this.EWalletPayment = new EWalletPaymentClient(apiKey, requestClient, baseUrl);
         }
 
         public BalanceClient Balance { get; private set; }
@@ -46,5 +49,9 @@
         public PaymentMethodClient PaymentMethod { get; private set; }
 
         public LinkedAccountTokenClient LinkedAccountToken { get; private set; }
+
+        public EWalletChargeClient EWalletCharge { get; private set; }
+
+        public EWalletPaymentClient EWalletPayment { get; private set; }
     }
 }
