@@ -67,28 +67,28 @@
         {
             string url = string.Format("{0}{1}{2}", "/linked_account_tokens/", linkedAccountTokenId, "/accounts");
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<AccessibleLinkedAccountToken[]>(HttpMethod.Get, headers, url, this.apiKey, this.baseUrl);
+            return await client.Request<AccessibleLinkedAccountToken[]>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
         }
 
         private async Task<InitializedLinkedAccountToken> InitializeRequest(InitializedLinkedAccountTokenParameter parameter, HeaderParameter? headers)
         {
             string url = "/linked_account_tokens/auth";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<InitializedLinkedAccountTokenParameter, InitializedLinkedAccountToken>(HttpMethod.Post, headers, url, this.apiKey, this.baseUrl, parameter);
+            return await client.Request<InitializedLinkedAccountTokenParameter, InitializedLinkedAccountToken>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
         }
 
         private async Task<UnbindedLinkedAccountToken> UnbindRequest(string linkedAccountTokenId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/linked_account_tokens/", linkedAccountTokenId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<UnbindedLinkedAccountToken>(HttpMethod.Delete, headers, url, this.apiKey, this.baseUrl);
+            return await client.Request<UnbindedLinkedAccountToken>(HttpMethod.Delete, headers, url, this.ApiKey, this.BaseUrl);
         }
 
         private async Task<ValidatedLinkedAccountToken> ValidateOtpRequest(Dictionary<string, string> parameter, string linkedAccountTokenId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", "/linked_account_tokens/", linkedAccountTokenId, "/validate_otp");
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<Dictionary<string, string>, ValidatedLinkedAccountToken>(HttpMethod.Post, headers, url, this.apiKey, this.baseUrl, parameter);
+            return await client.Request<Dictionary<string, string>, ValidatedLinkedAccountToken>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
         }
     }
 }

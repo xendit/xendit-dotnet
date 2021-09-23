@@ -60,28 +60,28 @@
         {
             string url = "/callback_virtual_accounts";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, headers, url, this.apiKey, this.baseUrl, parameter);
+            return await client.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
         }
 
         private async Task<VirtualAccountResponse> UpdateRequest(UpdateVirtualAccountParameter parameter, string id, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/callback_virtual_accounts/", id);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, headers, url, this.apiKey, this.baseUrl, parameter);
+            return await client.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, headers, url, this.ApiKey, this.BaseUrl, parameter);
         }
 
         private async Task<VirtualAccountResponse> GetRequest(string id, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/callback_virtual_accounts/", id);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<VirtualAccountResponse>(HttpMethod.Get, headers, url, this.apiKey, this.baseUrl);
+            return await client.Request<VirtualAccountResponse>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
         }
 
         private async Task<AvailableBank[]> GetAvailableBanksRequest(HeaderParameter? headers)
         {
             string url = "/available_virtual_account_banks";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<AvailableBank[]>(HttpMethod.Get, headers, url, this.apiKey, this.baseUrl);
+            return await client.Request<AvailableBank[]>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
         }
     }
 }

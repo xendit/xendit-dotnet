@@ -59,28 +59,28 @@
         {
             string url = "/disbursements";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DisbursementParameter, DisbursementResponse>(HttpMethod.Post, headers, url, this.apiKey, this.baseUrl, parameter);
+            return await client.Request<DisbursementParameter, DisbursementResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
         }
 
         private async Task<DisbursementResponse> GetByIdRequest(string id, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/disbursements/", id);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DisbursementResponse>(HttpMethod.Get, headers, url, this.apiKey, this.baseUrl);
+            return await client.Request<DisbursementResponse>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
         }
 
         private async Task<DisbursementResponse[]> GetByExternalIdRequest(string externalId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/disbursements?external_id=", externalId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DisbursementResponse[]>(HttpMethod.Get, headers, url, this.apiKey, this.baseUrl);
+            return await client.Request<DisbursementResponse[]>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
         }
 
         private async Task<AvailableBank[]> GetAvailableBanksRequest(HeaderParameter? headers)
         {
             string url = "/available_disbursements_banks";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<AvailableBank[]>(HttpMethod.Get, headers, url, this.apiKey, this.baseUrl);
+            return await client.Request<AvailableBank[]>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
         }
     }
 }

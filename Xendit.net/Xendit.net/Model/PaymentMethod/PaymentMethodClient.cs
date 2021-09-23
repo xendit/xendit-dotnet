@@ -38,14 +38,14 @@
         {
             string url = "/payment_methods";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<PaymentMethodParameter, PaymentMethodResponse>(HttpMethod.Post, headers, url, this.apiKey, this.baseUrl, parameter);
+            return await client.Request<PaymentMethodParameter, PaymentMethodResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
         }
 
         private async Task<PaymentMethodResponse[]> GetPaymentMethodRequest(string customerId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/payment_methods?customer_id=", customerId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<PaymentMethodResponse[]>(HttpMethod.Get, headers, url, this.apiKey, this.baseUrl);
+            return await client.Request<PaymentMethodResponse[]>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
         }
     }
 }
