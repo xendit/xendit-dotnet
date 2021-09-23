@@ -13,7 +13,7 @@ This library is the abstraction of Xendit API for access from applications writt
 - [Usage](#usage)
   - [API Key](#api-key)
     - [Global Variable](#global-variable)
-    - [`XenditClient` instance](#xenditclient-instance)
+    - [`XenditClient` instance or Individual `Client` instance](#xenditclient-instance-or-individual-client-instance)
   - [Balance Service](#balance-service)
     - [Get Balance](#get-balance)
   - [Virtual Account Services](#virtual-account-services)
@@ -91,7 +91,7 @@ Please check [Xendit API Reference](https://developers.xendit.co/api-reference/)
 
 You need to use secret API key in order to use functionality in this library. The key can be obtained from your [Xendit Dashboard](https://dashboard.xendit.co/settings/developers#api-keys).
 
-To add API Key, you have 2 options: Use global variable or use `XenditClient` instance.
+To add API Key, you have 2 options: Use global variable or use `XenditClient` or Individual `Client` instance.
 
 #### Global Variable
 
@@ -113,8 +113,8 @@ namespace XenditExample
             try
             {
                 HttpClient httpClient = new HttpClient();
-                NetworkClient networkClient = new NetworkClient(httpClient);
-                XenditConfiguration.RequestClient = networkClient;
+                NetworkClient requestClient = new NetworkClient(httpClient);
+                XenditConfiguration.RequestClient = requestClient;
                 XenditConfiguration.ApiKey = "xnd_development_...";
 
                 BalanceResponse balanceResponse = await Balance.Get();
@@ -129,7 +129,7 @@ namespace XenditExample
 }
 ```
 
-#### `XenditClient` instance
+#### `XenditClient` instance or Individual `Client` instance
 
 ```cs
 namespace XenditExample
@@ -148,11 +148,18 @@ namespace XenditExample
         {
             try
             {
+                // define API key
                 string apiKey = "xnd_development_...";
+
+                // define base URL (optional, default is `https://api.xendit.co`)
                 string baseUrl = "https://api.xendit.co";
+
+                // define network client
                 HttpClient httpClient = new HttpClient();
-                NetworkClient networkClient = new NetworkClient(httpClient);
-                XenditClient client = new XenditClient(apiKey, baseUrl, networkClient);
+                NetworkClient requestClient = new NetworkClient(httpClient);
+      
+                // define XenditClient, third parameter (base URL) is optional
+                XenditClient client = new XenditClient(apiKey, requestClient, baseUrl);
               
                 BalanceResponse balanceResponse = await client.Balance.Get();
                 Console.WriteLine(balanceResponse.Balance);
@@ -165,6 +172,52 @@ namespace XenditExample
     }
 }
 ```
+
+You also can use individual instance (e.g: `BalanceClient`, `VirtualAccountClient`, etc.)
+
+```cs
+namespace XenditExample
+{
+    using System;
+    using System.Threading.Tasks;
+    using System.Net.Http;
+    using Xendit.net;
+    using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Network;
+
+    class ExampleGetBalance
+    {
+        static async Task Main(string[] args)
+        {
+            try
+            {
+                // define API key (optional, default using XenditConfiguration API key)
+                string apiKey = "xnd_development_...";
+
+                // define base URL (optional, default using XenditConfiguration base URL)
+                string baseUrl = "https://api.xendit.co";
+
+                // define network client (optional, default using XenditConfiguration network client)
+                HttpClient httpClient = new HttpClient();
+                NetworkClient requestClient = new NetworkClient(httpClient);
+      
+                // define BalanceClient, all of the parameters are optional (default: using global variable)
+                BalanceClient balanceClient = new BalanceClient(apiKey, requestClient, baseUrl)
+              
+                BalanceResponse balanceResponse = balanceClient.Get();
+                Console.WriteLine(balanceResponse.Balance);
+            }
+            catch (XenditException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+    }
+}
+```
+
+Note that since constructor parameters of individual client are optional and it will use global variable, you need to define `XenditConfiguration` API key, request client and base URL if you don't pass any value to the constructor parameters.
 
 ### Balance Service
 
