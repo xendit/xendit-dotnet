@@ -4,11 +4,12 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
-    using Xendit.net.Exception;
-    using Xendit.net.Struct;
     using Xendit.net.Enum;
+    using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.DirectDebitPayment;
+    using Xendit.net.Network;
+    using Xendit.net.Struct;
 
     class ExampleCreateDirectDebitPayment
     {
@@ -48,7 +49,7 @@ namespace XenditExample
 
                 string idempotencyKey = "fa9b53a1-f81a-47ff-8fde-b2eec3546b66";
 
-                DirectDebitPayment directDebitPayment = await DirectDebitPayment.Create(directDebitPaymentParameter, idempotencyKey);
+                DirectDebitPaymentResponse directDebitPayment = await DirectDebitPayment.Create(directDebitPaymentParameter, idempotencyKey);
                 Console.WriteLine(directDebitPayment);
             }
             catch (XenditException e)

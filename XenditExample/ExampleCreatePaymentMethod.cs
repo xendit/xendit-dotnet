@@ -4,11 +4,12 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
-    using Xendit.net.Exception;
-    using Xendit.net.Struct;
     using Xendit.net.Enum;
+    using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.PaymentMethod;
+    using Xendit.net.Network;
+    using Xendit.net.Struct;
 
     class ExampleCreatePaymentMethod
     {
@@ -36,7 +37,7 @@ namespace XenditExample
                     CustomerId = "4b7b6050-0830-440a-903b-37d527dbbaa9",
                 };
 
-                PaymentMethod paymentMethod = await PaymentMethod.Create(parameter);
+                PaymentMethodResponse paymentMethod = await PaymentMethod.Create(parameter);
                 Console.WriteLine(paymentMethod);
             }
             catch (XenditException e)

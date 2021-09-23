@@ -17,10 +17,9 @@ namespace XenditExample
             XenditConfiguration.RequestClient = networkClient;
             XenditConfiguration.ApiKey = "xnd_development_...";
 
-            string virtualAccountId = "random_virtual_account_id";
-
             try
             {
+                string virtualAccountId = "random_virtual_account_id";
                 VirtualAccountResponse virtualAccount = await VirtualAccount.Get(virtualAccountId);
 
                 Console.WriteLine(virtualAccount);

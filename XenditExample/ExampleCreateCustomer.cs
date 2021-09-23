@@ -4,11 +4,12 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
-    using Xendit.net.Exception;
-    using Xendit.net.Struct;
     using Xendit.net.Enum;
+    using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.Customer;
+    using Xendit.net.Network;
+    using Xendit.net.Struct;
 
     class ExampleCreateCustomer
     {
@@ -29,7 +30,7 @@ namespace XenditExample
                     Addresses = new Address[] { new Address { Country = Country.Indonesia } }
                 };
 
-                Customer individualCustomerVersion20200519 = await Customer.Create(individualParameterVersion20200519, version: ApiVersion.Version20200519);
+                CustomerResponse individualCustomerVersion20200519 = await Customer.Create(individualParameterVersion20200519, version: ApiVersion.Version20200519);
                 Console.WriteLine(individualCustomerVersion20200519);
 
                 CustomerParameter individualParameter = new CustomerParameter
@@ -61,7 +62,7 @@ namespace XenditExample
                     },
                 };
 
-                Customer individualCustomerVersion20201031 = await Customer.Create(individualParameter);
+                CustomerResponse individualCustomerVersion20201031 = await Customer.Create(individualParameter);
                 Console.WriteLine(individualCustomerVersion20201031);
             }
             catch (XenditException e)

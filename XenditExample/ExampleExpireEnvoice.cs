@@ -4,8 +4,10 @@ namespace XenditExample
     using System.Threading.Tasks;
     using System.Net.Http;
     using Xendit.net;
+    using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
+    using Xendit.net.Model.Invoice;
     using Xendit.net.Network;
 
     class ExampleExpireInvoice
@@ -20,7 +22,7 @@ namespace XenditExample
             try
             {
                 string invoiceId = "invoice_id";
-                Invoice invoice = await Invoice.Expire(invoiceId);
+                InvoiceResponse invoice = await Invoice.Expire(invoiceId);
                 Console.WriteLine(invoice);
             }
             catch (XenditException e)

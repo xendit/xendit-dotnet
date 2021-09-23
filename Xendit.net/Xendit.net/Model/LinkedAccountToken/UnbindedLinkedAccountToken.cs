@@ -2,7 +2,7 @@
 {
     using System.Text.Json.Serialization;
 
-    public class UnbindedLinkedAccountTokenResponse
+    public class UnbindedLinkedAccountToken
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }

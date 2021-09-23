@@ -27,7 +27,7 @@
             },
         };
 
-        internal static readonly InitializedLinkedAccountTokenResponse ExpectedInitializedLinkedAccount = new InitializedLinkedAccountTokenResponse
+        internal static readonly InitializedLinkedAccountToken ExpectedInitializedLinkedAccount = new InitializedLinkedAccountToken
         {
             Id = LinkedAccountId,
             CustomerId = "customer-id",
@@ -56,7 +56,7 @@
         internal static readonly string LinkedAccountIdUrl = string.Format("{0}/{1}", LinkedAccountUrl, LinkedAccountId);
         internal static readonly string LinkedAccountAccessibleUrl = string.Format("{0}/{1}/{2}", LinkedAccountUrl, LinkedAccountId, "accounts");
 
-        internal static readonly ValidatedLinkedAccountTokenResponse ExpectedValidatedLinkedAccount = new ValidatedLinkedAccountTokenResponse
+        internal static readonly ValidatedLinkedAccountToken ExpectedValidatedLinkedAccount = new ValidatedLinkedAccountToken
         {
             Id = LinkedAccountId,
             CustomerId = "customer-id",
@@ -64,9 +64,9 @@
             Status = LinkedAccountEnum.Status.Success,
         };
 
-        internal static readonly AccessibleLinkedAccountTokenResponse[] ExpectedAccessibleLinkedAccounts = new AccessibleLinkedAccountTokenResponse[]
+        internal static readonly AccessibleLinkedAccountToken[] ExpectedAccessibleLinkedAccounts = new AccessibleLinkedAccountToken[]
         {
-            new AccessibleLinkedAccountTokenResponse
+            new AccessibleLinkedAccountToken
             {
                 Id = LinkedAccountId,
                 ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
@@ -81,7 +81,7 @@
             },
         };
 
-        internal static readonly UnbindedLinkedAccountTokenResponse ExpectedUnbindedLinkedAccount = new UnbindedLinkedAccountTokenResponse
+        internal static readonly UnbindedLinkedAccountToken ExpectedUnbindedLinkedAccount = new UnbindedLinkedAccountToken
         {
             Id = LinkedAccountId,
             IsDeleted = true,

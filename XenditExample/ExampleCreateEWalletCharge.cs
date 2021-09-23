@@ -36,7 +36,7 @@ namespace XenditExample
                     },
                 };
 
-                EWalletCharge eWalletCharge = await EWalletCharge.Create(parameter);
+                EWalletChargeResponse eWalletCharge = await EWalletCharge.Create(parameter);
                 Console.WriteLine(eWalletCharge);
             }
             catch (XenditException e)

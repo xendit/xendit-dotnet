@@ -3,7 +3,7 @@
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
 
-    public class AccessibleLinkedAccountTokenResponse
+    public class AccessibleLinkedAccountToken
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }

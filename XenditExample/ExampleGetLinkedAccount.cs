@@ -4,11 +4,11 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
     using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.LinkedAccountToken;
+    using Xendit.net.Network;
     using Xendit.net.Struct;
-    using Xendit.net.Enum;
 
     class ExampleGetLinkedAccount
     {
@@ -22,7 +22,7 @@ namespace XenditExample
             try
             {
                 string linkedAccountTokenId = "linked-account-token-id";
-                AccessibleLinkedAccount[] accessibleLinkedAccounts = await AccessibleLinkedAccount.Get(linkedAccountTokenId);
+                AccessibleLinkedAccount[] accessibleLinkedAccounts = await LinkedAccountToken.Get(linkedAccountTokenId);
                 Console.WriteLine(accessibleLinkedAccounts);
             }
             catch (XenditException e)

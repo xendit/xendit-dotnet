@@ -53,6 +53,12 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Update Fixed Payment Code](#update-fixed-payment-code)
     - [Get Payment Code](#get-payment-code)
     - [Get Payments By Payment Code ID](#get-payments-by-payment-code-id)
+  - [E-Wallet Service](#e-wallet-service)
+    - [Create E-Wallet Charge (API version `2020-01-25`)](#create-e-wallet-charge-api-version-2020-01-25)
+    - [Get E-Wallet Charge (API version `2020-01-25`)](#get-e-wallet-charge-api-version-2020-01-25)
+    - [Create E-Wallet Payment (API version `2020-02-01`)](#create-e-wallet-payment-api-version-2020-02-01)
+    - [Create E-Wallet Payment (API version `2019-02-04`)](#create-e-wallet-payment-api-version-2019-02-04)
+    - [Get E-Wallet Payment](#get-e-wallet-payment)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -337,13 +343,13 @@ DisbursementParameter parameter = new DisbursementParameter
   Amount = 1000,
 };
 
-Disbursement disbursement = await Disbursement.Create(parameter);
+DisbursementResponse disbursement = await Disbursement.Create(parameter);
 ```
 
 It will return:
 
 ```cs
-Disbursement disbursement = new Disbursement
+DisbursementResponse disbursement = new DisbursementResponse
 {
   Id = "generated-id",
   ExternalId = "disb-1475459775872",
@@ -359,13 +365,13 @@ Disbursement disbursement = new Disbursement
 #### Get a disbursement by ID
 
 ```cs
-Disbursement disbursement = await Disbursement.GetById("disbursement_id");
+DisbursementResponse disbursement = await Disbursement.GetById("disbursement_id");
 ```
 
 It will return:
 
 ```cs
-Disbursement disbursement = new Disbursement
+DisbursementResponse disbursement = new DisbursementResponse
 {
   Id = "disbursement_id",
   ExternalId = "disb-1475459775872",
@@ -381,15 +387,15 @@ Disbursement disbursement = new Disbursement
 #### Get a disbursement by External ID
 
 ```cs
-Disbursement[] disbursements = await Disbursement.GetByExternalId("external_id");
+DisbursementResponse[] disbursements = await Disbursement.GetByExternalId("external_id");
 ```
 
 It will return:
 
 ```cs
-Disbursement[] disbursements = new Disbursement[]
+DisbursementResponse[] disbursements = new DisbursementResponse[]
 {
-  new Disbursement
+  new DisbursementResponse
   {
     Id = "disbursement_id",
     ExternalId = "disb-1475459775872",
@@ -487,14 +493,14 @@ InvoiceParameter parameter = new InvoiceParameter
   Currency = Currency.IDR,
 };
 
-Invoice invoice = await Invoice.Create(parameter);
+InvoiceResponse invoice = await Invoice.Create(parameter);
 Console.WriteLine(invoice);
 ```
 
 It will return:
 
 ```cs
-Invoice invoice = new Invoice
+InvoiceResponse invoice = new InvoiceResponse
 {
   Id = "610a306ffe63418fdb6bd0b3",
   ExternalId = "external-id",
@@ -566,13 +572,13 @@ Invoice invoice = new Invoice
 #### Get invoice by ID
 
 ```cs
-Invoice invoice = await Invoice.GetById("EXAMPLE_ID");
+InvoiceResponse invoice = await Invoice.GetById("EXAMPLE_ID");
 ```
 
 It will return:
 
 ```cs
-Invoice invoice = new Invoice
+InvoiceResponse invoice = new InvoiceResponse
 {
   Id = "610a306ffe63418fdb6bd0b3",
   ExternalId = "external-id",
@@ -652,7 +658,7 @@ To get all invoices, please use struct `ListInvoiceParameter` for defining which
 
 ```cs
 // Invoke GetAll without specifying parameter
-Invoice[] invoicesWithoutParams = await Invoice.GetAll(null);
+InvoiceResponse[] invoicesWithoutParams = await Invoice.GetAll(null);
 
 // specify parameter using ListInvoiceParameter
 ListInvoiceParameter parameter = new ListInvoiceParameter
@@ -662,15 +668,15 @@ ListInvoiceParameter parameter = new ListInvoiceParameter
     PaymentChannels = new InvoicePaymentChannelType[] { },
 };
 
-Invoice[] invoiceArray = await Invoice.GetAll(parameter);
+InvoiceResponse[] invoiceArray = await Invoice.GetAll(parameter);
 ```
 
 It will return:
 
 ```cs
-Invoice[] invoices = new Invoice[]
+InvoiceResponse[] invoices = new InvoiceResponse[]
 {
-  Invoice invoice = new Invoice
+  new InvoiceResponse
   {
     Id = "610a306ffe63418fdb6bd0b3",
     ExternalId = "external-id",
@@ -744,13 +750,13 @@ Invoice[] invoices = new Invoice[]
 #### Expire an invoice
 
 ```cs
-Invoice invoice = await Invoice.Expire("EXAMPLE_ID");
+InvoiceResponse invoice = await Invoice.Expire("EXAMPLE_ID");
 ```
 
 It will return:
 
 ```cs
-Invoice invoice = new Invoice
+InvoiceResponse invoice = new InvoiceResponse
 {
   Id = "610a306ffe63418fdb6bd0b3",
   ExternalId = "external-id",
@@ -865,18 +871,18 @@ CustomerParameter individualParameter = new CustomerParameter
   KycDocuments = new KycDocument[] { document },
 };
 
-Customer customerDefault = await Customer.Create(individualParameter);
+CustomerResponse customerDefault = await Customer.Create(individualParameter);
 Console.WriteLine(customerDefault);
 
 // or you can define with the API version
-Customer customer = await Customer.Create(individualParameter, version: ApiVersion.Version20201031);
+CustomerResponse customer = await Customer.Create(individualParameter, version: ApiVersion.Version20201031);
 Console.WriteLine(customer);
 ```
 
 It will return:
 
 ```cs
-Customer customerDefault = new Customer
+CustomerResponse customerDefault = new CustomerResponse
 {
   ReferenceId = "demo_11212145",
   Type = CustomerType.Individual,
@@ -912,13 +918,13 @@ CustomerParameter parameter = new CustomerParameter
     Addresses = new Address[] { new Address { Country = Country.Indonesia } }
 };
 
-Customer customerWithVersion = await Customer.Create(parameter, version: ApiVersion.Version20200519);
+CustomerResponse customerWithVersion = await Customer.Create(parameter, version: ApiVersion.Version20200519);
 ```
 
 It will return:
 
 ```cs
-Customer customerWithVersion = new Customer
+CustomerResponse customerWithVersion = new Customer
 {
     ReferenceId = "demo_11212144",
     Email = "john@email.com",
@@ -936,19 +942,19 @@ Method `Get` has three parameters: reference ID (required), optional headers, an
 Here is the example of invoking method `Get` with API version of `2020-10-31`:
 
 ```cs
-Customer customerDefault = await Customer.Get("example_reference_id");
+CustomerResponse customerDefault = await Customer.Get("example_reference_id");
 
-Customer customerWithVersion20201031 = await Customer.Get("example_reference_id", version: ApiVersion.Version20201031);
+CustomerResponse customerWithVersion20201031 = await Customer.Get("example_reference_id", version: ApiVersion.Version20201031);
 ```
 
 It will return:
 
 ```cs
-Customer customerDefault = new Customer
+CustomerResponse customerDefault = new CustomerResponse
 {
-  Data = new Customer[]
+  Data = new CustomerResponse[]
   {
-    new Customer
+    new CustomerResponse
     {
       ReferenceId = "example_reference_id",
       Type = CustomerType.Individual,
@@ -979,17 +985,17 @@ Customer customerDefault = new Customer
 For API version of `2020-05-19`, here is the example:
 
 ```cs
-Customer customerWithVersion = await Customer.Get("example_reference_id", version: ApiVersion.Version20200519);
+CustomerResponse customerWithVersion = await Customer.Get("example_reference_id", version: ApiVersion.Version20200519);
 ```
 
 It will return:
 
 ```cs
-Customer customerWithVersion = new Customer
+CustomerResponse customerWithVersion = new CustomerResponse
 {
-  Data = new Customer[]
+  Data = new CustomerResponse[]
   {
-    new Customer
+    new CustomerResponse
     {
       ReferenceId = "example_reference_id",
       Email = "john@email.com",
@@ -1044,14 +1050,14 @@ DirectDebitPaymentParameter directDebitPaymentParameter = new DirectDebitPayment
 
 string idempotencyKey = "fa9b53a1-f81a-47ff-8fde-b2eec3546b66";
 
-DirectDebitPayment directDebitPayment = await DirectDebitPayment.Create(directDebitPaymentParameter, idempotencyKey);
+DirectDebitPaymentResponse directDebitPayment = await DirectDebitPayment.Create(directDebitPaymentParameter, idempotencyKey);
 Console.WriteLine(directDebitPayment);
 ```
 
 It will return:
 
 ```cs
-DirectDebitPayment directDebitPayment = new DirectDebitPayment
+DirectDebitPaymentResponse directDebitPayment = new DirectDebitPaymentResponse
 {
   Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
   ReferenceId = "reference-id",
@@ -1086,14 +1092,14 @@ Here is the example of invoking `ValidateOtp`:
 ```cs
 string otpCode = "123456";
 
-DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOtp(otpCode, "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
+DirectDebitPaymentResponse directDebitPayment = await DirectDebitPayment.ValidateOtp(otpCode, "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
 Console.WriteLine(directDebitPayment);
 ```
 
 It will return:
 
 ```cs
-DirectDebitPayment directDebitPayment = new DirectDebitPayment
+DirectDebitPaymentResponse directDebitPayment = new DirectDebitPaymentResponse
 {
   Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
   ReferenceId = "reference-id",
@@ -1124,14 +1130,14 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
 #### Get Direct Debit Payment by ID
 
 ```cs
-DirectDebitPayment directDebitPayment = await DirectDebitPayment.GetById("ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
+DirectDebitPaymentResponse directDebitPayment = await DirectDebitPayment.GetById("ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14");
 Console.WriteLine(directDebitPayment);
 ```
 
 It will return:
 
 ```cs
-DirectDebitPayment directDebitPayment = new DirectDebitPayment
+DirectDebitPaymentResponse directDebitPayment = new DirectDebitPaymentResponse
 {
   Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
   ReferenceId = "reference-id",
@@ -1162,14 +1168,14 @@ DirectDebitPayment directDebitPayment = new DirectDebitPayment
 #### Get Direct Debit Payments by Reference ID
 
 ```cs
-DirectDebitPayment[] directDebitPayments = await DirectDebitPayment.GetByReferenceId("reference-id");
+DirectDebitPaymentResponse[] directDebitPayments = await DirectDebitPayment.GetByReferenceId("reference-id");
 Console.WriteLine(directDebitPayments);
 ```
 
 It will return:
 
 ```cs
-DirectDebitPayment[] directDebitPayments = new DirectDebitPayment[]
+DirectDebitPaymentResponse[] directDebitPayments = new DirectDebitPaymentResponse[]
 {
   {
     Id = "ddpy-623dca10-5dad-4916-b14d-81aaa76b5d14",
@@ -1203,15 +1209,15 @@ DirectDebitPayment[] directDebitPayments = new DirectDebitPayment[]
 
 #### Initialize Linked Account Tokenization
 
-To initialize linked account tokenization, use struct `InitializedLinkedAccountParameter`. You may use these enum and class to construct `InitializedLinkedAccountParameter`:
+To initialize linked account tokenization, use struct `InitializedLinkedAccountTokenParameter`. You may use these enum and class to construct `InitializedLinkedAccountTokenParameter`:
 
 - Enum `LinkedAccountEnum.ChannelCode` for `ChannelCode` property
-- `LinkedAccountProperties` for `Properties` property
+- `LinkedAccountTokenProperties` for `Properties` property
 
 Here is the example:
 
 ```cs
-InitializedLinkedAccountParameter parameter = new InitializedLinkedAccountParameter
+InitializedLinkedAccountTokenParameter parameter = new InitializedLinkedAccountTokenParameter
 {
   CustomerId = "customer-id",
   ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
@@ -1228,13 +1234,13 @@ InitializedLinkedAccountParameter parameter = new InitializedLinkedAccountParame
   },
 };
 
-InitializedLinkedAccount initializedLinkedAccount = await InitializedLinkedAccount.Initialize(parameter);
+InitializedLinkedAccountToken initializedLinkedAccount = await LinkedAccountToken.Initialize(parameter);
 ```
 
 It will return:
 
 ```cs
-InitializedLinkedAccount initializedLinkedAccount = new InitializedLinkedAccount
+InitializedLinkedAccountToken initializedLinkedAccount = new InitializedLinkedAccountToken
 {
   Id = "linked-account-token-id",
   CustomerId = "customer-id",
@@ -1254,13 +1260,13 @@ InitializedLinkedAccount initializedLinkedAccount = new InitializedLinkedAccount
 string otpCode = "123456";
 string linkedAccountTokenId = "linked-account-token-id";
 
-ValidatedLinkedAccount validatedLinkedAccount = await ValidatedLinkedAccount.ValidateOtp(otpCode,linkedAccountTokenId);
+ValidatedLinkedAccountToken validatedLinkedAccount = await ValidatedLinkedAccount.ValidateOtp(otpCode,linkedAccountTokenId);
 ```
 
 It will return:
 
 ```cs
-ValidatedLinkedAccount validatedLinkedAccount = new ValidatedLinkedAccount
+ValidatedLinkedAccountToken validatedLinkedAccount = new ValidatedLinkedAccountToken
 {
   Id = "linked-account-token-id",
   CustomerId = "customer-id",
@@ -1272,15 +1278,15 @@ ValidatedLinkedAccount validatedLinkedAccount = new ValidatedLinkedAccount
 #### Get Accessible Accounts by Linked Account Token
 
 ```cs
-AccessibleLinkedAccount[] accessibleLinkedAccounts = await AccessibleLinkedAccount.Get("linked-account-token-id");
+AccessibleLinkedAccountToken[] accessibleLinkedAccounts = await LinkedAccountToken.Get("linked-account-token-id");
 ```
 
 It will return:
 
 ```cs
-AccessibleLinkedAccount[] accessibleLinkedAccounts = new AccessibleLinkedAccount[]
+AccessibleLinkedAccountToken[] accessibleLinkedAccounts = new AccessibleLinkedAccountToken[]
 {
-  new AccessibleLinkedAccount
+  new AccessibleLinkedAccountToken
   {
     Id = "linked-account-token-id",
     ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
@@ -1299,13 +1305,13 @@ AccessibleLinkedAccount[] accessibleLinkedAccounts = new AccessibleLinkedAccount
 #### Unbind Linked Account Token
 
 ```cs
-UnbindedLinkedAccount unbindedLinkedAccount = await UnbindedLinkedAccount.Unbind("linked-account-token-id");
+UnbindedLinkedAccountToken unbindedLinkedAccount = await LinkedAccount.Unbind("linked-account-token-id");
 ```
 
 It will return:
 
 ```cs
-UnbindedLinkedAccount unbindedLinkedAccount = new UnbindedLinkedAccount
+UnbindedLinkedAccountToken unbindedLinkedAccount = new UnbindedLinkedAccountToken
 {
   Id = "linked-account-token-id",
   IsDeleted = true,
@@ -1338,14 +1344,14 @@ PaymentMethodParameter parameter = new PaymentMethodParameter
   },
   CustomerId = "4b7b6050-0830-440a-903b-37d527dbbaa9",
 };
-PaymentMethod paymentMethod = await PaymentMethod.Create(parameter);
+PaymentMethodResponse paymentMethod = await PaymentMethod.Create(parameter);
 Console.WriteLine(paymentMethod);
 ```
 
 It will return:
 
 ```cs
-PaymentMethod paymentMethod = new PaymentMethod
+PaymentMethodResponse paymentMethod = new PaymentMethodResponse
 {
   Id = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
   Type = PaymentMethodEnum.AccountType.DebitCard,
@@ -1369,15 +1375,15 @@ PaymentMethod paymentMethod = new PaymentMethod
 #### Get Payment Methods by Customer ID
 
 ```cs
-PaymentMethod[] paymentMethods = await PaymentMethod.Get("4b7b6050-0830-440a-903b-37d527dbbaa9");
+PaymentMethodResponse[] paymentMethods = await PaymentMethod.Get("4b7b6050-0830-440a-903b-37d527dbbaa9");
 ```
 
 It will return
 
 ```cs
-PaymentMethod[] paymentMethods = new PaymentMethods[]
+PaymentMethodResponse[] paymentMethods = new PaymentMethodResponse[]
 {
-  new PaymentMethod
+  new PaymentMethodResponse
   {
     Id = "pm-c30d4800-afe4-4e58-ad5f-cc006d169139",
     Type = PaymentMethodEnum.AccountType.DebitCard,
@@ -1530,7 +1536,7 @@ FixedPaymentCode fixedPaymentCode = new FixedPaymentCode
 #### Get Payments By Payment Code ID
 
 ```cs
-FixedPaymentCode[] fixedPaymentCodes = await RetailOutlet.GetPaymentCode("example_payment_code_id");
+FixedPaymentCode[] fixedPaymentCodes = await RetailOutlet.GetPayments("example_payment_code_id");
 ```
 
 It will return:
@@ -1554,7 +1560,6 @@ FixedPaymentCode[] fixedPaymentCodes = new FixedPaymentCode[]
   // ...
 }
 ```
-````
 
 ### E-Wallet Service
 
@@ -1584,16 +1589,16 @@ EWalletChargeParameter parameter = new EWalletChargeParameter
   },
 };
 
-EWalletCharge eWalletCharge = await EWalletCharge.Create(parameter);
+EWalletChargeResponse eWalletCharge = await EWalletCharge.Create(parameter);
 
 // define API version
-EWalletCharge eWalletCharge = await EWalletCharge.Create(parameter, apiVersion: ApiVersion.Version20210125);
+EWalletChargeResponse eWalletCharge = await EWalletCharge.Create(parameter, apiVersion: ApiVersion.Version20210125);
 ```
 
 It will return:
 
 ```cs
-EWalletCharge eWalletCharge = new EWalletCharge
+EWalletChargeResponse eWalletCharge = new EWalletChargeResponse
 {
   Id = "<GENERATED_ID>",
   BusinessId = "<MERCHANT_BUSINESS_ID>",
@@ -1625,13 +1630,13 @@ EWalletCharge eWalletCharge = new EWalletCharge
 #### Get E-Wallet Charge (API version `2020-01-25`)
 
 ```cs
-EWalletCharge eWalletCharge = await EWalletCharge.Get("CHARGE_ID");
+EWalletChargeResponse eWalletCharge = await EWalletCharge.Get("CHARGE_ID");
 ```
 
 It will return:
 
 ```cs
-EWalletCharge eWalletCharge = new EWalletCharge
+EWalletChargeResponse eWalletCharge = new EWalletChargeResponse
 {
   Id = "<GENERATED_ID>",
   BusinessId = "<MERCHANT_BUSINESS_ID>",
@@ -1679,16 +1684,16 @@ EWalletPaymentParameter parameter = new EWalletPaymentParameter
 };
 
 // if we don't pass API version parameter, it uses default value of API version 2020-02-01
-EWalletPayment eWalletPayment = await EWalletPayment.Create(parameter);
+EWalletPaymentResponse eWalletPayment = await EWalletPayment.Create(parameter);
 
 // define API version
-EWalletPayment eWalletPayment = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20200201);
+EWalletPaymentResponse eWalletPayment = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20200201);
 ```
 
 It will return:
 
 ```cs
-EWalletPaymentParameter parameter = new EWalletPaymentParameter
+EWalletPaymentResponse eWalletPayment = new EWalletPaymentResponse
 {
   BusinessId = "<MERCHANT_BUSINESS_ID>",
   ExternalId = "example-external-id",
@@ -1719,13 +1724,13 @@ EWalletPaymentParameter parameter = new EWalletPaymentParameter
 };
 
 // define API version
-EWalletPayment eWalletPayment = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20190204);
+EWalletPaymentResponse eWalletPayment = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20190204);
 ```
 
 It will return:
 
 ```cs
-EWalletPaymentParameter parameter = new EWalletPaymentParameter
+EWalletPaymentResponse eWalletPayment = new EWalletPaymentResponse
 {
   BusinessId = "<MERCHANT_BUSINESS_ID>",
   ExternalId = "example-external-id",
@@ -1740,13 +1745,13 @@ EWalletPaymentParameter parameter = new EWalletPaymentParameter
 #### Get E-Wallet Payment
 
 ```cs
-EWalletPayment eWalletPayment = await EWalletPayment.Get("example-external-id", EWalletEnum.PaymentType.Ovo);
+EWalletPaymentResponse eWalletPayment = await EWalletPayment.Get("example-external-id", EWalletEnum.PaymentType.Ovo);
 ```
 
 It will return:
 
 ```cs
-EWalletPaymentParameter parameter = new EWalletPaymentParameter
+EWalletPaymentResponse eWalletPayment = new EWalletPaymentResponse
 {
   BusinessId = "<MERCHANT_BUSINESS_ID>",
   ExternalId = "example-external-id",

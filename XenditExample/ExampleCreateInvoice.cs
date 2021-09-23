@@ -5,9 +5,10 @@ namespace XenditExample
     using System.Threading.Tasks;
     using Xendit.net;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
     using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.Invoice;
+    using Xendit.net.Network;
     using Xendit.net.Struct;
 
     class ExampleCreateInvoice
@@ -69,7 +70,7 @@ namespace XenditExample
                     PaymentMethods = new InvoicePaymentChannelType[] { InvoicePaymentChannelType.ShopeePay },
                 };
 
-                Invoice invoice = await Invoice.Create(parameter);
+                InvoiceResponse invoice = await Invoice.Create(parameter);
                 Console.WriteLine(invoice);
             }
             catch (XenditException e)
