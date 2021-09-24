@@ -14,7 +14,7 @@
 
     public class XenditClient
     {
-        public XenditClient(string apiKey, INetworkClient requestClient, string baseUrl = "https://api.xendit.co")
+        public XenditClient(string apiKey, INetworkClient requestClient = null, string baseUrl = "https://api.xendit.co")
         {
             this.Balance = new BalanceClient(apiKey, requestClient, baseUrl);
             this.Customer = new CustomerClient(apiKey, requestClient, baseUrl);

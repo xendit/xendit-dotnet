@@ -158,13 +158,13 @@ namespace XenditExample
                 HttpClient httpClient = new HttpClient();
                 NetworkClient requestClient = new NetworkClient(httpClient);
       
-                // define XenditClient, third parameter (base URL) is optional
+                // define XenditClient, request client and base url is optional
                 XenditClient client = new XenditClient(apiKey, requestClient, baseUrl);
                 BalanceResponse balanceResponse = await client.Balance.Get();
                 Console.WriteLine(balanceResponse.Balance);
 
-                // not using base URL
-                XenditClient client2 = new XenditClient(apiKey, requestClient);
+                // not using request client and base URL
+                XenditClient client2 = new XenditClient(apiKey);
                 BalanceResponse balanceResponse2 = await client2.Balance.Get();
                 Console.WriteLine(balanceResponse2.Balance);
             }
@@ -236,7 +236,7 @@ The `accountType` parameter is optional. You can use `accountType` in enum (`"Ca
 ```cs
 BalanceResponse balance = await Balance.Get();
 
-BalanceResponse holdingBalance = await Balance.Get(AccountType.Holding);
+BalanceResponse holdingBalance = await Balance.Get(BalanceAccountType.Holding);
 ```
 
 It will return:
