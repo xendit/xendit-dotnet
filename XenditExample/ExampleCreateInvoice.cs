@@ -7,6 +7,7 @@ namespace XenditExample
     using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
+    using Xendit.net.Model.Customer;
     using Xendit.net.Model.Invoice;
     using Xendit.net.Network;
     using Xendit.net.Struct;
@@ -32,7 +33,7 @@ namespace XenditExample
                     PostalCode = "12345",
                 };
 
-                Customer customer = new Customer
+                CustomerResponse customer = new CustomerResponse
                 {
                     GivenNames = "John",
                     Email = "john@email.com",

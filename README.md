@@ -499,7 +499,7 @@ AvailableBank[] availableBanks = new AvailableBank[]
 To create an invoice, please use struct `InvoiceParameter` for parameter body. You may use these classes to construct `InvoiceParameter`:
 
 - `ItemInvoice` for `Items` property
-- `Customer` for `Customer` property
+- `CustomerResponse` for `Customer` property
 - `Address` for `Addresses` property in `Customer`
 - `FeeInvoice` for `Fees` property
 - `NotificationPreference` for `NotificationPreference` property
@@ -517,7 +517,7 @@ Address addresses = new Address
   PostalCode = "12345",
 };
 
-Customer customer = new Customer
+CustomerResponse customer = new CustomerResponse
 {
   GivenNames = "John",
   Email = "john@email.com",
@@ -606,7 +606,7 @@ InvoiceResponse invoice = new InvoiceResponse
   Updated = "<UPDATED_TIMESTAMP>",
   Currency = Currency.IDR,
   Fees = new FeeInvoice[] { new FeeInvoice { Type = "name_of_fee_for_internal_reference", Value = 200 } },
-  Customer = new Customer {
+  CustomerResponse = new CustomerResponse {
     GivenNames = "John",
     Email = "john@email.com",
     MobileNumber = "+6287774441111",
@@ -684,7 +684,7 @@ InvoiceResponse invoice = new InvoiceResponse
   Updated = "<UPDATED_TIMESTAMP>",
   Currency = Currency.IDR,
   Fees = new FeeInvoice[] { new FeeInvoice { Type = "name_of_fee_for_internal_reference", Value = 200 } },
-  Customer = new Customer
+  CustomerResponse = new CustomerResponse
   {
     GivenNames = "John",
     Email = "john@email.com",
@@ -782,7 +782,7 @@ InvoiceResponse[] invoices = new InvoiceResponse[]
     Updated = "<UPDATED_TIMESTAMP>",
     Currency = Currency.IDR,
     Fees = new FeeInvoice[] { new FeeInvoice { Type = "name_of_fee_for_internal_reference", Value = 200 } },
-    Customer = new Customer
+    CustomerResponse = new CustomerResponse
     {
       GivenNames = "John",
       Email = "john@email.com",
@@ -862,7 +862,7 @@ InvoiceResponse invoice = new InvoiceResponse
   Updated = "<UPDATED_TIMESTAMP>",
   Currency = Currency.IDR,
   Fees = new FeeInvoice[] { new FeeInvoice { Type = "name_of_fee_for_internal_reference", Value = 200 } },
-  Customer = new Customer
+  CustomerResponse = new CustomerResponse
   {
     GivenNames = "John",
     Email = "john@email.com",
