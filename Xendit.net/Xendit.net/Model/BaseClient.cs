@@ -11,8 +11,8 @@
         public BaseClient(string apiKey = null, INetworkClient requestClient = null, string baseUrl = null)
         {
             this.apiKey = apiKey;
-            this.requestClient = requestClient;
             this.baseUrl = baseUrl;
+            this.requestClient = requestClient;
         }
 
         public string ApiKey
@@ -21,16 +21,16 @@
             set => this.apiKey = value;
         }
 
-        public INetworkClient RequestClient
-        {
-            get => this.requestClient;
-            set => this.requestClient = value;
-        }
-
         public string BaseUrl
         {
             get => this.baseUrl;
             set => this.baseUrl = value;
+        }
+
+        public INetworkClient RequestClient
+        {
+            get => this.requestClient;
+            set => this.requestClient = value;
         }
     }
 }

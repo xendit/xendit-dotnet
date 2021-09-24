@@ -1,10 +1,30 @@
 ﻿namespace Xendit.net
 {
+    using System.Net.Http;
     using Xendit.net.Network;
 
     public class XenditConfiguration
     {
-        public static volatile INetworkClient RequestClient;
+
+        private static INetworkClient requestClient;
+
+        public static INetworkClient RequestClient
+        {
+            get
+            {
+                if (requestClient != null)
+                {
+                    return requestClient;
+                }
+
+                HttpClient httpClient = new HttpClient();
+                NetworkClient client = new NetworkClient(httpClient);
+
+                return client;
+            }
+
+            set => requestClient = value;
+        }
 
         public static string ApiKey { get; set; }
 
