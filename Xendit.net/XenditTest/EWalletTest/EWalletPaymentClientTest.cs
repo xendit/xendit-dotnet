@@ -17,7 +17,7 @@
         public async void EWalletPaymentClient_Create_ShouldSuccess()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<EWalletPaymentParameter, EWalletPaymentResponse>(HttpMethod.Post, Constant.PaymentApiVersionHeaders, Constant.EWalletPaymentUrl, Constant.ApiKey, Constant.BaseUrl, Constant.EWalletPaymentParameter))
+                .Setup(mockClient => mockClient.Request<EWalletPaymentParameter, EWalletPaymentResponse>(HttpMethod.Post, Constant.EWalletPaymentUrl, Constant.ApiKey, Constant.BaseUrl, Constant.EWalletPaymentParameter, Constant.PaymentApiVersionHeaders))
                 .ReturnsAsync(Constant.ExpectedEWalletPayment);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -30,7 +30,7 @@
         public async void EWalletPaymentClient_Get_ShouldSuccess()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<EWalletPaymentResponse>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetEWalletPaymentUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<EWalletPaymentResponse>(HttpMethod.Get, Constant.GetEWalletPaymentUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedEWalletPayment);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);

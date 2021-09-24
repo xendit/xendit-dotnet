@@ -22,12 +22,12 @@
             this.client.DefaultRequestHeaders.ConnectionClose = true;
         }
 
-        public async Task<TResponse> Request<TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url, string apiKey, string baseUrl)
+        public async Task<TResponse> Request<TResponse>(HttpMethod httpMethod, string url, string apiKey, string baseUrl, HeaderParameter? headers)
         {
-            return await this.Request<int, TResponse>(httpMethod, headers, url, apiKey, baseUrl, 0);
+            return await this.Request<int, TResponse>(httpMethod, url, apiKey, baseUrl, 0, headers);
         }
 
-        public async Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, HeaderParameter? headers, string url, string apiKey, string baseUrl, TBody requestBody)
+        public async Task<TResponse> Request<TBody, TResponse>(HttpMethod httpMethod, string url, string apiKey, string baseUrl, TBody requestBody, HeaderParameter? headers)
         {
             baseUrl = baseUrl ?? XenditConfiguration.BaseUrl;
             apiKey = apiKey ?? XenditConfiguration.ApiKey;

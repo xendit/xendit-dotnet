@@ -68,7 +68,7 @@
 
             string url = "/payment_codes";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
+            return await client.Request<CreateFixedPaymentCodeParameter, FixedPaymentCode>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         private async Task<FixedPaymentCode> UpdatePaymentCodeRequest(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, HeaderParameter? headers)
@@ -80,21 +80,21 @@
 
             string url = string.Format("{0}{1}", "/payment_codes/", paymentCodeId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, headers, url, this.ApiKey, this.BaseUrl, parameter);
+            return await client.Request<UpdateFixedPaymentCodeParameter, FixedPaymentCode>(XenditHttpMethod.Patch, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         private async Task<FixedPaymentCode> GetPaymentCodeRequest(string paymentCodeId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/payment_codes/", paymentCodeId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<FixedPaymentCode>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<FixedPaymentCode>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         private async Task<FixedPaymentCode[]> GetPaymentsRequest(string paymentCodeId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", "/payment_codes/", paymentCodeId, "/payments");
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<FixedPaymentCode[]>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<FixedPaymentCode[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
     }
 }

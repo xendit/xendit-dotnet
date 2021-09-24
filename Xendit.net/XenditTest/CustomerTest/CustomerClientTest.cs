@@ -18,7 +18,7 @@
         public async void CustomerClient_ShouldSuccess_Create_WithDefaultHeaderAndVersion()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.NewApiVersionHeaders, Constant.CustomerUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomerBody))
+                .Setup(mockClient => mockClient.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.CustomerUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomerBody, Constant.NewApiVersionHeaders))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -31,7 +31,7 @@
         public async void CustomerClient_ShouldSuccess_Create_WithCustomHeaderAndDefaultVersion()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomerBody))
+                .Setup(mockClient => mockClient.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.CustomerUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomerBody, Constant.NewApiVersionHeadersWithUserId))
                 .ReturnsAsync(Constant.ExpectedCustomerData);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -44,7 +44,7 @@
         public async void CustomerClient_ShouldSuccess_Create_WithVersion()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.ApiVersionHeaders, Constant.CustomerUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomerBody))
+                .Setup(mockClient => mockClient.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.CustomerUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomerBody, Constant.ApiVersionHeaders))
                 .ReturnsAsync(Constant.ExpectedCustomerData);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -57,7 +57,7 @@
         public async void CustomerClient_ShouldSuccess_Get_WithDefaultHeaderAndVersion()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<CustomerResponse>(HttpMethod.Get, Constant.NewApiVersionHeaders, Constant.CustomerIdUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<CustomerResponse>(HttpMethod.Get, Constant.CustomerIdUrl, Constant.ApiKey, Constant.BaseUrl, Constant.NewApiVersionHeaders))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -70,7 +70,7 @@
         public async void CustomerClient_ShouldSuccess_Get_WithHeaders()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<CustomerResponse>(HttpMethod.Get, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerIdUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<CustomerResponse>(HttpMethod.Get, Constant.CustomerIdUrl, Constant.ApiKey, Constant.BaseUrl, Constant.NewApiVersionHeadersWithUserId))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -83,7 +83,7 @@
         public async void CustomerClient_ShouldSuccess_Get_WithVersion()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<CustomerResponse[]>(HttpMethod.Get, Constant.ApiVersionHeaders, Constant.CustomerIdUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<CustomerResponse[]>(HttpMethod.Get, Constant.CustomerIdUrl, Constant.ApiKey, Constant.BaseUrl, Constant.ApiVersionHeaders))
                 .ReturnsAsync(new CustomerResponse[] { Constant.ExpectedCustomerData });
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);

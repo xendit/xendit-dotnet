@@ -44,7 +44,7 @@
         {
             string url = "/ewallets";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<EWalletPaymentParameter, EWalletPaymentResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
+            return await client.Request<EWalletPaymentParameter, EWalletPaymentResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         private async Task<EWalletPaymentResponse> GetRequest(string externalId, EWalletEnum.PaymentType ewalletType, HeaderParameter? headers)
@@ -52,7 +52,7 @@
             string ewalletTypeString = JsonSerializer.Deserialize<string>(JsonSerializer.Serialize(ewalletType));
             string url = string.Format("/ewallets?external_id={0}&ewallet_type={1}", externalId, ewalletTypeString);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<EWalletPaymentResponse>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<EWalletPaymentResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
     }
 }

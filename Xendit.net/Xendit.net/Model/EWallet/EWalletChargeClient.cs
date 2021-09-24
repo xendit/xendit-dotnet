@@ -45,14 +45,14 @@
         {
             string url = "/ewallets/charges";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
+            return await client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         private async Task<EWalletChargeResponse> GetChargeRequest(string id, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/ewallets/charges/", id);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<EWalletChargeResponse>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<EWalletChargeResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
     }
 }

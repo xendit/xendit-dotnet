@@ -17,7 +17,7 @@ namespace XenditTest.BalanceTest
         public async void Balance_ShouldSuccess_IfNoGivenParam()
         {
             MockClient
-                .Setup(client => client.Request<BalanceResponse>(HttpMethod.Get, null, Constant.Url, null, null))
+                .Setup(client => client.Request<BalanceResponse>(HttpMethod.Get, Constant.Url, null, null, null))
                 .ReturnsAsync(Constant.ExpectedBalance);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -30,7 +30,7 @@ namespace XenditTest.BalanceTest
         public async void Balance_ShouldSuccess_IfGivenParam()
         {
             MockClient
-                .Setup(client => client.Request<BalanceResponse>(HttpMethod.Get, null, Constant.AccountTypeUrl, null, null))
+                .Setup(client => client.Request<BalanceResponse>(HttpMethod.Get, Constant.AccountTypeUrl, null, null, null))
                 .ReturnsAsync(Constant.ExpectedBalance);
             XenditConfiguration.RequestClient = MockClient.Object;
 
@@ -42,7 +42,7 @@ namespace XenditTest.BalanceTest
         public async void Balance_ShouldSuccess_IfGivenParam_WithCustomHeaders()
         {
             MockClient
-                .Setup(client => client.Request<BalanceResponse>(HttpMethod.Get, Constant.CustomHeaders, Constant.AccountTypeUrl, null, null))
+                .Setup(client => client.Request<BalanceResponse>(HttpMethod.Get, Constant.AccountTypeUrl, null, null, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedBalance);
             XenditConfiguration.RequestClient = MockClient.Object;
 

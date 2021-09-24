@@ -27,7 +27,7 @@
         {
             string url = string.Format("{0}{1}", "/callback_virtual_account_payments/payment_id=", paymentId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<VirtualAccountPaymentResponse>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<VirtualAccountPaymentResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
     }
 }

@@ -17,7 +17,7 @@
         public async void BalanceClient_ShouldSuccess_IfNoGivenParam()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<BalanceResponse>(HttpMethod.Get, null, Constant.Url, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<BalanceResponse>(HttpMethod.Get, Constant.Url, Constant.ApiKey, Constant.BaseUrl, null))
                 .ReturnsAsync(Constant.ExpectedBalance);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -30,7 +30,7 @@
         public async void BalanceClient_ShouldSuccess_IfGivenParam()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<BalanceResponse>(HttpMethod.Get, null, Constant.AccountTypeUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<BalanceResponse>(HttpMethod.Get, Constant.AccountTypeUrl, Constant.ApiKey, Constant.BaseUrl, null))
                 .ReturnsAsync(Constant.ExpectedBalance);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -43,7 +43,7 @@
         public async void BalanceClient_ShouldSuccess_IfGivenParam_WithCustomHeaders()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<BalanceResponse>(HttpMethod.Get, Constant.CustomHeaders, Constant.AccountTypeUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<BalanceResponse>(HttpMethod.Get, Constant.AccountTypeUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedBalance);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);

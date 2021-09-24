@@ -18,7 +18,7 @@
         public async void DisbursementClient_ShouldSuccess_GetAvailableBanks()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<AvailableBank[]>(HttpMethod.Get, null, Constant.AvailableBankUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<AvailableBank[]>(HttpMethod.Get, Constant.AvailableBankUrl, Constant.ApiKey, Constant.BaseUrl, null))
                 .ReturnsAsync(Constant.ExpectedAvailableBanks);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -31,7 +31,7 @@
         public async void DisbursementClient_ShouldSuccess_GetAvailableBanks_WithCustomHeaders()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<AvailableBank[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.AvailableBankUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<AvailableBank[]>(HttpMethod.Get, Constant.AvailableBankUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedAvailableBanks);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -44,7 +44,7 @@
         public async void DisbursementClient_ShouldSuccess_GetById()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<DisbursementResponse>(HttpMethod.Get, null, Constant.DisbursementIdUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<DisbursementResponse>(HttpMethod.Get, Constant.DisbursementIdUrl, Constant.ApiKey, Constant.BaseUrl, null))
                 .ReturnsAsync(Constant.ExpectedDisbursement);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -57,7 +57,7 @@
         public async void DisbursementClient_ShouldSuccess_GetById_WithCustomHeaders()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<DisbursementResponse>(HttpMethod.Get, Constant.CustomHeaders, Constant.DisbursementIdUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<DisbursementResponse>(HttpMethod.Get, Constant.DisbursementIdUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedDisbursement);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -70,7 +70,7 @@
         public async void DisbursementClient_ShouldSuccess_GetByExternalId()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<DisbursementResponse[]>(HttpMethod.Get, null, Constant.DisbursementExternalIdUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<DisbursementResponse[]>(HttpMethod.Get, Constant.DisbursementExternalIdUrl, Constant.ApiKey, Constant.BaseUrl, null))
                 .ReturnsAsync(Constant.ExpectedDisbursements);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -83,7 +83,7 @@
         public async void DisbursementClient_ShouldSuccess_GetByExternalId_WithCustomHeaders()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<DisbursementResponse[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.DisbursementExternalIdUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<DisbursementResponse[]>(HttpMethod.Get, Constant.DisbursementExternalIdUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedDisbursements);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -96,7 +96,7 @@
         public async void DisbursementClient_ShouldSuccess_WhenCreate()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<DisbursementParameter, DisbursementResponse>(HttpMethod.Post, null, Constant.DisbursementUrl, Constant.ApiKey, Constant.BaseUrl, Constant.DisbursementBody))
+                .Setup(mockClient => mockClient.Request<DisbursementParameter, DisbursementResponse>(HttpMethod.Post, Constant.DisbursementUrl, Constant.ApiKey, Constant.BaseUrl, Constant.DisbursementBody, null))
                 .ReturnsAsync(Constant.ExpectedDisbursement);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
@@ -109,7 +109,7 @@
         public async void DisbursementClient_ShouldSuccess_WhenCreate_WithCustomHeaders()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<DisbursementParameter, DisbursementResponse>(HttpMethod.Post, Constant.CustomHeaders, Constant.DisbursementUrl, Constant.ApiKey, Constant.BaseUrl, Constant.DisbursementBody))
+                .Setup(mockClient => mockClient.Request<DisbursementParameter, DisbursementResponse>(HttpMethod.Post, Constant.DisbursementUrl, Constant.ApiKey, Constant.BaseUrl, Constant.DisbursementBody, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedDisbursement);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);

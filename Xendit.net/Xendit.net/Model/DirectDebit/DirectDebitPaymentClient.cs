@@ -70,28 +70,28 @@
         {
             string url = "/direct_debits";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DirectDebitPaymentParameter, DirectDebitPaymentResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
+            return await client.Request<DirectDebitPaymentParameter, DirectDebitPaymentResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         private async Task<DirectDebitPaymentResponse> ValidateOtpRequest(Dictionary<string, string> parameter, string directDebitId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", "/direct_debits/", directDebitId, "/validate_otp/");
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<Dictionary<string, string>, DirectDebitPaymentResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
+            return await client.Request<Dictionary<string, string>, DirectDebitPaymentResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         private async Task<DirectDebitPaymentResponse> GetByIdRequest(string id, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", "/direct_debits/", id, "/");
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DirectDebitPaymentResponse>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<DirectDebitPaymentResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         private async Task<DirectDebitPaymentResponse[]> GetByReferenceIdRequest(string referenceId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/direct_debits?reference_id=", referenceId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DirectDebitPaymentResponse[]>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<DirectDebitPaymentResponse[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
     }
 }

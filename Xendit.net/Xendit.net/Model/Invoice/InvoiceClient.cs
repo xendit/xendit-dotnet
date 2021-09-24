@@ -63,28 +63,28 @@
         {
             string url = "/v2/invoices";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<InvoiceParameter, InvoiceResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
+            return await client.Request<InvoiceParameter, InvoiceResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         private async Task<InvoiceResponse> GetByIdRequest(string invoiceId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/v2/invoices/", invoiceId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<InvoiceResponse>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<InvoiceResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         private async Task<InvoiceResponse[]> GetAllRequest(string queryParams, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/v2/invoices?", queryParams);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<InvoiceResponse[]>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<InvoiceResponse[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         private async Task<InvoiceResponse> ExpireRequest(string invoiceId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}{2}", "/invoices/", invoiceId, "/expire!");
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<Dictionary<string, string>, InvoiceResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, new Dictionary<string, string>());
+            return await client.Request<Dictionary<string, string>, InvoiceResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, new Dictionary<string, string>(), headers);
         }
     }
 }

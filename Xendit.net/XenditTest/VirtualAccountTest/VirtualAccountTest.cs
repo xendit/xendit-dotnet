@@ -20,7 +20,7 @@ namespace XenditTest.VirtualAccountTest
         public async void VirtualAccount_ShouldSuccess_GetAvailableBanks()
         {
             MockClient
-                .Setup(client => client.Request<AvailableBank[]>(HttpMethod.Get, null, Constant.AvailableBankUrl, null, null))
+                .Setup(client => client.Request<AvailableBank[]>(HttpMethod.Get, Constant.AvailableBankUrl, null, null, null))
                 .ReturnsAsync(Constant.ExpectedAvailableBanks);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -33,7 +33,7 @@ namespace XenditTest.VirtualAccountTest
         public async void VirtualAccount_ShouldSuccess_GetAvailableBanks_WithCustomHeaders()
         {
             MockClient
-                .Setup(client => client.Request<AvailableBank[]>(HttpMethod.Get, Constant.CustomHeaders, Constant.AvailableBankUrl, null, null))
+                .Setup(client => client.Request<AvailableBank[]>(HttpMethod.Get, Constant.AvailableBankUrl, null, null, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedAvailableBanks);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -46,7 +46,7 @@ namespace XenditTest.VirtualAccountTest
         public async void VirtualAccount_ShouldSuccess_GetVirtualAccountById()
         {
             MockClient
-                .Setup(client => client.Request<VirtualAccountResponse>(HttpMethod.Get, null, Constant.VAUrlWithId, null, null))
+                .Setup(client => client.Request<VirtualAccountResponse>(HttpMethod.Get, Constant.VAUrlWithId, null, null, null))
                 .ReturnsAsync(Constant.ExpectedVirtualAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -59,7 +59,7 @@ namespace XenditTest.VirtualAccountTest
         public async void VirtualAccount_ShouldSuccess_GetVirtualAccountById_WithCustomHeaders()
         {
             MockClient
-                .Setup(client => client.Request<VirtualAccountResponse>(HttpMethod.Get, Constant.CustomHeaders, Constant.VAUrlWithId, null, null))
+                .Setup(client => client.Request<VirtualAccountResponse>(HttpMethod.Get, Constant.VAUrlWithId, null, null, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedVirtualAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -72,7 +72,7 @@ namespace XenditTest.VirtualAccountTest
         public async void VirtualAccount_ShouldSuccess_WhenUpdate()
         {
             MockClient
-            .Setup(client => client.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, null, Constant.VAUrlWithId, null, null, Constant.UpdateVAbody))
+            .Setup(client => client.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, Constant.VAUrlWithId, null, null, Constant.UpdateVAbody, null))
             .ReturnsAsync(Constant.ExpectedUpdatedVirtualAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -85,7 +85,7 @@ namespace XenditTest.VirtualAccountTest
         public async void VirtualAccount_ShouldSuccess_WhenUpdate_WithCustomHeaders()
         {
             MockClient
-            .Setup(client => client.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, Constant.CustomHeaders, Constant.VAUrlWithId, null, null, Constant.UpdateVAbody))
+            .Setup(client => client.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, Constant.VAUrlWithId, null, null, Constant.UpdateVAbody, Constant.CustomHeaders))
             .ReturnsAsync(Constant.ExpectedUpdatedVirtualAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -98,7 +98,7 @@ namespace XenditTest.VirtualAccountTest
         public async void VirtualAccount_ShouldSuccess_WhenCreate()
         {
             MockClient
-            .Setup(client => client.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, null, Constant.VAUrl, null, null, Constant.ClosedPostVAbody))
+            .Setup(client => client.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, Constant.VAUrl, null, null, Constant.ClosedPostVAbody, null))
             .ReturnsAsync(Constant.ExpectedCreatedClosedVirtualAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -111,7 +111,7 @@ namespace XenditTest.VirtualAccountTest
         public async void VirtualAccount_ShouldSuccess_WhenCreate_WithCustomHeaders()
         {
             MockClient
-            .Setup(client => client.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, Constant.CustomHeaders, Constant.VAUrl, null, null, Constant.ClosedPostVAbody))
+            .Setup(client => client.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, Constant.VAUrl, null, null, Constant.ClosedPostVAbody, Constant.CustomHeaders))
             .ReturnsAsync(Constant.ExpectedCreatedClosedVirtualAccount);
 
             XenditConfiguration.RequestClient = MockClient.Object;

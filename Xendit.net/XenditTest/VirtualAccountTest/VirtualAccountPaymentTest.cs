@@ -16,7 +16,7 @@
         public async void VirtualAccountPayment_ShouldSuccess_GetVirtualAccountPayment()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<VirtualAccountPaymentResponse>(HttpMethod.Get, null, Constant.VirtualAccountPaymentUrl, null, null))
+                .Setup(mockClient => mockClient.Request<VirtualAccountPaymentResponse>(HttpMethod.Get, Constant.VirtualAccountPaymentUrl, null, null, null))
                 .ReturnsAsync(Constant.ExpectedVirtualAccountPayment);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -29,7 +29,7 @@
         public async void VirtualAccountPaymentClient_ShouldSuccess_GetVirtualAccountPayment()
         {
             MockClient
-                .Setup(mockClient => mockClient.Request<VirtualAccountPaymentResponse>(HttpMethod.Get, null, Constant.VirtualAccountPaymentUrl, Constant.ApiKey, Constant.BaseUrl))
+                .Setup(mockClient => mockClient.Request<VirtualAccountPaymentResponse>(HttpMethod.Get, Constant.VirtualAccountPaymentUrl, Constant.ApiKey, Constant.BaseUrl, null))
                 .ReturnsAsync(Constant.ExpectedVirtualAccountPayment);
 
             XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);

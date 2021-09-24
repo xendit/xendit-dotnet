@@ -18,7 +18,7 @@
         public async void Customer_ShouldSuccess_Create_WithDefaultHeaderAndVersion()
         {
             MockClient
-                .Setup(client => client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.NewApiVersionHeaders, Constant.CustomerUrl, null, null, Constant.CustomerBody))
+                .Setup(client => client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.CustomerUrl, null, null, Constant.CustomerBody, Constant.NewApiVersionHeaders))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -31,7 +31,7 @@
         public async void Customer_ShouldSuccess_Create_WithCustomHeaderAndDefaultVersion()
         {
             MockClient
-                .Setup(client => client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerUrl, null, null, Constant.CustomerBody))
+                .Setup(client => client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.CustomerUrl, null, null, Constant.CustomerBody, Constant.NewApiVersionHeadersWithUserId))
                 .ReturnsAsync(Constant.ExpectedCustomerData);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -44,7 +44,7 @@
         public async void Customer_ShouldSuccess_Create_WithVersion()
         {
             MockClient
-                .Setup(client => client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.ApiVersionHeaders, Constant.CustomerUrl, null, null, Constant.CustomerBody))
+                .Setup(client => client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.CustomerUrl, null, null, Constant.CustomerBody, Constant.ApiVersionHeaders))
                 .ReturnsAsync(Constant.ExpectedCustomerData);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -57,7 +57,7 @@
         public async void Customer_ShouldSuccess_Get_WithDefaultHeaderAndVersion()
         {
             MockClient
-                .Setup(client => client.Request<CustomerResponse>(HttpMethod.Get, Constant.NewApiVersionHeaders, Constant.CustomerIdUrl, null, null))
+                .Setup(client => client.Request<CustomerResponse>(HttpMethod.Get, Constant.CustomerIdUrl, null, null, Constant.NewApiVersionHeaders))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -70,7 +70,7 @@
         public async void Customer_ShouldSuccess_Get_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<CustomerResponse>(HttpMethod.Get, Constant.NewApiVersionHeadersWithUserId, Constant.CustomerIdUrl, null, null))
+                .Setup(client => client.Request<CustomerResponse>(HttpMethod.Get, Constant.CustomerIdUrl, null, null, Constant.NewApiVersionHeadersWithUserId))
                 .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -83,7 +83,7 @@
         public async void Customer_ShouldSuccess_Get_WithVersion()
         {
             MockClient
-                .Setup(client => client.Request<CustomerResponse[]>(HttpMethod.Get, Constant.ApiVersionHeaders, Constant.CustomerIdUrl, null, null))
+                .Setup(client => client.Request<CustomerResponse[]>(HttpMethod.Get, Constant.CustomerIdUrl, null, null, Constant.ApiVersionHeaders))
                 .ReturnsAsync(new CustomerResponse[] { Constant.ExpectedCustomerData });
 
             XenditConfiguration.RequestClient = MockClient.Object;

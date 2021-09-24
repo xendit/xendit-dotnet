@@ -35,7 +35,7 @@
             }
 
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<BalanceResponse>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<BalanceResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
     }
 }

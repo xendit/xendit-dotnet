@@ -47,7 +47,7 @@
         {
             string url = "/customers";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, headers, url, this.ApiKey, this.BaseUrl, parameter);
+            return await client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         private async Task<CustomerResponse> GetCustomerRequest(string referenceId, HeaderParameter headers)
@@ -57,13 +57,13 @@
 
             if (headers.ApiVersion == ApiVersion.Version20200519)
             {
-                CustomerResponse[] customerData = await client.Request<CustomerResponse[]>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+                CustomerResponse[] customerData = await client.Request<CustomerResponse[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
                 CustomerResponse customer = new CustomerResponse { Data = customerData };
 
                 return customer;
             }
 
-            return await client.Request<CustomerResponse>(HttpMethod.Get, headers, url, this.ApiKey, this.BaseUrl);
+            return await client.Request<CustomerResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
     }
 }

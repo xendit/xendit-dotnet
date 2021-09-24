@@ -17,7 +17,7 @@
         public async void EWalletCharge_ShouldSuccess_GetByChargeId()
         {
             MockClient
-                .Setup(client => client.Request<EWalletChargeResponse>(HttpMethod.Get, Constant.ApiVersionHeaders, Constant.GetChargeUrl, null, null))
+                .Setup(client => client.Request<EWalletChargeResponse>(HttpMethod.Get, Constant.GetChargeUrl, null, null, Constant.ApiVersionHeaders))
                 .ReturnsAsync(Constant.ExpectedEWalletCharge);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -30,7 +30,7 @@
         public async void EWalletCharge_ShouldSuccess_GetByChargeId_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<EWalletChargeResponse>(HttpMethod.Get, Constant.CustomHeaders, Constant.GetChargeUrl, null, null))
+                .Setup(client => client.Request<EWalletChargeResponse>(HttpMethod.Get, Constant.GetChargeUrl, null, null, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedEWalletCharge);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -43,7 +43,7 @@
         public async void EWalletCharge_ShouldSuccess_Create()
         {
             MockClient
-                .Setup(client => client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, Constant.ApiVersionHeaders, Constant.EWalletChargeUrl, null, null, Constant.EWalletBody))
+                .Setup(client => client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, Constant.EWalletChargeUrl, null, null, Constant.EWalletBody, Constant.ApiVersionHeaders))
                 .ReturnsAsync(Constant.ExpectedEWalletCharge);
 
             XenditConfiguration.RequestClient = MockClient.Object;
@@ -56,7 +56,7 @@
         public async void EWalletCharge_ShouldSuccess_Create_WithHeaders()
         {
             MockClient
-                .Setup(client => client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, Constant.CustomHeaders, Constant.EWalletChargeUrl, null, null, Constant.EWalletBody))
+                .Setup(client => client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, Constant.EWalletChargeUrl, null, null, Constant.EWalletBody, Constant.CustomHeaders))
                 .ReturnsAsync(Constant.ExpectedEWalletCharge);
 
             XenditConfiguration.RequestClient = MockClient.Object;
