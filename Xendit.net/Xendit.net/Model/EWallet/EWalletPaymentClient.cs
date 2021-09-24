@@ -17,7 +17,7 @@
         /// <summary>
         /// Create new e-wallet payment.
         /// </summary>
-        /// <param name="parameter">Parameter listed here <see cref="EWalletPaymentParameter"/>. </param>
+        /// <param name="parameter">Parameter listed here <see cref="EWalletPaymentParameter"/>.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/ewallets/create-payment"/>.</param>
         /// <param name="apiVersion">API version that will be used to request. Use values listed on <see href="https://developers.xendit.co/api-reference/#ewallets"/>.</param>
         /// <returns>A Task of <see cref="EWalletPaymentResponse"/>.</returns>
