@@ -204,9 +204,13 @@ namespace XenditExample
       
                 // define BalanceClient, all of the parameters are optional (default: using global variable)
                 BalanceClient balanceClient = new BalanceClient(apiKey, requestClient, baseUrl)
-              
                 BalanceResponse balanceResponse = balanceClient.Get();
                 Console.WriteLine(balanceResponse.Balance);
+
+                // using only API key as constructor parameter
+                BalanceClient balance = new BalanceClient(apiKey);
+                BalanceResponse balanceResponse2 = balance.Get();
+                Console.WriteLine(balanceResponse2.Balance);
             }
             catch (XenditException e)
             {
@@ -217,7 +221,7 @@ namespace XenditExample
 }
 ```
 
-Note that since constructor parameters of individual client are optional and it will use global variable, you need to define `XenditConfiguration` API key, request client and base URL if you don't pass any value to the constructor parameters.
+Note that since constructor parameters of individual client are optional and it will use global variable, you need to define `XenditConfiguration` API key if you don't pass any value to the constructor parameters.
 
 ### Balance Service
 
