@@ -5,7 +5,6 @@
 
     public class XenditConfiguration
     {
-
         private static INetworkClient requestClient;
 
         public static INetworkClient RequestClient
