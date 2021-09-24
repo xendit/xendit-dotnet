@@ -160,9 +160,13 @@ namespace XenditExample
       
                 // define XenditClient, third parameter (base URL) is optional
                 XenditClient client = new XenditClient(apiKey, requestClient, baseUrl);
-              
                 BalanceResponse balanceResponse = await client.Balance.Get();
                 Console.WriteLine(balanceResponse.Balance);
+
+                // not using base URL
+                XenditClient client2 = new XenditClient(apiKey, requestClient);
+                BalanceResponse balanceResponse2 = await client2.Balance.Get();
+                Console.WriteLine(balanceResponse2.Balance);
             }
             catch (XenditException e)
             {
