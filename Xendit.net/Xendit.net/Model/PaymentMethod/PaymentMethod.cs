@@ -14,7 +14,8 @@
         /// <returns>A Task of <see cref="PaymentMethodResponse"/>.</returns>
         public static async Task<PaymentMethodResponse> Create(PaymentMethodParameter parameter, HeaderParameter? headers = null)
         {
-            return await CreatePaymentMethodRequest(headers, parameter);
+            PaymentMethodClient client = new PaymentMethodClient();
+            return await client.Create(parameter, headers);
         }
 
         /// <summary>
@@ -24,17 +25,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/>.</param>
         /// <returns>A Task of <see cref="PaymentMethodResponse[]"/>.</returns>
         public static async Task<PaymentMethodResponse[]> Get(string customerId, HeaderParameter? headers = null)
-        {
-            return await GetPaymentMethodRequest(headers, customerId);
-        }
-
-        private static async Task<PaymentMethodResponse> CreatePaymentMethodRequest(HeaderParameter? headers, PaymentMethodParameter parameter)
-        {
-            PaymentMethodClient client = new PaymentMethodClient();
-            return await client.Create(parameter, headers);
-        }
-
-        private static async Task<PaymentMethodResponse[]> GetPaymentMethodRequest(HeaderParameter? headers, string customerId)
         {
             PaymentMethodClient client = new PaymentMethodClient();
             return await client.Get(customerId, headers);

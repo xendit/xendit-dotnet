@@ -13,7 +13,8 @@
         /// <returns>A Task of <see cref="DisbursementResponse"/>.</returns>
         public static async Task<DisbursementResponse> Create(DisbursementParameter parameter, HeaderParameter? headers = null)
         {
-            return await CreateDisbursementRequest(parameter, headers);
+            DisbursementClient client = new DisbursementClient();
+            return await client.Create(parameter, headers);
         }
 
         /// <summary>
@@ -24,7 +25,8 @@
         /// <returns>A Task of <see cref="DisbursementResponse"/>.</returns>
         public static async Task<DisbursementResponse> GetById(string id, HeaderParameter? headers = null)
         {
-            return await GetByIdRequest(id, headers);
+            DisbursementClient client = new DisbursementClient();
+            return await client.GetById(id, headers);
         }
 
         /// <summary>
@@ -35,7 +37,8 @@
         /// <returns>A Task of <see cref="DisbursementResponse[]"/>.</returns>
         public static async Task<DisbursementResponse[]> GetByExternalId(string externalId, HeaderParameter? headers = null)
         {
-            return await GetByExternalIdRequest(externalId, headers);
+            DisbursementClient client = new DisbursementClient();
+            return await client.GetByExternalId(externalId, headers);
         }
 
         /// <summary>
@@ -44,29 +47,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-available-banks">.</see></param>
         /// <returns>A Task of <see cref="AvailableBank[]"/>.</returns>
         public static async Task<AvailableBank[]> GetAvailableBanks(HeaderParameter? headers = null)
-        {
-            return await GetAvailableBanksRequest(headers);
-        }
-
-        private static async Task<DisbursementResponse> CreateDisbursementRequest(DisbursementParameter parameter, HeaderParameter? headers)
-        {
-            DisbursementClient client = new DisbursementClient();
-            return await client.Create(parameter, headers);
-        }
-
-        private static async Task<DisbursementResponse> GetByIdRequest(string id, HeaderParameter? headers)
-        {
-            DisbursementClient client = new DisbursementClient();
-            return await client.GetById(id, headers);
-        }
-
-        private static async Task<DisbursementResponse[]> GetByExternalIdRequest(string externalId, HeaderParameter? headers)
-        {
-            DisbursementClient client = new DisbursementClient();
-            return await client.GetByExternalId(externalId, headers);
-        }
-
-        private static async Task<AvailableBank[]> GetAvailableBanksRequest(HeaderParameter? headers)
         {
             DisbursementClient client = new DisbursementClient();
             return await client.GetAvailableBanks(headers);

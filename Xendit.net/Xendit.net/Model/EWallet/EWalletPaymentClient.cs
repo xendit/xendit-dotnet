@@ -25,7 +25,10 @@
         {
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };
             validHeaders.XApiVersion = apiVersion;
-            return await this.CreateRequest(parameter, validHeaders);
+
+            string url = "/ewallets";
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<EWalletPaymentParameter, EWalletPaymentResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, validHeaders);
         }
 
         /// <summary>
@@ -36,18 +39,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/ewallets/get-payment-status"/>.</param>
         /// <returns>A Task of <see cref="EWalletPaymentResponse"/>.</returns>
         public async Task<EWalletPaymentResponse> Get(string externalId, EWalletEnum.PaymentType ewalletType, HeaderParameter? headers = null)
-        {
-            return await this.GetRequest(externalId, ewalletType, headers);
-        }
-
-        private async Task<EWalletPaymentResponse> CreateRequest(EWalletPaymentParameter parameter, HeaderParameter? headers)
-        {
-            string url = "/ewallets";
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<EWalletPaymentParameter, EWalletPaymentResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
-        }
-
-        private async Task<EWalletPaymentResponse> GetRequest(string externalId, EWalletEnum.PaymentType ewalletType, HeaderParameter? headers)
         {
             string ewalletTypeString = JsonSerializer.Deserialize<string>(JsonSerializer.Serialize(ewalletType));
             string url = string.Format("/ewallets?external_id={0}&ewallet_type={1}", externalId, ewalletTypeString);

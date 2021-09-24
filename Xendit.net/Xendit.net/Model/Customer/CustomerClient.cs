@@ -25,7 +25,9 @@
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };
             validHeaders.ApiVersion = version;
 
-            return await this.CreateCustomerRequest(parameter, validHeaders);
+            string url = "/customers";
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, validHeaders);
         }
 
         /// <summary>
@@ -40,30 +42,18 @@
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };
             validHeaders.ApiVersion = version;
 
-            return await this.GetCustomerRequest(referenceId, validHeaders);
-        }
-
-        private async Task<CustomerResponse> CreateCustomerRequest(CustomerParameter parameter, HeaderParameter? headers)
-        {
-            string url = "/customers";
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
-        }
-
-        private async Task<CustomerResponse> GetCustomerRequest(string referenceId, HeaderParameter headers)
-        {
             string url = string.Format("{0}{1}", "/customers?reference_id=", referenceId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
 
-            if (headers.ApiVersion == ApiVersion.Version20200519)
+            if (validHeaders.ApiVersion == ApiVersion.Version20200519)
             {
-                CustomerResponse[] customerData = await client.Request<CustomerResponse[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
+                CustomerResponse[] customerData = await client.Request<CustomerResponse[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, validHeaders);
                 CustomerResponse customer = new CustomerResponse { Data = customerData };
 
                 return customer;
             }
 
-            return await client.Request<CustomerResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
+            return await client.Request<CustomerResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, validHeaders);
         }
     }
 }

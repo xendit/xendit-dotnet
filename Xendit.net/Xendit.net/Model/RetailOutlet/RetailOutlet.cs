@@ -13,7 +13,8 @@
         /// <returns>A Task of <see cref="FixedPaymentCode"/>.</returns>
         public static async Task<FixedPaymentCode> CreatePaymentCode(CreateFixedPaymentCodeParameter parameter, HeaderParameter? headers = null)
         {
-            return await CreatePaymentCodeRequest(parameter, headers);
+            RetailOutletClient client = new RetailOutletClient();
+            return await client.CreatePaymentCode(parameter, headers);
         }
 
         /// <summary>
@@ -25,7 +26,8 @@
         /// <returns>A Task of <see cref="FixedPaymentCode"/>.</returns>
         public static async Task<FixedPaymentCode> UpdatePaymentCode(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, HeaderParameter? headers = null)
         {
-            return await UpdatePaymentCodeRequest(parameter, paymentCodeId, headers);
+            RetailOutletClient client = new RetailOutletClient();
+            return await client.UpdatePaymentCode(parameter, paymentCodeId, headers);
         }
 
         /// <summary>
@@ -36,7 +38,8 @@
         /// <returns>A Task of <see cref="FixedPaymentCode"/>.</returns>
         public static async Task<FixedPaymentCode> GetPaymentCode(string paymentCodeId, HeaderParameter? headers = null)
         {
-            return await GetPaymentCodeRequest(paymentCodeId, headers);
+            RetailOutletClient client = new RetailOutletClient();
+            return await client.GetPaymentCode(paymentCodeId, headers);
         }
 
         /// <summary>
@@ -46,29 +49,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#get-payments-by-payment-code-id"/>.</param>
         /// <returns>A Task of <see cref="FixedPaymentCode[]"/>.</returns>
         public static async Task<FixedPaymentCode[]> GetPayments(string paymentCodeId, HeaderParameter? headers = null)
-        {
-            return await GetPaymentsRequest(paymentCodeId, headers);
-        }
-
-        private static async Task<FixedPaymentCode> CreatePaymentCodeRequest(CreateFixedPaymentCodeParameter parameter, HeaderParameter? headers)
-        {
-            RetailOutletClient client = new RetailOutletClient();
-            return await client.CreatePaymentCode(parameter, headers);
-        }
-
-        private static async Task<FixedPaymentCode> UpdatePaymentCodeRequest(UpdateFixedPaymentCodeParameter parameter, string paymentCodeId, HeaderParameter? headers)
-        {
-            RetailOutletClient client = new RetailOutletClient();
-            return await client.UpdatePaymentCode(parameter, paymentCodeId, headers);
-        }
-
-        private static async Task<FixedPaymentCode> GetPaymentCodeRequest(string paymentCodeId, HeaderParameter? headers)
-        {
-            RetailOutletClient client = new RetailOutletClient();
-            return await client.GetPaymentCode(paymentCodeId, headers);
-        }
-
-        private static async Task<FixedPaymentCode[]> GetPaymentsRequest(string paymentCodeId, HeaderParameter? headers)
         {
             RetailOutletClient client = new RetailOutletClient();
             return await client.GetPayments(paymentCodeId, headers);

@@ -24,7 +24,10 @@
         {
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };
             validHeaders.Idempotencykey = idempotencyKey;
-            return await this.CreateRequest(parameter, validHeaders);
+
+            string url = "/direct_debits";
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<DirectDebitPaymentParameter, DirectDebitPaymentResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, validHeaders);
         }
 
         /// <summary>
@@ -41,7 +44,9 @@
                 { "otp_code", otpCode },
             };
 
-            return await this.ValidateOtpRequest(parameter, directDebitId, headers);
+            string url = string.Format("{0}{1}{2}", "/direct_debits/", directDebitId, "/validate_otp/");
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<Dictionary<string, string>, DirectDebitPaymentResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         /// <summary>
@@ -52,7 +57,9 @@
         /// <returns>A Task of <see cref="DirectDebitPaymentResponse"/>.</returns>
         public async Task<DirectDebitPaymentResponse> GetById(string id, HeaderParameter? headers = null)
         {
-            return await this.GetByIdRequest(id, headers);
+            string url = string.Format("{0}{1}{2}", "/direct_debits/", id, "/");
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<DirectDebitPaymentResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         /// <summary>
@@ -62,32 +69,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-payment-by-reference-id"/>.</param>
         /// <returns>A Task of <see cref="DirectDebitPaymentResponse"/>.</returns>
         public async Task<DirectDebitPaymentResponse[]> GetByReferenceId(string referenceId, HeaderParameter? headers = null)
-        {
-            return await this.GetByReferenceIdRequest(referenceId, headers);
-        }
-
-        private async Task<DirectDebitPaymentResponse> CreateRequest(DirectDebitPaymentParameter parameter, HeaderParameter? headers)
-        {
-            string url = "/direct_debits";
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DirectDebitPaymentParameter, DirectDebitPaymentResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
-        }
-
-        private async Task<DirectDebitPaymentResponse> ValidateOtpRequest(Dictionary<string, string> parameter, string directDebitId, HeaderParameter? headers)
-        {
-            string url = string.Format("{0}{1}{2}", "/direct_debits/", directDebitId, "/validate_otp/");
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<Dictionary<string, string>, DirectDebitPaymentResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
-        }
-
-        private async Task<DirectDebitPaymentResponse> GetByIdRequest(string id, HeaderParameter? headers)
-        {
-            string url = string.Format("{0}{1}{2}", "/direct_debits/", id, "/");
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DirectDebitPaymentResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
-        }
-
-        private async Task<DirectDebitPaymentResponse[]> GetByReferenceIdRequest(string referenceId, HeaderParameter? headers)
         {
             string url = string.Format("{0}{1}", "/direct_debits?reference_id=", referenceId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;

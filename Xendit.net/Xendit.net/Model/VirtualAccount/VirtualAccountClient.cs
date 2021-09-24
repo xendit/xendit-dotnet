@@ -20,7 +20,9 @@
         /// <returns>A Task of <see cref="VirtualAccountResponse"/>.</returns>
         public async Task<VirtualAccountResponse> Create(CreateVirtualAccountParameter parameter, HeaderParameter? headers = null)
         {
-            return await this.CreateRequest(parameter, headers);
+            string url = "/callback_virtual_accounts";
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         /// <summary>
@@ -31,7 +33,9 @@
         /// <returns>A Task of <see cref="VirtualAccountResponse"/>.</returns>
         public async Task<VirtualAccountResponse> Get(string id, HeaderParameter? headers = null)
         {
-            return await this.GetRequest(id, headers);
+            string url = string.Format("{0}{1}", "/callback_virtual_accounts/", id);
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<VirtualAccountResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         /// <summary>
@@ -43,7 +47,9 @@
         /// <returns>A Task of <see cref="VirtualAccountResponse"/>.</returns>
         public async Task<VirtualAccountResponse> Update(UpdateVirtualAccountParameter parameter, string id, HeaderParameter? headers = null)
         {
-            return await this.UpdateRequest(parameter, id, headers);
+            string url = string.Format("{0}{1}", "/callback_virtual_accounts/", id);
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         /// <summary>
@@ -52,32 +58,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-virtual-account-banks"/>.</param>
         /// <returns>A Task of <see cref="AvailableBank[]"/>.</returns>
         public async Task<AvailableBank[]> GetAvailableBanks(HeaderParameter? headers = null)
-        {
-            return await this.GetAvailableBanksRequest(headers);
-        }
-
-        private async Task<VirtualAccountResponse> CreateRequest(CreateVirtualAccountParameter parameter, HeaderParameter? headers = null)
-        {
-            string url = "/callback_virtual_accounts";
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<CreateVirtualAccountParameter, VirtualAccountResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
-        }
-
-        private async Task<VirtualAccountResponse> UpdateRequest(UpdateVirtualAccountParameter parameter, string id, HeaderParameter? headers)
-        {
-            string url = string.Format("{0}{1}", "/callback_virtual_accounts/", id);
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<UpdateVirtualAccountParameter, VirtualAccountResponse>(XenditHttpMethod.Patch, url, this.ApiKey, this.BaseUrl, parameter, headers);
-        }
-
-        private async Task<VirtualAccountResponse> GetRequest(string id, HeaderParameter? headers)
-        {
-            string url = string.Format("{0}{1}", "/callback_virtual_accounts/", id);
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<VirtualAccountResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
-        }
-
-        private async Task<AvailableBank[]> GetAvailableBanksRequest(HeaderParameter? headers)
         {
             string url = "/available_virtual_account_banks";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;

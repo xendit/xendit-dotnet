@@ -14,11 +14,6 @@
         /// <returns>A Task of <see cref="BalanceResponse"/>.</returns>
         public static async Task<BalanceResponse> Get(BalanceAccountType? accountType = null, HeaderParameter? headers = null)
         {
-            return await GetBalanceRequest(accountType, headers);
-        }
-
-        private static async Task<BalanceResponse> GetBalanceRequest(BalanceAccountType? accountType, HeaderParameter? headers)
-        {
             BalanceClient client = new BalanceClient();
             return await client.Get(accountType, headers);
         }

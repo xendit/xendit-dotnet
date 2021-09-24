@@ -22,11 +22,6 @@
         /// <returns>A Task of <see cref="BalanceResponse"/>.</returns>
         public async Task<BalanceResponse> Get(BalanceAccountType? accountType = null, HeaderParameter? headers = null)
         {
-            return await this.GetBalanceRequest(accountType, headers);
-        }
-
-        private async Task<BalanceResponse> GetBalanceRequest(BalanceAccountType? accountType, HeaderParameter? headers)
-        {
             string url = "/balance";
             if (accountType != null)
             {

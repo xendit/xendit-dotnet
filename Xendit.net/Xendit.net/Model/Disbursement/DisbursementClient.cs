@@ -20,7 +20,9 @@
         /// <returns>A Task of <see cref="DisbursementResponse"/>.</returns>
         public async Task<DisbursementResponse> Create(DisbursementParameter parameter, HeaderParameter? headers = null)
         {
-            return await this.CreateDisbursementRequest(parameter, headers);
+            string url = "/disbursements";
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<DisbursementParameter, DisbursementResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         /// <summary>
@@ -31,7 +33,9 @@
         /// <returns>A Task of <see cref="DisbursementResponse"/>.</returns>
         public async Task<DisbursementResponse> GetById(string id, HeaderParameter? headers = null)
         {
-            return await this.GetByIdRequest(id, headers);
+            string url = string.Format("{0}{1}", "/disbursements/", id);
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<DisbursementResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         /// <summary>
@@ -42,7 +46,9 @@
         /// <returns>A Task of <see cref="DisbursementResponse[]"/>.</returns>
         public async Task<DisbursementResponse[]> GetByExternalId(string externalId, HeaderParameter? headers = null)
         {
-            return await this.GetByExternalIdRequest(externalId, headers);
+            string url = string.Format("{0}{1}", "/disbursements?external_id=", externalId);
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<DisbursementResponse[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         /// <summary>
@@ -51,32 +57,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-available-banks">.</see></param>
         /// <returns>A Task of <see cref="AvailableBank[]"/>.</returns>
         public async Task<AvailableBank[]> GetAvailableBanks(HeaderParameter? headers = null)
-        {
-            return await this.GetAvailableBanksRequest(headers);
-        }
-
-        private async Task<DisbursementResponse> CreateDisbursementRequest(DisbursementParameter parameter, HeaderParameter? headers)
-        {
-            string url = "/disbursements";
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DisbursementParameter, DisbursementResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
-        }
-
-        private async Task<DisbursementResponse> GetByIdRequest(string id, HeaderParameter? headers)
-        {
-            string url = string.Format("{0}{1}", "/disbursements/", id);
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DisbursementResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
-        }
-
-        private async Task<DisbursementResponse[]> GetByExternalIdRequest(string externalId, HeaderParameter? headers)
-        {
-            string url = string.Format("{0}{1}", "/disbursements?external_id=", externalId);
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<DisbursementResponse[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
-        }
-
-        private async Task<AvailableBank[]> GetAvailableBanksRequest(HeaderParameter? headers)
         {
             string url = "/available_disbursements_banks";
             var client = this.requestClient ?? XenditConfiguration.RequestClient;

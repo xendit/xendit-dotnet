@@ -15,7 +15,8 @@
         /// <returns>A Task of <see cref="EWalletPaymentResponse"/>.</returns>
         public static async Task<EWalletPaymentResponse> Create(EWalletPaymentParameter parameter, HeaderParameter? headers = null, ApiVersion apiVersion = ApiVersion.Version20200201)
         {
-            return await CreateRequest(parameter, headers, apiVersion);
+            EWalletPaymentClient client = new EWalletPaymentClient();
+            return await client.Create(parameter, headers, apiVersion);
         }
 
         /// <summary>
@@ -26,17 +27,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/ewallets/get-payment-status"/>.</param>
         /// <returns>A Task of <see cref="EWalletPaymentResponse"/>.</returns>
         public static async Task<EWalletPaymentResponse> Get(string externalId, EWalletEnum.PaymentType ewalletType, HeaderParameter? headers = null)
-        {
-            return await GetRequest(externalId, ewalletType, headers);
-        }
-
-        private static async Task<EWalletPaymentResponse> CreateRequest(EWalletPaymentParameter parameter, HeaderParameter? headers, ApiVersion apiVersion)
-        {
-            EWalletPaymentClient client = new EWalletPaymentClient();
-            return await client.Create(parameter, headers, apiVersion);
-        }
-
-        private static async Task<EWalletPaymentResponse> GetRequest(string externalId, EWalletEnum.PaymentType ewalletType, HeaderParameter? headers)
         {
             EWalletPaymentClient client = new EWalletPaymentClient();
             return await client.Get(externalId, ewalletType, headers);

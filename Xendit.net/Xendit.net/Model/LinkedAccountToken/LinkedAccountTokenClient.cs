@@ -21,7 +21,9 @@
         /// <returns>A Task of <see cref="AccessibleLinkedAccountToken[]"/>.</returns>
         public async Task<AccessibleLinkedAccountToken[]> Get(string linkedAccountTokenId, HeaderParameter? headers = null)
         {
-            return await this.GetRequest(linkedAccountTokenId, headers);
+            string url = string.Format("{0}{1}{2}", "/linked_account_tokens/", linkedAccountTokenId, "/accounts");
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<AccessibleLinkedAccountToken[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         /// <summary>
@@ -32,7 +34,9 @@
         /// <returns>A Task of <see cref="InitializedLinkedAccountToken"/>.</returns>
         public async Task<InitializedLinkedAccountToken> Initialize(InitializedLinkedAccountTokenParameter parameter, HeaderParameter? headers = null)
         {
-            return await this.InitializeRequest(parameter, headers);
+            string url = "/linked_account_tokens/auth";
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<InitializedLinkedAccountTokenParameter, InitializedLinkedAccountToken>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
         }
 
         /// <summary>
@@ -43,7 +47,9 @@
         /// <returns>A Task of <see cref="UnbindedLinkedAccountToken"/>.</returns>
         public async Task<UnbindedLinkedAccountToken> Unbind(string linkedAccountTokenId, HeaderParameter? headers = null)
         {
-            return await this.UnbindRequest(linkedAccountTokenId, headers);
+            string url = string.Format("{0}{1}", "/linked_account_tokens/", linkedAccountTokenId);
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<UnbindedLinkedAccountToken>(HttpMethod.Delete, url, this.ApiKey, this.BaseUrl, headers);
         }
 
         /// <summary>
@@ -60,32 +66,6 @@
                 { "otp_code", otpCode },
             };
 
-            return await this.ValidateOtpRequest(parameter, linkedAccountTokenId, headers);
-        }
-
-        private async Task<AccessibleLinkedAccountToken[]> GetRequest(string linkedAccountTokenId, HeaderParameter? headers)
-        {
-            string url = string.Format("{0}{1}{2}", "/linked_account_tokens/", linkedAccountTokenId, "/accounts");
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<AccessibleLinkedAccountToken[]>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
-        }
-
-        private async Task<InitializedLinkedAccountToken> InitializeRequest(InitializedLinkedAccountTokenParameter parameter, HeaderParameter? headers)
-        {
-            string url = "/linked_account_tokens/auth";
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<InitializedLinkedAccountTokenParameter, InitializedLinkedAccountToken>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
-        }
-
-        private async Task<UnbindedLinkedAccountToken> UnbindRequest(string linkedAccountTokenId, HeaderParameter? headers)
-        {
-            string url = string.Format("{0}{1}", "/linked_account_tokens/", linkedAccountTokenId);
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<UnbindedLinkedAccountToken>(HttpMethod.Delete, url, this.ApiKey, this.BaseUrl, headers);
-        }
-
-        private async Task<ValidatedLinkedAccountToken> ValidateOtpRequest(Dictionary<string, string> parameter, string linkedAccountTokenId, HeaderParameter? headers)
-        {
             string url = string.Format("{0}{1}{2}", "/linked_account_tokens/", linkedAccountTokenId, "/validate_otp");
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
             return await client.Request<Dictionary<string, string>, ValidatedLinkedAccountToken>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);

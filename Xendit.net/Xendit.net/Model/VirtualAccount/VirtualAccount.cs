@@ -13,7 +13,8 @@
         /// <returns>A Task of <see cref="VirtualAccountResponse"/>.</returns>
         public static async Task<VirtualAccountResponse> Create(CreateVirtualAccountParameter parameter, HeaderParameter? headers = null)
         {
-            return await CreateRequest(parameter, headers);
+            VirtualAccountClient client = new VirtualAccountClient();
+            return await client.Create(parameter, headers);
         }
 
         /// <summary>
@@ -24,7 +25,8 @@
         /// <returns>A Task of <see cref="VirtualAccountResponse"/>.</returns>
         public static async Task<VirtualAccountResponse> Get(string id, HeaderParameter? headers = null)
         {
-            return await GetRequest(id, headers);
+            VirtualAccountClient client = new VirtualAccountClient();
+            return await client.Get(id, headers);
         }
 
         /// <summary>
@@ -36,7 +38,8 @@
         /// <returns>A Task of <see cref="VirtualAccountResponse"/>.</returns>
         public static async Task<VirtualAccountResponse> Update(UpdateVirtualAccountParameter parameter, string id, HeaderParameter? headers = null)
         {
-            return await UpdateRequest(parameter, id, headers);
+            VirtualAccountClient client = new VirtualAccountClient();
+            return await client.Update(parameter, id, headers);
         }
 
         /// <summary>
@@ -45,29 +48,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#get-virtual-account-banks"/>.</param>
         /// <returns>A Task of <see cref="AvailableBank[]"/>.</returns>
         public static async Task<AvailableBank[]> GetAvailableBanks(HeaderParameter? headers = null)
-        {
-            return await GetAvailableBanksRequest(headers);
-        }
-
-        private static async Task<VirtualAccountResponse> CreateRequest(CreateVirtualAccountParameter parameter, HeaderParameter? headers = null)
-        {
-            VirtualAccountClient client = new VirtualAccountClient();
-            return await client.Create(parameter, headers);
-        }
-
-        private static async Task<VirtualAccountResponse> UpdateRequest(UpdateVirtualAccountParameter parameter, string id, HeaderParameter? headers)
-        {
-            VirtualAccountClient client = new VirtualAccountClient();
-            return await client.Update(parameter, id, headers);
-        }
-
-        private static async Task<VirtualAccountResponse> GetRequest(string id, HeaderParameter? headers)
-        {
-            VirtualAccountClient client = new VirtualAccountClient();
-            return await client.Get(id, headers);
-        }
-
-        private static async Task<AvailableBank[]> GetAvailableBanksRequest(HeaderParameter? headers)
         {
             VirtualAccountClient client = new VirtualAccountClient();
             return await client.GetAvailableBanks();

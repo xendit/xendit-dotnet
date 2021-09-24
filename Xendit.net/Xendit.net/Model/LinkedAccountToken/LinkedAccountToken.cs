@@ -13,7 +13,8 @@
         /// <returns>A Task of <see cref="AccessibleLinkedAccountToken[]"/>.</returns>
         public static async Task<AccessibleLinkedAccountToken[]> Get(string linkedAccountTokenId, HeaderParameter? headers = null)
         {
-            return await GetRequest(linkedAccountTokenId, headers);
+            LinkedAccountTokenClient client = new LinkedAccountTokenClient();
+            return await client.Get(linkedAccountTokenId, headers);
         }
 
         /// <summary>
@@ -24,7 +25,8 @@
         /// <returns>A Task of <see cref="InitializedLinkedAccountToken"/>.</returns>
         public static async Task<InitializedLinkedAccountToken> Initialize(InitializedLinkedAccountTokenParameter parameter, HeaderParameter? headers = null)
         {
-            return await InitializeRequest(parameter, headers);
+            LinkedAccountTokenClient client = new LinkedAccountTokenClient();
+            return await client.Initialize(parameter, headers);
         }
 
         /// <summary>
@@ -35,7 +37,8 @@
         /// <returns>A Task of <see cref="UnbindedLinkedAccountToken"/>.</returns>
         public static async Task<UnbindedLinkedAccountToken> Unbind(string linkedAccountTokenId, HeaderParameter? headers = null)
         {
-            return await UnbindRequest(linkedAccountTokenId, headers);
+            LinkedAccountTokenClient client = new LinkedAccountTokenClient();
+            return await client.Unbind(linkedAccountTokenId, headers);
         }
 
         /// <summary>
@@ -46,29 +49,6 @@
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#validate-otp-for-linked-account-token"/>.</param>
         /// <returns>A Task of <see cref="ValidatedLinkedAccountToken"/>.</returns>
         public static async Task<ValidatedLinkedAccountToken> ValidateOtp(string otpCode, string linkedAccountTokenId, HeaderParameter? headers = null)
-        {
-            return await ValidateOtpRequest(otpCode, linkedAccountTokenId, headers);
-        }
-
-        private static async Task<AccessibleLinkedAccountToken[]> GetRequest(string linkedAccountTokenId, HeaderParameter? headers)
-        {
-            LinkedAccountTokenClient client = new LinkedAccountTokenClient();
-            return await client.Get(linkedAccountTokenId, headers);
-        }
-
-        private static async Task<InitializedLinkedAccountToken> InitializeRequest(InitializedLinkedAccountTokenParameter parameter, HeaderParameter? headers)
-        {
-            LinkedAccountTokenClient client = new LinkedAccountTokenClient();
-            return await client.Initialize(parameter, headers);
-        }
-
-        private static async Task<UnbindedLinkedAccountToken> UnbindRequest(string linkedAccountTokenId, HeaderParameter? headers)
-        {
-            LinkedAccountTokenClient client = new LinkedAccountTokenClient();
-            return await client.Unbind(linkedAccountTokenId, headers);
-        }
-
-        private static async Task<ValidatedLinkedAccountToken> ValidateOtpRequest(string otpCode, string linkedAccountTokenId, HeaderParameter? headers)
         {
             LinkedAccountTokenClient client = new LinkedAccountTokenClient();
             return await client.ValidateOtp(otpCode, linkedAccountTokenId, headers);

@@ -24,7 +24,10 @@
         {
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };
             validHeaders.XApiVersion = apiVersion;
-            return await this.CreateChargeRequest(parameter, validHeaders);
+
+            string url = "/ewallets/charges";
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, validHeaders);
         }
 
         /// <summary>
@@ -38,21 +41,10 @@
         {
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };
             validHeaders.XApiVersion = apiVersion;
-            return await this.GetChargeRequest(chargeId, validHeaders);
-        }
 
-        private async Task<EWalletChargeResponse> CreateChargeRequest(EWalletChargeParameter parameter, HeaderParameter? headers)
-        {
-            string url = "/ewallets/charges";
+            string url = string.Format("{0}{1}", "/ewallets/charges/", chargeId);
             var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<EWalletChargeParameter, EWalletChargeResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, headers);
-        }
-
-        private async Task<EWalletChargeResponse> GetChargeRequest(string id, HeaderParameter? headers)
-        {
-            string url = string.Format("{0}{1}", "/ewallets/charges/", id);
-            var client = this.requestClient ?? XenditConfiguration.RequestClient;
-            return await client.Request<EWalletChargeResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, headers);
+            return await client.Request<EWalletChargeResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, validHeaders);
         }
     }
 }

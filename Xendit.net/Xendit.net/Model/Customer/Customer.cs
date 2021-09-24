@@ -15,7 +15,8 @@
         /// <returns>A Task of <see cref="CustomerResponse"/>.</returns>
         public static async Task<CustomerResponse> Create(CustomerParameter parameter, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
         {
-            return await CreateCustomerRequest(parameter, headers, version);
+            CustomerClient client = new CustomerClient();
+            return await client.Create(parameter, headers, version);
         }
 
         /// <summary>
@@ -26,17 +27,6 @@
         /// <param name="version">API version that will be used to request <see cref="ApiVersion"/>.</param>
         /// <returns>A Task of <see cref="CustomerResponse[]"/>.</returns>
         public static async Task<CustomerResponse> Get(string referenceId, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
-        {
-            return await GetCustomerRequest(referenceId, headers, version);
-        }
-
-        private static async Task<CustomerResponse> CreateCustomerRequest(CustomerParameter parameter, HeaderParameter? headers, ApiVersion version)
-        {
-            CustomerClient client = new CustomerClient();
-            return await client.Create(parameter, headers, version);
-        }
-
-        private static async Task<CustomerResponse> GetCustomerRequest(string referenceId, HeaderParameter? headers, ApiVersion version)
         {
             CustomerClient client = new CustomerClient();
             return await client.Get(referenceId, headers, version);
