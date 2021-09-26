@@ -255,7 +255,7 @@ BalanceResponse balance = new BalanceResponse
 To create a virtual account, use struct `CreateVirtualAccountParameter`. You may use `VirtualAccountEnum.BankCode` for `BankCode` property.
 
 ```cs
-VirtualAccountParameter parameter = new VirtualAccountParameter
+CreateVirtualAccountParameter parameter = new CreateVirtualAccountParameter
 {
   ExternalId = "my_external_id",
   BankCode = VirtualAccountEnum.BankCode.Bni,
