@@ -10,16 +10,16 @@
         Unknown,
 
         [EnumMember(Value = "BCA")]
-        BCA,
+        Bca,
 
         [EnumMember(Value = "BNI")]
-        BNI,
+        Bni,
 
         [EnumMember(Value = "BNI_SYARIAH")]
-        BNISyariah,
+        BniSyariah,
 
         [EnumMember(Value = "BRI")]
-        BRI,
+        Bri,
 
         [EnumMember(Value = "MANDIRI")]
         Mandiri,

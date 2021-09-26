@@ -34,7 +34,7 @@
             PaidAt = "2020-01-31T11:20:01.017Z",
             CreditCardChargeId = "credit_id",
             PaymentMethod = InvoicePaymentMethodType.BankTransfer,
-            PaymentChannel = InvoicePaymentChannelType.BCA,
+            PaymentChannel = InvoicePaymentChannelType.Bca,
             PaymentDestination = "012",
             FixedVa = true,
         };

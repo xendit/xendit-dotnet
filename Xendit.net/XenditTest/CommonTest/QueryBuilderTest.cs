@@ -29,7 +29,7 @@
             {
                 ExternalId = "external-id",
                 Amount = 2000,
-                PaymentMethods = new InvoicePaymentChannelType[] { InvoicePaymentChannelType.BCA, InvoicePaymentChannelType.CreditCard },
+                PaymentMethods = new InvoicePaymentChannelType[] { InvoicePaymentChannelType.Bca, InvoicePaymentChannelType.CreditCard },
             };
 
             string expectedResult = "&external_id=\"external-id\"&amount=2000&payment_methods=[\"BCA\",\"CREDIT_CARD\"]";

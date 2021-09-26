@@ -13,16 +13,16 @@
         CreditCard,
 
         [EnumMember(Value = "BCA")]
-        BCA,
+        Bca,
 
         [EnumMember(Value = "BNI")]
-        BNI,
+        Bni,
 
         [EnumMember(Value = "BNI_SYARIAH")]
-        BNISyariah,
+        BniSyariah,
 
         [EnumMember(Value = "BRI")]
-        BRI,
+        Bri,
 
         [EnumMember(Value = "MANDIRI")]
         Mandiri,
@@ -40,36 +40,36 @@
         SevenEleven,
 
         [EnumMember(Value = "OVO")]
-        OVO,
+        Ovo,
 
         [EnumMember(Value = "DANA")]
         Dana,
 
         [EnumMember(Value = "SHOPEEPAY")]
-        ShopeePay,
+        Shopeepay,
 
         [EnumMember(Value = "LINKAJA")]
-        LinkAja,
+        Linkaja,
 
         [EnumMember(Value = "GRABPAY")]
-        GrabPay,
+        Grabpay,
 
         [EnumMember(Value = "GCASH")]
-        GCash,
+        Gcash,
 
         [EnumMember(Value = "PAYMAYA")]
-        PayMaya,
+        Paymaya,
 
         [EnumMember(Value = "QRIS")]
-        QRIS,
+        Qris,
 
         [EnumMember(Value = "DD_BRI")]
-        DirectDebitBRI,
+        DirectDebitBri,
 
         [EnumMember(Value = "DD_BPI")]
-        DirectDebitBPI,
+        DirectDebitBpi,
 
         [EnumMember(Value = "DD_UBP")]
-        DirectDebitUBP,
+        DirectDebitUbp,
     }
 }
