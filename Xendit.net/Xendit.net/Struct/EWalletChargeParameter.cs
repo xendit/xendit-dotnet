@@ -5,7 +5,7 @@
     using Xendit.net.Enum;
     using Xendit.net.Model.EWallet;
 
-    public class EWalletChargeParameter
+    public struct EWalletChargeParameter
     {
         [JsonPropertyName("reference_id")]
         public string ReferenceId { get; set; }

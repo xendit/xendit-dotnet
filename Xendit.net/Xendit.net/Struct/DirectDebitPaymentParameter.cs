@@ -6,7 +6,7 @@
     using Xendit.net.Model.DirectDebit;
     using Xendit.net.Model.LinkedAccountToken;
 
-    public class DirectDebitPaymentParameter
+    public struct DirectDebitPaymentParameter
     {
         [JsonPropertyName("reference_id")]
         public string ReferenceId { get; set; }
