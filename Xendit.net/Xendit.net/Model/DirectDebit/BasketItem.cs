@@ -27,7 +27,7 @@
         public string SubCategory { get; set; }
 
         [JsonPropertyName("price")]
-        public long Price { get; set; }
+        public long? Price { get; set; }
 
         [JsonPropertyName("url")]
         public string Url { get; set; }
@@ -36,6 +36,6 @@
         public Dictionary<string, object> Metadata { get; set; }
 
         [JsonPropertyName("quantity")]
-        public long Quantity { get; set; }
+        public long? Quantity { get; set; }
     }
 }

@@ -17,10 +17,10 @@
         public long Amount { get; set; }
 
         [JsonPropertyName("checkout_method")]
-        public EWalletEnum.CheckoutMethod CheckoutMethod { get; set; }
+        public EWalletEnum.CheckoutMethod? CheckoutMethod { get; set; }
 
         [JsonPropertyName("channel_code")]
-        public EWalletEnum.ChannelCode ChannelCode { get; set; }
+        public EWalletEnum.ChannelCode? ChannelCode { get; set; }
 
         [JsonPropertyName("channel_properties")]
         public EWalletChargeProperties ChannelProperties { get; set; }

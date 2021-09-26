@@ -6,10 +6,10 @@
     public class IdentityAccount
     {
         [JsonPropertyName("country")]
-        public Country Country { get; set; }
+        public Country? Country { get; set; }
 
         [JsonPropertyName("type")]
-        public CustomerIdentityAccountType Type { get; set; }
+        public CustomerIdentityAccountType? Type { get; set; }
 
         [JsonPropertyName("company")]
         public string Company { get; set; }

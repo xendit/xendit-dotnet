@@ -9,7 +9,7 @@
         public string BusinessName { get; set; }
 
         [JsonPropertyName("business_type")]
-        public CustomerBusinessType BusinessType { get; set; }
+        public CustomerBusinessType? BusinessType { get; set; }
 
         [JsonPropertyName("nature_of_business")]
         public string NatureOfBusiness { get; set; }
