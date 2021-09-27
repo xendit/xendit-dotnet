@@ -5,7 +5,7 @@ namespace XenditExample
     using System.Net.Http;
     using Xendit.net;
     using Xendit.net.Exception;
-    using Xendit.net.Model;
+    using Xendit.net.Model.VirtualAccount;
     using Xendit.net.Network;
 
     class ExampleGetVirtualAccountPayment
@@ -20,7 +20,7 @@ namespace XenditExample
             try
             {
                 string virtualAccountPaymentId = "random_1560763705544";
-                VirtualAccountPayment virtualAccountPayment = await VirtualAccountPayment.Get(virtualAccountPaymentId);
+                VirtualAccountPaymentResponse virtualAccountPayment = await VirtualAccountPayment.Get(virtualAccountPaymentId);
 
                 Console.WriteLine(virtualAccountPayment);
             }

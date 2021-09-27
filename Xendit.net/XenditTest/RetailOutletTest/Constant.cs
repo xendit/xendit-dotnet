@@ -1,12 +1,12 @@
 ﻿namespace XenditTest.RetailOutletTest
 {
     using Xendit.net.Enum;
-    using Xendit.net.Model;
+    using Xendit.net.Model.RetailOutlet;
     using Xendit.net.Struct;
 
     internal class Constant
     {
-        internal static readonly string RetailOutletUrl = "https://api.xendit.co/payment_codes";
+        internal static readonly string RetailOutletUrl = "/payment_codes";
         internal static readonly CreateFixedPaymentCodeParameter CreateFixedPaymentCodeParameter = new CreateFixedPaymentCodeParameter
         {
             ReferenceId = "reference_id",
@@ -85,5 +85,8 @@
         {
             ForUserId = "user-id",
         };
+
+        internal static readonly string ApiKey = "api-key";
+        internal static readonly string BaseUrl = "https://api.xendit.co";
     }
 }

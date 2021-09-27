@@ -7,7 +7,7 @@
 
     internal class Constant
     {
-        internal static readonly EWalletCharge ExpectedEWalletCharge = new EWalletCharge
+        internal static readonly EWalletChargeResponse ExpectedEWalletCharge = new EWalletChargeResponse
         {
             Id = "charge-id",
             BusinessId = "5f218745736e619164dc8608",
@@ -78,15 +78,15 @@
         };
 
         internal static readonly string ChargeId = "charge-id";
-        internal static readonly string EWalletChargeUrl = "https://api.xendit.co/ewallets/charges";
+        internal static readonly string EWalletChargeUrl = "/ewallets/charges";
         internal static readonly string GetChargeUrl = string.Format("{0}/{1}", EWalletChargeUrl, ChargeId);
 
         internal static readonly string ExternalId = "external-id";
         internal static readonly EWalletEnum.PaymentType PaymentType = EWalletEnum.PaymentType.Ovo;
-        internal static readonly string EWalletPaymentUrl = "https://api.xendit.co/ewallets";
-        internal static readonly string GetEWalletPaymentUrl = "https://api.xendit.co/ewallets?external_id=external-id&ewallet_type=OVO";
+        internal static readonly string EWalletPaymentUrl = "/ewallets";
+        internal static readonly string GetEWalletPaymentUrl = "/ewallets?external_id=external-id&ewallet_type=OVO";
 
-        internal static readonly EWalletPayment ExpectedEWalletPayment = new EWalletPayment
+        internal static readonly EWalletPaymentResponse ExpectedEWalletPayment = new EWalletPaymentResponse
         {
             Amount = 1000,
             BusinessId = "business-id",
@@ -103,5 +103,8 @@
             Phone = "08123123123",
             EWalletType = EWalletEnum.PaymentType.Ovo,
         };
+
+        internal static readonly string ApiKey = "api-key";
+        internal static readonly string BaseUrl = "https://api.xendit.co";
     }
 }

@@ -5,9 +5,11 @@ namespace XenditExample
     using System.Threading.Tasks;
     using Xendit.net;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
     using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.Customer;
+    using Xendit.net.Model.Invoice;
+    using Xendit.net.Network;
     using Xendit.net.Struct;
 
     class ExampleCreateInvoice
@@ -31,7 +33,7 @@ namespace XenditExample
                     PostalCode = "12345",
                 };
 
-                Customer customer = new Customer
+                CustomerResponse customer = new CustomerResponse
                 {
                     GivenNames = "John",
                     Email = "john@email.com",
@@ -62,14 +64,14 @@ namespace XenditExample
                     ExternalId = "external-id",
                     Amount = 1000,
                     Customer = customer,
-                    CustomerNotificationPreference = preference,
+                    NotificationPreference = preference,
                     Items = new ItemInvoice[] { item },
                     Fees = new FeeInvoice[] { fee },
                     Currency = Currency.IDR,
                     PaymentMethods = new InvoicePaymentChannelType[] { InvoicePaymentChannelType.ShopeePay },
                 };
 
-                Invoice invoice = await Invoice.Create(parameter);
+                InvoiceResponse invoice = await Invoice.Create(parameter);
                 Console.WriteLine(invoice);
             }
             catch (XenditException e)

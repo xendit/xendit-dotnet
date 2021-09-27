@@ -5,7 +5,7 @@ namespace XenditExample
     using System.Net.Http;
     using Xendit.net;
     using Xendit.net.Exception;
-    using Xendit.net.Model;
+    using Xendit.net.Model.VirtualAccount;
     using Xendit.net.Network;
 
     class ExampleGetVirtualAccount
@@ -17,11 +17,10 @@ namespace XenditExample
             XenditConfiguration.RequestClient = networkClient;
             XenditConfiguration.ApiKey = "xnd_development_...";
 
-            string virtualAccountId = "random_virtual_account_id";
-
             try
             {
-                VirtualAccount virtualAccount = await VirtualAccount.Get(virtualAccountId);
+                string virtualAccountId = "random_virtual_account_id";
+                VirtualAccountResponse virtualAccount = await VirtualAccount.Get(virtualAccountId);
 
                 Console.WriteLine(virtualAccount);
             }

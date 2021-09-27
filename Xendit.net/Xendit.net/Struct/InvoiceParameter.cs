@@ -5,6 +5,7 @@
     using Xendit.net.Enum;
     using Xendit.net.Model;
     using Xendit.net.Model.Customer;
+    using Xendit.net.Model.Invoice;
 
     public struct InvoiceParameter
     {
@@ -66,6 +67,6 @@
         public FeeInvoice[] Fees { get; set; }
 
         [JsonPropertyName("customer_notification_preference")]
-        public NotificationPreference CustomerNotificationPreference { get; set; }
+        public NotificationPreference NotificationPreference { get; set; }
     }
 }

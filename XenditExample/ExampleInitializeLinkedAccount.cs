@@ -4,11 +4,12 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
-    using Xendit.net.Exception;
-    using Xendit.net.Struct;
     using Xendit.net.Enum;
+    using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.LinkedAccountToken;
+    using Xendit.net.Network;
+    using Xendit.net.Struct;
 
     class ExampleInitializeLinkedAccount
     {
@@ -21,7 +22,7 @@ namespace XenditExample
 
             try
             {
-                InitializedLinkedAccountParameter parameter = new InitializedLinkedAccountParameter
+                InitializedLinkedAccountTokenParameter parameter = new InitializedLinkedAccountTokenParameter
                 {
                     CustomerId = "customer-id",
                     ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
@@ -38,7 +39,7 @@ namespace XenditExample
                     },
                 };
 
-                InitializedLinkedAccount initializedLinkedAccount = await InitializedLinkedAccount.Initialize(parameter);
+                InitializedLinkedAccount initializedLinkedAccount = await LinkedAccountToken.Initialize(parameter);
                 Console.WriteLine(initializedLinkedAccount);
             }
             catch (XenditException e)

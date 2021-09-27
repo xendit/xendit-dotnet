@@ -6,7 +6,7 @@
     using Xendit.net;
     using Xendit.net.Enum;
     using Xendit.net.Exception;
-    using Xendit.net.Model;
+    using Xendit.net.Model.Balance;
     using Xendit.net.Network;
 
     class ExampleGetBalance
@@ -20,11 +20,11 @@
             
             try
             {
-                Balance balance = await Balance.Get();
-                Console.WriteLine(balance.Value);
+                BalanceResponse balance = await Balance.Get();
+                Console.WriteLine(balance.Balance);
 
-                Balance balanceWithType = await Balance.Get(BalanceAccountType.Holding);
-                Console.WriteLine(balanceWithType.Value);
+                BalanceResponse balanceWithType = await Balance.Get(BalanceAccountType.Holding);
+                Console.WriteLine(balanceWithType.Balance)
             }
             catch (XenditException e)
             {

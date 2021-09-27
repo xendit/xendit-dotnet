@@ -21,7 +21,7 @@ namespace XenditExample
 
             try
             {
-                EWalletCharge eWalletCharge = await EWalletCharge.Get("CHARGE_ID");
+                EWalletChargeResponse eWalletCharge = await EWalletCharge.Get("CHARGE_ID");
                 Console.WriteLine(eWalletCharge);
             }
             catch (XenditException e)

@@ -2,19 +2,19 @@
 {
     using System.Collections.Generic;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
+    using Xendit.net.Model.LinkedAccountToken;
     using Xendit.net.Struct;
 
     internal class Constant
     {
-        internal static readonly string LinkedAccountUrl = "https://api.xendit.co/linked_account_tokens";
+        internal static readonly string LinkedAccountUrl = "/linked_account_tokens";
         internal static readonly string LinkedAccountAuthUrl = string.Format("{0}{1}", LinkedAccountUrl, "/auth");
 
-        internal static readonly InitializedLinkedAccountParameter InitializedLinkedAccountParameter = new InitializedLinkedAccountParameter
+        internal static readonly InitializedLinkedAccountTokenParameter InitializedLinkedAccountParameter = new InitializedLinkedAccountTokenParameter
         {
             CustomerId = "customer-id",
             ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
-            Properties = new LinkedAccountProperties
+            Properties = new LinkedAccountTokenProperties
             {
                 AccountMobileNumber = "+62818555988",
                 CardLastFour = "4444",
@@ -27,7 +27,7 @@
             },
         };
 
-        internal static readonly InitializedLinkedAccount ExpectedInitializedLinkedAccount = new InitializedLinkedAccount
+        internal static readonly InitializedLinkedAccountToken ExpectedInitializedLinkedAccount = new InitializedLinkedAccountToken
         {
             Id = LinkedAccountId,
             CustomerId = "customer-id",
@@ -56,7 +56,7 @@
         internal static readonly string LinkedAccountIdUrl = string.Format("{0}/{1}", LinkedAccountUrl, LinkedAccountId);
         internal static readonly string LinkedAccountAccessibleUrl = string.Format("{0}/{1}/{2}", LinkedAccountUrl, LinkedAccountId, "accounts");
 
-        internal static readonly ValidatedLinkedAccount ExpectedValidatedLinkedAccount = new ValidatedLinkedAccount
+        internal static readonly ValidatedLinkedAccountToken ExpectedValidatedLinkedAccount = new ValidatedLinkedAccountToken
         {
             Id = LinkedAccountId,
             CustomerId = "customer-id",
@@ -64,14 +64,14 @@
             Status = LinkedAccountEnum.Status.Success,
         };
 
-        internal static readonly AccessibleLinkedAccount[] ExpectedAccessibleLinkedAccounts = new AccessibleLinkedAccount[]
+        internal static readonly AccessibleLinkedAccountToken[] ExpectedAccessibleLinkedAccounts = new AccessibleLinkedAccountToken[]
         {
-            new AccessibleLinkedAccount
+            new AccessibleLinkedAccountToken
             {
                 Id = LinkedAccountId,
                 ChannelCode = LinkedAccountEnum.ChannelCode.DcBri,
                 Type = LinkedAccountEnum.Type.DebitCard,
-                Properties = new LinkedAccountProperties
+                Properties = new LinkedAccountTokenProperties
                 {
                     AccountMobileNumber = "+62818555988",
                     CardLastFour = "4444",
@@ -81,10 +81,13 @@
             },
         };
 
-        internal static readonly UnbindedLinkedAccount ExpectedUnbindedLinkedAccount = new UnbindedLinkedAccount
+        internal static readonly UnbindedLinkedAccountToken ExpectedUnbindedLinkedAccount = new UnbindedLinkedAccountToken
         {
             Id = LinkedAccountId,
             IsDeleted = true,
         };
+
+        internal static readonly string ApiKey = "api-key";
+        internal static readonly string BaseUrl = "https://api.xendit.co";
     }
 }

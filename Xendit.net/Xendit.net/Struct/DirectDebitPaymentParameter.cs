@@ -3,10 +3,10 @@
     using System.Collections.Generic;
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
     using Xendit.net.Model.DirectDebit;
+    using Xendit.net.Model.LinkedAccountToken;
 
-    public class DirectDebitPaymentParameter
+    public struct DirectDebitPaymentParameter
     {
         [JsonPropertyName("reference_id")]
         public string ReferenceId { get; set; }
@@ -24,7 +24,7 @@
         public string CallbackUrl { get; set; }
 
         [JsonPropertyName("enable_otp")]
-        public bool EnableOtp { get; set; }
+        public bool? EnableOtp { get; set; }
 
         [JsonPropertyName("description")]
         public string Description { get; set; }
@@ -36,7 +36,7 @@
         public string FailureRedirectUrl { get; set; }
 
         [JsonPropertyName("device")]
-        public LinkedAccountDevice Device { get; set; }
+        public LinkedAccountTokenDevice Device { get; set; }
 
         [JsonPropertyName("basket")]
         public BasketItem[] Basket { get; set; }

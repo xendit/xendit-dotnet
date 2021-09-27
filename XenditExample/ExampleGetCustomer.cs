@@ -5,9 +5,10 @@ namespace XenditExample
     using System.Threading.Tasks;
     using Xendit.net;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
     using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.Customer;
+    using Xendit.net.Network;
 
     class ExampleGetCustomer
     {
@@ -20,10 +21,10 @@ namespace XenditExample
 
             try
             {
-                Customer customerDefault = await Customer.Get("demo_11212145");
+                CustomerResponse customerDefault = await Customer.Get("demo_11212145");
                 Console.WriteLine(customerDefault);
 
-                Customer customerCustomVersion = await Customer.Get("demo_11212144", version: ApiVersion.Version20200519);
+                CustomerResponse customerCustomVersion = await Customer.Get("demo_11212144", version: ApiVersion.Version20200519);
                 Console.WriteLine(customerCustomVersion);
             }
             catch (XenditException e)

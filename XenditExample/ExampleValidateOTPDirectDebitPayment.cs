@@ -4,11 +4,11 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
     using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.DirectDebitPayment;
+    using Xendit.net.Network;
     using Xendit.net.Struct;
-    using Xendit.net.Enum;
 
     class ExampleValidateOtpDirectDebitPayment
     {
@@ -22,7 +22,7 @@ namespace XenditExample
             try
             {
                 string otpCode = "123456";
-                DirectDebitPayment directDebitPayment = await DirectDebitPayment.ValidateOtp(otpCode, "direct_debit_id");
+                DirectDebitPaymentResponse directDebitPayment = await DirectDebitPayment.ValidateOtp(otpCode, "direct_debit_id");
                 Console.WriteLine(directDebitPayment);
             }
             catch (XenditException e)

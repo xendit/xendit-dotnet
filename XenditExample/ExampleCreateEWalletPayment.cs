@@ -31,10 +31,10 @@ namespace XenditExample
                     EWalletType = EWalletEnum.PaymentType.Ovo,
                 };
 
-                EWalletPayment eWalletPayment = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20200201);
-                Console.WriteLine(eWalletCheWalletPaymentarge);
+                EWalletPaymentResponse eWalletPayment = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20200201);
+                Console.WriteLine(eWalletPayment);
 
-                EWalletPayment eWalletPayment2 = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20190204);
+                EWalletPaymentResponse eWalletPayment2 = await EWalletPayment.Create(parameter, apiVersion: ApiVersion.Version20190204);
                 Console.WriteLine(eWalletPayment2);
             }
             catch (XenditException e)

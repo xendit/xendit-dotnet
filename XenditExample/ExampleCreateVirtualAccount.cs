@@ -7,7 +7,7 @@ namespace XenditExample
     using Xendit.net;
     using Xendit.net.Enum;
     using Xendit.net.Exception;
-    using Xendit.net.Model;
+    using Xendit.net.Model.VirtualAccount;
     using Xendit.net.Network;
     using Xendit.net.Struct;
 
@@ -30,7 +30,7 @@ namespace XenditExample
                     ExpectedAmount = 200000,
                 };
 
-                VirtualAccount virtualAccount = await VirtualAccount.Create(parameter);
+                VirtualAccountResponse virtualAccount = await VirtualAccount.Create(parameter);
                 Console.WriteLine(virtualAccount);
             }
             catch (XenditException e)

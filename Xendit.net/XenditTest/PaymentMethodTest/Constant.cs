@@ -1,13 +1,12 @@
 ﻿namespace XenditTest.PaymentMethodTest
 {
-    using System.Collections.Generic;
     using Xendit.net.Enum;
-    using Xendit.net.Model;
+    using Xendit.net.Model.PaymentMethod;
     using Xendit.net.Struct;
 
     internal class Constant
     {
-        internal static readonly PaymentMethod ExpectedPaymentMethod = new PaymentMethod
+        internal static readonly PaymentMethodResponse ExpectedPaymentMethod = new PaymentMethodResponse
         {
             Id = "payment-method-id",
             Type = PaymentMethodEnum.AccountType.DebitCard,
@@ -19,7 +18,7 @@
             Metadata = null,
         };
 
-        internal static readonly PaymentMethod[] ExpectedPaymentMethods = new PaymentMethod[] { ExpectedPaymentMethod };
+        internal static readonly PaymentMethodResponse[] ExpectedPaymentMethods = new PaymentMethodResponse[] { ExpectedPaymentMethod };
 
         internal static readonly PaymentMethodProperties PaymentMethodBodyProperties = new PaymentMethodProperties
         {
@@ -40,12 +39,15 @@
 
         internal static readonly string CustomerId = "customer-id";
 
-        internal static readonly string PaymentMethodUrl = "https://api.xendit.co/payment_methods";
+        internal static readonly string PaymentMethodUrl = "/payment_methods";
         internal static readonly string GetPaymentMethodByCustomerIdUrl = string.Format("{0}{1}{2}", PaymentMethodUrl, "?customer_id=", CustomerId);
 
         internal static readonly HeaderParameter CustomHeaders = new HeaderParameter
         {
             ForUserId = "user-id",
         };
+
+        internal static readonly string ApiKey = "api-key";
+        internal static readonly string BaseUrl = "https://api.xendit.co";
     }
 }

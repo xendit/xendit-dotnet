@@ -4,11 +4,11 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
     using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.DirectDebitPayment;
+    using Xendit.net.Network;
     using Xendit.net.Struct;
-    using Xendit.net.Enum;
 
     class ExampleGetDirectDebitPayment
     {
@@ -21,10 +21,10 @@ namespace XenditExample
 
             try
             {
-                DirectDebitPayment directDebitPayment = await DirectDebitPayment.GetById("direct_debit_id");
+                DirectDebitPaymentResponse directDebitPayment = await DirectDebitPayment.GetById("direct_debit_id");
                 Console.WriteLine(directDebitPayment);
 
-                DirectDebitPayment[] directDebitPayments = await DirectDebitPayment.GetByReferenceId("reference_id");
+                DirectDebitPaymentResponse[] directDebitPayments = await DirectDebitPayment.GetByReferenceId("reference_id");
                 Console.WriteLine(directDebitPayments);
             }
             catch (XenditException e)

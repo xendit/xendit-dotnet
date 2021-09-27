@@ -8,6 +8,7 @@ namespace XenditExample
     using Xendit.net.Enum;
     using Xendit.net.Exception;
     using Xendit.net.Model;
+    using Xendit.net.Model.Invoice;
     using Xendit.net.Network;
 
     class ExampleGetInvoice
@@ -22,7 +23,7 @@ namespace XenditExample
             try
             {
                 string invoiceId = "invoice_id";
-                Invoice invoice = await Invoice.GetById(invoiceId);
+                InvoiceResponse invoice = await Invoice.GetById(invoiceId);
                 Console.WriteLine(invoice);
 
                 ListInvoiceParameter parameter = new ListInvoiceParameter

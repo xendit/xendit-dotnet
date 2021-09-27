@@ -1,22 +1,32 @@
 ﻿namespace Xendit.net
 {
+    using System.Net.Http;
     using Xendit.net.Network;
 
     public class XenditConfiguration
     {
-        public static volatile INetworkClient RequestClient;
+        private static INetworkClient requestClient;
 
-        private static readonly string LiveUrl = "https://api.xendit.co";
-        private static volatile string apiUrl = LiveUrl;
-
-        public static string ApiKey { get; set; }
-
-        public static string ApiUrl
+        public static INetworkClient RequestClient
         {
             get
             {
-                return apiUrl;
+                if (requestClient != null)
+                {
+                    return requestClient;
+                }
+
+                HttpClient httpClient = new HttpClient();
+                NetworkClient client = new NetworkClient(httpClient);
+
+                return client;
             }
+
+            set => requestClient = value;
         }
+
+        public static string ApiKey { get; set; }
+
+        public static string BaseUrl { get; private set; } = "https://api.xendit.co";
     }
 }

@@ -23,7 +23,7 @@ namespace XenditExample
 
             try
             {
-                EWalletPayment eWalletPayment = await EWalletPayment.Get("external-id", EWalletEnum.PaymentType.Ovo);
+                EWalletPaymentResponse eWalletPayment = await EWalletPayment.Get("external-id", EWalletEnum.PaymentType.Ovo);
                 Console.WriteLine(eWalletPayment);
             }
             catch (XenditException e)

@@ -4,11 +4,11 @@ namespace XenditExample
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xendit.net;
-    using Xendit.net.Model;
-    using Xendit.net.Network;
     using Xendit.net.Exception;
+    using Xendit.net.Model;
+    using Xendit.net.Model.LinkedAccountToken;
+    using Xendit.net.Network;
     using Xendit.net.Struct;
-    using Xendit.net.Enum;
 
     class ExampleValidateLinkedAccount
     {
@@ -24,7 +24,7 @@ namespace XenditExample
                 string otpCode = "123456";
                 string linkedAccountTokenId = "linked-account-token-id";
 
-                ValidatedLinkedAccount validatedLinkedAccount = await ValidatedLinkedAccount.ValidateOtp(otpCode, linkedAccountTokenId);
+                ValidatedLinkedAccount validatedLinkedAccount = await LinkedAccountToken.ValidateOtp(otpCode, linkedAccountTokenId);
                 Console.WriteLine(validatedLinkedAccount);
             }
             catch (XenditException e)
