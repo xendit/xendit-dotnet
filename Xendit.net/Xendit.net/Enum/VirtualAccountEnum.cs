@@ -34,6 +34,10 @@
 
             [EnumMember(Value = "SAHABAT_SAMPOERNA")]
             SahabatSampoerna,
+
+            [EnumMember(Value = "BSI")]
+            Bsi,
+
         }
 
         [JsonStringEnumMemberConverterOptions(deserializationFailureFallbackValue: Unknown)]
