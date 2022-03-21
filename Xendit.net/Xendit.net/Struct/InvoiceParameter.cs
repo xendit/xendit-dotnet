@@ -57,7 +57,7 @@
         [JsonPropertyName("reminder_time")]
         public int? ReminderTime { get; set; }
 
-        [JsonPropertyName("invoice")]
+        [JsonPropertyName("items")]
         public ItemInvoice[] Items { get; set; }
 
         [JsonPropertyName("customer")]
