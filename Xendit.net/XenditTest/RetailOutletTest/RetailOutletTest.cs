@@ -114,7 +114,7 @@
 
             XenditConfiguration.RequestClient = MockClient.Object;
 
-            PaymentsResponse actualPaymentsResponse = await RetailOutlet.GetPaymentsByFixedPaymentCode(Constant.PaymentCodeId);
+            PaymentsResponse actualPaymentsResponse = await RetailOutlet.GetPaymentsByFixedPaymentCode(Constant.FixedPaymentCodeId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedPaymentsResponse), JsonSerializer.Serialize(actualPaymentsResponse));
         }
     }
