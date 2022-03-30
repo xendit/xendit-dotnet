@@ -60,6 +60,30 @@
             ExpectedFixedPaymentCode,
         };
 
+        internal static readonly PaymentsResponse ExpectedPaymentsResponse = new PaymentsResponse() {
+            Data = new Payment[] { new Payment{
+                Status = "COMPLETED",
+                FixedPaymentCodePaymentId = "61c53c4fdc1b825d9a58ff54",
+                FixedPaymentCodeId = "61c53c3727c7a679826dd90a",
+                Amount = 1000,
+                Name = "JOHN DOE",
+                Prefix = "TEST",
+                PaymentCode = "TEST892185",
+                PaymentId = "1640315983260",
+                ExternalId = "FPC-1640315959",
+                RetailOutletName = "ALFAMART",
+                TransactionTimestamp = "2021-12-24T03:19:43.260Z",
+                Id = "61c53c4f6cc577e4038ab099",
+                OwnerId = "60ca10b83ffd534ece8aa856",
+            }},
+            HasMore = true,
+            Links = new Links() {
+                Href = "https://api.xendit.co/fixed_payment_code/61c53c3727c7a679826dd90a/payments?limit=1&after_id=61c53c4f6cc577e4038ab099",
+                Rel = "next",
+                Method = "GET",
+            }
+        };
+
         internal static readonly UpdateFixedPaymentCodeParameter UpdateFixedPaymentCodeParameter = new UpdateFixedPaymentCodeParameter
         {
             CustomerName = "Rika Sutanto",
@@ -79,8 +103,10 @@
         };
 
         internal static readonly string PaymentCodeId = "payment_code_id";
+        internal static readonly string FixedPaymentCodeId = "fixed_payment_code_id";
         internal static readonly string PaymentCodeIdUrl = string.Format("{0}/{1}", RetailOutletUrl, PaymentCodeId);
         internal static readonly string GetPaymentsUrl = string.Format("{0}/payments", PaymentCodeIdUrl);
+        internal static readonly string GetPaymentsByFixedPaymentCodeUrl = string.Format("/fixed_payment_code/{0}/payments", FixedPaymentCodeId);
         internal static readonly HeaderParameter Headers = new HeaderParameter
         {
             ForUserId = "user-id",

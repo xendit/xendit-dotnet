@@ -104,5 +104,18 @@
             FixedPaymentCode[] actualFixedPaymentCodes = await RetailOutlet.GetPayments(Constant.PaymentCodeId);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedFixedPaymentCodes), JsonSerializer.Serialize(actualFixedPaymentCodes));
         }
+
+        [Fact]
+        public async void RetailOutlet_GetPaymentsByFixedPaymentCode_ShouldSuccess()
+        {
+            MockClient
+                .Setup(client => client.Request<PaymentsResponse>(HttpMethod.Get, Constant.GetPaymentsByFixedPaymentCodeUrl, null, null, null))
+                .ReturnsAsync(Constant.ExpectedPaymentsResponse);
+
+            XenditConfiguration.RequestClient = MockClient.Object;
+
+            PaymentsResponse actualPaymentsResponse = await RetailOutlet.GetPaymentsByFixedPaymentCode(Constant.PaymentCodeId);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedPaymentsResponse), JsonSerializer.Serialize(actualPaymentsResponse));
+        }
     }
 }
