@@ -53,6 +53,7 @@ This library is the abstraction of Xendit API for access from applications writt
     - [Update Fixed Payment Code](#update-fixed-payment-code)
     - [Get Payment Code](#get-payment-code)
     - [Get Payments By Payment Code ID](#get-payments-by-payment-code-id)
+    - [Get Payments By Fixed Payment Code ID](#get-payments-by-fixed-payment-code-id)
   - [E-Wallet Service](#e-wallet-service)
     - [Create E-Wallet Charge (API version `2020-01-25`)](#create-e-wallet-charge-api-version-2020-01-25)
     - [Get E-Wallet Charge (API version `2020-01-25`)](#get-e-wallet-charge-api-version-2020-01-25)
@@ -1618,6 +1619,42 @@ FixedPaymentCode[] fixedPaymentCodes = new FixedPaymentCode[]
     CreatedAt = "2021-01-01T02:38:01.385383888Z",
     UpdatedAt = "2021-01-01T02:38:01.385383888Z",
   },
+  // ...
+}
+```
+
+#### Get Payments By Fixed Payment Code ID
+
+```cs
+PaymentsResponse payments = await RetailOutlet.GetPaymentsByFixedPaymentCode("example_fixed_payment_code_id");
+```
+
+It will return:
+
+```cs
+PaymentsResponse payments = new PaymentsResponse()
+{
+  Data = new Payment[] { new Payment {
+      Status = "COMPLETED",
+      FixedPaymentCodePaymentId = "61c53c4fdc1b825d9a58ff54",
+      FixedPaymentCodeId = "61c53c3727c7a679826dd90a",
+      Amount = 1000,
+      Name = "JOHN DOE",
+      Prefix = "TEST",
+      PaymentCode = "TEST892185",
+      PaymentId = "1640315983260",
+      ExternalId = "FPC-1640315959",
+      RetailOutletName = "ALFAMART",
+      TransactionTimestamp = "2021-12-24T03:19:43.260Z",
+      Id = "61c53c4f6cc577e4038ab099",
+      OwnerId = "60ca10b83ffd534ece8aa856",
+  }},
+  HasMore = true,
+  Links = new Links() {
+      Href = "https://api.xendit.co/fixed_payment_code/61c53c3727c7a679826dd90a/payments?limit=1&after_id=61c53c4f6cc577e4038ab099",
+      Rel = "next",
+      Method = "GET",
+  }
   // ...
 }
 ```
