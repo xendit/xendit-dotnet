@@ -43,6 +43,18 @@
         }
 
         /// <summary>
+        /// Get payments by fixed payment code ID.
+        /// </summary>
+        /// <param name="fixedPaymentCode">The fixed payment code ID.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property listed here <see href="https://developers.xendit.co/api-reference/#get-payments-by-fixed-payment-code-id"/>.</param>
+        /// <returns>A Task of <see cref="PaymentsResponse"/>.</returns>
+        public static async Task<PaymentsResponse> GetPaymentsByFixedPaymentCode(string fixedPaymentCode, HeaderParameter? headers = null)
+        {
+            RetailOutletClient client = new RetailOutletClient();
+            return await client.GetPaymentsByFixedPaymentCode(fixedPaymentCode, headers);
+        }
+
+        /// <summary>
         /// Get payments by payment code ID.
         /// </summary>
         /// <param name="paymentCodeId">ID of the payment code to retrieve payments made.</param>
