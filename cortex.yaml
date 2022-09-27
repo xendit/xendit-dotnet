@@ -1,0 +1,11 @@
+openapi: 3.0.1
+info:
+  title: xendit-dotnet
+  description: xendit-dotnet
+  x-cortex-git:
+    github:
+      repository: xendit/xendit-dotnet
+  x-cortex-tag: xendit-dotnet
+  x-cortex-owners:
+  - type: GROUP
+    name: xendit/api-full-time
