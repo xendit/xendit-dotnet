@@ -91,7 +91,7 @@
         public bool FixedVa { get; set; }
 
         [JsonPropertyName("reminder_date")]
-        public bool ReminderDate { get; set; }
+        public string ReminderDate { get; set; }
 
         [JsonPropertyName("items")]
         public ItemInvoice[] Items { get; set; }
