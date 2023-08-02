@@ -6,6 +6,7 @@
     using System.Net.Http.Headers;
     using System.Text;
     using System.Text.Json;
+    using System.Text.Json.Serialization;
     using System.Threading.Tasks;
     using Xendit.net.Common;
     using Xendit.net.Exception;
@@ -81,7 +82,7 @@
             {
                 JsonSerializerOptions options = new JsonSerializerOptions
                 {
-                    IgnoreNullValues = true,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                 };
 
                 request.Content = new StringContent(JsonSerializer.Serialize(requestBody, options), Encoding.UTF8, "application/json");

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup Condition="$(ModernFrameworks.Contains('|$(TargetFramework)|'))">
+      <ProjectReference Include="..\..\Xendit.net\Xendit.net\Xendit.net.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
+      <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$(LegacyFrameworks.Contains('|$(TargetFramework)|'))">
+      <PackageReference Include="Xendit.net" Version="1.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DotNetEnv" Version="2.5.0" />
+    </ItemGroup>
+  
+    <PropertyGroup>
+      <OutputType>Exe</OutputType>
+      <ModernFrameworks>|net7.0|net6.0|net5.0|</ModernFrameworks>
+      <TargetFrameworks>net7.0;net6.0;net5.0</TargetFrameworks>
+    </PropertyGroup>
+  
+  </Project>
