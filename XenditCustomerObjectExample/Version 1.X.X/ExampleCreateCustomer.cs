@@ -48,7 +48,7 @@ namespace XenditCustomerObjectExample
             }
         }
 
-        public async Task CreateCustomer20201031() {
+        public async Task CreateCustomer20201031WithIndividualDetail() {
             HttpClient httpClient = new HttpClient();
             NetworkClient networkClient = new NetworkClient(httpClient);
             XenditConfiguration.RequestClient = networkClient;
@@ -157,8 +157,8 @@ namespace XenditCustomerObjectExample
                 Console.WriteLine(e.ToString());
             }
         }
-    
-        public async Task CreateCustomer20201031WithCustomParams() {
+
+        public async Task CreateCustomer20201031WithBusinessDetail() {
             HttpClient httpClient = new HttpClient();
             NetworkClient networkClient = new NetworkClient(httpClient);
             XenditConfiguration.RequestClient = networkClient;
@@ -173,30 +173,23 @@ namespace XenditCustomerObjectExample
                     "text/png;24123123",
                     "text/png;24123125"
                 };
-                object individualParameter = new
+                CustomerParameter businessParameter = new CustomerParameter
                 {
-                    reference_id = referenceId,
-                    type = CustomerType.Individual,
-                    individual_detail = new IndividualDetail
+                    ReferenceId = referenceId,
+                    Type = CustomerType.Business,
+                    BusinessDetail = new BusinessDetail
                     {
-                        GivenNames = "John",
-                        Surname = "Pantau",
-                        Gender = CustomerGender.Male,
-                        Nationality = "ID",
-                        PlaceOfBirth = "Jakarta",
-                        DateOfBirth = "1900-01-01",
-                        Employment = new Employment
-                        {
-                            EmployerName = "PT Murah",
-                            NatureOfBusiness = "Retail",
-                            RoleDescription = "Staff"
-                        }
+                        BusinessName = "PT Jakarta",
+                        BusinessType = CustomerBusinessType.Corporation,
+                        NatureOfBusiness = "Travel",
+                        BusinessDomicile = "ID",
+                        DateOfRegistration = "2050-12-31",
+
                     },
-                    mobile_number = "+628123456789",
-                    email = "john@test.com",
-                    phone_number = "+6221872772",
-                    hashed_phone_number = "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
-                    addresses = new Address[] 
+                    MobileNumber = "+628123456789",
+                    Email = "john@test.com",
+                    PhoneNumber = "+6221872772",
+                    Addresses = new Address[] 
                     { 
                         new Address
                         {
@@ -221,35 +214,32 @@ namespace XenditCustomerObjectExample
                                 IsPrimary = false
                         }
                     },
-                    identity_accounts = new IdentityAccount[]
+                    IdentityAccount = new IdentityAccount[]
                     {
                         new IdentityAccount
                         {
                             Country = Country.Indonesia,
                             Type = CustomerIdentityAccountType.BankAccount,
-                            Company = "PT Murah",
+                            Company = "PT Jakarta",
                             Description = "No Description",
                             Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
                         }
                     },
-                    kyc_documents = new KycDocument[]
+                    KycDocuments = new KycDocument[]
                     {
                         new KycDocument
                         {
                             Country = Country.Indonesia,
                             Type = CustomerKycDocumentType.IdentityCard,
                             SubType = CustomerKycDocumentSubType.NationalId,
-                            DocumentName = "KTP - John",
-                            DocumentNumber = "JH652211",
+                            DocumentName = "NPWP - PT Jakarta",
+                            DocumentNumber = "JAKARTA001",
                             ExpiresAt = "2050-12-31",
-                            HolderName = "John Pantau",
+                            HolderName = "PT Jakarta",
                             DocumentImages = images
                         }
                     },
-                    date_of_registration = "2023-01-01",
-                    domicile_of_registration = "ID",
-                    trading_name = "Murah & co",
-                    metadata =  new Dictionary<string, string>()
+                    Metadata =  new Dictionary<string, string>()
                     {
                         {
                             "x", "y"
@@ -262,8 +252,48 @@ namespace XenditCustomerObjectExample
                     WriteIndented = true,
                 };
 
+                Console.WriteLine(JsonSerializer.Serialize(businessParameter, options));
+                CustomerResponse businessCustomerVersion20201031 = await Customer.Create(businessParameter, version: ApiVersion.Version20201031);
+                Console.WriteLine(JsonSerializer.Serialize(businessCustomerVersion20201031, options));
+            }
+            catch (XenditException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public async Task CreateCustomer20201031WithMinimalInput() {
+            HttpClient httpClient = new HttpClient();
+            NetworkClient networkClient = new NetworkClient(httpClient);
+            XenditConfiguration.RequestClient = networkClient;
+            XenditConfiguration.ApiKey = System.Environment.GetEnvironmentVariable("XENDIT_API_KEY");
+            Guid myUUId = Guid.NewGuid();
+            string referenceId = myUUId.ToString();
+            Console.WriteLine(referenceId);
+
+            try
+            {
+                string[] images = {
+                    "text/png;24123123",
+                    "text/png;24123125"
+                };
+                CustomerParameter individualParameter = new CustomerParameter
+                {
+                    ReferenceId = referenceId,
+                    Type = CustomerType.Individual,
+                    IndividualDetail = new IndividualDetail
+                    {
+                        GivenNames = "John Pantau",
+                    },
+                };
+
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                };
+
                 Console.WriteLine(JsonSerializer.Serialize(individualParameter, options));
-                CustomerResponse individualCustomerVersion20201031 = await Customer.CreateCustomParams(individualParameter, version: ApiVersion.Version20201031);
+                CustomerResponse individualCustomerVersion20201031 = await Customer.Create(individualParameter, version: ApiVersion.Version20201031);
                 Console.WriteLine(JsonSerializer.Serialize(individualCustomerVersion20201031, options));
             }
             catch (XenditException e)

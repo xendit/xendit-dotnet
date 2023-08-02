@@ -17,6 +17,9 @@
         [JsonPropertyName("email")]
         public string Email { get; set; }
 
+        [JsonPropertyName("given_name")]
+        public string GivenName { get; set; }
+
         [JsonPropertyName("given_names")]
         public string GivenNames { get; set; }
 
@@ -67,8 +70,5 @@
 
         [JsonPropertyName("domicile_of_registration")]
         public string DomicileOfRegistration { get; set; }
-
-        [JsonPropertyName("trading_name")]
-        public string TradingName { get; set; }
     }
 }
