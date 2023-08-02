@@ -1,6 +1,7 @@
 ﻿namespace Xendit.net.Struct
 {
     using System.Collections.Generic;
+    using System.Text.Json;
     using System.Text.Json.Serialization;
     using Xendit.net.Enum;
     using Xendit.net.Model.Customer;
@@ -31,6 +32,9 @@
         [JsonPropertyName("phone_number")]
         public string PhoneNumber { get; set; }
 
+        [JsonPropertyName("hashed_phone_number")]
+        public string HashedPhoneNumber { get; set; }
+
         [JsonPropertyName("nationality")]
         public string Nationality { get; set; }
 
@@ -57,5 +61,14 @@
 
         [JsonPropertyName("kyc_documents")]
         public KycDocument[] KycDocuments { get; set; }
+
+        [JsonPropertyName("date_of_registration")]
+        public string DateOfRegistration { get; set; }
+
+        [JsonPropertyName("domicile_of_registration")]
+        public string DomicileOfRegistration { get; set; }
+
+        [JsonPropertyName("trading_name")]
+        public string TradingName { get; set; }
     }
 }

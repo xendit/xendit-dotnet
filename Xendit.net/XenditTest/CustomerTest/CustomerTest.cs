@@ -28,6 +28,19 @@
         }
 
         [Fact]
+        public async void Customer_ShouldSuccess_CreateCustomParams_WithDefaultHeaderAndVersion()
+        {
+            MockClient
+                .Setup(client => client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.CustomerUrl, null, null, Constant.CustomerBody, Constant.NewApiVersionHeaders))
+                .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
+
+            XenditConfiguration.RequestClient = MockClient.Object;
+
+            CustomerResponse actualCustomer = await Customer.CreateCustomParams(Constant.CustomerBody);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
+        }
+
+        [Fact]
         public async void Customer_ShouldSuccess_Create_WithCustomHeaderAndDefaultVersion()
         {
             MockClient
@@ -41,6 +54,19 @@
         }
 
         [Fact]
+        public async void Customer_ShouldSuccess_CreateCustomParams_WithCustomHeaderAndDefaultVersion()
+        {
+            MockClient
+                .Setup(client => client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.CustomerUrl, null, null, Constant.CustomerBody, Constant.NewApiVersionHeadersWithUserId))
+                .ReturnsAsync(Constant.ExpectedCustomerData);
+
+            XenditConfiguration.RequestClient = MockClient.Object;
+
+            CustomerResponse actualCustomer = await Customer.CreateCustomParams(Constant.CustomerBody, Constant.UserIdHeaders);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerData), JsonSerializer.Serialize(actualCustomer));
+        }
+
+        [Fact]
         public async void Customer_ShouldSuccess_Create_WithVersion()
         {
             MockClient
@@ -50,6 +76,19 @@
             XenditConfiguration.RequestClient = MockClient.Object;
 
             CustomerResponse actualCustomer = await Customer.Create(Constant.CustomerBody, version: ApiVersion.Version20200519);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerData), JsonSerializer.Serialize(actualCustomer));
+        }
+
+        [Fact]
+        public async void Customer_ShouldSuccess_CreateCustomParams_WithVersion()
+        {
+            MockClient
+                .Setup(client => client.Request<CustomerParameter, CustomerResponse>(HttpMethod.Post, Constant.CustomerUrl, null, null, Constant.CustomerBody, Constant.ApiVersionHeaders))
+                .ReturnsAsync(Constant.ExpectedCustomerData);
+
+            XenditConfiguration.RequestClient = MockClient.Object;
+
+            CustomerResponse actualCustomer = await Customer.CreateCustomParams(Constant.CustomerBody, version: ApiVersion.Version20200519);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerData), JsonSerializer.Serialize(actualCustomer));
         }
 

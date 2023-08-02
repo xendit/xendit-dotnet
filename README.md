@@ -8,58 +8,57 @@ This library is the abstraction of Xendit API for access from applications writt
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [API Documentation](#api-documentation)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [API Key](#api-key)
-    - [Global Variable](#global-variable)
-    - [`XenditClient` instance or Individual `Client` instance](#xenditclient-instance-or-individual-client-instance)
-  - [Balance Service](#balance-service)
-    - [Get Balance](#get-balance)
-  - [Virtual Account Services](#virtual-account-services)
-    - [Create a Virtual Account](#create-a-virtual-account)
-    - [Get a Virtual Account by ID](#get-a-virtual-account-by-id)
-    - [Update a Virtual Account](#update-a-virtual-account)
-    - [Get banks with available virtual account service](#get-banks-with-available-virtual-account-service)
-    - [Get a virtual account payment by payment ID](#get-a-virtual-account-payment-by-payment-id)
-  - [Disbursement Services](#disbursement-services)
-    - [Create a disbursement](#create-a-disbursement)
-    - [Get a disbursement by ID](#get-a-disbursement-by-id)
-    - [Get a disbursement by External ID](#get-a-disbursement-by-external-id)
-    - [Get banks with available disbursement service](#get-banks-with-available-disbursement-service)
-  - [Invoice services](#invoice-services)
-    - [Create an invoice](#create-an-invoice)
-    - [Get invoice by ID](#get-invoice-by-id)
-    - [Get all invoices](#get-all-invoices)
-    - [Expire an invoice](#expire-an-invoice)
-  - [Customer services](#customer-services)
-    - [Create Customer](#create-customer)
-    - [Get Customer by Reference ID](#get-customer-by-reference-id)
-  - [Direct Debit Payment Services](#direct-debit-payment-services)
-    - [Create Direct Debit Payment](#create-direct-debit-payment)
-    - [Validate OTP for Direct Debit Payment](#validate-otp-for-direct-debit-payment)
-    - [Get Direct Debit Payment by ID](#get-direct-debit-payment-by-id)
-    - [Get Direct Debit Payments by Reference ID](#get-direct-debit-payments-by-reference-id)
-  - [Linked Account Services](#linked-account-services)
-    - [Initialize Linked Account Tokenization](#initialize-linked-account-tokenization)
-    - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
-    - [Get Accessible Accounts by Linked Account Token](#get-accessible-accounts-by-linked-account-token)
-    - [Unbind Linked Account Token](#unbind-linked-account-token)
-  - [Payment Methods Services](#payment-methods-services)
-    - [Create Payment Methods](#create-payment-methods)
-    - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
-  - [Retail Outlet Services](#retail-outlet-services)
-    - [Create Fixed Payment Code](#create-fixed-payment-code)
-    - [Update Fixed Payment Code](#update-fixed-payment-code)
-    - [Get Payment Code](#get-payment-code)
-    - [Get Payments By Payment Code ID](#get-payments-by-payment-code-id)
-    - [Get Payments By Fixed Payment Code ID](#get-payments-by-fixed-payment-code-id)
-  - [E-Wallet Service](#e-wallet-service)
-    - [Create E-Wallet Charge (API version `2020-01-25`)](#create-e-wallet-charge-api-version-2020-01-25)
-    - [Get E-Wallet Charge (API version `2020-01-25`)](#get-e-wallet-charge-api-version-2020-01-25)
-    - [Create E-Wallet Payment (API version `2020-02-01`)](#create-e-wallet-payment-api-version-2020-02-01)
-    - [Create E-Wallet Payment (API version `2019-02-04`)](#create-e-wallet-payment-api-version-2019-02-04)
-    - [Get E-Wallet Payment](#get-e-wallet-payment)
+- [Xendit API .NET Library](#xendit-api-net-library)
+  - [Table of Contents](#table-of-contents)
+  - [API Documentation](#api-documentation)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [API Key](#api-key)
+      - [Global Variable](#global-variable)
+      - [`XenditClient` instance or Individual `Client` instance](#xenditclient-instance-or-individual-client-instance)
+    - [Balance Service](#balance-service)
+      - [Get Balance](#get-balance)
+    - [Virtual Account Services](#virtual-account-services)
+      - [Create a Virtual Account](#create-a-virtual-account)
+      - [Get a Virtual Account by ID](#get-a-virtual-account-by-id)
+      - [Update a Virtual Account](#update-a-virtual-account)
+      - [Get banks with available virtual account service](#get-banks-with-available-virtual-account-service)
+      - [Get a virtual account payment by payment ID](#get-a-virtual-account-payment-by-payment-id)
+    - [Disbursement Services](#disbursement-services)
+      - [Create a disbursement](#create-a-disbursement)
+      - [Get a disbursement by ID](#get-a-disbursement-by-id)
+      - [Get a disbursement by External ID](#get-a-disbursement-by-external-id)
+      - [Get banks with available disbursement service](#get-banks-with-available-disbursement-service)
+    - [Invoice services](#invoice-services)
+      - [Create an invoice](#create-an-invoice)
+      - [Get invoice by ID](#get-invoice-by-id)
+      - [Get all invoices](#get-all-invoices)
+      - [Expire an invoice](#expire-an-invoice)
+    - [Direct Debit Payment Services](#direct-debit-payment-services)
+      - [Create Direct Debit Payment](#create-direct-debit-payment)
+      - [Validate OTP for Direct Debit Payment](#validate-otp-for-direct-debit-payment)
+      - [Get Direct Debit Payment by ID](#get-direct-debit-payment-by-id)
+      - [Get Direct Debit Payments by Reference ID](#get-direct-debit-payments-by-reference-id)
+    - [Linked Account Services](#linked-account-services)
+      - [Initialize Linked Account Tokenization](#initialize-linked-account-tokenization)
+      - [Validate OTP for Linked Account Token](#validate-otp-for-linked-account-token)
+      - [Get Accessible Accounts by Linked Account Token](#get-accessible-accounts-by-linked-account-token)
+      - [Unbind Linked Account Token](#unbind-linked-account-token)
+    - [Payment Methods Services](#payment-methods-services)
+      - [Create Payment Methods](#create-payment-methods)
+      - [Get Payment Methods by Customer ID](#get-payment-methods-by-customer-id)
+    - [Retail Outlet Services](#retail-outlet-services)
+      - [Create Fixed Payment Code](#create-fixed-payment-code)
+      - [Update Fixed Payment Code](#update-fixed-payment-code)
+      - [Get Payment Code](#get-payment-code)
+      - [Get Payments By Payment Code ID](#get-payments-by-payment-code-id)
+      - [Get Payments By Fixed Payment Code ID](#get-payments-by-fixed-payment-code-id)
+    - [E-Wallet Service](#e-wallet-service)
+      - [Create E-Wallet Charge (API version `2020-01-25`)](#create-e-wallet-charge-api-version-2020-01-25)
+      - [Get E-Wallet Charge (API version `2020-01-25`)](#get-e-wallet-charge-api-version-2020-01-25)
+      - [Create E-Wallet Payment (API version `2020-02-01`)](#create-e-wallet-payment-api-version-2020-02-01)
+      - [Create E-Wallet Payment (API version `2019-02-04`)](#create-e-wallet-payment-api-version-2019-02-04)
+      - [Get E-Wallet Payment](#get-e-wallet-payment)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -888,185 +887,6 @@ InvoiceResponse invoice = new InvoiceResponse
 };
 ```
 
-### Customer services
-
-#### Create Customer
-
-The library supports get customer operation for API version `2020-10-31` (recommended) and `2020-05-19`.
-
-Method `Create` has three parameters: parameter or request body using struct `CustomerParameter`, optional headers, and optional API version with default value of `ApiVersion.Version20201031` enum (represents `2020-10-31` version).
-
-To construct struct `CustomerParameter`, you may use these classes and enums (applicable for API version of `2020-10-31`):
-
-- Class: `IndividualDetail`, `BusinessDetail`, `IdentityAccount`, `KycDocument`, `IdentityAccountProperties`, and `Address` (applicable for both API versions).
-- Enum: `CustomerType`, `CustomerKycDocumentType`, `CustomerKycDocumentSubType`, `CustomerIdentityAccountType`, `CustomerGender`, `CustomerBusinessType`, and `CustomerAddressCategory`.
-
-Here is the example of invoking method `Create` with API version of `2020-10-31`:
-
-```cs
-IndividualDetail individualDetail = new IndividualDetail
-{
-  GivenNames = "John",
-  Gender = CustomerGender.Male,
-};
-
-IdentityAccount identityAccount = new IdentityAccount
-{
-  Country = Country.Indonesia,
-  Type = CustomerIdentityAccountType.BankAccount,
-  Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
-};
-
-KycDocument document = new KycDocument
-{
-  Country = Country.Indonesia,
-  Type = CustomerKycDocumentType.IdentityCard,
-  SubType = CustomerKycDocumentSubType.NationalId,
-};
-
-CustomerParameter individualParameter = new CustomerParameter
-{
-  ReferenceId = "demo_11212145",
-  Type = CustomerType.Individual,
-  IndividualDetail = individualDetail,
-  IdentityAccount = new IdentityAccount[] { identityAccount },
-  KycDocuments = new KycDocument[] { document },
-};
-
-CustomerResponse customerDefault = await Customer.Create(individualParameter);
-Console.WriteLine(customerDefault);
-
-// or you can define with the API version
-CustomerResponse customer = await Customer.Create(individualParameter, version: ApiVersion.Version20201031);
-Console.WriteLine(customer);
-```
-
-It will return:
-
-```cs
-CustomerResponse customerDefault = new CustomerResponse
-{
-  ReferenceId = "demo_11212145",
-  Type = CustomerType.Individual,
-  IndividualDetail = new IndividualDetail { GivenNames = "John", Gender = CustomerGender.Male },
-  IdentityAccount = new IdentityAccount[]
-  {
-    new IdentityAccount
-    {
-      Country = Country.Indonesia,
-      Type = CustomerIdentityAccountType.BankAccount,
-      Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
-    }
-  },
-  KycDocuments = new KycDocument[]
-  {
-    new KycDocument
-    { Country = Country.Indonesia,
-      Type = CustomerKycDocumentType.IdentityCard,
-      SubType = CustomerKycDocumentSubType.NationalId,
-    }
-  }
-};
-```
-
-For API version of `2020-05-19`, here is the example:
-
-```cs
-CustomerParameter parameter = new CustomerParameter
-{
-    ReferenceId = "demo_11212144",
-    Email = "john@email.com",
-    GivenNames = "John",
-    Addresses = new Address[] { new Address { Country = Country.Indonesia } }
-};
-
-CustomerResponse customerWithVersion = await Customer.Create(parameter, version: ApiVersion.Version20200519);
-```
-
-It will return:
-
-```cs
-CustomerResponse customerWithVersion = new Customer
-{
-    ReferenceId = "demo_11212144",
-    Email = "john@email.com",
-    GivenNames = "John",
-    Addresses = new Address[] { new Address { Country = Country.Indonesia } }
-};
-```
-
-#### Get Customer by Reference ID
-
-The library supports get customer operation for API version `2020-10-31` (recommended) and `2020-05-19`.
-
-Method `Get` has three parameters: reference ID (required), optional headers, and optional API version with default value of `ApiVersion.Version20201031` enum (represents `2020-10-31` version).
-
-Here is the example of invoking method `Get` with API version of `2020-10-31`:
-
-```cs
-CustomerResponse customerDefault = await Customer.Get("example_reference_id");
-
-CustomerResponse customerWithVersion20201031 = await Customer.Get("example_reference_id", version: ApiVersion.Version20201031);
-```
-
-It will return:
-
-```cs
-CustomerResponse customerDefault = new CustomerResponse
-{
-  Data = new CustomerResponse[]
-  {
-    new CustomerResponse
-    {
-      ReferenceId = "example_reference_id",
-      Type = CustomerType.Individual,
-      IndividualDetail = new IndividualDetail { GivenNames = "John", Gender = CustomerGender.Male },
-      IdentityAccount = new IdentityAccount[]
-      {
-        new IdentityAccount
-        {
-          Country = Country.Indonesia,
-          Type = CustomerIdentityAccountType.BankAccount,
-          Properties = new IdentityAccountProperties { AccountNumber = "account_number" }
-        }
-      },
-      KycDocuments = new KycDocument[]
-      {
-        new KycDocument
-        { Country = Country.Indonesia,
-          Type = CustomerKycDocumentType.IdentityCard,
-          SubType = CustomerKycDocumentSubType.NationalId,
-        }
-      }
-    }
-  },
-  HasMore = false,
-};
-```
-
-For API version of `2020-05-19`, here is the example:
-
-```cs
-CustomerResponse customerWithVersion = await Customer.Get("example_reference_id", version: ApiVersion.Version20200519);
-```
-
-It will return:
-
-```cs
-CustomerResponse customerWithVersion = new CustomerResponse
-{
-  Data = new CustomerResponse[]
-  {
-    new CustomerResponse
-    {
-      ReferenceId = "example_reference_id",
-      Email = "john@email.com",
-      GivenNames = "John",
-      Addresses = new Address[] { new Address { Country = Country.Indonesia } }
-    }
-  },
-};
-```
 
 ### Direct Debit Payment Services
 

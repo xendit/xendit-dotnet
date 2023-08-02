@@ -55,5 +55,22 @@
 
             return await client.Request<CustomerResponse>(HttpMethod.Get, url, this.ApiKey, this.BaseUrl, validHeaders);
         }
+
+        /// <summary>
+        /// Create customer with custom parameters.
+        /// </summary>
+        /// <param name="parameter">Custom Parameter.</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-customer"/>.</param>
+        /// <param name="version">API version that will be used to request <see cref="ApiVersion"/>.</param>
+        /// <returns>A Task of <see cref="CustomerResponse"/>.</returns>
+        public async Task<CustomerResponse> CreateCustomParams(object parameter, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
+        {
+            HeaderParameter validHeaders = headers ?? new HeaderParameter { };
+            validHeaders.ApiVersion = version;
+
+            string url = "/customers";
+            var client = this.requestClient ?? XenditConfiguration.RequestClient;
+            return await client.Request<object, CustomerResponse>(HttpMethod.Post, url, this.ApiKey, this.BaseUrl, parameter, validHeaders);
+        }
     }
 }

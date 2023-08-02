@@ -20,6 +20,19 @@
         }
 
         /// <summary>
+        /// Create customer with parameters.
+        /// </summary>
+        /// <param name="parameter">Custom Parameter</param>
+        /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-customer"/>.</param>
+        /// <param name="version">API version that will be used to request <see cref="ApiVersion"/>.</param>
+        /// <returns>A Task of <see cref="CustomerResponse"/>.</returns>
+        public static async Task<CustomerResponse> CreateCustomParams(object parameter, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
+        {
+            CustomerClient client = new CustomerClient();
+            return await client.CreateCustomParams(parameter, headers, version);
+        }
+
+        /// <summary>
         /// Get customer by reference ID.
         /// </summary>
         /// <param name="referenceId">Merchant-provided identifier for the customer.</param>
