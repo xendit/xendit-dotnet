@@ -13,6 +13,7 @@ using [Xendit.net 1.1.0](https://www.nuget.org/packages/Xendit.net/1.1.0) **.NET
   - [Examples](#examples)
     - [Create Customer](#create-customer)
     - [Get Customer by Reference ID](#get-customer-by-reference-id)
+    - [Update Customer by ID](#update-customer-by-id)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -194,4 +195,27 @@ CustomerResponse customerWithVersion = new CustomerResponse
     }
   },
 };
+```
+
+### Update Customer by ID
+
+The library supports Update customer operation for API version `2020-10-31` (recommended) and `2020-05-19`.
+
+Method `Update` has three parameters: reference ID (required), optional headers, and optional API version with default value of `ApiVersion.Version20201031` enum (represents `2020-10-31` version).
+
+Here is the example of invoking method `Update` with API version of `2020-10-31`:
+
+```cs
+
+ CustomerParameter updatedIndividualParameter = new CustomerParameter
+{
+    IndividualDetail = new IndividualDetail
+    {
+        GivenNames = "Updated John Pantau",
+    },
+};
+
+Console.WriteLine(JsonSerializer.Serialize(updatedIndividualParameter));
+CustomerResponse updatedIndividualCustomerVersion20201031 = await Customer.Update(updatedIndividualParameter, "example_customer_id", version: ApiVersion.Version20201031);
+Console.WriteLine(JsonSerializer.Serialize(updatedIndividualCustomerVersion20201031));
 ```

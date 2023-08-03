@@ -62,11 +62,12 @@
         /// <param name="parameter">Parameter listed here <see cref="CustomerParameter"/>.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#create-customer"/>.</param>
         /// <param name="version">API version that will be used to request <see cref="ApiVersion"/>.</param>
+        /// /// <param name="customerId">customerId that we want to updated.</param>
         /// <returns>A Task of <see cref="CustomerResponse"/>.</returns>
         /// <summary>
-        public async Task<CustomerResponse> Update(CustomerParameter parameter, string id, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
+        public async Task<CustomerResponse> Update(CustomerParameter parameter, string customerId, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
         {
-            string url = string.Format("{0}{1}", "/customers/", id);
+            string url = string.Format("{0}{1}", "/customers/", customerId);
             HeaderParameter validHeaders = headers ?? new HeaderParameter { };
             validHeaders.ApiVersion = version;
             var client = this.requestClient ?? XenditConfiguration.RequestClient;

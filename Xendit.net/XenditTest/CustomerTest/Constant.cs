@@ -68,6 +68,7 @@
 
         internal static readonly CustomerResponse[] ExpectedCustomers = new CustomerResponse[] { ExpectedCustomerData };
         internal static readonly string CustomerIdUrl = string.Format("{0}?reference_id={1}", CustomerUrl, ExpectedCustomerData.ReferenceId);
+        internal static readonly string UpdatedCustomerIdUrl = string.Format("{0}/{1}", CustomerUrl, ExpectedCustomerData.Id);
 
         internal static readonly CustomerResponse ExpectedCustomerNewApiVersion = new CustomerResponse
         {
