@@ -38,6 +38,7 @@
         /// <param name="parameter">Parameter listed here <see cref="CustomerParameter"/>.</param>
         /// <param name="headers">Custom headers <see cref="HeaderParameter"/>. Use property based on <see href="https://developers.xendit.co/api-reference/#update-customer"/>.</param>
         /// <param name="version">API version that will be used to request <see cref="ApiVersion"/>.</param>
+        /// <param name="customerId">customerId that we want to updated.</param>
         /// <returns>A Task of <see cref="CustomerResponse"/>.</returns>
         public static async Task<CustomerResponse> Update(CustomerParameter parameter, string customerId, HeaderParameter? headers = null, ApiVersion version = ApiVersion.Version20201031)
         {

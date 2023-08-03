@@ -1,5 +1,6 @@
 ﻿namespace XenditTest.CustomerTest
 {
+    using System;
     using System.Net.Http;
     using System.Text.Json;
     using Moq;
@@ -90,6 +91,45 @@
 
             CustomerResponse actualCustomer = await client.Customer.Get(Constant.ExpectedCustomerData.ReferenceId, version: ApiVersion.Version20200519);
             Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerOldApiVersion), JsonSerializer.Serialize(actualCustomer));
+        }
+
+        [Fact]
+        public async void CustomerClient_ShouldSuccess_Update_WithDefaultHeaderAndVersion()
+        {
+            MockClient
+                .Setup(mockClient => mockClient.Request<CustomerParameter, CustomerResponse>(XenditHttpMethod.Patch, Constant.UpdatedCustomerIdUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomerBody, Constant.NewApiVersionHeaders))
+                .ReturnsAsync(Constant.ExpectedCustomerNewApiVersion);
+
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
+
+            CustomerResponse actualCustomer = await client.Customer.Update(Constant.CustomerBody, Constant.ExpectedCustomerData.Id);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerNewApiVersion), JsonSerializer.Serialize(actualCustomer));
+        }
+
+        [Fact]
+        public async void CustomerClient_ShouldSuccess_Update_WithCustomHeaderAndDefaultVersion()
+        {
+            MockClient
+                .Setup(mockClient => mockClient.Request<CustomerParameter, CustomerResponse>(XenditHttpMethod.Patch, Constant.UpdatedCustomerIdUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomerBody, Constant.NewApiVersionHeadersWithUserId))
+                .ReturnsAsync(Constant.ExpectedCustomerData);
+
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
+
+            CustomerResponse actualCustomer = await client.Customer.Update(Constant.CustomerBody, Constant.ExpectedCustomerData.Id, Constant.UserIdHeaders);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerData), JsonSerializer.Serialize(actualCustomer));
+        }
+
+        [Fact]
+        public async void CustomerClient_ShouldSuccess_Update_WithVersion()
+        {
+            MockClient
+                .Setup(mockClient => mockClient.Request<CustomerParameter, CustomerResponse>(XenditHttpMethod.Patch, Constant.UpdatedCustomerIdUrl, Constant.ApiKey, Constant.BaseUrl, Constant.CustomerBody, Constant.ApiVersionHeaders))
+                .ReturnsAsync(Constant.ExpectedCustomerData);
+
+            XenditClient client = new XenditClient(Constant.ApiKey, MockClient.Object, Constant.BaseUrl);
+
+            CustomerResponse actualCustomer = await client.Customer.Update(Constant.CustomerBody, Constant.ExpectedCustomerData.Id, version: ApiVersion.Version20200519);
+            Assert.Equal(JsonSerializer.Serialize(Constant.ExpectedCustomerData), JsonSerializer.Serialize(actualCustomer));
         }
     }
 }
